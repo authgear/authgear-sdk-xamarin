@@ -58,7 +58,7 @@ namespace Authgear.Xamarin
             }
             if (options.ClientId == null)
             {
-                throw new ArgumentNullException(nameof(options));
+                throw new ArgumentNullException(nameof(options.ClientId));
             }
             if (options.AuthgearEndpoint == null)
             {
@@ -70,8 +70,10 @@ namespace Authgear.Xamarin
             tokenStorage = options.TokenStorage ?? new PersistentTokenStorage();
             name = options.Name ?? "default";
             containerStorage = new PersistentContainerStorage();
-            oauthRepo = new OauthRepoHttp();
-            oauthRepo.Endpoint = authgearEndpoint;
+            oauthRepo = new OauthRepoHttp
+            {
+                Endpoint = authgearEndpoint
+            };
             keyRepo = new KeyRepoPlatformStore();
             biometric = new Biometric(containerStorage);
         }
