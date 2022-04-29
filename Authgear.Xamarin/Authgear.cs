@@ -100,7 +100,7 @@ namespace Authgear.Xamarin
         private void UpdateSessionState(SessionState state, SessionStateChangeReason reason)
         {
             SessionState = state;
-            SessionStateChange.Invoke(this, reason);
+            SessionStateChange?.Invoke(this, reason);
         }
 
         public async Task<AuthorizeResult> AuthorizeAsync(AuthorizeOptions options)
