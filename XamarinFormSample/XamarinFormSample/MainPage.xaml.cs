@@ -11,23 +11,24 @@ namespace XamarinFormSample
 {
     public partial class MainPage : ContentPage
     {
-        private readonly AuthgearSdk authgear;
+        public MainViewModel MainViewModel { get; private set; }
         public MainPage()
         {
             InitializeComponent();
-            authgear = DependencyService.Get<AuthgearSdk>();
+            MainViewModel = new MainViewModel();
+            BindingContext = MainViewModel;
         }
 
         private void Configure_Clicked(object sender, EventArgs e)
         {
-            _ = Configure();
+            _ = ConfigureAsync();
         }
 
-        private async Task Configure()
+        private async Task ConfigureAsync()
         {
             try
             {
-                await authgear.Configure();
+                await MainViewModel.ConfigureAsync();
             }
             catch (Exception error)
             {
