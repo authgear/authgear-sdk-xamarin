@@ -26,7 +26,7 @@ namespace Authgear.Xamarin.Data
             throw new NotImplementedException();
         }
 
-        public string GetOIDCCodeVerifier(string aNamespace)
+        public string GetOidcCodeVerifier(string aNamespace)
         {
             throw new NotImplementedException();
         }
@@ -41,7 +41,7 @@ namespace Authgear.Xamarin.Data
             throw new NotImplementedException();
         }
 
-        public void SetOIDCCodeVerifier(string aNamespace, string verifier)
+        public void SetOidcCodeVerifier(string aNamespace, string verifier)
         {
             throw new NotImplementedException();
         }

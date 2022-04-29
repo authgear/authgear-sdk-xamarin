@@ -7,11 +7,6 @@ namespace XamarinFormSample
 {
     public partial class App : Application
     {
-        private static readonly AuthgearSdk Authgear = new AuthgearSdk(new AuthgearOptions
-        {
-            ClientId = "",
-            AuthgearEndpoint = ""
-        });
         public App()
         {
             InitializeComponent();

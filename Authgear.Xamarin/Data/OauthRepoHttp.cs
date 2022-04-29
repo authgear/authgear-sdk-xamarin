@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Authgear.Xamarin.Data
 {
@@ -31,12 +32,12 @@ namespace Authgear.Xamarin.Data
             throw new NotImplementedException();
         }
 
-        public OidcTokenResponse OidcTokenRequest(OidcTokenRequest request)
+        public Task<OidcTokenResponse> OidcTokenRequest(OidcTokenRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public UserInfo OidcUserInfoRequest(string accessToken)
+        public Task<UserInfo> OidcUserInfoRequest(string accessToken)
         {
             throw new NotImplementedException();
         }

@@ -97,6 +97,10 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Authgear.Xamarin\Authgear.Xamarin.csproj">
+      <Project>{8e90bd7e-7698-4c05-bdf1-96145d5df73a}</Project>
+      <Name>Authgear.Xamarin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XamarinFormSample\XamarinFormSample.csproj">
       <Project>{1CBBB469-C891-4E2A-B4C5-1A5E8094E4A8}</Project>
       <Name>XamarinFormSample</Name>

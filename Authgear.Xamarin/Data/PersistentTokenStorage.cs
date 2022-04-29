@@ -11,7 +11,7 @@ namespace Authgear.Xamarin.Data
             throw new NotImplementedException();
         }
 
-        public void GetRefreshToken(string aNamespace)
+        public string GetRefreshToken(string aNamespace)
         {
             throw new NotImplementedException();
         }

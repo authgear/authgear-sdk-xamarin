@@ -6,8 +6,8 @@ namespace Authgear.Xamarin.Data
 {
     internal interface IContainerStorage
     {
-        void SetOIDCCodeVerifier(string aNamespace, string verifier);
-        string GetOIDCCodeVerifier(string aNamespace);
+        void SetOidcCodeVerifier(string aNamespace, string verifier);
+        string GetOidcCodeVerifier(string aNamespace);
 
         string GetAnonymousKeyId(string aNamespace);
         void SetAnonymousKeyId(string aNamespace, string keyId);
