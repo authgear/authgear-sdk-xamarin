@@ -99,14 +99,16 @@ namespace Authgear.Xamarin.Data
                 content.Headers.Add("authorization", $"Bearer {request.AccessToken}");
             };
             var responseMessage = await client.PostAsync(config.TokenEndpoint, content);
-            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
-            var responseStream = await responseMessage.Content.ReadAsStreamAsync();
-            return JsonSerializer.Deserialize<OidcTokenResponse>(responseStream);
+            return await responseMessage.GetJsonAsync<OidcTokenResponse>();
         }
 
-        public Task<UserInfo> OidcUserInfoRequest(string accessToken)
+        public async Task<UserInfo> OidcUserInfoRequest(string accessToken)
         {
-            throw new NotImplementedException();
+            var config = await OidcConfiguration();
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("authorization", $"Bearer {accessToken}");
+            var responseMessage = await client.GetAsync(config.UserInfoEndpoint);
+            return await responseMessage.GetJsonAsync<UserInfo>();
         }
 
         public void WechatAuthCallback(string code, string state)

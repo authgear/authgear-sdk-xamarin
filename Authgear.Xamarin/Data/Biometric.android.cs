@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Authgear.Xamarin.Data
 {
-    internal class BiometricAndroid : IBiometric
+    internal class Biometric : IBiometric
     {
         private readonly IContainerStorage containerStorage;
-        internal BiometricAndroid(IContainerStorage containerStorage)
+        internal Biometric(IContainerStorage containerStorage)
         {
             this.containerStorage = containerStorage;
         }
@@ -23,7 +23,7 @@ namespace Authgear.Xamarin.Data
         }
         private void RemovePrivateKey(string alias)
         {
-            throw new NotImplementedException();
+            // TODO:
         }
     }
 }

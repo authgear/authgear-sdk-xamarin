@@ -73,7 +73,7 @@ namespace Authgear.Xamarin
             oauthRepo = new OauthRepoHttp();
             oauthRepo.Endpoint = authgearEndpoint;
             keyRepo = new KeyRepoPlatformStore();
-            biometric = new BiometricAndroid(containerStorage);
+            biometric = new Biometric(containerStorage);
         }
 
         private void EnsureIsInitialized()

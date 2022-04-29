@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Authgear.Xamarin
@@ -15,6 +16,12 @@ namespace Authgear.Xamarin
                 var responseStr = await responseMessage.Content.ReadAsStringAsync();
                 throw new AuthgearException(responseStr);
             }
+        }
+        public static async Task<T> GetJsonAsync<T>(this HttpResponseMessage responseMessage)
+        {
+            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
+            var responseStream = await responseMessage.Content.ReadAsStreamAsync();
+            return JsonSerializer.Deserialize<T>(responseStream);
         }
     }
 }
