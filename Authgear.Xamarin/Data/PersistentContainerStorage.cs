@@ -1,49 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Authgear.Xamarin.Data
 {
     internal class PersistentContainerStorage : IContainerStorage
     {
+        private const string KeyVerifier = "verifier";
+        private const string KeyAnonymousId = "anonymousId";
+        private const string KeyBiometricKeyId = "biometricKeyId";
         public void DeleteAnonymousKeyId(string aNamespace)
         {
-            throw new NotImplementedException();
+            SecureStorage.Remove($"{aNamespace}_{KeyAnonymousId}");
         }
 
         public void DeleteBiometricKeyId(string aNamespace)
         {
-            throw new NotImplementedException();
+            SecureStorage.Remove($"{aNamespace}_{KeyBiometricKeyId}");
         }
 
-        public string GetAnonymousKeyId(string aNamespace)
+        public Task<string> GetAnonymousKeyId(string aNamespace)
         {
-            throw new NotImplementedException();
+            return SecureStorage.GetAsync($"{aNamespace}_{KeyAnonymousId}");
         }
 
-        public string GetBiometricKeyId(string aNamespace)
+        public Task<string> GetBiometricKeyId(string aNamespace)
         {
-            throw new NotImplementedException();
+            return SecureStorage.GetAsync($"{aNamespace}_{KeyBiometricKeyId}");
         }
 
-        public string GetOidcCodeVerifier(string aNamespace)
+        public Task<string> GetOidcCodeVerifier(string aNamespace)
         {
-            throw new NotImplementedException();
+            return SecureStorage.GetAsync($"{aNamespace}_{KeyVerifier}");
         }
 
         public void SetAnonymousKeyId(string aNamespace, string keyId)
         {
-            throw new NotImplementedException();
+            SecureStorage.SetAsync($"{aNamespace}_{KeyAnonymousId}", keyId);
         }
 
         public void SetBiometricKeyId(string aNamespace, string keyId)
         {
-            throw new NotImplementedException();
+            SecureStorage.SetAsync($"{aNamespace}_{KeyBiometricKeyId}", keyId);
         }
 
         public void SetOidcCodeVerifier(string aNamespace, string verifier)
         {
-            throw new NotImplementedException();
+            SecureStorage.SetAsync($"{aNamespace}_{KeyVerifier}", verifier);
         }
     }
 }

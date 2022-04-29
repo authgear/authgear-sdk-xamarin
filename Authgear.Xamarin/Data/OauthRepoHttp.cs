@@ -1,16 +1,46 @@
 ﻿using Authgear.Xamarin.Oauth;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Authgear.Xamarin.Data
 {
     internal class OauthRepoHttp : IOauthRepo
     {
-        public string Endpoint { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Endpoint { get; set; }
 
-        public OidcConfiguration OidcConfiguration => throw new NotImplementedException();
+        private OidcConfiguration config;
+
+        private ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
+
+        public async Task<OidcConfiguration> OidcConfiguration()
+        {
+            try
+            {
+                locker.EnterReadLock();
+                if (config != null) return config;
+            }
+            finally { locker.ExitReadLock(); }
+            // Double-checked locking
+            try
+            {
+                locker.EnterWriteLock();
+                var configAfterLock = config;
+                if (configAfterLock != null) return configAfterLock;
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(Endpoint)
+                };
+                var stream = await client.GetStreamAsync("/.well-known/openid-configuration");
+                config = JsonSerializer.Deserialize<OidcConfiguration>(stream);
+                return config;
+            }
+            finally { locker.ExitWriteLock(); }
+        }
 
         public void BiometricSetupRequest(string accessToken, string clientId, string jwt)
         {
