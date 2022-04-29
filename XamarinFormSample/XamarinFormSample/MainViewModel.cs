@@ -50,8 +50,17 @@ namespace XamarinFormSample
             }
         }
 
+        private void EnsureAuthgear()
+        {
+            if (authgear == null)
+            {
+                throw new InvalidOperationException("Authgear is not configured. Did you forget to click configure?");
+            }
+        }
+
         public async Task AuthorizeAsync()
         {
+            EnsureAuthgear();
             try
             {
                 SetIsLoading(true);
@@ -63,6 +72,20 @@ namespace XamarinFormSample
                 Debug.WriteLine(result.State ?? "No state");
                 UserInfo = result.UserInfo;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
+        public async Task LogoutAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                await authgear.LogoutAsync();
             }
             finally
             {

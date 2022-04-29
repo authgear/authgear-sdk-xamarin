@@ -58,9 +58,17 @@ namespace Authgear.Xamarin.Data
             throw new NotImplementedException();
         }
 
-        public void OidcRevocationRequest(string refreshToken)
+        public async Task OidcRevocationRequest(string refreshToken)
         {
-            throw new NotImplementedException();
+            var config = await OidcConfiguration();
+            var body = new Dictionary<string, string>()
+            {
+                ["token"] = refreshToken
+            };
+            var client = new HttpClient();
+            var content = new FormUrlEncodedContent(body);
+            var responseMessage = await client.PostAsync(config.RevocationEndpoint, content);
+            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
         }
 
         public async Task<OidcTokenResponse> OidcTokenRequest(OidcTokenRequest request)

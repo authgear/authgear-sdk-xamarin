@@ -12,7 +12,7 @@ namespace Authgear.Xamarin.Data
         Task<OidcConfiguration> OidcConfiguration();
         Task<OidcTokenResponse> OidcTokenRequest(OidcTokenRequest request);
         void BiometricSetupRequest(string accessToken, string clientId, string jwt);
-        void OidcRevocationRequest(string refreshToken);
+        Task OidcRevocationRequest(string refreshToken);
         Task<UserInfo> OidcUserInfoRequest(string accessToken);
         ChallengeResponse OauthChallenge(string purpose);
         AppSessionTokenResponse OauthAppSessionToken(string refreshToken);

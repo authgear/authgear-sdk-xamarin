@@ -18,6 +18,10 @@ namespace Authgear.Xamarin
 
         internal OidcAuthenticationRequest ToRequest(bool suppressIdpSessionCookie)
         {
+            if (RedirectUri == null)
+            {
+                throw new ArgumentNullException(nameof(RedirectUri));
+            }
             return new OidcAuthenticationRequest
             {
                 RedirectUri = this.RedirectUri,

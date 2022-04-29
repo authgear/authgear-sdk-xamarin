@@ -42,5 +42,17 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", error.Message, "OK");
             }
         }
+
+        private async void Logout_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.LogoutAsync();
+            }
+            catch (Exception error)
+            {
+                await DisplayAlert("Error", error.Message, "OK");
+            }
+        }
     }
 }

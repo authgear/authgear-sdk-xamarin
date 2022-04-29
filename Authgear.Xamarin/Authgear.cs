@@ -116,6 +116,24 @@ namespace Authgear.Xamarin
             return await FinishAuthorizationAsync(deepLink);
         }
 
+        public async Task LogoutAsync(bool? force = null)
+        {
+            EnsureIsInitialized();
+            try
+            {
+                var refreshToken = await tokenStorage.GetRefreshTokenAsync(name) ?? "";
+                await oauthRepo.OidcRevocationRequest(refreshToken);
+            }
+            catch (Exception e)
+            {
+                if (force != true)
+                {
+                    throw e;
+                }
+            }
+            ClearSession(SessionStateChangeReason.Logout);
+        }
+
         private VerifierHolder SetupVerifier()
         {
             var verifier = GenerateCodeVerifier();
@@ -241,6 +259,19 @@ namespace Authgear.Xamarin
             {
                 tokenStorage.SetRefreshToken(name, tokenResponse.RefreshToken);
             }
+        }
+
+        private void ClearSession(SessionStateChangeReason reason)
+        {
+            tokenStorage.DeleteRefreshToken(name);
+            lock (tokenStateLock)
+            {
+                AccessToken = null;
+                refreshToken = null;
+                IdToken = null;
+                expiredAt = null;
+            }
+            UpdateSessionState(SessionState.NoSession, reason);
         }
     }
 }
