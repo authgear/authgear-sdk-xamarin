@@ -47,7 +47,7 @@ namespace Authgear.Xamarin
         public event EventHandler<SessionStateChangeReason> SessionStateChange;
         private bool ShouldSuppressIDPSessionCookie
         {
-            get { return false; }
+            get { return !shareSessionWithSystemBrowser; }
         }
         private readonly object tokenStateLock = new object();
         private AuthgearSdk(AuthgearOptions options)
@@ -71,6 +71,7 @@ namespace Authgear.Xamarin
             name = options.Name ?? "default";
             containerStorage = new PersistentContainerStorage();
             oauthRepo = new OauthRepoHttp();
+            oauthRepo.Endpoint = authgearEndpoint;
             keyRepo = new KeyRepoPlatformStore();
             biometric = new BiometricAndroid(containerStorage);
         }
@@ -108,7 +109,7 @@ namespace Authgear.Xamarin
             EnsureIsInitialized();
             var codeVerifier = SetupVerifier();
             var request = options.ToRequest(ShouldSuppressIDPSessionCookie);
-            var authorizeUrl = AuthorizeEndpoint(request, codeVerifier);
+            var authorizeUrl = await AuthorizeEndpoint(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
             return await FinishAuthorizationAsync(deepLink);
         }
@@ -143,34 +144,45 @@ namespace Authgear.Xamarin
             return sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
         }
 
-        private string AuthorizeEndpoint(OidcAuthenticationRequest request, VerifierHolder codeVerifier)
+        private async Task<string> AuthorizeEndpoint(OidcAuthenticationRequest request, VerifierHolder codeVerifier)
         {
-            var config = oauthRepo.OidcConfiguration;
+            var config = await oauthRepo.OidcConfiguration();
             var query = request.ToQuery(ClientId, codeVerifier);
-            return $"{config.AuthorizationEndpoint}?{query}";
+            return $"{config.AuthorizationEndpoint}?{query.ToQueryParameter()}";
         }
 
         private async Task<string> OpenAuthorizeUrlAsync(string redirectUrl, string authorizeUrl)
         {
+            // WebAuthenticator abstracts the uri for us but we need the uri in FinishAuthorization.
+            // Substitute the uri for now.
             var result = await WebAuthenticator.AuthenticateAsync(new Uri(authorizeUrl), new Uri(redirectUrl));
-            return result.ToString();
+            var builder = new UriBuilder(redirectUrl)
+            {
+                Query = result.Properties.ToQueryParameter()
+            };
+            return builder.ToString();
         }
 
         private async Task<AuthorizeResult> FinishAuthorizationAsync(string deepLink)
         {
             var uri = new Uri(deepLink);
-            var redirectUri = $"{uri.Scheme}://{uri.Authority}/{uri.PathAndQuery}";
+            var path = uri.LocalPath == "/" ? "" : uri.LocalPath;
+            var redirectUri = $"{uri.Scheme}://{uri.Authority}{path}";
             var query = uri.ParseQueryString();
-            var state = query["state"];
-            var error = query["error"];
-            var errorDescription = query["error_description"];
-            var errorUri = query["error_uri"];
+            query.TryGetValue("state", out var state);
+            query.TryGetValue("error", out var error);
+            query.TryGetValue("error_description", out var errorDescription);
+            query.TryGetValue("error_uri", out var errorUri);
             if (error != null)
             {
                 throw new OauthException(error, errorDescription, state, errorUri);
             }
-            var code = query["code"] ?? throw new OauthException("invalid_request", "Missing parameter: code", state, errorUri);
-            var codeVerifier = containerStorage.GetOidcCodeVerifier(name);
+            query.TryGetValue("code", out var code);
+            if (code == null)
+            {
+                throw new OauthException("invalid_request", "Missing parameter: code", state, errorUri);
+            }
+            var codeVerifier = await containerStorage.GetOidcCodeVerifier(name);
             var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
             {
                 GrantType = GrantType.AuthorizationCode,

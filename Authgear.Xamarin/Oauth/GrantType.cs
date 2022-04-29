@@ -7,7 +7,7 @@ namespace Authgear.Xamarin
 {
     public enum GrantType
     {
-        [Description("authorization_token")]
+        [Description("authorization_code")]
         AuthorizationCode,
         [Description("refresh_token")]
         RefreshToken,

@@ -8,14 +8,13 @@ namespace Authgear.Xamarin.CsExtensions
     {
         public static string ToBase64UrlSafeString(byte[] input)
         {
-            var base64 = Convert.ToBase64String(input);
-            return base64.Replace("+", "-").Replace("/", "_");
+            var base64 = Convert.ToBase64String(input, Base64FormattingOptions.None);
+            return base64.Replace("+", "-").Replace("/", "_").Replace("=", "");
         }
         public static string ToBase64UrlSafeString(string inputStr, Encoding encoding)
         {
             var input = encoding.GetBytes(inputStr);
-            var base64 = Convert.ToBase64String(input);
-            return base64.Replace("+", "-").Replace("/", "_");
+            return ToBase64UrlSafeString(input);
         }
     }
 }

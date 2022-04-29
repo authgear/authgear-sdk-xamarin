@@ -13,7 +13,7 @@ namespace Authgear.Xamarin
         /// <returns></returns>
         public static Dictionary<string, string> ParseQueryString(this Uri uri)
         {
-            var query = uri.Query;
+            var query = uri.Query.Replace("?", "");
             var entries = query.Split('&');
             var dict = new Dictionary<string, string>();
             foreach (var entry in entries)
@@ -23,7 +23,7 @@ namespace Authgear.Xamarin
                 {
                     dict.Add(keyValue[0], keyValue[1]);
                 }
-                else
+                else if (keyValue[0] != null && keyValue[0].Length > 0)
                 {
                     dict.Add(keyValue[0], null);
                 }
