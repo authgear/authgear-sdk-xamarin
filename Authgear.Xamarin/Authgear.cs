@@ -82,10 +82,10 @@ namespace Authgear.Xamarin
                 throw new InvalidOperationException("Authgear is not configured. Did you forget to call Configure?");
             }
         }
-        public Task Configure()
+        public async Task Configure()
         {
             isInitialized = true;
-            var refreshToken = tokenStorage.GetRefreshToken(name);
+            var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
             this.refreshToken = refreshToken;
             if (refreshToken != null)
             {
@@ -95,7 +95,6 @@ namespace Authgear.Xamarin
             {
                 UpdateSessionState(SessionState.NoSession, SessionStateChangeReason.NoToken);
             }
-            return Task.CompletedTask;
         }
 
         private void UpdateSessionState(SessionState state, SessionStateChangeReason reason)
