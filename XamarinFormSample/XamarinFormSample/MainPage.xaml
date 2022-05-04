@@ -14,6 +14,7 @@
             <Label Text="{Binding State, Mode=OneWay}" Margin="16, 0, 16, 0"/>
             <Button Text="Configure" Clicked="Configure_Clicked" Margin="16"/>
             <Button Text="Authorize" Clicked="Authorize_Clicked" Margin="16, 0, 16, 0"/>
+            <Button Text="Enable Biometric" Clicked="EnableBiometric_Clicked" Margin="16, 0, 16, 0"/>
             <Button Text="Logout" Clicked="Logout_Clicked" Margin="16, 16, 16, 0"/>
         </StackLayout>
     </Grid>

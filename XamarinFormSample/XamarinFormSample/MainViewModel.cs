@@ -79,6 +79,30 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task EnableBiometricAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                await authgear.EnableBiometricAsync(new BiometricOptions
+                {
+                    Android = new BiometricOptionsAndroid
+                    {
+                        Title = "Enable biometric title",
+                        Subtitle = "subtitle",
+                        Description = "description",
+                        NegativeButtonText = "Cancel",
+                        AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
+                    }
+                });
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task LogoutAsync()
         {
             EnsureAuthgear();

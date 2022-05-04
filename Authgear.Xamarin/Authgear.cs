@@ -1,11 +1,13 @@
 ﻿using Authgear.Xamarin.CsExtensions;
 using Authgear.Xamarin.Data;
+using Authgear.Xamarin.Data.Oauth;
 using Authgear.Xamarin.Oauth;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -44,6 +46,7 @@ namespace Authgear.Xamarin
         private readonly string name;
         private bool isInitialized = false;
         private string refreshToken = null;
+        private Task refreshAccessTokenTask = null;
         public event EventHandler<SessionStateChangeReason> SessionStateChange;
         private bool ShouldSuppressIDPSessionCookie
         {
@@ -75,7 +78,6 @@ namespace Authgear.Xamarin
                 Endpoint = authgearEndpoint
             };
             keyRepo = new KeyRepoPlatformStore();
-            biometric = new Biometric(containerStorage);
         }
 
         private void EnsureIsInitialized()
@@ -164,6 +166,87 @@ namespace Authgear.Xamarin
             return sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
         }
 
+        private bool ShouldRefreshAccessToken
+        {
+            get
+            {
+                if (refreshToken == null) return false;
+                if (AccessToken == null) return true;
+                var expireAt = this.expiredAt;
+                if (expiredAt == null) return true;
+                var now = DateTime.Now;
+                if (expireAt < now) return true;
+                return false;
+            }
+        }
+
+        private async Task RefreshAccessToken()
+        {
+            var taskSource = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var existingTask = Interlocked.CompareExchange(ref refreshAccessTokenTask, taskSource.Task, null);
+            var isExchanged = existingTask == null;
+            if (isExchanged)
+            {
+                try
+                {
+                    await DoRefreshAccessToken();
+                    taskSource.SetResult(null);
+                }
+                catch (Exception ex)
+                {
+                    taskSource.SetException(ex);
+                    throw;
+                }
+                finally
+                {
+                    refreshAccessTokenTask = null;
+                }
+            }
+            else
+            {
+                // Shouldn't need to, just in case.
+                taskSource.SetCanceled();
+                await existingTask;
+            }
+        }
+
+        private async Task DoRefreshAccessToken()
+        {
+            var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
+            if (refreshToken == null)
+            {
+                // Somehow we are asked to refresh access token but we don't have the refresh token.
+                // Something went wrong, clear session.
+                ClearSession(SessionStateChangeReason.NoToken);
+                return;
+            }
+            try
+            {
+                var tokenResponse = await oauthRepo.OidcTokenRequest(
+                    new OidcTokenRequest
+                    {
+                        GrantType = GrantType.RefreshToken,
+                        ClientId = ClientId,
+                        XDeviceInfo = GetDeviceInfoString(),
+                        RefreshToken = refreshToken
+                    });
+                SaveToken(tokenResponse, SessionStateChangeReason.FoundToken);
+            }
+            catch (Exception ex)
+            {
+                if (ex is OauthException)
+                {
+                    var oauthEx = ex as OauthException;
+                    if (oauthEx.Error == "invalid_grant")
+                    {
+                        ClearSession(SessionStateChangeReason.Invalid);
+                        return;
+                    }
+                }
+                throw ex;
+            }
+        }
+
         private async Task<string> AuthorizeEndpoint(OidcAuthenticationRequest request, VerifierHolder codeVerifier)
         {
             var config = await oauthRepo.OidcConfiguration();
@@ -214,19 +297,50 @@ namespace Authgear.Xamarin
             });
             var userInfo = await oauthRepo.OidcUserInfoRequest(tokenResponse.AccessToken);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
-            DisableBiometric();
+            await DisableBiometricAsync();
             return new AuthorizeResult { UserInfo = userInfo, State = state };
+        }
+
+        public void EnsureBiometricIsSupported(BiometricOptions options)
+        {
+            EnsureIsInitialized();
+            biometric.EnsureIsSupported(options);
+        }
+
+        public async Task<bool> IsBiometricEnabled()
+        {
+            EnsureIsInitialized();
+            var kid = await containerStorage.GetBiometricKeyId(name);
+            if (kid == null) { return false; }
+            return true;
+        }
+
+        public async Task DisableBiometricAsync()
+        {
+            EnsureIsInitialized();
+            var kid = await containerStorage.GetBiometricKeyId(name);
+            if (kid != null)
+            {
+                biometric.RemoveBiometric(name);
+                containerStorage.DeleteBiometricKeyId(name);
+            }
+        }
+
+        public async Task EnableBiometricAsync(BiometricOptions options)
+        {
+            EnsureIsInitialized();
+            await RefreshAccessTokenIfNeeded();
+            var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
+            var challengeResponse = await oauthRepo.OauthChallenge("biometric_request");
+            var challenge = challengeResponse.Token;
+            var result = await biometric.EnableBiometric(options, challenge, PlatformGetDeviceInfo());
+            await oauthRepo.BiometricSetupRequest(accessToken, ClientId, result.Jwt);
+            containerStorage.SetBiometricKeyId(name, result.Kid);
         }
 
         private string GetDeviceInfoString()
         {
             return ConvertExtensions.ToBase64UrlSafeString(JsonSerializer.Serialize(PlatformGetDeviceInfo()), Encoding.UTF8);
-        }
-
-        public void DisableBiometric()
-        {
-            EnsureIsInitialized();
-            biometric.RemoveBiometric(name);
         }
 
         private void SaveToken(OidcTokenResponse tokenResponse, SessionStateChangeReason reason)
@@ -261,7 +375,17 @@ namespace Authgear.Xamarin
             }
         }
 
-        private void ClearSession(SessionStateChangeReason reason)
+        public async Task<string> RefreshAccessTokenIfNeeded()
+        {
+            EnsureIsInitialized();
+            if (ShouldRefreshAccessToken)
+            {
+                await RefreshAccessToken();
+            }
+            return AccessToken;
+        }
+
+        public void ClearSession(SessionStateChangeReason reason)
         {
             tokenStorage.DeleteRefreshToken(name);
             lock (tokenStateLock)

@@ -54,5 +54,17 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", error.Message, "OK");
             }
         }
+
+        private async void EnableBiometric_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.EnableBiometricAsync();
+            }
+            catch (Exception error)
+            {
+                await DisplayAlert("Error", error.Message, "OK");
+            }
+        }
     }
 }
