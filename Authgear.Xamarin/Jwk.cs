@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Authgear.Xamarin
 {
-    internal class Jwk
+    internal partial class Jwk
     {
         [JsonPropertyName("kid")]
         public string Kid { get; set; }

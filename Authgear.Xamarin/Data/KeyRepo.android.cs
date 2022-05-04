@@ -28,7 +28,7 @@ namespace Authgear.Xamarin
                     throw new AnonymousUserNotFoundException();
                 }
             }
-            var jwk = JwkExtensions.FromPublicKey(keyId, keyPair.Public);
+            var jwk = Jwk.FromPublicKey(keyId, keyPair.Public);
             var header = new JwtHeader
             {
                 Typ = JwtHeaderType.Anonymous,

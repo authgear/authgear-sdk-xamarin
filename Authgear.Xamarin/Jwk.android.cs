@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal static class JwkExtensions
+    internal partial class Jwk
     {
         public static Jwk FromPublicKey(string kid, IPublicKey publicKey)
         {

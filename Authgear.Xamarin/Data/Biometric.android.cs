@@ -148,7 +148,7 @@ namespace Authgear.Xamarin.Data
             var alias = string.Format(AliasFormat, kid);
             var spec = MakeGenerateKeyPairSpec(alias, ToKeyPropertiesAuthType(optionsAn.AccessContraint), optionsAn.InvalidatedByBiometricEnrollment);
             var keyPair = CreateKeyPair(spec);
-            var jwk = JwkExtensions.FromPublicKey(kid, keyPair.Public);
+            var jwk = Jwk.FromPublicKey(kid, keyPair.Public);
             var header = new JwtHeader
             {
                 Typ = JwtHeaderType.Biometric,
@@ -172,7 +172,7 @@ namespace Authgear.Xamarin.Data
             try
             {
                 var keyPair = GetPrivateKey(alias);
-                var jwk = JwkExtensions.FromPublicKey(kid, keyPair.Public);
+                var jwk = Jwk.FromPublicKey(kid, keyPair.Public);
                 var header = new JwtHeader
                 {
                     Typ = JwtHeaderType.Biometric,
