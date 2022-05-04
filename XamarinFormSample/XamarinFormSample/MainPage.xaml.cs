@@ -25,9 +25,9 @@ namespace XamarinFormSample
             {
                 await MainViewModel.ConfigureAsync();
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                await DisplayAlert("Error", error.Message, "OK");
+                await DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
@@ -37,9 +37,9 @@ namespace XamarinFormSample
             {
                 await MainViewModel.AuthorizeAsync();
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                await DisplayAlert("Error", error.Message, "OK");
+                await DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
@@ -49,9 +49,9 @@ namespace XamarinFormSample
             {
                 await MainViewModel.LogoutAsync();
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                await DisplayAlert("Error", error.Message, "OK");
+                await DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
@@ -61,9 +61,21 @@ namespace XamarinFormSample
             {
                 await MainViewModel.EnableBiometricAsync();
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                await DisplayAlert("Error", error.Message, "OK");
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+        private async void AuthenticateBiometric_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.AuthenticateBiometricAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
             }
         }
     }

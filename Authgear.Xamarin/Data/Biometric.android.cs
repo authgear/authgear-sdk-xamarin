@@ -17,6 +17,7 @@ namespace Authgear.Xamarin.Data
     {
         private const int BiometricOnly = BiometricManager.Authenticators.BiometricStrong;
         private const int BiometricOrDeviceCredential = BiometricManager.Authenticators.BiometricStrong | BiometricManager.Authenticators.DeviceCredential;
+        private const string AndroidKeyStore = "AndroidKeyStore";
         private const string AliasFormat = "com.authgear.keys.biometric.{0}";
         private const int KeySize = 2048;
         private class AuthenticationCallbackImpl : AuthenticationCallback
@@ -101,9 +102,22 @@ namespace Authgear.Xamarin.Data
         }
         private void RemovePrivateKey(string alias)
         {
-            var keystore = KeyStore.GetInstance("AndroidKeyStore");
+            var keystore = KeyStore.GetInstance(AndroidKeyStore);
             keystore.Load(null);
             keystore.DeleteEntry(alias);
+        }
+
+        private KeyPair GetPrivateKey(string alias)
+        {
+            var keyStore = KeyStore.GetInstance(AndroidKeyStore);
+            keyStore.Load(null);
+            var entry = keyStore.GetEntry(alias, null);
+            var privateKeyEntry = entry as KeyStore.PrivateKeyEntry;
+            if (privateKeyEntry == null)
+            {
+                return null;
+            }
+            return new KeyPair(privateKeyEntry.Certificate.PublicKey, privateKeyEntry.PrivateKey);
         }
 
         private void EnsureCanAuthenticate(BiometricOptions options)
@@ -129,8 +143,7 @@ namespace Authgear.Xamarin.Data
             EnsureApiLevel();
             EnsureCanAuthenticate(options);
             var optionsAn = options.Android;
-            var authenticators = ToAuthenticators(optionsAn.AccessContraint);
-            var promptInfo = BuildPromptInfo(optionsAn.Title, optionsAn.Subtitle, optionsAn.Description, optionsAn.NegativeButtonText, authenticators);
+            var promptInfo = BuildPromptInfo(optionsAn);
             var kid = Guid.NewGuid().ToString();
             var alias = string.Format(AliasFormat, kid);
             var spec = MakeGenerateKeyPairSpec(alias, ToKeyPropertiesAuthType(optionsAn.AccessContraint), optionsAn.InvalidatedByBiometricEnrollment);
@@ -148,6 +161,40 @@ namespace Authgear.Xamarin.Data
             var cryptoObject = new BiometricPrompt.CryptoObject(lockedSignature);
             var jwt = await Authenticate(promptInfo, cryptoObject, header, payload);
             return new BiometricEnableResult { Kid = kid, Jwt = jwt };
+        }
+
+        public async Task<string> AuthenticateBiometricAsync(BiometricOptions options, string kid, string challenge, DeviceInfoRoot deviceInfo)
+        {
+            EnsureApiLevel();
+            EnsureCanAuthenticate(options);
+            var promptInfo = BuildPromptInfo(options.Android);
+            var alias = string.Format(AliasFormat, kid);
+            try
+            {
+                var keyPair = GetPrivateKey(alias);
+                var jwk = JwkExtensions.FromPublicKey(kid, keyPair.Public);
+                var header = new JwtHeader
+                {
+                    Typ = JwtHeaderType.Biometric,
+                    Kid = kid,
+                    Alg = jwk.Alg,
+                    Jwk = jwk,
+                };
+                var payload = new JwtPayload(DateTimeOffset.Now, challenge, "authenticate", deviceInfo);
+                var lockedSignature = MakeSignature(keyPair.Private);
+                var cryptoObject = new BiometricPrompt.CryptoObject(lockedSignature);
+                return await Authenticate(promptInfo, cryptoObject, header, payload);
+            }
+            catch (Exception ex)
+            {
+                throw AuthgearException.Wrap(ex);
+            }
+        }
+
+        private PromptInfo BuildPromptInfo(BiometricOptionsAndroid options)
+        {
+            var authenticators = ToAuthenticators(options.AccessContraint);
+            return BuildPromptInfo(options.Title, options.Subtitle, options.Description, options.NegativeButtonText, authenticators);
         }
 
         private PromptInfo BuildPromptInfo(string title, string subtitle, string description, string negativeButtonText, int authenticators)
@@ -204,7 +251,7 @@ namespace Authgear.Xamarin.Data
 
         private KeyPair CreateKeyPair(KeyGenParameterSpec spec)
         {
-            var generator = KeyPairGenerator.GetInstance(KeyProperties.KeyAlgorithmRsa, "AndroidKeyStore");
+            var generator = KeyPairGenerator.GetInstance(KeyProperties.KeyAlgorithmRsa, AndroidKeyStore);
             generator.Initialize(spec);
             return generator.GenerateKeyPair();
         }

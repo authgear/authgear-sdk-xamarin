@@ -338,9 +338,58 @@ namespace Authgear.Xamarin
             containerStorage.SetBiometricKeyId(name, result.Kid);
         }
 
+        public async Task<UserInfo> AuthenticateBiometricAsync(BiometricOptions options)
+        {
+            EnsureIsInitialized();
+            var kid = await containerStorage.GetBiometricKeyId(name) ?? throw new BiometricPrivateKeyNotFoundException();
+            var challengeResponse = await oauthRepo.OauthChallenge("biometric_request");
+            var challenge = challengeResponse.Token;
+            try
+            {
+                var deviceInfo = PlatformGetDeviceInfo();
+                var jwt = await biometric.AuthenticateBiometricAsync(options, kid, challenge, deviceInfo);
+                try
+                {
+                    var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
+                    {
+                        GrantType = GrantType.Biometric,
+                        ClientId = ClientId,
+                        XDeviceInfo = GetDeviceInfoString(deviceInfo),
+                        Jwt = jwt
+                    });
+                    var userInfo = await oauthRepo.OidcUserInfoRequest(tokenResponse.AccessToken);
+                    SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
+                    return userInfo;
+                }
+                catch (OauthException ex)
+                {
+                    // In case the biometric was removed remotely.
+                    if (ex.Error == "invalid_grant" && ex.ErrorDescription == "InvalidCredentials")
+                    {
+                        await DisableBiometricAsync();
+                    }
+                    throw;
+                }
+            }
+            catch (BiometricPrivateKeyNotFoundException)
+            {
+                await DisableBiometricAsync();
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw AuthgearException.Wrap(ex);
+            }
+        }
+
         private string GetDeviceInfoString()
         {
             return ConvertExtensions.ToBase64UrlSafeString(JsonSerializer.Serialize(PlatformGetDeviceInfo()), Encoding.UTF8);
+        }
+
+        private string GetDeviceInfoString(DeviceInfoRoot deviceInfo)
+        {
+            return ConvertExtensions.ToBase64UrlSafeString(JsonSerializer.Serialize(deviceInfo), Encoding.UTF8);
         }
 
         private void SaveToken(OidcTokenResponse tokenResponse, SessionStateChangeReason reason)

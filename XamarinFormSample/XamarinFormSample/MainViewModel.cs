@@ -79,6 +79,31 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task AuthenticateBiometricAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                var result = await authgear.AuthenticateBiometricAsync(new BiometricOptions
+                {
+                    Android = new BiometricOptionsAndroid
+                    {
+                        Title = "Authenticate biometric title",
+                        Subtitle = "subtitle",
+                        Description = "description",
+                        NegativeButtonText = "Cancel",
+                        AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
+                    }
+                });
+                UserInfo = result;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
         public async Task EnableBiometricAsync()
         {
             EnsureAuthgear();
