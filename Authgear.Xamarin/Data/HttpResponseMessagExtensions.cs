@@ -1,8 +1,10 @@
 ﻿using Authgear.Xamarin.Data;
+using Authgear.Xamarin.Oauth;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Authgear.Xamarin
@@ -13,8 +15,27 @@ namespace Authgear.Xamarin
         {
             if (!responseMessage.IsSuccessStatusCode)
             {
-                var responseStr = await responseMessage.Content.ReadAsStringAsync();
-                throw new AuthgearException(responseStr);
+                try
+                {
+                    var errorStr = await responseMessage.Content.ReadAsStringAsync();
+                    try
+                    {
+                        // Try parsing it as server exception
+                        var serverErrorResult = AuthgearJson.Deserialize<ServerErrorResult>(errorStr);
+                        var error = serverErrorResult.Error;
+                        throw new ServerException(error.Name, error.Reason, error.Message, error.Info);
+                    }
+                    catch (JsonException)
+                    {
+                        // It's an oauth exception
+                        var error = AuthgearJson.Deserialize<OauthError>(errorStr);
+                        throw new OauthException(error.Error, error.ErrorDescription, error.State, error.ErrorUri);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new AuthgearException(ex);
+                }
             }
         }
         public static async Task<T> GetJsonAsync<T>(this HttpResponseMessage responseMessage)
