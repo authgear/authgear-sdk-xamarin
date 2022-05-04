@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Authgear.Xamarin.Data;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Authgear.Xamarin
@@ -21,7 +21,7 @@ namespace Authgear.Xamarin
         {
             await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
             var responseStream = await responseMessage.Content.ReadAsStreamAsync();
-            return JsonSerializer.Deserialize<T>(responseStream);
+            return AuthgearJson.Deserialize<T>(responseStream);
         }
     }
 }
