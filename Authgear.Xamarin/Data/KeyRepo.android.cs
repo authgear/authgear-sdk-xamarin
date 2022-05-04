@@ -42,6 +42,23 @@ namespace Authgear.Xamarin
             return Task.FromResult(new KeyJwtResult { Jwt = jwt, KeyId = keyId });
         }
 
+        public Task<string> PromoteAnonymousUserAsync(string keyId, string challenge, DeviceInfoRoot deviceInfo)
+        {
+            var keyPair = GetAnonymousKey(keyId) ?? throw new AnonymousUserNotFoundException();
+            var jwk = Jwk.FromPublicKey(keyId, keyPair.Public);
+            var header = new JwtHeader
+            {
+                Typ = JwtHeaderType.Anonymous,
+                Jwk = jwk,
+                Alg = jwk.Alg,
+                Kid = jwk.Kid,
+            };
+            var payload = new JwtPayload(DateTimeOffset.Now, challenge, "promote", deviceInfo);
+            var signature = MakeSignature(keyPair.Private);
+            var jwt = Jwt.Sign(signature, header, payload);
+            return Task.FromResult(jwt);
+        }
+
         public static Signature MakeSignature(IPrivateKey privateKey)
         {
             var signature = Signature.GetInstance("SHA256withRSA");

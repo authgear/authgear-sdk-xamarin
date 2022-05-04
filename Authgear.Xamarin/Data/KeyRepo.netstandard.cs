@@ -11,5 +11,10 @@ namespace Authgear.Xamarin.Data
         {
             throw new NotImplementedException();
         }
+
+        public Task<string> PromoteAnonymousUserAsync(string keyId, string challenge, DeviceInfoRoot deviceInfo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -3,7 +3,9 @@ using Authgear.Xamarin.Data;
 using Authgear.Xamarin.Data.Oauth;
 using Authgear.Xamarin.Oauth;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -129,6 +131,34 @@ namespace Authgear.Xamarin
             await DisableBiometricAsync();
             containerStorage.SetAnonymousKeyId(name, keyId);
             return userInfo;
+        }
+
+        public async Task<AuthorizeResult> PromoteAnonymousUserAsync(PromoteOptions options)
+        {
+            EnsureIsInitialized();
+            var keyId = (await containerStorage.GetAnonymousKeyId(name)) ?? throw new AnonymousUserNotFoundException();
+            var challengeResponse = await oauthRepo.OauthChallenge("anonymous_request");
+            var challenge = challengeResponse.Token;
+            var jwt = await keyRepo.PromoteAnonymousUserAsync(keyId, challenge, PlatformGetDeviceInfo());
+            var jwtValue = WebUtility.UrlEncode(jwt);
+            var loginHint = $"https://authgear.com/login_hint?type=anonymous&jwt={jwtValue}";
+            var codeVerifier = SetupVerifier();
+            var authorizeUrl = await AuthorizeEndpoint(new OidcAuthenticationRequest
+            {
+                RedirectUri = options.RedirectUri,
+                ResponseType = "code",
+                Scope = new List<string>() { "openid", "offline_access", "https://authgear.com/scopes/full-access" },
+                Prompt = new List<PromptOption>() { PromptOption.Login },
+                LoginHint = loginHint,
+                State = options.State,
+                UiLocales = options.UiLocales,
+                WechatRedirectUri = options.WechatRedirectUri,
+                SuppressIdpSessionCookie = ShouldSuppressIDPSessionCookie,
+            }, codeVerifier);
+            var deepLink = await OpenAuthorizeUrlAsync(options.RedirectUri, authorizeUrl);
+            var result = await FinishAuthorizationAsync(deepLink);
+            containerStorage.DeleteAnonymousKeyId(name);
+            return result;
         }
 
         public async Task<AuthorizeResult> AuthorizeAsync(AuthorizeOptions options)

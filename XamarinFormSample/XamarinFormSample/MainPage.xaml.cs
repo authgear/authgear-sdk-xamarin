@@ -90,5 +90,17 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+        private async void PromoteAnonymousUser_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.PromoteAnonymousUserAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 }

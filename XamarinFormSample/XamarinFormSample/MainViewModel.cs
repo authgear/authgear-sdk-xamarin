@@ -74,6 +74,26 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task PromoteAnonymousUserAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                var result = await authgear.PromoteAnonymousUserAsync(new PromoteOptions
+                {
+                    RedirectUri = RedirectUri,
+                });
+                Debug.WriteLine(result.State ?? "No state");
+                UserInfo = result.UserInfo;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task AuthorizeAsync()
         {
             EnsureAuthgear();

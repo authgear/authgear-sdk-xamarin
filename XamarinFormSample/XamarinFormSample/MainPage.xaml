@@ -15,6 +15,7 @@
             <Button Text="Configure" Clicked="Configure_Clicked" Margin="16, 16, 16, 0"/>
             <Button Text="Authorize" Clicked="Authorize_Clicked" Margin="16, 16, 16, 0"/>
             <Button Text="Authenticate Anonymously" Clicked="AuthenticateAnontmously_Clicked" Margin="16, 16, 16, 0"/>
+            <Button Text="Promote anoymous user" Clicked="PromoteAnonymousUser_Clicked" Margin="16, 16, 16, 0"/>
             <Button Text="Authenticate Biometric" Clicked="AuthenticateBiometric_Clicked" Margin="16, 16, 16, 0"/>
             <Button Text="Enable Biometric" Clicked="EnableBiometric_Clicked" Margin="16, 16, 16, 0"/>
             <Button Text="Logout" Clicked="Logout_Clicked" Margin="16, 16, 16, 0"/>
