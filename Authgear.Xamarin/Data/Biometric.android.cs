@@ -157,8 +157,8 @@ namespace Authgear.Xamarin.Data
                 Jwk = jwk,
             };
             var payload = new JwtPayload(DateTimeOffset.Now, challenge, "setup", deviceInfo);
-            var lockedSignature = MakeSignature(keyPair.Private);
-            var cryptoObject = new BiometricPrompt.CryptoObject(lockedSignature);
+            var lockedSignature = KeyRepo.MakeSignature(keyPair.Private);
+            var cryptoObject = new CryptoObject(lockedSignature);
             var jwt = await Authenticate(promptInfo, cryptoObject, header, payload);
             return new BiometricEnableResult { Kid = kid, Jwt = jwt };
         }
@@ -181,8 +181,8 @@ namespace Authgear.Xamarin.Data
                     Jwk = jwk,
                 };
                 var payload = new JwtPayload(DateTimeOffset.Now, challenge, "authenticate", deviceInfo);
-                var lockedSignature = MakeSignature(keyPair.Private);
-                var cryptoObject = new BiometricPrompt.CryptoObject(lockedSignature);
+                var lockedSignature = KeyRepo.MakeSignature(keyPair.Private);
+                var cryptoObject = new CryptoObject(lockedSignature);
                 return await Authenticate(promptInfo, cryptoObject, header, payload);
             }
             catch (Exception ex)
@@ -254,13 +254,6 @@ namespace Authgear.Xamarin.Data
             var generator = KeyPairGenerator.GetInstance(KeyProperties.KeyAlgorithmRsa, AndroidKeyStore);
             generator.Initialize(spec);
             return generator.GenerateKeyPair();
-        }
-
-        private Signature MakeSignature(IPrivateKey privateKey)
-        {
-            var signature = Signature.GetInstance("SHA256withRSA");
-            signature.InitSign(privateKey);
-            return signature;
         }
 
         private Task<string> Authenticate(PromptInfo promptInfo, CryptoObject cryptoObject, JwtHeader header, JwtPayload payload)

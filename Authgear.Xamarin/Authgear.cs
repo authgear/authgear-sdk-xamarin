@@ -77,7 +77,6 @@ namespace Authgear.Xamarin
             {
                 Endpoint = authgearEndpoint
             };
-            keyRepo = new KeyRepoPlatformStore();
         }
 
         private void EnsureIsInitialized()
@@ -106,6 +105,30 @@ namespace Authgear.Xamarin
         {
             SessionState = state;
             SessionStateChange?.Invoke(this, reason);
+        }
+
+        public async Task<UserInfo> AuthenticateAnonymouslyAsync()
+        {
+            EnsureIsInitialized();
+            var challengeResponse = await oauthRepo.OauthChallenge("anonymous_request");
+            var challenge = challengeResponse.Token;
+            var keyId = await containerStorage.GetAnonymousKeyId(name);
+            var deviceInfo = PlatformGetDeviceInfo();
+            var jwtResult = await keyRepo.GetOrCreateAnonymousJwtAsync(keyId, challenge, deviceInfo);
+            keyId = jwtResult.KeyId;
+            var jwt = jwtResult.Jwt;
+            var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
+            {
+                GrantType = GrantType.Anonymous,
+                ClientId = ClientId,
+                XDeviceInfo = GetDeviceInfoString(deviceInfo),
+                Jwt = jwt
+            });
+            var userInfo = await oauthRepo.OidcUserInfoRequest(tokenResponse.AccessToken);
+            SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
+            await DisableBiometricAsync();
+            containerStorage.SetAnonymousKeyId(name, keyId);
+            return userInfo;
         }
 
         public async Task<AuthorizeResult> AuthorizeAsync(AuthorizeOptions options)

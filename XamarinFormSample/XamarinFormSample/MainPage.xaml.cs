@@ -78,5 +78,17 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+        private async void AuthenticateAnontmously_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.AuthenticateAnonymouslyAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 }

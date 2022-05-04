@@ -58,6 +58,22 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task AuthenticateAnonymouslyAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                var userInfo = await authgear.AuthenticateAnonymouslyAsync();
+                UserInfo = userInfo;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task AuthorizeAsync()
         {
             EnsureAuthgear();
