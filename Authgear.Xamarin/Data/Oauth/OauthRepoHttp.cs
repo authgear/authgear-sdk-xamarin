@@ -1,0 +1,149 @@
+﻿using Authgear.Xamarin.CsExtensions;
+using Authgear.Xamarin.Oauth;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Authgear.Xamarin.Data.Oauth
+{
+    internal class OauthRepoHttp : IOauthRepo
+    {
+
+        public string Endpoint { get; set; }
+
+        private OidcConfiguration config;
+
+        private readonly ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
+
+        public async Task<OidcConfiguration> OidcConfiguration()
+        {
+            try
+            {
+                locker.EnterReadLock();
+                if (config != null) return config;
+            }
+            finally { locker.ExitReadLock(); }
+            // Double-checked locking
+            try
+            {
+                locker.EnterWriteLock();
+                var configAfterLock = config;
+                if (configAfterLock != null) return configAfterLock;
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(Endpoint)
+                };
+                var responseMessage = await client.GetAsync("/.well-known/openid-configuration");
+                config = await responseMessage.GetJsonAsync<OidcConfiguration>();
+                return config;
+            }
+            finally { locker.ExitWriteLock(); }
+        }
+
+        public async Task BiometricSetupRequest(string accessToken, string clientId, string jwt)
+        {
+            var config = await OidcConfiguration();
+            var body = new Dictionary<string, string>()
+            {
+                ["client_id"] = clientId,
+                ["grant_type"] = GrantType.Biometric.GetDescription(),
+                ["jwt"] = jwt
+            };
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("authorization", $"Bearer {accessToken}");
+            var content = new FormUrlEncodedContent(body);
+            var responseMessage = await client.PostAsync(config.TokenEndpoint, content);
+            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
+        }
+
+        public AppSessionTokenResponse OauthAppSessionToken(string refreshToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ChallengeResponse> OauthChallenge(string purpose)
+        {
+            var body = new Dictionary<string, string>
+            {
+                ["purpose"] = purpose
+            };
+            var client = new HttpClient()
+            {
+                BaseAddress = new Uri(Endpoint)
+            };
+            var content = new StringContent(AuthgearJson.Serialize(body), Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("/oauth2/challenge", content);
+            var result = await responseMessage.GetJsonAsync<ChallengeResponseResult>();
+            return result.Result;
+        }
+
+        public async Task OidcRevocationRequest(string refreshToken)
+        {
+            var config = await OidcConfiguration();
+            var body = new Dictionary<string, string>()
+            {
+                ["token"] = refreshToken
+            };
+            var client = new HttpClient();
+            var content = new FormUrlEncodedContent(body);
+            var responseMessage = await client.PostAsync(config.RevocationEndpoint, content);
+            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
+        }
+
+        public async Task<OidcTokenResponse> OidcTokenRequest(OidcTokenRequest request)
+        {
+            var config = await OidcConfiguration();
+            var body = new Dictionary<string, string>()
+            {
+                ["grant_type"] = request.GrantType.GetDescription(),
+                ["client_id"] = request.ClientId,
+                ["x_device_info"] = request.XDeviceInfo,
+            };
+            if (request.RedirectUri != null)
+            {
+                body["redirect_uri"] = request.RedirectUri;
+            }
+            if (request.Code != null)
+            {
+                body["code"] = request.Code;
+            }
+            if (request.CodeVerifier != null)
+            {
+                body["code_verifier"] = request.CodeVerifier;
+            }
+            if (request.RefreshToken != null)
+            {
+                body["refresh_token"] = request.RefreshToken;
+            }
+            if (request.Jwt != null)
+            {
+                body["jwt"] = request.Jwt;
+            }
+            var client = new HttpClient();
+            if (request.AccessToken != null)
+            {
+                client.DefaultRequestHeaders.Add("authorization", $"Bearer {request.AccessToken}");
+            };
+            var content = new FormUrlEncodedContent(body);
+            var responseMessage = await client.PostAsync(config.TokenEndpoint, content);
+            return await responseMessage.GetJsonAsync<OidcTokenResponse>();
+        }
+
+        public async Task<UserInfo> OidcUserInfoRequest(string accessToken)
+        {
+            var config = await OidcConfiguration();
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("authorization", $"Bearer {accessToken}");
+            var responseMessage = await client.GetAsync(config.UserInfoEndpoint);
+            return await responseMessage.GetJsonAsync<UserInfo>();
+        }
+
+        public void WechatAuthCallback(string code, string state)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
