@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinFormSample"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              x:Class="XamarinFormSample.MainPage"
-             x:DataType="local:MainViewModel">
+             x:DataType="local:MainViewModel"
+             ios:Page.UseSafeArea="true">
     <Grid>
         <ActivityIndicator IsRunning="True" IsVisible="{Binding IsLoading, Mode=OneWay}"/>
         <StackLayout IsVisible="{Binding IsNotLoading, Mode=OneWay}">
