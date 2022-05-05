@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal static class Jwt
+    internal partial class Jwt
     {
         public static string Sign(Signature signature, JwtHeader header, JwtPayload payload)
         {
