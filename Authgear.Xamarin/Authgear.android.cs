@@ -14,6 +14,7 @@ namespace Authgear.Xamarin
             this.context = context;
             biometric = new Biometric(context);
             keyRepo = new KeyRepo();
+            webView = new WebView();
         }
         private DeviceInfoRoot PlatformGetDeviceInfo()
         {

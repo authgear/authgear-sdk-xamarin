@@ -29,6 +29,7 @@ namespace Authgear.Xamarin
         /// ExpireInPercentage of OidcTokenResponse.expiresIn to calculate the expiry time.
         /// </summary>
         private const float ExpireInPercentage = 0.9f;
+        const string LoginHintFormat = "https://authgear.com/login_hint?type=app_session_token&app_session_token={0}";
         public string ClientId
         { get; private set; }
         public SessionState SessionState
@@ -45,6 +46,7 @@ namespace Authgear.Xamarin
         private readonly IOauthRepo oauthRepo;
         private readonly IKeyRepo keyRepo;
         private readonly IBiometric biometric;
+        private readonly IWebView webView;
         private readonly string name;
         private bool isInitialized = false;
         private string refreshToken = null;
@@ -222,6 +224,31 @@ namespace Authgear.Xamarin
                 }
             }
             ClearSession(SessionStateChangeReason.Logout);
+        }
+
+        public async Task OpenUrlAsync(string path)
+        {
+            EnsureIsInitialized();
+            var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
+            var appSessionTokenResponse = await oauthRepo.OauthAppSessionToken(refreshToken);
+            var token = appSessionTokenResponse.AppSessionToken;
+            var url = new Uri(new Uri(authgearEndpoint), path).ToString();
+            var loginHint = string.Format(LoginHintFormat, WebUtility.UrlEncode(token));
+            var authorizeUrl = await AuthorizeEndpoint(new OidcAuthenticationRequest
+            {
+                RedirectUri = url,
+                ResponseType = "none",
+                Scope = new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" },
+                Prompt = new List<PromptOption>() { PromptOption.None },
+                LoginHint = loginHint,
+                SuppressIdpSessionCookie = ShouldSuppressIDPSessionCookie,
+            }, null);
+            await webView.ShowAsync(authorizeUrl);
+        }
+
+        public async Task OpenAsync(SettingsPage page)
+        {
+            await OpenUrlAsync(page.GetDescription());
         }
 
         private VerifierHolder SetupVerifier()

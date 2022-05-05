@@ -2,27 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XamarinFormSample"
+             xmlns:authgear="clr-namespace:Authgear.Xamarin;assembly=Authgear.Xamarin"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              x:Class="XamarinFormSample.MainPage"
              x:DataType="local:MainViewModel"
              ios:Page.UseSafeArea="true">
     <Grid>
         <ActivityIndicator IsRunning="True" IsVisible="{Binding IsLoading, Mode=OneWay}"/>
-        <StackLayout IsVisible="{Binding IsNotLoading, Mode=OneWay}">
-            <Entry Placeholder="Client Id" Text="{Binding ClientId, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
-            <Entry Placeholder="Authgear endpoint" Text="{Binding AuthgearEndpoint, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
-            <Label Text="SessionState" Margin="16, 16, 16, 0"/>
-            <Label Text="{Binding State, Mode=OneWay}" Margin="16, 16, 16, 0"/>
-            <Button Text="Configure" Clicked="Configure_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Authorize" Clicked="Authorize_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Fetch user info" Clicked="FetchUserInfo_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Reauthenticate" Clicked="Reauthenticate_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Authenticate Anonymously" Clicked="AuthenticateAnontmously_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Promote anoymous user" Clicked="PromoteAnonymousUser_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Authenticate Biometric" Clicked="AuthenticateBiometric_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Enable Biometric" Clicked="EnableBiometric_Clicked" Margin="16, 16, 16, 0"/>
-            <Button Text="Logout" Clicked="Logout_Clicked" Margin="16, 16, 16, 0"/>
-        </StackLayout>
+        <ScrollView IsVisible="{Binding IsNotLoading, Mode=OneWay}">
+            <StackLayout>
+                <Entry Placeholder="Client Id" Text="{Binding ClientId, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
+                <Entry Placeholder="Authgear endpoint" Text="{Binding AuthgearEndpoint, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
+                <Label Text="SessionState" Margin="16, 16, 16, 0"/>
+                <Label Text="{Binding State, Mode=OneWay}" Margin="16, 16, 16, 0"/>
+                <Button Text="Configure" Clicked="Configure_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Open settings" Command="{Binding OpenCommand}" CommandParameter="{Binding Source={x:Static authgear:SettingsPage.Settings}}"  Margin="16, 16, 16, 0"/>
+                <Button Text="Open identity" Command="{Binding OpenCommand}" CommandParameter="{Binding Source={x:Static authgear:SettingsPage.Identity}}"  Margin="16, 16, 16, 0"/>
+                <Button Text="Authorize" Clicked="Authorize_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Fetch user info" Clicked="FetchUserInfo_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Reauthenticate" Clicked="Reauthenticate_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Authenticate Anonymously" Clicked="AuthenticateAnontmously_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Promote anoymous user" Clicked="PromoteAnonymousUser_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Authenticate Biometric" Clicked="AuthenticateBiometric_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Enable Biometric" Clicked="EnableBiometric_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Logout" Clicked="Logout_Clicked" Margin="16, 16, 16, 0"/>
+            </StackLayout>
+        </ScrollView>
     </Grid>
 
 </ContentPage>

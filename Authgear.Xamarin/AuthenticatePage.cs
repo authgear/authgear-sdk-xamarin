@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    public enum Page
+    public enum AuthenticatePage
     {
         [Description("login")]
         Login,

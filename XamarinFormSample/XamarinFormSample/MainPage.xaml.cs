@@ -17,6 +17,10 @@ namespace XamarinFormSample
             InitializeComponent();
             MainViewModel = new MainViewModel();
             BindingContext = MainViewModel;
+            MainViewModel.ErrorRaised += async (s, e) =>
+            {
+                await DisplayAlert("Error", e.Message, "OK");
+            };
         }
 
         private async void Configure_Clicked(object sender, EventArgs e)
@@ -126,5 +130,7 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+        
     }
 }

@@ -6,12 +6,12 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using AuthgearPage = Authgear.Xamarin.Page;
 
 namespace XamarinFormSample
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        public delegate void ErrorRaisedHandler(object sender, Exception e);
         private AuthgearSdk authgear;
         private readonly IAuthgearFactory authgearFactory;
         public readonly string RedirectUri = "com.authgear.exampleapp.xamarin://host/path";
@@ -22,9 +22,25 @@ namespace XamarinFormSample
         public bool IsLoading { get; private set; } = false;
         public UserInfo UserInfo { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public event ErrorRaisedHandler ErrorRaised;
+
+        public Command OpenCommand { get; private set; }
         public MainViewModel()
         {
             authgearFactory = DependencyService.Get<IAuthgearFactory>();
+            OpenCommand = new Command(async (param) =>
+            {
+                var page = (SettingsPage)param;
+                try
+                {
+                    await OpenAsync(page);
+                }
+                catch (Exception ex)
+                {
+                    ErrorRaised?.Invoke(this, ex);
+                }
+            });
         }
         public async Task ConfigureAsync()
         {
@@ -42,6 +58,7 @@ namespace XamarinFormSample
                     State = authgear.SessionState.ToString();
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
                 };
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
                 await authgear.Configure();
             }
             finally
@@ -94,6 +111,20 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task OpenAsync(SettingsPage page)
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                await authgear.OpenAsync(page);
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task AuthorizeAsync()
         {
             EnsureAuthgear();
@@ -103,7 +134,7 @@ namespace XamarinFormSample
                 var result = await authgear.AuthorizeAsync(new AuthorizeOptions
                 {
                     RedirectUri = RedirectUri,
-                    Page = AuthgearPage.Login,
+                    Page = AuthenticatePage.Login,
                 });
                 Debug.WriteLine(result.State ?? "No state");
                 UserInfo = result.UserInfo;
