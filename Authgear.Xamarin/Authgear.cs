@@ -528,6 +528,14 @@ namespace Authgear.Xamarin
             }
         }
 
+        public async Task<UserInfo> FetchUserInfoAsync()
+        {
+            EnsureIsInitialized();
+            await RefreshAccessTokenIfNeeded();
+            var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
+            return await oauthRepo.OidcUserInfoRequest(accessToken);
+        }
+
         public async Task RefreshIdToken()
         {
             EnsureIsInitialized();

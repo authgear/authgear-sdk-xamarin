@@ -115,6 +115,22 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task FetchUserInfoAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                var userInfo = await authgear.FetchUserInfoAsync();
+                UserInfo = userInfo;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task ReAuthenticateAsync()
         {
             EnsureAuthgear();

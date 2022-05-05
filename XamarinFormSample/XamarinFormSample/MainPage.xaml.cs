@@ -114,5 +114,17 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+        private async void FetchUserInfo_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.FetchUserInfoAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 }
