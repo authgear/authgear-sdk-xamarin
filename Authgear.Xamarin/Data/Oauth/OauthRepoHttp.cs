@@ -59,9 +59,20 @@ namespace Authgear.Xamarin.Data.Oauth
             await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
         }
 
-        public AppSessionTokenResponse OauthAppSessionToken(string refreshToken)
+        public async Task<AppSessionTokenResponse> OauthAppSessionToken(string refreshToken)
         {
-            throw new NotImplementedException();
+            var body = new Dictionary<string, string>()
+            {
+                ["refresh_token"] = refreshToken,
+            };
+            var client = new HttpClient()
+            {
+                BaseAddress = new Uri(Endpoint)
+            };
+            var content = new StringContent(AuthgearJson.Serialize(body), Encoding.UTF8, "application/json");
+            var responseMessage = await client.PostAsync("/oauth2/app_session_token", content);
+            var result = await responseMessage.GetJsonAsync<AppSessionTokenResponseResult>();
+            return result.Result;
         }
 
         public async Task<ChallengeResponse> OauthChallenge(string purpose)
@@ -139,11 +150,6 @@ namespace Authgear.Xamarin.Data.Oauth
             client.DefaultRequestHeaders.Add("authorization", $"Bearer {accessToken}");
             var responseMessage = await client.GetAsync(config.UserInfoEndpoint);
             return await responseMessage.GetJsonAsync<UserInfo>();
-        }
-
-        public void WechatAuthCallback(string code, string state)
-        {
-            throw new NotImplementedException();
         }
     }
 }

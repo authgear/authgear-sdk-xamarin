@@ -17,7 +17,7 @@ namespace Authgear.Xamarin.Oauth
         public List<string> UiLocales { get; set; }
         public string IdTokenHint { get; set; }
         public string WechatRedirectUri { get; set; }
-        public Page? Page { get; set; }
+        public AuthenticatePage? Page { get; set; }
         public bool? SuppressIdpSessionCookie { get; set; }
         internal Dictionary<string, string> ToQuery(string clientId, VerifierHolder codeVerifier)
         {

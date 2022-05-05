@@ -15,7 +15,6 @@ namespace Authgear.Xamarin.Data.Oauth
         Task OidcRevocationRequest(string refreshToken);
         Task<UserInfo> OidcUserInfoRequest(string accessToken);
         Task<ChallengeResponse> OauthChallenge(string purpose);
-        AppSessionTokenResponse OauthAppSessionToken(string refreshToken);
-        void WechatAuthCallback(string code, string state);
+        Task<AppSessionTokenResponse> OauthAppSessionToken(string refreshToken);
     }
 }
