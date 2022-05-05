@@ -54,6 +54,17 @@ namespace Authgear.Xamarin
         {
             get { return !shareSessionWithSystemBrowser; }
         }
+        public bool CanReauthenticate
+        {
+            get
+            {
+                var idToken = IdToken;
+                if (idToken == null) { return false; }
+                var jsonDocument = Jwt.Decode(idToken);
+                if (!jsonDocument.RootElement.TryGetProperty("https://authgear.com/claims/user/can_reauthenticate", out var can)) { return false; }
+                return can.ValueKind == JsonValueKind.True;
+            }
+        }
         private readonly object tokenStateLock = new object();
         private AuthgearSdk(AuthgearOptions options)
         {
@@ -169,6 +180,30 @@ namespace Authgear.Xamarin
             var authorizeUrl = await AuthorizeEndpoint(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
             return await FinishAuthorizationAsync(deepLink);
+        }
+
+        public async Task<ReauthenticateResult> ReauthenticateAsync(ReauthenticateOptions options, BiometricOptions biometricOptions)
+        {
+            EnsureIsInitialized();
+            if (await IsBiometricEnabled() && biometricOptions != null)
+            {
+                var userInfo = await AuthenticateBiometricAsync(biometricOptions);
+                return new ReauthenticateResult { State = options.State, UserInfo = userInfo };
+            }
+            if (!CanReauthenticate)
+            {
+                throw new AuthgearException("CanReauthenticate is false");
+            }
+            var idTokenHint = IdToken;
+            if (idTokenHint == null)
+            {
+                throw new AuthgearException("Call refreshIdToken first");
+            }
+            var codeVerifier = SetupVerifier();
+            var request = options.ToRequest(idTokenHint, ShouldSuppressIDPSessionCookie);
+            var authorizeUrl = await AuthorizeEndpoint(request, codeVerifier);
+            var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
+            return await FinishReauthenticationAsync(deepLink);
         }
 
         public async Task LogoutAsync(bool? force = null)
@@ -319,7 +354,7 @@ namespace Authgear.Xamarin
             return builder.ToString();
         }
 
-        private async Task<AuthorizeResult> FinishAuthorizationAsync(string deepLink)
+        private async Task<(UserInfo userInfo, OidcTokenResponse tokenResponse, string state)> ParseDeepLinkAndGetUserAsync(string deepLink)
         {
             var uri = new Uri(deepLink);
             var path = uri.LocalPath == "/" ? "" : uri.LocalPath;
@@ -349,9 +384,25 @@ namespace Authgear.Xamarin
                 CodeVerifier = codeVerifier ?? "",
             });
             var userInfo = await oauthRepo.OidcUserInfoRequest(tokenResponse.AccessToken);
+            return (userInfo, tokenResponse, state);
+        }
+
+        private async Task<AuthorizeResult> FinishAuthorizationAsync(string deepLink)
+        {
+            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
             return new AuthorizeResult { UserInfo = userInfo, State = state };
+        }
+
+        private async Task<ReauthenticateResult> FinishReauthenticationAsync(string deepLink)
+        {
+            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink);
+            if (tokenResponse.IdToken != null)
+            {
+                IdToken = tokenResponse.IdToken;
+            }
+            return new ReauthenticateResult { UserInfo = userInfo, State = state };
         }
 
         public void EnsureBiometricIsSupported(BiometricOptions options)
@@ -474,6 +525,24 @@ namespace Authgear.Xamarin
             if (tokenResponse.RefreshToken != null)
             {
                 tokenStorage.SetRefreshToken(name, tokenResponse.RefreshToken);
+            }
+        }
+
+        public async Task RefreshIdToken()
+        {
+            EnsureIsInitialized();
+            await RefreshAccessTokenIfNeeded();
+            var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
+            var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
+            {
+                GrantType = GrantType.IdToken,
+                ClientId = ClientId,
+                XDeviceInfo = GetDeviceInfoString(),
+                AccessToken = accessToken,
+            });
+            if (tokenResponse.IdToken != null)
+            {
+                IdToken = tokenResponse.IdToken;
             }
         }
 

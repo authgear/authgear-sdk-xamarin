@@ -102,5 +102,17 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
+
+        private async void Reauthenticate_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.ReAuthenticateAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
     }
 }

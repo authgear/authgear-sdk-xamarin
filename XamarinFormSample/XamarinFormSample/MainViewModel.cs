@@ -115,6 +115,26 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task ReAuthenticateAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                await authgear.RefreshIdToken();
+                var result = await authgear.ReauthenticateAsync(new ReauthenticateOptions
+                {
+                    RedirectUri = RedirectUri,
+                }, null);
+                UserInfo = result.UserInfo;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task AuthenticateBiometricAsync()
         {
             EnsureAuthgear();
@@ -140,6 +160,7 @@ namespace XamarinFormSample
                 SetIsLoading(false);
             }
         }
+
         public async Task EnableBiometricAsync()
         {
             EnsureAuthgear();
