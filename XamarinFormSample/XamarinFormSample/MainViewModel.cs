@@ -14,7 +14,7 @@ namespace XamarinFormSample
     {
         private AuthgearSdk authgear;
         private readonly IAuthgearFactory authgearFactory;
-        public string RedirectUri { get; set; }
+        public readonly string RedirectUri = "com.authgear.exampleapp.xamarin://host/path";
         public string ClientId { get; set; }
         public string AuthgearEndpoint { get; set; }
         public string State { get; private set; } = "<no-authgear-instance>";

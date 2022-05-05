@@ -9,7 +9,6 @@
     <Grid>
         <ActivityIndicator IsRunning="True" IsVisible="{Binding IsLoading, Mode=OneWay}"/>
         <StackLayout IsVisible="{Binding IsNotLoading, Mode=OneWay}">
-            <Entry Placeholder="Redirect Uri" Text="{Binding RedirectUri, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
             <Entry Placeholder="Client Id" Text="{Binding ClientId, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
             <Entry Placeholder="Authgear endpoint" Text="{Binding AuthgearEndpoint, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
             <Label Text="SessionState" Margin="16, 16, 16, 0"/>
