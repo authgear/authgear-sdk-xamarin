@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Authgear.Xamarin.Data
 {
-    internal class TransientTokenStorage : ITokenStorage
+    public class TransientTokenStorage : ITokenStorage
     {
         private readonly Dictionary<string, string> refreshTokens = new Dictionary<string, string>();
         public void DeleteRefreshToken(string aNamespace)

@@ -13,7 +13,7 @@ namespace Authgear.Xamarin
         public List<PromptOption> PromptOptions { get; set; }
         public string LoginHint { get; set; }
         public List<string> UiLocales { get; set; }
-        public AuthenticatePage Page { get; set; }
+        public AuthenticatePage? Page { get; set; }
 
         internal OidcAuthenticationRequest ToRequest(bool suppressIdpSessionCookie)
         {
