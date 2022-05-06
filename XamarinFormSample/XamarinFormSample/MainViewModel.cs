@@ -59,7 +59,7 @@ namespace XamarinFormSample
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
                 };
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
-                await authgear.Configure();
+                await authgear.ConfigureAsync();
             }
             finally
             {
@@ -168,7 +168,7 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                await authgear.RefreshIdToken();
+                await authgear.RefreshIdTokenAsync();
                 var result = await authgear.ReauthenticateAsync(new ReauthenticateOptions
                 {
                     RedirectUri = RedirectUri,

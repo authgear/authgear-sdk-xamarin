@@ -16,7 +16,7 @@ namespace Authgear.Xamarin.Data
             throw new NotImplementedException();
         }
 
-        public Task<BiometricEnableResult> EnableBiometric(BiometricOptions options, string challenge, DeviceInfoRoot deviceInfo)
+        public Task<BiometricEnableResult> EnableBiometricAsync(BiometricOptions options, string challenge, DeviceInfoRoot deviceInfo)
         {
             throw new NotImplementedException();
         }

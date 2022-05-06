@@ -11,7 +11,7 @@ namespace Authgear.Xamarin
 
         void EnsureIsSupported(BiometricOptions options);
 
-        Task<BiometricEnableResult> EnableBiometric(BiometricOptions options, string challenge, DeviceInfoRoot deviceInfo);
+        Task<BiometricEnableResult> EnableBiometricAsync(BiometricOptions options, string challenge, DeviceInfoRoot deviceInfo);
         /// <summary>
         /// 
         /// </summary>

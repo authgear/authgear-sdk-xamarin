@@ -18,7 +18,7 @@ namespace Authgear.Xamarin.Data.Oauth
 
         private readonly ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
 
-        public async Task<OidcConfiguration> OidcConfiguration()
+        public async Task<OidcConfiguration> GetOidcConfigurationAsync()
         {
             try
             {
@@ -43,9 +43,9 @@ namespace Authgear.Xamarin.Data.Oauth
             finally { locker.ExitWriteLock(); }
         }
 
-        public async Task BiometricSetupRequest(string accessToken, string clientId, string jwt)
+        public async Task BiometricSetupRequestAsync(string accessToken, string clientId, string jwt)
         {
-            var config = await OidcConfiguration();
+            var config = await GetOidcConfigurationAsync();
             var body = new Dictionary<string, string>()
             {
                 ["client_id"] = clientId,
@@ -59,7 +59,7 @@ namespace Authgear.Xamarin.Data.Oauth
             await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
         }
 
-        public async Task<AppSessionTokenResponse> OauthAppSessionToken(string refreshToken)
+        public async Task<AppSessionTokenResponse> OauthAppSessionTokenAsync(string refreshToken)
         {
             var body = new Dictionary<string, string>()
             {
@@ -75,7 +75,7 @@ namespace Authgear.Xamarin.Data.Oauth
             return result.Result;
         }
 
-        public async Task<ChallengeResponse> OauthChallenge(string purpose)
+        public async Task<ChallengeResponse> OauthChallengeAsync(string purpose)
         {
             var body = new Dictionary<string, string>
             {
@@ -91,9 +91,9 @@ namespace Authgear.Xamarin.Data.Oauth
             return result.Result;
         }
 
-        public async Task OidcRevocationRequest(string refreshToken)
+        public async Task OidcRevocationRequestAsync(string refreshToken)
         {
-            var config = await OidcConfiguration();
+            var config = await GetOidcConfigurationAsync();
             var body = new Dictionary<string, string>()
             {
                 ["token"] = refreshToken
@@ -104,9 +104,9 @@ namespace Authgear.Xamarin.Data.Oauth
             await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
         }
 
-        public async Task<OidcTokenResponse> OidcTokenRequest(OidcTokenRequest request)
+        public async Task<OidcTokenResponse> OidcTokenRequestAsync(OidcTokenRequest request)
         {
-            var config = await OidcConfiguration();
+            var config = await GetOidcConfigurationAsync();
             var body = new Dictionary<string, string>()
             {
                 ["grant_type"] = request.GrantType.GetDescription(),
@@ -143,9 +143,9 @@ namespace Authgear.Xamarin.Data.Oauth
             return await responseMessage.GetJsonAsync<OidcTokenResponse>();
         }
 
-        public async Task<UserInfo> OidcUserInfoRequest(string accessToken)
+        public async Task<UserInfo> OidcUserInfoRequestAsync(string accessToken)
         {
-            var config = await OidcConfiguration();
+            var config = await GetOidcConfigurationAsync();
             var client = new HttpClient();
             client.DefaultRequestHeaders.Add("authorization", $"Bearer {accessToken}");
             var responseMessage = await client.GetAsync(config.UserInfoEndpoint);

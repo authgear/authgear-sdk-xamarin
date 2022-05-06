@@ -130,7 +130,7 @@ namespace Authgear.Xamarin.Data
             }
         }
 
-        public async Task<BiometricEnableResult> EnableBiometric(BiometricOptions options, string challenge, DeviceInfoRoot deviceInfo)
+        public async Task<BiometricEnableResult> EnableBiometricAsync(BiometricOptions options, string challenge, DeviceInfoRoot deviceInfo)
         {
             if (options == null)
             {

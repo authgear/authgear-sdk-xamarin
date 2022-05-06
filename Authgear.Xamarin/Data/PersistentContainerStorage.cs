@@ -21,17 +21,17 @@ namespace Authgear.Xamarin.Data
             SecureStorage.Remove($"{aNamespace}_{KeyBiometricKeyId}");
         }
 
-        public Task<string> GetAnonymousKeyId(string aNamespace)
+        public Task<string> GetAnonymousKeyIdAsync(string aNamespace)
         {
             return SecureStorage.GetAsync($"{aNamespace}_{KeyAnonymousId}");
         }
 
-        public Task<string> GetBiometricKeyId(string aNamespace)
+        public Task<string> GetBiometricKeyIdAsync(string aNamespace)
         {
             return SecureStorage.GetAsync($"{aNamespace}_{KeyBiometricKeyId}");
         }
 
-        public Task<string> GetOidcCodeVerifier(string aNamespace)
+        public Task<string> GetOidcCodeVerifierAsync(string aNamespace)
         {
             return SecureStorage.GetAsync($"{aNamespace}_{KeyVerifier}");
         }

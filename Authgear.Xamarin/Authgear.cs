@@ -101,7 +101,7 @@ namespace Authgear.Xamarin
                 throw new InvalidOperationException("Authgear is not configured. Did you forget to call Configure?");
             }
         }
-        public async Task Configure()
+        public async Task ConfigureAsync()
         {
             isInitialized = true;
             var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
@@ -125,21 +125,21 @@ namespace Authgear.Xamarin
         public async Task<UserInfo> AuthenticateAnonymouslyAsync()
         {
             EnsureIsInitialized();
-            var challengeResponse = await oauthRepo.OauthChallenge("anonymous_request");
+            var challengeResponse = await oauthRepo.OauthChallengeAsync("anonymous_request");
             var challenge = challengeResponse.Token;
-            var keyId = await containerStorage.GetAnonymousKeyId(name);
+            var keyId = await containerStorage.GetAnonymousKeyIdAsync(name);
             var deviceInfo = PlatformGetDeviceInfo();
             var jwtResult = await keyRepo.GetOrCreateAnonymousJwtAsync(keyId, challenge, deviceInfo);
             keyId = jwtResult.KeyId;
             var jwt = jwtResult.Jwt;
-            var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
             {
                 GrantType = GrantType.Anonymous,
                 ClientId = ClientId,
                 XDeviceInfo = GetDeviceInfoString(deviceInfo),
                 Jwt = jwt
             });
-            var userInfo = await oauthRepo.OidcUserInfoRequest(tokenResponse.AccessToken);
+            var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
             containerStorage.SetAnonymousKeyId(name, keyId);
@@ -149,8 +149,8 @@ namespace Authgear.Xamarin
         public async Task<AuthenticateResult> PromoteAnonymousUserAsync(PromoteOptions options)
         {
             EnsureIsInitialized();
-            var keyId = (await containerStorage.GetAnonymousKeyId(name)) ?? throw new AnonymousUserNotFoundException();
-            var challengeResponse = await oauthRepo.OauthChallenge("anonymous_request");
+            var keyId = (await containerStorage.GetAnonymousKeyIdAsync(name)) ?? throw new AnonymousUserNotFoundException();
+            var challengeResponse = await oauthRepo.OauthChallengeAsync("anonymous_request");
             var challenge = challengeResponse.Token;
             var jwt = await keyRepo.PromoteAnonymousUserAsync(keyId, challenge, PlatformGetDeviceInfo());
             var jwtValue = WebUtility.UrlEncode(jwt);
@@ -187,7 +187,7 @@ namespace Authgear.Xamarin
         public async Task<ReauthenticateResult> ReauthenticateAsync(ReauthenticateOptions options, BiometricOptions biometricOptions)
         {
             EnsureIsInitialized();
-            if (await IsBiometricEnabled() && biometricOptions != null)
+            if (await GetIsBiometricEnabledAsync() && biometricOptions != null)
             {
                 var userInfo = await AuthenticateBiometricAsync(biometricOptions);
                 return new ReauthenticateResult { State = options.State, UserInfo = userInfo };
@@ -214,7 +214,7 @@ namespace Authgear.Xamarin
             try
             {
                 var refreshToken = await tokenStorage.GetRefreshTokenAsync(name) ?? "";
-                await oauthRepo.OidcRevocationRequest(refreshToken);
+                await oauthRepo.OidcRevocationRequestAsync(refreshToken);
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace Authgear.Xamarin
         {
             EnsureIsInitialized();
             var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
-            var appSessionTokenResponse = await oauthRepo.OauthAppSessionToken(refreshToken);
+            var appSessionTokenResponse = await oauthRepo.OauthAppSessionTokenAsync(refreshToken);
             var token = appSessionTokenResponse.AppSessionToken;
             var url = new Uri(new Uri(authgearEndpoint), path).ToString();
             var loginHint = string.Format(LoginHintFormat, WebUtility.UrlEncode(token));
@@ -295,7 +295,7 @@ namespace Authgear.Xamarin
             }
         }
 
-        private async Task RefreshAccessToken()
+        private async Task RefreshAccessTokenAsync()
         {
             var taskSource = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
             var existingTask = Interlocked.CompareExchange(ref refreshAccessTokenTask, taskSource.Task, null);
@@ -304,7 +304,7 @@ namespace Authgear.Xamarin
             {
                 try
                 {
-                    await DoRefreshAccessToken();
+                    await DoRefreshAccessTokenAsync();
                     taskSource.SetResult(null);
                 }
                 catch (Exception ex)
@@ -325,7 +325,7 @@ namespace Authgear.Xamarin
             }
         }
 
-        private async Task DoRefreshAccessToken()
+        private async Task DoRefreshAccessTokenAsync()
         {
             var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
             if (refreshToken == null)
@@ -337,7 +337,7 @@ namespace Authgear.Xamarin
             }
             try
             {
-                var tokenResponse = await oauthRepo.OidcTokenRequest(
+                var tokenResponse = await oauthRepo.OidcTokenRequestAsync(
                     new OidcTokenRequest
                     {
                         GrantType = GrantType.RefreshToken,
@@ -364,7 +364,7 @@ namespace Authgear.Xamarin
 
         private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, VerifierHolder codeVerifier)
         {
-            var config = await oauthRepo.OidcConfiguration();
+            var config = await oauthRepo.GetOidcConfigurationAsync();
             var query = request.ToQuery(ClientId, codeVerifier);
             return $"{config.AuthorizationEndpoint}?{query.ToQueryParameter()}";
         }
@@ -412,8 +412,8 @@ namespace Authgear.Xamarin
             {
                 throw new OauthException("invalid_request", "Missing parameter: code", state, errorUri);
             }
-            var codeVerifier = await containerStorage.GetOidcCodeVerifier(name);
-            var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
+            var codeVerifier = await containerStorage.GetOidcCodeVerifierAsync(name);
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
             {
                 GrantType = GrantType.AuthorizationCode,
                 ClientId = ClientId,
@@ -422,7 +422,7 @@ namespace Authgear.Xamarin
                 RedirectUri = redirectUri,
                 CodeVerifier = codeVerifier ?? "",
             });
-            var userInfo = await oauthRepo.OidcUserInfoRequest(tokenResponse.AccessToken);
+            var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken);
             return (userInfo, tokenResponse, state);
         }
 
@@ -450,10 +450,10 @@ namespace Authgear.Xamarin
             biometric.EnsureIsSupported(options);
         }
 
-        public async Task<bool> IsBiometricEnabled()
+        public async Task<bool> GetIsBiometricEnabledAsync()
         {
             EnsureIsInitialized();
-            var kid = await containerStorage.GetBiometricKeyId(name);
+            var kid = await containerStorage.GetBiometricKeyIdAsync(name);
             if (kid == null) { return false; }
             return true;
         }
@@ -461,7 +461,7 @@ namespace Authgear.Xamarin
         public async Task DisableBiometricAsync()
         {
             EnsureIsInitialized();
-            var kid = await containerStorage.GetBiometricKeyId(name);
+            var kid = await containerStorage.GetBiometricKeyIdAsync(name);
             if (kid != null)
             {
                 biometric.RemoveBiometric(name);
@@ -472,20 +472,20 @@ namespace Authgear.Xamarin
         public async Task EnableBiometricAsync(BiometricOptions options)
         {
             EnsureIsInitialized();
-            await RefreshAccessTokenIfNeeded();
+            await RefreshAccessTokenIfNeededAsync();
             var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
-            var challengeResponse = await oauthRepo.OauthChallenge("biometric_request");
+            var challengeResponse = await oauthRepo.OauthChallengeAsync("biometric_request");
             var challenge = challengeResponse.Token;
-            var result = await biometric.EnableBiometric(options, challenge, PlatformGetDeviceInfo());
-            await oauthRepo.BiometricSetupRequest(accessToken, ClientId, result.Jwt);
+            var result = await biometric.EnableBiometricAsync(options, challenge, PlatformGetDeviceInfo());
+            await oauthRepo.BiometricSetupRequestAsync(accessToken, ClientId, result.Jwt);
             containerStorage.SetBiometricKeyId(name, result.Kid);
         }
 
         public async Task<UserInfo> AuthenticateBiometricAsync(BiometricOptions options)
         {
             EnsureIsInitialized();
-            var kid = await containerStorage.GetBiometricKeyId(name) ?? throw new BiometricPrivateKeyNotFoundException();
-            var challengeResponse = await oauthRepo.OauthChallenge("biometric_request");
+            var kid = await containerStorage.GetBiometricKeyIdAsync(name) ?? throw new BiometricPrivateKeyNotFoundException();
+            var challengeResponse = await oauthRepo.OauthChallengeAsync("biometric_request");
             var challenge = challengeResponse.Token;
             try
             {
@@ -493,14 +493,14 @@ namespace Authgear.Xamarin
                 var jwt = await biometric.AuthenticateBiometricAsync(options, kid, challenge, deviceInfo);
                 try
                 {
-                    var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
+                    var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
                     {
                         GrantType = GrantType.Biometric,
                         ClientId = ClientId,
                         XDeviceInfo = GetDeviceInfoString(deviceInfo),
                         Jwt = jwt
                     });
-                    var userInfo = await oauthRepo.OidcUserInfoRequest(tokenResponse.AccessToken);
+                    var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken);
                     SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
                     return userInfo;
                 }
@@ -570,17 +570,17 @@ namespace Authgear.Xamarin
         public async Task<UserInfo> FetchUserInfoAsync()
         {
             EnsureIsInitialized();
-            await RefreshAccessTokenIfNeeded();
+            await RefreshAccessTokenIfNeededAsync();
             var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
-            return await oauthRepo.OidcUserInfoRequest(accessToken);
+            return await oauthRepo.OidcUserInfoRequestAsync(accessToken);
         }
 
-        public async Task RefreshIdToken()
+        public async Task RefreshIdTokenAsync()
         {
             EnsureIsInitialized();
-            await RefreshAccessTokenIfNeeded();
+            await RefreshAccessTokenIfNeededAsync();
             var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
-            var tokenResponse = await oauthRepo.OidcTokenRequest(new OidcTokenRequest
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
             {
                 GrantType = GrantType.IdToken,
                 ClientId = ClientId,
@@ -593,12 +593,12 @@ namespace Authgear.Xamarin
             }
         }
 
-        public async Task<string> RefreshAccessTokenIfNeeded()
+        public async Task<string> RefreshAccessTokenIfNeededAsync()
         {
             EnsureIsInitialized();
             if (ShouldRefreshAccessToken)
             {
-                await RefreshAccessToken();
+                await RefreshAccessTokenAsync();
             }
             return AccessToken;
         }
