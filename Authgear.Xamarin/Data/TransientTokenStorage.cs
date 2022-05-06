@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 
 namespace Authgear.Xamarin.Data
 {
-    public class PersistentTokenStorage : ITokenStorage
+    internal class TransientTokenStorage : ITokenStorage
     {
-        private const string KeyRefreshToken = "refresh_token";
+        private readonly Dictionary<string, string> refreshTokens = new Dictionary<string, string>();
         public void DeleteRefreshToken(string aNamespace)
         {
-            SecureStorage.Remove($"{aNamespace}_{KeyRefreshToken}");
+            refreshTokens.Remove(aNamespace);
         }
 
         public Task<string> GetRefreshTokenAsync(string aNamespace)
         {
-            return SecureStorage.GetAsync($"{aNamespace}_{KeyRefreshToken}");
+            return Task.FromResult(refreshTokens[aNamespace]);
         }
 
         public void SetRefreshToken(string aNamespace, string refreshToken)
         {
-            SecureStorage.SetAsync($"{aNamespace}_{KeyRefreshToken}", refreshToken);
+            refreshTokens[aNamespace] = refreshToken;
         }
     }
 }
