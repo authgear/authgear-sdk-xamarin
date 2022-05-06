@@ -1,6 +1,7 @@
 ﻿using Authgear.Xamarin.CsExtensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Authgear.Xamarin.Oauth
@@ -35,7 +36,7 @@ namespace Authgear.Xamarin.Oauth
             }
             if (Prompt != null)
             {
-                query["prompt"] = string.Join(" ", Prompt.GetDescription());
+                query["prompt"] = string.Join(" ", Prompt.Select(x => x.GetDescription()));
             }
             if (LoginHint != null)
             {
