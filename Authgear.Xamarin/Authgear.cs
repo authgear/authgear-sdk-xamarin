@@ -168,7 +168,7 @@ namespace Authgear.Xamarin
                 SuppressIdpSessionCookie = ShouldSuppressIDPSessionCookie,
             }, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(options.RedirectUri, authorizeUrl);
-            var result = await FinishAuthenticationAsync(deepLink);
+            var result = await FinishAuthenticationAsync(deepLink, codeVerifier.Verifier);
             containerStorage.DeleteAnonymousKeyId(name);
             return result;
         }
@@ -180,7 +180,7 @@ namespace Authgear.Xamarin
             var request = options.ToRequest(ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
-            return await FinishAuthenticationAsync(deepLink);
+            return await FinishAuthenticationAsync(deepLink, codeVerifier.Verifier);
         }
 
         public async Task<ReauthenticateResult> ReauthenticateAsync(ReauthenticateOptions options, BiometricOptions biometricOptions)
@@ -204,7 +204,7 @@ namespace Authgear.Xamarin
             var request = options.ToRequest(idTokenHint, ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
-            return await FinishReauthenticationAsync(deepLink);
+            return await FinishReauthenticationAsync(deepLink, codeVerifier.Verifier);
         }
 
         public async Task LogoutAsync(bool? force = null)
@@ -253,7 +253,6 @@ namespace Authgear.Xamarin
         private VerifierHolder SetupVerifier()
         {
             var verifier = GenerateCodeVerifier();
-            containerStorage.SetOidcCodeVerifier(name, verifier);
             return new VerifierHolder { Verifier = verifier, Challenge = ComputeCodeChallenge(verifier) };
         }
 
@@ -392,7 +391,7 @@ namespace Authgear.Xamarin
             }
         }
 
-        private async Task<(UserInfo userInfo, OidcTokenResponse tokenResponse, string state)> ParseDeepLinkAndGetUserAsync(string deepLink)
+        private async Task<(UserInfo userInfo, OidcTokenResponse tokenResponse, string state)> ParseDeepLinkAndGetUserAsync(string deepLink, string codeVerifier)
         {
             var uri = new Uri(deepLink);
             var path = uri.LocalPath == "/" ? "" : uri.LocalPath;
@@ -411,7 +410,6 @@ namespace Authgear.Xamarin
             {
                 throw new OauthException("invalid_request", "Missing parameter: code", state, errorUri);
             }
-            var codeVerifier = await containerStorage.GetOidcCodeVerifierAsync(name);
             var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
             {
                 GrantType = GrantType.AuthorizationCode,
@@ -425,17 +423,17 @@ namespace Authgear.Xamarin
             return (userInfo, tokenResponse, state);
         }
 
-        private async Task<AuthenticateResult> FinishAuthenticationAsync(string deepLink)
+        private async Task<AuthenticateResult> FinishAuthenticationAsync(string deepLink, string codeVerifier)
         {
-            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink);
+            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
             return new AuthenticateResult { UserInfo = userInfo, State = state };
         }
 
-        private async Task<ReauthenticateResult> FinishReauthenticationAsync(string deepLink)
+        private async Task<ReauthenticateResult> FinishReauthenticationAsync(string deepLink, string codeVerifier)
         {
-            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink);
+            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
             if (tokenResponse.IdToken != null)
             {
                 IdToken = tokenResponse.IdToken;

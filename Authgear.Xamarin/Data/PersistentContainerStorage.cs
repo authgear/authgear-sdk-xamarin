@@ -31,11 +31,6 @@ namespace Authgear.Xamarin.Data
             return SecureStorage.GetAsync($"{aNamespace}_{KeyBiometricKeyId}");
         }
 
-        public Task<string> GetOidcCodeVerifierAsync(string aNamespace)
-        {
-            return SecureStorage.GetAsync($"{aNamespace}_{KeyVerifier}");
-        }
-
         public void SetAnonymousKeyId(string aNamespace, string keyId)
         {
             SecureStorage.SetAsync($"{aNamespace}_{KeyAnonymousId}", keyId);
@@ -44,11 +39,6 @@ namespace Authgear.Xamarin.Data
         public void SetBiometricKeyId(string aNamespace, string keyId)
         {
             SecureStorage.SetAsync($"{aNamespace}_{KeyBiometricKeyId}", keyId);
-        }
-
-        public void SetOidcCodeVerifier(string aNamespace, string verifier)
-        {
-            SecureStorage.SetAsync($"{aNamespace}_{KeyVerifier}", verifier);
         }
     }
 }
