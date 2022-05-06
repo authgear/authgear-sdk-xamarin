@@ -371,19 +371,26 @@ namespace Authgear.Xamarin
 
         private async Task<string> OpenAuthorizeUrlAsync(string redirectUrl, string authorizeUrl)
         {
-            // WebAuthenticator abstracts the uri for us but we need the uri in FinishAuthorization.
-            // Substitute the uri for now.
-            var result = await WebAuthenticator.AuthenticateAsync(new WebAuthenticatorOptions
+            try
             {
-                Url = new Uri(authorizeUrl),
-                CallbackUrl = new Uri(redirectUrl),
-                PrefersEphemeralWebBrowserSession = !shareSessionWithSystemBrowser
-            });
-            var builder = new UriBuilder(redirectUrl)
+                // WebAuthenticator abstracts the uri for us but we need the uri in FinishAuthorization.
+                // Substitute the uri for now.
+                var result = await WebAuthenticator.AuthenticateAsync(new WebAuthenticatorOptions
+                {
+                    Url = new Uri(authorizeUrl),
+                    CallbackUrl = new Uri(redirectUrl),
+                    PrefersEphemeralWebBrowserSession = !shareSessionWithSystemBrowser
+                });
+                var builder = new UriBuilder(redirectUrl)
+                {
+                    Query = result.Properties.ToQueryParameter()
+                };
+                return builder.ToString();
+            }
+            catch (TaskCanceledException ex)
             {
-                Query = result.Properties.ToQueryParameter()
-            };
-            return builder.ToString();
+                throw new AuthenticationCanceledException(ex.InnerException);
+            }
         }
 
         private async Task<(UserInfo userInfo, OidcTokenResponse tokenResponse, string state)> ParseDeepLinkAndGetUserAsync(string deepLink)
