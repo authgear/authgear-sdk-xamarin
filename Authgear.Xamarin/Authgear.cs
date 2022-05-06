@@ -373,7 +373,12 @@ namespace Authgear.Xamarin
         {
             // WebAuthenticator abstracts the uri for us but we need the uri in FinishAuthorization.
             // Substitute the uri for now.
-            var result = await WebAuthenticator.AuthenticateAsync(new Uri(authorizeUrl), new Uri(redirectUrl));
+            var result = await WebAuthenticator.AuthenticateAsync(new WebAuthenticatorOptions
+            {
+                Url = new Uri(authorizeUrl),
+                CallbackUrl = new Uri(redirectUrl),
+                PrefersEphemeralWebBrowserSession = !shareSessionWithSystemBrowser
+            });
             var builder = new UriBuilder(redirectUrl)
             {
                 Query = result.Properties.ToQueryParameter()
