@@ -18,7 +18,7 @@ namespace Authgear.Xamarin
             {
                 if (bpae.ErrorCode == BiometricPrompt.ErrorCanceled || bpae.ErrorCode == BiometricPrompt.ErrorNegativeButton || bpae.ErrorCode == BiometricPrompt.ErrorUserCanceled)
                 {
-                    return new BiometricCanceledException(ex);
+                    return new OperationCanceledException("Biometric Prompt was cancelled.", ex);
                 }
                 if (bpae.ErrorCode == BiometricPrompt.ErrorHwNotPresent || bpae.ErrorCode == BiometricPrompt.ErrorHwUnavailable || bpae.ErrorCode == BiometricPrompt.ErrorSecurityUpdateRequired)
                 {

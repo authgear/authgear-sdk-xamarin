@@ -146,6 +146,12 @@ namespace Authgear.Xamarin
             return userInfo;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        /// <exception cref="AnonymousUserNotFoundException"></exception>
+        /// <exception cref="TaskCanceledException"></exception>
         public async Task<AuthenticateResult> PromoteAnonymousUserAsync(PromoteOptions options)
         {
             EnsureIsInitialized();
@@ -173,6 +179,11 @@ namespace Authgear.Xamarin
             return result;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="options"></param>
+        /// <exception cref="TaskCanceledException"></exception>
+        /// <returns></returns>
         public async Task<AuthenticateResult> AuthenticateAsync(AuthenticateOptions options)
         {
             EnsureIsInitialized();
@@ -183,6 +194,14 @@ namespace Authgear.Xamarin
             return await FinishAuthenticationAsync(deepLink, codeVerifier.Verifier);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="biometricOptions"></param>
+        /// <returns></returns>
+        /// <exception cref="AuthgearException"></exception>
+        /// <exception cref="TaskCanceledException"></exception>
+        /// <exception cref="OperationCanceledException"></exception>
         public async Task<ReauthenticateResult> ReauthenticateAsync(ReauthenticateOptions options, BiometricOptions biometricOptions)
         {
             EnsureIsInitialized();
@@ -367,28 +386,27 @@ namespace Authgear.Xamarin
             return $"{config.AuthorizationEndpoint}?{query.ToQueryParameter()}";
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="redirectUrl"></param>
+        /// <param name="authorizeUrl"></param>
+        /// <exception cref="TaskCanceledException"></exception>
+        /// <returns>Redirect URI with query parameters</returns>
         private async Task<string> OpenAuthorizeUrlAsync(string redirectUrl, string authorizeUrl)
         {
-            try
+            // WebAuthenticator abstracts the uri for us but we need the uri in FinishAuthorization.
+            // Substitute the uri for now.
+            var result = await WebAuthenticator.AuthenticateAsync(new WebAuthenticatorOptions
             {
-                // WebAuthenticator abstracts the uri for us but we need the uri in FinishAuthorization.
-                // Substitute the uri for now.
-                var result = await WebAuthenticator.AuthenticateAsync(new WebAuthenticatorOptions
-                {
-                    Url = new Uri(authorizeUrl),
-                    CallbackUrl = new Uri(redirectUrl),
-                    PrefersEphemeralWebBrowserSession = !shareSessionWithSystemBrowser
-                });
-                var builder = new UriBuilder(redirectUrl)
-                {
-                    Query = result.Properties.ToQueryParameter()
-                };
-                return builder.ToString();
-            }
-            catch (TaskCanceledException ex)
+                Url = new Uri(authorizeUrl),
+                CallbackUrl = new Uri(redirectUrl),
+                PrefersEphemeralWebBrowserSession = !shareSessionWithSystemBrowser
+            });
+            var builder = new UriBuilder(redirectUrl)
             {
-                throw new AuthenticationCanceledException(ex.InnerException);
-            }
+                Query = result.Properties.ToQueryParameter()
+            };
+            return builder.ToString();
         }
 
         private async Task<(UserInfo userInfo, OidcTokenResponse tokenResponse, string state)> ParseDeepLinkAndGetUserAsync(string deepLink, string codeVerifier)
@@ -466,6 +484,12 @@ namespace Authgear.Xamarin
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        /// <exception cref="UnauthenticatedUserException"></exception>
+        /// <exception cref="OperationCanceledException"></exception>
         public async Task EnableBiometricAsync(BiometricOptions options)
         {
             EnsureIsInitialized();
@@ -478,6 +502,12 @@ namespace Authgear.Xamarin
             containerStorage.SetBiometricKeyId(name, result.Kid);
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        /// <exception cref="BiometricPrivateKeyNotFoundException"></exception>
+        /// <exception cref="OperationCanceledException"></exception>
         public async Task<UserInfo> AuthenticateBiometricAsync(BiometricOptions options)
         {
             EnsureIsInitialized();
