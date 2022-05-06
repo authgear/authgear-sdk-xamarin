@@ -18,7 +18,7 @@
                 <Button Text="Configure" Clicked="Configure_Clicked" Margin="16, 16, 16, 0"/>
                 <Button Text="Open settings" Command="{Binding OpenCommand}" CommandParameter="{Binding Source={x:Static authgear:SettingsPage.Settings}}"  Margin="16, 16, 16, 0"/>
                 <Button Text="Open identity" Command="{Binding OpenCommand}" CommandParameter="{Binding Source={x:Static authgear:SettingsPage.Identity}}"  Margin="16, 16, 16, 0"/>
-                <Button Text="Authorize" Clicked="Authorize_Clicked" Margin="16, 16, 16, 0"/>
+                <Button Text="Authenticate" Clicked="Authenticate_Clicked" Margin="16, 16, 16, 0"/>
                 <Button Text="Fetch user info" Clicked="FetchUserInfo_Clicked" Margin="16, 16, 16, 0"/>
                 <Button Text="Reauthenticate" Clicked="Reauthenticate_Clicked" Margin="16, 16, 16, 0"/>
                 <Button Text="Authenticate Anonymously" Clicked="AuthenticateAnontmously_Clicked" Margin="16, 16, 16, 0"/>

@@ -35,11 +35,11 @@ namespace XamarinFormSample
             }
         }
 
-        private async void Authorize_Clicked(object sender, EventArgs e)
+        private async void Authenticate_Clicked(object sender, EventArgs e)
         {
             try
             {
-                await MainViewModel.AuthorizeAsync();
+                await MainViewModel.AuthenticateAsync();
             }
             catch (Exception ex)
             {

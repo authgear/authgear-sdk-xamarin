@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    public class AuthorizeOptions
+    public class AuthenticateOptions
     {
         public string RedirectUri { get; set; }
         public string State { get; set; }

@@ -146,7 +146,7 @@ namespace Authgear.Xamarin
             return userInfo;
         }
 
-        public async Task<AuthorizeResult> PromoteAnonymousUserAsync(PromoteOptions options)
+        public async Task<AuthenticateResult> PromoteAnonymousUserAsync(PromoteOptions options)
         {
             EnsureIsInitialized();
             var keyId = (await containerStorage.GetAnonymousKeyId(name)) ?? throw new AnonymousUserNotFoundException();
@@ -156,7 +156,7 @@ namespace Authgear.Xamarin
             var jwtValue = WebUtility.UrlEncode(jwt);
             var loginHint = $"https://authgear.com/login_hint?type=anonymous&jwt={jwtValue}";
             var codeVerifier = SetupVerifier();
-            var authorizeUrl = await AuthorizeEndpoint(new OidcAuthenticationRequest
+            var authorizeUrl = await GetAuthorizeEndpointAsync(new OidcAuthenticationRequest
             {
                 RedirectUri = options.RedirectUri,
                 ResponseType = "code",
@@ -169,19 +169,19 @@ namespace Authgear.Xamarin
                 SuppressIdpSessionCookie = ShouldSuppressIDPSessionCookie,
             }, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(options.RedirectUri, authorizeUrl);
-            var result = await FinishAuthorizationAsync(deepLink);
+            var result = await FinishAuthenticationAsync(deepLink);
             containerStorage.DeleteAnonymousKeyId(name);
             return result;
         }
 
-        public async Task<AuthorizeResult> AuthorizeAsync(AuthorizeOptions options)
+        public async Task<AuthenticateResult> AuthenticateAsync(AuthenticateOptions options)
         {
             EnsureIsInitialized();
             var codeVerifier = SetupVerifier();
             var request = options.ToRequest(ShouldSuppressIDPSessionCookie);
-            var authorizeUrl = await AuthorizeEndpoint(request, codeVerifier);
+            var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
-            return await FinishAuthorizationAsync(deepLink);
+            return await FinishAuthenticationAsync(deepLink);
         }
 
         public async Task<ReauthenticateResult> ReauthenticateAsync(ReauthenticateOptions options, BiometricOptions biometricOptions)
@@ -203,7 +203,7 @@ namespace Authgear.Xamarin
             }
             var codeVerifier = SetupVerifier();
             var request = options.ToRequest(idTokenHint, ShouldSuppressIDPSessionCookie);
-            var authorizeUrl = await AuthorizeEndpoint(request, codeVerifier);
+            var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
             return await FinishReauthenticationAsync(deepLink);
         }
@@ -234,7 +234,7 @@ namespace Authgear.Xamarin
             var token = appSessionTokenResponse.AppSessionToken;
             var url = new Uri(new Uri(authgearEndpoint), path).ToString();
             var loginHint = string.Format(LoginHintFormat, WebUtility.UrlEncode(token));
-            var authorizeUrl = await AuthorizeEndpoint(new OidcAuthenticationRequest
+            var authorizeUrl = await GetAuthorizeEndpointAsync(new OidcAuthenticationRequest
             {
                 RedirectUri = url,
                 ResponseType = "none",
@@ -362,7 +362,7 @@ namespace Authgear.Xamarin
             }
         }
 
-        private async Task<string> AuthorizeEndpoint(OidcAuthenticationRequest request, VerifierHolder codeVerifier)
+        private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, VerifierHolder codeVerifier)
         {
             var config = await oauthRepo.OidcConfiguration();
             var query = request.ToQuery(ClientId, codeVerifier);
@@ -414,12 +414,12 @@ namespace Authgear.Xamarin
             return (userInfo, tokenResponse, state);
         }
 
-        private async Task<AuthorizeResult> FinishAuthorizationAsync(string deepLink)
+        private async Task<AuthenticateResult> FinishAuthenticationAsync(string deepLink)
         {
             (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
-            return new AuthorizeResult { UserInfo = userInfo, State = state };
+            return new AuthenticateResult { UserInfo = userInfo, State = state };
         }
 
         private async Task<ReauthenticateResult> FinishReauthenticationAsync(string deepLink)

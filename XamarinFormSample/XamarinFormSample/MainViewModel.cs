@@ -125,13 +125,13 @@ namespace XamarinFormSample
             }
         }
 
-        public async Task AuthorizeAsync()
+        public async Task AuthenticateAsync()
         {
             EnsureAuthgear();
             try
             {
                 SetIsLoading(true);
-                var result = await authgear.AuthorizeAsync(new AuthorizeOptions
+                var result = await authgear.AuthenticateAsync(new AuthenticateOptions
                 {
                     RedirectUri = RedirectUri,
                     Page = AuthenticatePage.Login,
