@@ -13,7 +13,6 @@ namespace Authgear.Xamarin
         public List<PromptOption> PromptOptions { get; set; }
         public string LoginHint { get; set; }
         public List<string> UiLocales { get; set; }
-        public string WechatRedirectUri { get; set; }
         public AuthenticatePage Page { get; set; }
 
         internal OidcAuthenticationRequest ToRequest(bool suppressIdpSessionCookie)
@@ -33,7 +32,6 @@ namespace Authgear.Xamarin
                 IdTokenHint = null,
                 MaxAge = null,
                 UiLocales = this.UiLocales,
-                WechatRedirectUri = this.WechatRedirectUri,
                 Page = this.Page,
                 SuppressIdpSessionCookie = suppressIdpSessionCookie
             };

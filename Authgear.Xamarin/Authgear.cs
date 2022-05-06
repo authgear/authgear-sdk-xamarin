@@ -165,7 +165,6 @@ namespace Authgear.Xamarin
                 LoginHint = loginHint,
                 State = options.State,
                 UiLocales = options.UiLocales,
-                WechatRedirectUri = options.WechatRedirectUri,
                 SuppressIdpSessionCookie = ShouldSuppressIDPSessionCookie,
             }, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(options.RedirectUri, authorizeUrl);
