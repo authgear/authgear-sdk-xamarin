@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinFormSample"
+             x:Name="this"
+             x:Class="XamarinFormSample.LabeledSwitch"
+             x:DataType="local:LabeledSwitch">
+  <ContentView.Content>
+      <Grid BindingContext="{x:Reference this}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+          <Label Text="{Binding Text, Mode=OneWay}" />
+          <Switch IsToggled="{Binding IsToggled, Mode=TwoWay}" Grid.Column="1"/>
+      </Grid>
+  </ContentView.Content>
+</ContentView>

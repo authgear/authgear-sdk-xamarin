@@ -1,4 +1,5 @@
 ﻿using Authgear.Xamarin;
+using Authgear.Xamarin.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +18,16 @@ namespace XamarinFormSample
         public readonly string RedirectUri = "com.authgear.exampleapp.xamarin://host/path";
         public string ClientId { get; set; }
         public string AuthgearEndpoint { get; set; }
+        public SessionState SessionState { get; set; } = SessionState.Unknown;
         public string State { get; private set; } = "<no-authgear-instance>";
         public bool IsNotLoading { get; private set; } = true;
         public bool IsLoading { get; private set; } = false;
+
+        public bool UseTransientStorage { get; set; }
+
+        public bool ShareSessioWithDeviceBrowser { get; set; }
+
+        public AuthenticatePage? AuthenticatePageToShow { get; set; }
         public UserInfo UserInfo { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,18 +55,23 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
+                // Ternary operator not working in C#7.3, only availabe in 9.0 :thinking:
+                ITokenStorage tokenStorage;
+                if (UseTransientStorage) { tokenStorage = new TransientTokenStorage(); }
+                else { tokenStorage = new PersistentTokenStorage(); }
                 authgear = authgearFactory.CreateAuthgear(new AuthgearOptions
                 {
                     ClientId = ClientId,
-                    AuthgearEndpoint = AuthgearEndpoint
+                    AuthgearEndpoint = AuthgearEndpoint,
+                    TokenStorage = tokenStorage,
+                    ShareSessionWithSystemBrowser = ShareSessioWithDeviceBrowser
                 });
                 State = authgear.SessionState.ToString();
                 authgear.SessionStateChange += (sender, e) =>
                 {
-                    State = authgear.SessionState.ToString();
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
+                    SetState(authgear.SessionState);
                 };
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
+                SetState(authgear.SessionState);
                 await authgear.ConfigureAsync();
             }
             finally
@@ -134,7 +147,7 @@ namespace XamarinFormSample
                 var result = await authgear.AuthenticateAsync(new AuthenticateOptions
                 {
                     RedirectUri = RedirectUri,
-                    Page = AuthenticatePage.Login,
+                    Page = AuthenticatePageToShow
                 });
                 Debug.WriteLine(result.State ?? "No state");
                 UserInfo = result.UserInfo;
@@ -162,7 +175,7 @@ namespace XamarinFormSample
             }
         }
 
-        public async Task ReAuthenticateAsync()
+        public async Task ReAuthenticateAsync(bool useBiometric)
         {
             EnsureAuthgear();
             try
@@ -172,7 +185,10 @@ namespace XamarinFormSample
                 var result = await authgear.ReauthenticateAsync(new ReauthenticateOptions
                 {
                     RedirectUri = RedirectUri,
-                }, null);
+                }, useBiometric ? new BiometricOptions
+                {
+
+                } : null);
                 UserInfo = result.UserInfo;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
             }
@@ -232,6 +248,20 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task DisableBiometricAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                await authgear.DisableBiometricAsync();
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task LogoutAsync()
         {
             EnsureAuthgear();
@@ -252,6 +282,13 @@ namespace XamarinFormSample
             IsNotLoading = !isLoading;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoading)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsNotLoading)));
+        }
+        private void SetState(SessionState state)
+        {
+            SessionState = state;
+            State = state.ToString();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SessionState)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
         }
     }
 }

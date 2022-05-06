@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace XamarinFormSample
 {
@@ -71,6 +72,18 @@ namespace XamarinFormSample
             }
         }
 
+        private async void DisableBiometric_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.DisableBiometricAsync();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
         private async void AuthenticateBiometric_Clicked(object sender, EventArgs e)
         {
             try
@@ -107,11 +120,23 @@ namespace XamarinFormSample
             }
         }
 
+        private async void ReauthenticateWeb_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.ReAuthenticateAsync(false);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
         private async void Reauthenticate_Clicked(object sender, EventArgs e)
         {
             try
             {
-                await MainViewModel.ReAuthenticateAsync();
+                await MainViewModel.ReAuthenticateAsync(true);
             }
             catch (Exception ex)
             {
@@ -130,7 +155,5 @@ namespace XamarinFormSample
                 await DisplayAlert("Error", ex.Message, "OK");
             }
         }
-
-        
     }
 }
