@@ -20,7 +20,13 @@ namespace XamarinFormSample
         public string AuthgearEndpoint { get; set; }
         public SessionState SessionState { get; set; } = SessionState.Unknown;
         public string State { get; private set; } = "<no-authgear-instance>";
-        public bool IsNotLoading { get; private set; } = true;
+        public bool IsNotLoading
+        {
+            get
+            {
+                return !IsLoading;
+            }
+        }
         public bool IsLoading { get; private set; } = false;
 
         public bool UseTransientStorage { get; set; }
@@ -285,8 +291,7 @@ namespace XamarinFormSample
 
         private void SetIsLoading(bool isLoading)
         {
-            IsLoading = IsLoading;
-            IsNotLoading = !isLoading;
+            IsLoading = isLoading;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoading)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsNotLoading)));
         }
