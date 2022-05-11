@@ -26,10 +26,6 @@
                 <Button Text="Configure" Clicked="Configure_Clicked"  Margin="16, 16, 16, 0"/>
                 <local:SessionStateButton Text="Authenticate" State="{Binding SessionState, Mode=OneWay}"
                                           PressableState="{Binding Source={x:Static authgear:SessionState.NoSession}}" Clicked="Authenticate_Clicked" Margin="16, 16, 16, 0"/>
-                <local:SessionStateButton Text="Authenticate Anonymously" State="{Binding SessionState, Mode=OneWay}"
-                                          PressableState="{Binding Source={x:Static authgear:SessionState.NoSession}}" Clicked="AuthenticateAnontmously_Clicked" Margin="16, 16, 16, 0"/>
-                <local:SessionStateButton Text="Promote anoymous user" State="{Binding SessionState, Mode=OneWay}"
-                                          PressableState="{Binding Source={x:Static authgear:SessionState.Authenticated}}" Clicked="PromoteAnonymousUser_Clicked" Margin="16, 16, 16, 0"/>
                 <local:SessionStateButton Text="Authenticate Biometric" State="{Binding SessionState, Mode=OneWay}"
                                           PressableState="{Binding Source={x:Static authgear:SessionState.NoSession}}" Clicked="AuthenticateBiometric_Clicked" Margin="16, 16, 16, 0"/>
                 <local:SessionStateButton Text="Reauthenticate Web" State="{Binding SessionState, Mode=OneWay}"
