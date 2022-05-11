@@ -16,7 +16,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -64,7 +63,7 @@
     <PackageReference Include="System.Text.Json">
       <Version>6.0.3</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +103,7 @@
       <Name>Authgear.Xamarin</Name>
     </ProjectReference>
     <ProjectReference Include="..\XamarinFormSample\XamarinFormSample.csproj">
-      <Project>{1CBBB469-C891-4E2A-B4C5-1A5E8094E4A8}</Project>
+      <Project>{4A2C9B15-4EB1-4595-8B8B-CA07A08F8EC7}</Project>
       <Name>XamarinFormSample</Name>
     </ProjectReference>
   </ItemGroup>
