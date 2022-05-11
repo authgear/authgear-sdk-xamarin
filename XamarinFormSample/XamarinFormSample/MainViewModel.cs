@@ -30,31 +30,105 @@ namespace XamarinFormSample
         public bool IsLoading { get; private set; } = false;
 
         public bool UseTransientStorage { get; set; }
-
         public bool ShareSessioWithDeviceBrowser { get; set; }
-
         public AuthenticatePage? AuthenticatePageToShow { get; set; }
         public UserInfo UserInfo { get; private set; }
+        private bool IsAnonymous
+        {
+            get
+            {
+                if (UserInfo == null)
+                {
+                    return false;
+                }
+                return UserInfo.IsAnonymous;
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool IsConfigured
+        {
+            get
+            {
+                return authgear != null;
+            }
+        }
+
+        private bool IsBiometricEnabled = false;
+
+        public bool IsEnabledAuthenticate
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.NoSession;
+            }
+        }
+
+        public bool IsEnabledAuthenticateBiometric
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.NoSession && IsBiometricEnabled;
+            }
+        }
+
+        public bool IsEnabledReauthenticateWeb
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
+            }
+        }
+
+        public bool IsEnabledReauthenticate
+        {
+            get
+            {
+                return IsEnabledReauthenticateWeb;
+            }
+        }
+
+        public bool IsEnabledEnableBiometric
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated && !IsAnonymous && !IsBiometricEnabled;
+            }
+        }
+        public bool IsEnabledDisableBiometric
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated && !IsAnonymous && IsBiometricEnabled;
+            }
+        }
+        public bool IsEnabledFetchUserInfo
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
+            }
+        }
+        public bool IsEnabledOpenSettings
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
+            }
+        }
+        public bool IsEnabledLogout
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
+            }
+        }
 
         public event ErrorRaisedHandler ErrorRaised;
 
-        public Command OpenCommand { get; private set; }
         public MainViewModel()
         {
             authgearFactory = DependencyService.Get<IAuthgearFactory>();
-            OpenCommand = new Command(async (param) =>
-            {
-                var page = (SettingsPage)param;
-                try
-                {
-                    await OpenAsync(page);
-                }
-                catch (Exception ex)
-                {
-                    ErrorRaised?.Invoke(this, ex);
-                }
-            });
         }
         public async Task ConfigureAsync()
         {
@@ -72,13 +146,12 @@ namespace XamarinFormSample
                     TokenStorage = tokenStorage,
                     ShareSessionWithSystemBrowser = ShareSessioWithDeviceBrowser
                 });
-                State = authgear.SessionState.ToString();
                 authgear.SessionStateChange += (sender, e) =>
                 {
-                    SetState(authgear.SessionState);
+                    _ = SyncAuthgearState();
                 };
-                SetState(authgear.SessionState);
                 await authgear.ConfigureAsync();
+                await SyncAuthgearState();
             }
             finally
             {
@@ -102,7 +175,6 @@ namespace XamarinFormSample
                 SetIsLoading(true);
                 var userInfo = await authgear.AuthenticateAnonymouslyAsync();
                 UserInfo = userInfo;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
             }
             finally
             {
@@ -122,11 +194,11 @@ namespace XamarinFormSample
                 });
                 Debug.WriteLine(result.State ?? "No state");
                 UserInfo = result.UserInfo;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
             }
             finally
             {
                 SetIsLoading(false);
+                Notify();
             }
         }
 
@@ -157,7 +229,6 @@ namespace XamarinFormSample
                 });
                 Debug.WriteLine(result.State ?? "No state");
                 UserInfo = result.UserInfo;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
             }
             finally
             {
@@ -173,7 +244,6 @@ namespace XamarinFormSample
                 SetIsLoading(true);
                 var userInfo = await authgear.FetchUserInfoAsync();
                 UserInfo = userInfo;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
             }
             finally
             {
@@ -203,7 +273,6 @@ namespace XamarinFormSample
                     }
                 } : null);
                 UserInfo = result.UserInfo;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
             }
             finally
             {
@@ -229,7 +298,6 @@ namespace XamarinFormSample
                     }
                 });
                 UserInfo = result;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
             }
             finally
             {
@@ -254,6 +322,7 @@ namespace XamarinFormSample
                         AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
                     }
                 });
+                await SyncAuthgearState();
             }
             finally
             {
@@ -268,6 +337,7 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 await authgear.DisableBiometricAsync();
+                await SyncAuthgearState();
             }
             finally
             {
@@ -294,13 +364,27 @@ namespace XamarinFormSample
             IsLoading = isLoading;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoading)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsNotLoading)));
+            Notify();
         }
-        private void SetState(SessionState state)
+        private async Task SyncAuthgearState()
         {
-            SessionState = state;
-            State = state.ToString();
+            SessionState = authgear.SessionState;
+            State = SessionState.ToString();
+            IsBiometricEnabled = await authgear.GetIsBiometricEnabledAsync();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SessionState)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
+        }
+        private void Notify()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledAuthenticate)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledAuthenticateBiometric)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledReauthenticateWeb)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledReauthenticate)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledEnableBiometric)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledDisableBiometric)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledFetchUserInfo)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledOpenSettings)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledLogout)));
         }
     }
 }

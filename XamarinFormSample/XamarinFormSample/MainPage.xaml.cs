@@ -120,6 +120,18 @@ namespace XamarinFormSample
             }
         }
 
+        private async void OpenSettings_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await MainViewModel.OpenAsync(SettingsPage.Settings);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
         private async void FetchUserInfo_Clicked(object sender, EventArgs e)
         {
             try
