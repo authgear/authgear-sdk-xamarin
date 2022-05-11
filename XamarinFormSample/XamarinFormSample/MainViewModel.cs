@@ -187,7 +187,14 @@ namespace XamarinFormSample
                     RedirectUri = RedirectUri,
                 }, useBiometric ? new BiometricOptions
                 {
-
+                    Android = new BiometricOptionsAndroid
+                    {
+                        Title = "Authenticate biometric title",
+                        Subtitle = "subtitle",
+                        Description = "description",
+                        NegativeButtonText = "Cancel",
+                        AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
+                    }
                 } : null);
                 UserInfo = result.UserInfo;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UserInfo)));
