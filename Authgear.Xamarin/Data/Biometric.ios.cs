@@ -35,7 +35,7 @@ namespace Authgear.Xamarin.Data
 
         public Task<string> AuthenticateBiometricAsync(BiometricOptions options, string kid, string challenge, DeviceInfoRoot deviceInfo)
         {
-            EnsureApiLevel();
+            EnsureIsSupported(options);
             var tag = string.Format(TagFormat, kid);
             var record = new SecRecord(SecKind.Key)
             {
@@ -68,7 +68,7 @@ namespace Authgear.Xamarin.Data
             {
                 throw new ArgumentNullException(nameof(options.Ios));
             }
-            EnsureApiLevel();
+            EnsureIsSupported(options);
             var kid = Guid.NewGuid().ToString();
             var tag = string.Format(TagFormat, kid);
             var flags = ToFlags(options.Ios.AccessConstraint);

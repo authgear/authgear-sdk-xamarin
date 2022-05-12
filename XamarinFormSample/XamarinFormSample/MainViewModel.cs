@@ -261,17 +261,7 @@ namespace XamarinFormSample
                 var result = await authgear.ReauthenticateAsync(new ReauthenticateOptions
                 {
                     RedirectUri = RedirectUri,
-                }, useBiometric ? new BiometricOptions
-                {
-                    Android = new BiometricOptionsAndroid
-                    {
-                        Title = "Authenticate biometric title",
-                        Subtitle = "subtitle",
-                        Description = "description",
-                        NegativeButtonText = "Cancel",
-                        AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
-                    }
-                } : null);
+                }, useBiometric ? CreateBiometricOptions() : null);
                 UserInfo = result.UserInfo;
             }
             finally
@@ -286,17 +276,7 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                var result = await authgear.AuthenticateBiometricAsync(new BiometricOptions
-                {
-                    Android = new BiometricOptionsAndroid
-                    {
-                        Title = "Authenticate biometric title",
-                        Subtitle = "subtitle",
-                        Description = "description",
-                        NegativeButtonText = "Cancel",
-                        AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
-                    }
-                });
+                var result = await authgear.AuthenticateBiometricAsync(CreateBiometricOptions());
                 UserInfo = result;
             }
             finally
@@ -311,23 +291,33 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                await authgear.EnableBiometricAsync(new BiometricOptions
-                {
-                    Android = new BiometricOptionsAndroid
-                    {
-                        Title = "Enable biometric title",
-                        Subtitle = "subtitle",
-                        Description = "description",
-                        NegativeButtonText = "Cancel",
-                        AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
-                    }
-                });
+                await authgear.EnableBiometricAsync(CreateBiometricOptions());
                 await SyncAuthgearState();
             }
             finally
             {
                 SetIsLoading(false);
             }
+        }
+
+        private BiometricOptions CreateBiometricOptions()
+        {
+            return new BiometricOptions
+            {
+                Android = new BiometricOptionsAndroid
+                {
+                    Title = "Enable biometric title",
+                    Subtitle = "subtitle",
+                    Description = "description",
+                    NegativeButtonText = "Cancel",
+                    AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
+                },
+                Ios = new BiometricOptionsIos
+                {
+                    LocalizedReason = "Reason",
+                    AccessConstraint = BiometricAccessConstraintIos.BiometricAny
+                }
+            };
         }
 
         public async Task DisableBiometricAsync()
