@@ -11,9 +11,9 @@ namespace Authgear.Xamarin.Oauth
         public string Error { get; set; }
         [JsonPropertyName("state")]
         public string State { get; set; }
-        [JsonPropertyName("errorDescription")]
+        [JsonPropertyName("error_description")]
         public string ErrorDescription { get; set; }
-        [JsonPropertyName("errorURI")]
+        [JsonPropertyName("error_uri")]
         public string ErrorUri { get; set; }
     }
 }
