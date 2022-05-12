@@ -10,5 +10,8 @@ namespace Authgear.Xamarin
     {
         [JsonPropertyName("android")]
         public DeviceInfoAndroid Android { get; set; }
+
+        [JsonPropertyName("ios")]
+        public DeviceInfoIos Ios { get; set; }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authgear.Xamarin", "Authgear.Xamarin\Authgear.Xamarin.csproj", "{8E90BD7E-7698-4C05-BDF1-96145D5DF73A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authgear.Xamarin", "Authgear.Xamarin\Authgear.Xamarin.csproj", "{8E90BD7E-7698-4C05-BDF1-96145D5DF73A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinFormSample.Android", "XamarinFormSample\XamarinFormSample.Android\XamarinFormSample.Android.csproj", "{0A468FFB-A95C-4FB1-8DCB-418E45BBD045}"
 EndProject

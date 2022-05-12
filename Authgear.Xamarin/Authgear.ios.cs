@@ -20,7 +20,10 @@ namespace Authgear.Xamarin
         }
         private DeviceInfoRoot PlatformGetDeviceInfo()
         {
-            return new DeviceInfoRoot { };
+            return new DeviceInfoRoot
+            {
+                Ios = DeviceInfoIos.Get()
+            };
         }
     }
 }

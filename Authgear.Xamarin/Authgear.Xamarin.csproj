@@ -32,5 +32,4 @@
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
 		<Compile Include="**\*.ios.cs" />
 	</ItemGroup>
-
 </Project>
