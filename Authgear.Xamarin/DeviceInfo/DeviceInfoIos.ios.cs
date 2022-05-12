@@ -13,7 +13,12 @@ namespace Authgear.Xamarin
             {
                 UName = new DeviceInfoIosUname
                 {
-                    // TODO:
+                    // These are best-effort approximation
+                    Machine = System.Environment.MachineName,
+                    NodeName = System.Environment.UserDomainName,
+                    Release = System.Environment.OSVersion.Version.ToString(),
+                    SysName = System.Environment.OSVersion.Platform.ToString(),
+                    Version = System.Environment.OSVersion.VersionString,
                 },
                 UiDevice = new DeviceInfoIosUiDevice
                 {
@@ -23,7 +28,11 @@ namespace Authgear.Xamarin
                     Model = UIDevice.CurrentDevice.Model,
                     UserInterfaceIdiom = UIDevice.CurrentDevice.UserInterfaceIdiom.ToString()
                 },
-                ProcessInfo = new DeviceInfoIosProcessInfo(),
+                ProcessInfo = new DeviceInfoIosProcessInfo
+                {
+                    IsMacCatalystApp = UIDevice.CurrentDevice.CheckSystemVersion(13, 0) && NSProcessInfo.ProcessInfo.IsMacCatalystApplication,
+                    IsIosAppOnMac = UIDevice.CurrentDevice.CheckSystemVersion(14, 0) && NSProcessInfo.ProcessInfo.IsiOSApplicationOnMac
+                },
                 Bundle = new DeviceInfoIosBundle
                 {
                     CFBundleIdentifier = infoDict["CFBundleIdentifier"]?.ToString(),
