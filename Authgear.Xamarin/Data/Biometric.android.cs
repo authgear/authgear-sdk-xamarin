@@ -126,7 +126,7 @@ namespace Authgear.Xamarin.Data
             var result = BiometricManager.From(context).CanAuthenticate(authenticators);
             if (result != BiometricManager.BiometricSuccess)
             {
-                throw new AuthgearException($"Cannot biometric authenticate: {result}");
+                throw AuthgearException.Wrap(new BiometricCanAuthenticateException(result));
             }
         }
 

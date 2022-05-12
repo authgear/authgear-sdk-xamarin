@@ -7,7 +7,7 @@ namespace Authgear.Xamarin
 {
     internal interface IBiometric
     {
-        void RemoveBiometric(string name);
+        void RemoveBiometric(string kid);
 
         void EnsureIsSupported(BiometricOptions options);
 

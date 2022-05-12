@@ -7,5 +7,7 @@ namespace Authgear.Xamarin
     public class BiometricOptions
     {
         public BiometricOptionsAndroid Android { get; set; }
+
+        public BiometricOptionsIos Ios { get; set; }
     }
 }

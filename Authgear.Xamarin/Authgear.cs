@@ -479,7 +479,7 @@ namespace Authgear.Xamarin
             var kid = await containerStorage.GetBiometricKeyIdAsync(name);
             if (kid != null)
             {
-                biometric.RemoveBiometric(name);
+                biometric.RemoveBiometric(kid);
                 containerStorage.DeleteBiometricKeyId(name);
             }
         }
