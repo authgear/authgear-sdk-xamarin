@@ -29,6 +29,7 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignProvision>Authgear Demo App Xamarin Dev</CodesignProvision>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
