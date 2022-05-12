@@ -4,6 +4,8 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Authgear.Xamarin;
+using Xamarin.Forms;
 
 namespace XamarinFormSample.iOS
 {
@@ -23,6 +25,8 @@ namespace XamarinFormSample.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            var factory = new AuthgearFactoryIos();
+            DependencyService.RegisterSingleton<IAuthgearFactory>(factory);
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

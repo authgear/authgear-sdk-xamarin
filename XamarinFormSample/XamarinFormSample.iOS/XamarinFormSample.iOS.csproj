@@ -75,6 +75,7 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AuthgearFactoryIos.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -137,6 +138,9 @@
     <ProjectReference Include="..\XamarinFormSample\XamarinFormSample.csproj">
       <Project>{4A2C9B15-4EB1-4595-8B8B-CA07A08F8EC7}</Project>
       <Name>XamarinFormSample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Authgear.Xamarin\Authgear.Xamarin.csproj">
+      <Name>Authgear.Xamarin</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

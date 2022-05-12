@@ -2,12 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UIKit;
 
 namespace Authgear.Xamarin
 {
     public partial class AuthgearSdk
     {
-        AuthgearSdk()
+        /// <summary>
+        /// </summary>
+        /// <param name="app">Dummy tag argument to denote this constructor is for ios</param>
+        /// <param name="options"></param>
+        public AuthgearSdk(UIApplication app, AuthgearOptions options) : this(options)
         {
             biometric = new Biometric();
             keyRepo = new KeyRepo();
