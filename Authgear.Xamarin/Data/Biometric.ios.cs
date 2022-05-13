@@ -1,10 +1,10 @@
-﻿using Foundation;
-using Security;
-using LocalAuthentication;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Foundation;
+using LocalAuthentication;
+using Security;
 using UIKit;
 
 namespace Authgear.Xamarin.Data
@@ -13,7 +13,7 @@ namespace Authgear.Xamarin.Data
     {
         private const string TagFormat = "com.authgear.keys.biometric.{0}";
         private const int KeySize = 2048;
-        
+
         private static SecAccessControlCreateFlags ToFlags(BiometricAccessConstraintIos biometricAccessConstraint)
         {
             switch (biometricAccessConstraint)
@@ -49,7 +49,7 @@ namespace Authgear.Xamarin.Data
             }
             try
             {
-                var secKey = (SecKey) secKeyObject;
+                var secKey = (SecKey)secKeyObject;
                 return Task.FromResult(SignJwt(kid, secKey, challenge, "authenticate", deviceInfo));
             }
             catch (Exception ex)

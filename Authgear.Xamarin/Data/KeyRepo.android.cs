@@ -1,10 +1,10 @@
-﻿using Android.Security.Keystore;
-using Authgear.Xamarin.Data;
-using Java.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Android.Security.Keystore;
+using Authgear.Xamarin.Data;
+using Java.Security;
 
 namespace Authgear.Xamarin
 {
@@ -77,7 +77,7 @@ namespace Authgear.Xamarin
             kpg.Initialize(spec);
             return kpg.GenerateKeyPair();
         }
-        
+
         private KeyPair GetAnonymousKey(string keyId)
         {
             var alias = string.Format(AliasFormat, keyId);

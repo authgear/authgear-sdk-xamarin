@@ -1,6 +1,6 @@
 ﻿using System;
-using UIKit;
 using Foundation;
+using UIKit;
 
 namespace Authgear.Xamarin
 {

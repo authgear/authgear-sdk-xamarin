@@ -1,13 +1,13 @@
-﻿using Android.Content;
-using AndroidX.Activity.Result;
-using AndroidX.AppCompat.App;
-using AndroidX.Browser.CustomTabs;
-using AndroidX.Fragment.App;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Android.Content;
+using AndroidX.Activity.Result;
+using AndroidX.AppCompat.App;
+using AndroidX.Browser.CustomTabs;
+using AndroidX.Fragment.App;
 using Xamarin.Essentials;
 
 namespace Authgear.Xamarin

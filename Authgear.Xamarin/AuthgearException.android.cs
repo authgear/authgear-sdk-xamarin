@@ -1,8 +1,8 @@
-﻿using Android.Security.Keystore;
-using AndroidX.Biometric;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Android.Security.Keystore;
+using AndroidX.Biometric;
 
 namespace Authgear.Xamarin
 {

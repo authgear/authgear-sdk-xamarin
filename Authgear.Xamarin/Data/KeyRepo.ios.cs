@@ -55,7 +55,7 @@ namespace Authgear.Xamarin.Data
 
         private void EnsureApiLevel()
         {
-            if(!UIDevice.CurrentDevice.CheckSystemVersion(11, 3))
+            if (!UIDevice.CurrentDevice.CheckSystemVersion(11, 3))
             {
                 throw new InvalidOperationException("Anonymous user is only supported on 11.3+");
             }

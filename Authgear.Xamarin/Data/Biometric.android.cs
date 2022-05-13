@@ -1,13 +1,13 @@
-﻿using Android.Content;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using Android.Content;
 using Android.OS;
 using Android.Security.Keystore;
 using AndroidX.Biometric;
 using AndroidX.Fragment.App;
 using Java.Security;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using static AndroidX.Biometric.BiometricPrompt;
 
@@ -260,7 +260,8 @@ namespace Authgear.Xamarin.Data
         {
             var taskSource = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
             var prompt = new BiometricPrompt(Platform.CurrentActivity as FragmentActivity, new AuthenticationCallbackImpl(taskSource, header, payload));
-            new Handler(Looper.MainLooper).Post(() => {
+            new Handler(Looper.MainLooper).Post(() =>
+            {
                 prompt.Authenticate(promptInfo, cryptoObject);
             });
             return taskSource.Task;

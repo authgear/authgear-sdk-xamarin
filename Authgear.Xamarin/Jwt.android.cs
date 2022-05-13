@@ -1,9 +1,9 @@
-﻿using Authgear.Xamarin.CsExtensions;
-using Authgear.Xamarin.Data;
-using Java.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Authgear.Xamarin.CsExtensions;
+using Authgear.Xamarin.Data;
+using Java.Security;
 
 namespace Authgear.Xamarin
 {

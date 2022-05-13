@@ -1,8 +1,4 @@
-﻿using Authgear.Xamarin.CsExtensions;
-using Authgear.Xamarin.Data;
-using Authgear.Xamarin.Data.Oauth;
-using Authgear.Xamarin.Oauth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,6 +7,10 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Authgear.Xamarin.CsExtensions;
+using Authgear.Xamarin.Data;
+using Authgear.Xamarin.Data.Oauth;
+using Authgear.Xamarin.Oauth;
 using Xamarin.Essentials;
 
 namespace Authgear.Xamarin

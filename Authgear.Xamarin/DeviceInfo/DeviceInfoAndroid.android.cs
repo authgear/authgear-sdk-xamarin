@@ -1,9 +1,8 @@
-﻿using Android.Content;
-using Android.Content.PM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Android.Content;
+using Android.Content.PM;
 using AndroidBuild = Android.OS.Build;
 using AndroidSettings = Android.Provider.Settings;
 

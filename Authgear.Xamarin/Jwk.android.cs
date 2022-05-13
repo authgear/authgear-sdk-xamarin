@@ -1,10 +1,10 @@
-﻿using Android.Runtime;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Android.Runtime;
 using Authgear.Xamarin.CsExtensions;
 using Java.Security;
 using Java.Security.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Authgear.Xamarin
 {

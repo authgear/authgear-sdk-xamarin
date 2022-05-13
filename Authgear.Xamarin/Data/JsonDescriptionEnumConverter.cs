@@ -1,10 +1,10 @@
-﻿using Authgear.Xamarin.CsExtensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
+using Authgear.Xamarin.CsExtensions;
 
 namespace Authgear.Xamarin.Data
 {

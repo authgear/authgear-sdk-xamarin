@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Authgear.Xamarin.CsExtensions
-{   
+{
     internal static class ConvertExtensions
     {
         public static string ToBase64UrlSafeStringFromBase64(string base64)

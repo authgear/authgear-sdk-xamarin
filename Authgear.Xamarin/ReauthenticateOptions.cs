@@ -1,7 +1,7 @@
-﻿using Authgear.Xamarin.Oauth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Authgear.Xamarin.Oauth;
 
 namespace Authgear.Xamarin
 {

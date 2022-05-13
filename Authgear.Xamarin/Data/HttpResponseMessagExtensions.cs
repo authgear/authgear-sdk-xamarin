@@ -1,11 +1,11 @@
-﻿using Authgear.Xamarin.Data;
-using Authgear.Xamarin.Oauth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Authgear.Xamarin.Data;
+using Authgear.Xamarin.Oauth;
 
 namespace Authgear.Xamarin
 {

@@ -1,9 +1,9 @@
-﻿using Authgear.Xamarin.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Text.Json.Serialization;
+using Authgear.Xamarin.Data;
 
 namespace Authgear.Xamarin
 {

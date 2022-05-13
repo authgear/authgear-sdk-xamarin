@@ -1,8 +1,8 @@
-﻿using Android.Content;
-using Authgear.Xamarin.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Android.Content;
+using Authgear.Xamarin.Data;
 
 namespace Authgear.Xamarin
 {
