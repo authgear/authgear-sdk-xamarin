@@ -3,9 +3,26 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid12.0;</TargetFrameworks>
 	<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	  <Summary>Authgear SDK for Xamarin</Summary>
+	  <PackageTags>xamarin, ios, android, xamarin.forms, Authgear Xamarin, kit, authgear</PackageTags>
+	  <Title>Authgear Xamarin SDK</Title>
+	  <Description>Authgear SDK for Xamarin</Description>
+	  <AssemblyVersion>1.0.0.0</AssemblyVersion>
+	  <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+	  <Version>1.0.0</Version>
+	  <PackageVersion>1.0.0</PackageVersion>
+	  <Authors>Oursky</Authors>
+	  <Owners>authgear,oursky</Owners>
+	  <NeutralLanguage>en</NeutralLanguage>
+	  <RepositoryUrl>https://github.com/authgear/authgear-sdk-xamarin</RepositoryUrl>
+	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	  <PackageProjectUrl>https://github.com/authgear/authgear-sdk-xamarin</PackageProjectUrl>
+	  <MDocDocumentationDirectory>$(MSBuildThisFileDirectory)..\docs\en</MDocDocumentationDirectory>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="mdoc" Version="5.7.4.10" PrivateAssets="All" />
     <PackageReference Include="System.Text.Json" Version="6.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
   </ItemGroup>
