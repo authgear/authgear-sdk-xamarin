@@ -23,5 +23,6 @@ namespace Authgear.Xamarin
         public string Manufacturer { get; set; }
         [JsonPropertyName("PRODUCT")]
         public string Product { get; set; }
+        public DeviceInfoAndroidVersion Version { get; set; }
     }
 }

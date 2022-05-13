@@ -9,5 +9,7 @@ namespace Authgear.Xamarin
     {
         [JsonPropertyName("bluetooth_name")]
         public string BluetoothName { get; set; }
+        [JsonPropertyName("ANDROID_ID")]
+        public string AndroidId { get; set; }
     }
 }

@@ -32,9 +32,5 @@
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
 		<Compile Include="**\*.ios.cs" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="AnonymousUserIosException.cs">
-	    <SubType></SubType>
-	  </Compile>
-	</ItemGroup>
+	
 </Project>

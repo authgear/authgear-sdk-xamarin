@@ -13,6 +13,9 @@ namespace Authgear.Xamarin
         public DeviceInfoAndroidPackageInfo PackageInfo { get; set; }
         [JsonPropertyName("Settings")]
         public DeviceInfoAndroidSettings Settings { get; set; }
+
+        [JsonPropertyName("ApplicationInfoLabel")]
+        public string AplicationInfoLabel { get; set; }
         private DeviceInfoAndroid()
         {
         }
