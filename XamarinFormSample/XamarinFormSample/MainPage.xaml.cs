@@ -20,7 +20,7 @@ namespace XamarinFormSample
             BindingContext = MainViewModel;
             MainViewModel.ErrorRaised += async (s, e) =>
             {
-                await DisplayAlert("Error", e.Message, "OK");
+                await ShowException(e);
             };
         }
 
@@ -32,7 +32,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -44,7 +44,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -56,7 +56,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -68,7 +68,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -80,7 +80,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -92,7 +92,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -104,7 +104,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -116,7 +116,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -128,7 +128,7 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
         }
 
@@ -140,8 +140,17 @@ namespace XamarinFormSample
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Error", ex.ToString(), "OK");
+                await ShowException(ex);
             }
+        }
+
+        private async Task ShowException(Exception ex)
+        {
+            if (ex is OperationCanceledException)
+            {
+                return;
+            }
+            await DisplayAlert("Error", ex.ToString(), "OK");
         }
     }
 }
