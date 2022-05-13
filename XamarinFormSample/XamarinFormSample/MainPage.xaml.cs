@@ -136,7 +136,8 @@ namespace XamarinFormSample
         {
             try
             {
-                await MainViewModel.FetchUserInfoAsync();
+                var userInfo = await MainViewModel.FetchUserInfoAsync();
+                await ShowUserInfo(userInfo);
             }
             catch (Exception ex)
             {
@@ -151,6 +152,17 @@ namespace XamarinFormSample
                 return;
             }
             await DisplayAlert("Error", ex.ToString(), "OK");
+        }
+
+        private async Task ShowUserInfo(UserInfo userInfo)
+        {
+            var message = String.Format(
+                "Sub: {0}\nIsVerified: {1}\nIsAnonymous: {2}",
+                userInfo.Sub,
+                userInfo.IsVerified,
+                userInfo.IsAnonymous
+            );
+            await DisplayAlert("UserInfo", message, "OK");
         }
     }
 }

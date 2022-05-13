@@ -239,7 +239,7 @@ namespace XamarinFormSample
             }
         }
 
-        public async Task FetchUserInfoAsync()
+        public async Task<UserInfo> FetchUserInfoAsync()
         {
             EnsureAuthgear();
             try
@@ -247,6 +247,7 @@ namespace XamarinFormSample
                 SetIsLoading(true);
                 var userInfo = await authgear.FetchUserInfoAsync();
                 UserInfo = userInfo;
+                return userInfo;
             }
             finally
             {
