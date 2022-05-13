@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - '*'
+    - '!gh-pages'
+  pull_request:
+    branches:
+    - '*'
+    - '!gh-pages'
+
+jobs:
+  deploy:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.105'
+    - run: dotnet restore
+    - uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: '17.0'
+    - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj
+    - uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install docfx
+      if: ${{ github.ref == 'refs/heads/main' }}
+    - working-directory: Documentation
+      run: docfx docfx.json
+    - name: Deploy docs to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.ref == 'refs/heads/main' }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site

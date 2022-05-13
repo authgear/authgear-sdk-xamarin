@@ -7,6 +7,7 @@
 	  <PackageTags>xamarin, ios, android, xamarin.forms, Authgear Xamarin, kit, authgear</PackageTags>
 	  <Title>Authgear Xamarin SDK</Title>
 	  <Description>Authgear SDK for Xamarin</Description>
+	  <Product>$(AssemblyName) ($(TargetFramework))</Product>
 	  <AssemblyVersion>1.0.0.0</AssemblyVersion>
 	  <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
 	  <Version>1.0.0</Version>
@@ -18,7 +19,6 @@
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	  <PackageProjectUrl>https://github.com/authgear/authgear-sdk-xamarin</PackageProjectUrl>
-	  <MDocDocumentationDirectory>$(MSBuildThisFileDirectory)..\docs\en</MDocDocumentationDirectory>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +28,7 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<None Include="..\LICENSE" PackagePath="" Pack="true" />
 		<Compile Include="**\*.cs" Exclude="obj\**\*.cs;**\*.android.cs;**\*.netstandard.cs;**\*.ios.cs" />
 	</ItemGroup>
 	
