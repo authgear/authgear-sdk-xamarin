@@ -49,5 +49,10 @@
 	</array>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Use Face ID to sign in</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
