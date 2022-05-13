@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
 
 namespace XamarinFormSample
 {
@@ -16,8 +17,8 @@ namespace XamarinFormSample
         private AuthgearSdk authgear;
         private readonly IAuthgearFactory authgearFactory;
         public readonly string RedirectUri = "com.authgear.exampleapp.xamarin://host/path";
-        public string ClientId { get; set; }
-        public string AuthgearEndpoint { get; set; }
+        public string ClientId { get; set; } = Preferences.Get("authgear.clientID", "");
+        public string AuthgearEndpoint { get; set; } = Preferences.Get("authgear.endpoint", "");
         public SessionState SessionState { get; set; } = SessionState.Unknown;
         public string State { get; private set; } = "<no-authgear-instance>";
         public bool IsNotLoading
@@ -146,6 +147,8 @@ namespace XamarinFormSample
                     TokenStorage = tokenStorage,
                     ShareSessionWithSystemBrowser = ShareSessioWithDeviceBrowser
                 });
+                Preferences.Set("authgear.endpoint", AuthgearEndpoint);
+                Preferences.Set("authgear.clientID", ClientId);
                 authgear.SessionStateChange += (sender, e) =>
                 {
                     _ = SyncAuthgearState();
