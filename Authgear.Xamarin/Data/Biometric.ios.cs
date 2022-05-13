@@ -45,7 +45,7 @@ namespace Authgear.Xamarin.Data
             var secKeyObject = SecKeyChain.QueryAsConcreteType(record, out var result);
             if (result != SecStatusCode.Success)
             {
-                throw new BiometricIosException(result);
+                throw AuthgearException.Wrap(new BiometricIosException(result));
             }
             try
             {
@@ -76,7 +76,7 @@ namespace Authgear.Xamarin.Data
             var (_, error) = await context.EvaluatePolicyAsync(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, options.Ios.LocalizedReason);
             if (error != null)
             {
-                throw new BiometricIosException(error);
+                throw AuthgearException.Wrap(new BiometricIosException(error));
             }
             var keyGenParameters = new SecKeyGenerationParameters
             {
@@ -86,7 +86,7 @@ namespace Authgear.Xamarin.Data
             var secKey = SecKey.CreateRandomKey(keyGenParameters.Dictionary, out error);
             if (error != null)
             {
-                throw new BiometricIosException(error);
+                throw AuthgearException.Wrap(new BiometricIosException(error));
             }
             var accessControl = new SecAccessControl(SecAccessible.WhenPasscodeSetThisDeviceOnly, flags);
             var record = new SecRecord(secKey)
@@ -98,7 +98,7 @@ namespace Authgear.Xamarin.Data
             var status = SecKeyChain.Add(record);
             if (status != SecStatusCode.Success)
             {
-                throw new BiometricIosException(status);
+                throw AuthgearException.Wrap(new BiometricIosException(status));
             }
             var jwt = SignJwt(kid, secKey, challenge, "setup", deviceInfo);
             return new BiometricEnableResult
@@ -137,7 +137,7 @@ namespace Authgear.Xamarin.Data
             _ = context.CanEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, out var error);
             if (error != null)
             {
-                throw new AuthgearException($"Cannot biometric authenticate: {error}");
+                throw AuthgearException.Wrap(new BiometricIosException(error));
             }
         }
 
@@ -152,7 +152,7 @@ namespace Authgear.Xamarin.Data
             var status = SecKeyChain.Remove(record);
             if (status != SecStatusCode.Success && status != SecStatusCode.ItemNotFound)
             {
-                throw new BiometricIosException(status);
+                throw AuthgearException.Wrap(new BiometricIosException(status));
             }
         }
     }
