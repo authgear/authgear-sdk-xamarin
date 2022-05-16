@@ -9,9 +9,11 @@ namespace Authgear.Xamarin
     internal class DeviceInfoRoot
     {
         [JsonPropertyName("android")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DeviceInfoAndroid Android { get; set; }
 
         [JsonPropertyName("ios")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DeviceInfoIos Ios { get; set; }
     }
 }
