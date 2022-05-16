@@ -86,7 +86,7 @@ namespace Authgear.Xamarin
                     },
                     Global = new DeviceInfoAndroidSettingsGlobal
                     {
-                        DeviceName = AndroidSettings.Secure.GetString(contentResolver, AndroidSettings.Global.DeviceName) ?? "",
+                        DeviceName = AndroidSettings.Global.GetString(contentResolver, AndroidSettings.Global.DeviceName) ?? "",
                     }
                 },
                 AplicationInfoLabel = context.ApplicationInfo.LoadLabel(context.PackageManager)
