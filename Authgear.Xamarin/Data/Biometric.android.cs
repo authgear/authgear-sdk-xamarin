@@ -7,6 +7,7 @@ using Android.OS;
 using Android.Security.Keystore;
 using AndroidX.Biometric;
 using AndroidX.Fragment.App;
+using Authgear.Xamarin.DeviceInfo;
 using Java.Security;
 using Xamarin.Essentials;
 using static AndroidX.Biometric.BiometricPrompt;

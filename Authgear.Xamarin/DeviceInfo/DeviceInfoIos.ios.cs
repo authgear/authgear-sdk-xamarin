@@ -5,7 +5,7 @@ using ObjCRuntime;
 using UIKit;
 using Xamarin.Essentials;
 
-namespace Authgear.Xamarin
+namespace Authgear.Xamarin.DeviceInfo
 {
     internal partial class DeviceInfoIos
     {
@@ -57,7 +57,7 @@ namespace Authgear.Xamarin
                 {
                     // These are best-effort approximation
                     Machine = GetBySysCtlName("hw.machine"),
-                    NodeName = DeviceInfo.Name,
+                    NodeName = global::Xamarin.Essentials.DeviceInfo.Name,
                     Release = GetBySysCtlName("kern.osrelease"),
                     SysName = GetBySysCtlName("kern.ostype"),
                     Version = GetBySysCtlName("kern.version"),

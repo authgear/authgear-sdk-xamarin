@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Authgear.Xamarin.CsExtensions;
 using Authgear.Xamarin.Data;
 using Authgear.Xamarin.Data.Oauth;
+using Authgear.Xamarin.DeviceInfo;
 using Authgear.Xamarin.Oauth;
 using Xamarin.Essentials;
 

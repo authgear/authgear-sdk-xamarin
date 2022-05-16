@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Authgear.Xamarin
+namespace Authgear.Xamarin.DeviceInfo
 {
     internal class DeviceInfoAndroidVersion
     {

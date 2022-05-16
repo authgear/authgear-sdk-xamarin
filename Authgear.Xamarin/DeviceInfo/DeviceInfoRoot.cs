@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using Xamarin.Essentials;
 
-namespace Authgear.Xamarin
+namespace Authgear.Xamarin.DeviceInfo
 {
     internal class DeviceInfoRoot
     {

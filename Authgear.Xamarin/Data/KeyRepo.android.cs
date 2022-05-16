@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Android.Security.Keystore;
 using Authgear.Xamarin.Data;
+using Authgear.Xamarin.DeviceInfo;
 using Java.Security;
 
 namespace Authgear.Xamarin

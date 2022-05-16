@@ -6,7 +6,7 @@ using Android.Content.PM;
 using AndroidBuild = Android.OS.Build;
 using AndroidSettings = Android.Provider.Settings;
 
-namespace Authgear.Xamarin
+namespace Authgear.Xamarin.DeviceInfo
 {
     internal partial class DeviceInfoAndroid
     {

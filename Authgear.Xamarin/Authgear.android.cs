@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Android.Content;
 using Authgear.Xamarin.Data;
+using Authgear.Xamarin.DeviceInfo;
 
 namespace Authgear.Xamarin
 {

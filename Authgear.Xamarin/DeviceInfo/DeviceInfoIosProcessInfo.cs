@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace Authgear.Xamarin
+namespace Authgear.Xamarin.DeviceInfo
 {
     internal class DeviceInfoIosProcessInfo
     {

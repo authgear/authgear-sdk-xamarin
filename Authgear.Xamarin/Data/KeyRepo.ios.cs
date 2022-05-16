@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Authgear.Xamarin.DeviceInfo;
 using Security;
 using UIKit;
 
