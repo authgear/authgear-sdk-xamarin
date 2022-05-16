@@ -22,7 +22,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="mdoc" Version="5.7.4.10" PrivateAssets="All" />
     <PackageReference Include="System.Text.Json" Version="6.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />
   </ItemGroup>
