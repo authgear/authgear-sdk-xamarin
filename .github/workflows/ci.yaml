@@ -5,6 +5,8 @@ on:
     branches:
     - '*'
     - '!gh-pages'
+    tags:
+    - '*'
   pull_request:
     branches:
     - '*'
@@ -38,3 +40,23 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: Documentation/_site
+  pack:
+    runs-on: windows-2022
+    needs: ["deploy"]
+    if: startsWith(github.ref, 'refs/tags') && !startsWith(github.ref, 'refs/tags/staging-')
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.105'
+    - run: dotnet restore
+    - uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: '17.0'
+    - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj /t:pack /p:Configuration=Release
+    - uses: actions/upload-artifact@v3
+      with:
+        name: nupkg
+        path: Authgear.Xamarin/bin/Release/Authgear.Xamarin.*.nupkg
+        retention-days: 5
+
