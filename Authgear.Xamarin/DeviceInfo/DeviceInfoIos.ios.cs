@@ -7,7 +7,7 @@ using Xamarin.Essentials;
 
 namespace Authgear.Xamarin
 {
-    public partial class DeviceInfoIos
+    internal partial class DeviceInfoIos
     {
         [DllImport(Constants.SystemLibrary, EntryPoint = "sysctlbyname")]
         internal static extern int SysctlByName([MarshalAs(UnmanagedType.LPStr)] string property, IntPtr output, IntPtr oldLen, IntPtr newp, uint newlen);

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Authgear.Xamarin
 {
-    public partial class DeviceInfoIos
+    internal partial class DeviceInfoIos
     {
         [JsonPropertyName("uname")]
         public DeviceInfoIosUname UName { get; set; }

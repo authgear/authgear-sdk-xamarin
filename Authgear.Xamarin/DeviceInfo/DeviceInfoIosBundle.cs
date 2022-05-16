@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Authgear.Xamarin
 {
-    public class DeviceInfoIosBundle
+    internal class DeviceInfoIosBundle
     {
         [JsonPropertyName("CFBundleIdentifier")]
         public string CFBundleIdentifier { get; set; }

@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Authgear.Xamarin
 {
-    public class DeviceInfoAndroidSecure
+    internal class DeviceInfoAndroidSecure
     {
         [JsonPropertyName("bluetooth_name")]
         public string BluetoothName { get; set; }

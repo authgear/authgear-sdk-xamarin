@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Authgear.Xamarin
 {
-    public class DeviceInfoAndroidPackageInfo
+    internal class DeviceInfoAndroidPackageInfo
     {
         [JsonPropertyName("packageName")]
         public string PackageName { get; set; }

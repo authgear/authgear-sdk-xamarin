@@ -8,7 +8,7 @@ using AndroidSettings = Android.Provider.Settings;
 
 namespace Authgear.Xamarin
 {
-    public partial class DeviceInfoAndroid
+    internal partial class DeviceInfoAndroid
     {
         public static DeviceInfoAndroid Get(Context context)
         {

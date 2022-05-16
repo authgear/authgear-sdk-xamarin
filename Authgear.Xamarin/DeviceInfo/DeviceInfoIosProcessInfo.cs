@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Authgear.Xamarin
 {
-    public class DeviceInfoIosProcessInfo
+    internal class DeviceInfoIosProcessInfo
     {
         [JsonPropertyName("isMacCatalystApp")]
         public bool IsMacCatalystApp { get; set; } = false;

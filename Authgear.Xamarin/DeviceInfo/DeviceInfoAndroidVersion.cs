@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    public class DeviceInfoAndroidVersion
+    internal class DeviceInfoAndroidVersion
     {
         public string BaseOs { get; set; }
         public string CodeName { get; set; }
