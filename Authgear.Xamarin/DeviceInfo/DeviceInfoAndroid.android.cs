@@ -13,14 +13,7 @@ namespace Authgear.Xamarin
         public static DeviceInfoAndroid Get(Context context)
         {
             PackageInfo packageInfo;
-            try
-            {
-                packageInfo = context.PackageManager.GetPackageInfo(context.PackageName, 0);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            packageInfo = context.PackageManager.GetPackageInfo(context.PackageName, 0);
             var contentResolver = context.ContentResolver;
             var baseOs = "";
             var previewSdkInt = "";
