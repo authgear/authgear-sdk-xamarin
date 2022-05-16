@@ -234,11 +234,11 @@ namespace Authgear.Xamarin
                 var refreshToken = await tokenStorage.GetRefreshTokenAsync(name) ?? "";
                 await oauthRepo.OidcRevocationRequestAsync(refreshToken);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 if (force != true)
                 {
-                    throw e;
+                    throw;
                 }
             }
             ClearSession(SessionStateChangeReason.Logout);
@@ -375,7 +375,7 @@ namespace Authgear.Xamarin
                         return;
                     }
                 }
-                throw ex;
+                throw;
             }
         }
 
