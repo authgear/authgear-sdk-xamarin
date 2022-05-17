@@ -72,6 +72,11 @@
                     Margin="16, 16, 16, 0"
                  />
                 <Button
+                    Text="Show auth time"
+                    Clicked="ShowAuthTime_Clicked"
+                    IsEnabled="{Binding IsEnabledShowAuthTime, Mode=OneWay}"
+                    Margin="16, 16, 16, 0"/>
+                <Button
                     Text="Logout"
                     Clicked="Logout_Clicked"
                     IsEnabled="{Binding IsEnabledLogout, Mode=OneWay}"

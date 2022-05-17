@@ -164,5 +164,10 @@ namespace XamarinFormSample
             );
             await DisplayAlert("UserInfo", message, "OK");
         }
+
+        private async void ShowAuthTime_Clicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("auth_time", MainViewModel.AuthTime?.ToString(), "OK");
+        }
     }
 }

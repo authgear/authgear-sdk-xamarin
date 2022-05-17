@@ -39,6 +39,19 @@ namespace Authgear.Xamarin
         { get; private set; }
         public string IdToken
         { get; private set; }
+        public DateTimeOffset? AuthTime
+        {
+            get
+            {
+                var idToken = IdToken;
+                if (idToken == null) { return null; }
+                var jsonDocument = Jwt.Decode(idToken);
+                if (!jsonDocument.RootElement.TryGetProperty("auth_time", out var authTimeJsonValue)) { return null; };
+                if (authTimeJsonValue.ValueKind != JsonValueKind.Number) { return null; }
+                var authTime = authTimeJsonValue.GetInt64();
+                return DateTimeOffset.FromUnixTimeSeconds(authTime);
+            }
+        }
         private DateTime? expiredAt;
         private readonly string authgearEndpoint;
         private readonly bool shareSessionWithSystemBrowser;

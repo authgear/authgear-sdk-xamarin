@@ -34,6 +34,14 @@ namespace XamarinFormSample
         public bool ShareSessioWithDeviceBrowser { get; set; }
         public AuthenticatePage? AuthenticatePageToShow { get; set; }
         public UserInfo UserInfo { get; private set; }
+
+        public DateTimeOffset? AuthTime
+        {
+            get
+            {
+                return authgear.AuthTime;
+            }
+        }
         private bool IsAnonymous
         {
             get
@@ -115,6 +123,13 @@ namespace XamarinFormSample
             get
             {
                 return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
+            }
+        }
+        public bool IsEnabledShowAuthTime
+        {
+            get
+            {
+                return IsConfigured && IsNotLoading;
             }
         }
         public bool IsEnabledLogout
@@ -367,6 +382,7 @@ namespace XamarinFormSample
             IsBiometricEnabled = await authgear.GetIsBiometricEnabledAsync();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SessionState)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AuthTime)));
         }
         private void Notify()
         {
@@ -378,6 +394,7 @@ namespace XamarinFormSample
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledDisableBiometric)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledFetchUserInfo)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledOpenSettings)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledShowAuthTime)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsEnabledLogout)));
         }
     }
