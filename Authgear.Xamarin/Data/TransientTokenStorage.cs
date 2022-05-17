@@ -19,7 +19,8 @@ namespace Authgear.Xamarin.Data
             {
                 var refreshToken = refreshTokens[aNamespace];
                 return Task.FromResult(refreshToken);
-            } catch (KeyNotFoundException)
+            }
+            catch (KeyNotFoundException)
             {
                 return Task.FromResult<string>(null);
             }
