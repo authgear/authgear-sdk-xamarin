@@ -52,7 +52,7 @@ namespace Authgear.Xamarin
                 return DateTimeOffset.FromUnixTimeSeconds(authTime);
             }
         }
-        private DateTime? expiredAt;
+        private DateTimeOffset? expiredAt;
         private readonly string authgearEndpoint;
         private readonly bool shareSessionWithSystemBrowser;
         private readonly ITokenStorage tokenStorage;
@@ -320,7 +320,7 @@ namespace Authgear.Xamarin
                 if (AccessToken == null) return true;
                 var expireAt = this.expiredAt;
                 if (expiredAt == null) return true;
-                var now = DateTime.Now;
+                var now = DateTimeOffset.UtcNow;
                 if (expireAt < now) return true;
                 return false;
             }
@@ -598,7 +598,7 @@ namespace Authgear.Xamarin
                 }
                 if (tokenResponse.ExpiresIn != null)
                 {
-                    expiredAt = DateTime.Now.AddMilliseconds(((float)tokenResponse.ExpiresIn * ExpireInPercentage));
+                    expiredAt = DateTimeOffset.UtcNow.AddMilliseconds(((float)tokenResponse.ExpiresIn * ExpireInPercentage));
                 }
                 UpdateSessionState(SessionState.Authenticated, reason);
             }
