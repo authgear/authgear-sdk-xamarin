@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Authgear.Xamarin.CsExtensions;
 
+[assembly: InternalsVisibleTo("UnitTest")]
 namespace Authgear.Xamarin.Oauth
 {
     internal class OidcAuthenticationRequest
@@ -33,6 +35,10 @@ namespace Authgear.Xamarin.Oauth
             {
                 query["code_challenge_method"] = "S256";
                 query["code_challenge"] = codeVerifier.Challenge;
+            }
+            if (State != null)
+            {
+                query["state"] = State;
             }
             if (Prompt != null)
             {
