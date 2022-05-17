@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.AuthgearSdk.html",
-          "hash": "V49ofB2NZCwV3oH8Q6KfyxPijh1sN3fBiLjZElTG6No="
+          "hash": "qFhpmvpIifloYjjaNuVsdCmC058LRhxg5mCKkT+KkGI="
         }
       },
       "is_incremental": false,
@@ -174,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.Data.TransientTokenStorage.html",
-          "hash": "K37OlYqvFBZ6nul4Ef1uj41EApZ5qUv0MIaifeFhrp0="
+          "hash": "zInYag++Oi8AZnmt6KB1kvK2bdfD0IBFgj1tWEgDIZ0="
         }
       },
       "is_incremental": false,

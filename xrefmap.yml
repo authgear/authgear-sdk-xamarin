@@ -283,6 +283,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearSdk.AuthenticateBiometricAsync
   nameWithType: AuthgearSdk.AuthenticateBiometricAsync
+- uid: Authgear.Xamarin.AuthgearSdk.AuthTime
+  name: AuthTime
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_AuthTime
+  commentId: P:Authgear.Xamarin.AuthgearSdk.AuthTime
+  fullName: Authgear.Xamarin.AuthgearSdk.AuthTime
+  nameWithType: AuthgearSdk.AuthTime
+- uid: Authgear.Xamarin.AuthgearSdk.AuthTime*
+  name: AuthTime
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_AuthTime_
+  commentId: Overload:Authgear.Xamarin.AuthgearSdk.AuthTime
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthgearSdk.AuthTime
+  nameWithType: AuthgearSdk.AuthTime
 - uid: Authgear.Xamarin.AuthgearSdk.CanReauthenticate
   name: CanReauthenticate
   href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_CanReauthenticate
