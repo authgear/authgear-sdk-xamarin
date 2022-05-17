@@ -15,7 +15,14 @@ namespace Authgear.Xamarin.Data
 
         public Task<string> GetRefreshTokenAsync(string aNamespace)
         {
-            return Task.FromResult(refreshTokens[aNamespace]);
+            try
+            {
+                var refreshToken = refreshTokens[aNamespace];
+                return Task.FromResult(refreshToken);
+            } catch (KeyNotFoundException)
+            {
+                return Task.FromResult<string>(null);
+            }
         }
 
         public void SetRefreshToken(string aNamespace, string refreshToken)
