@@ -889,42 +889,6 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.Data.TransientTokenStorage.SetRefreshToken
   nameWithType: TransientTokenStorage.SetRefreshToken
-- uid: Authgear.Xamarin.GrantType
-  name: GrantType
-  href: api/Authgear.Xamarin.GrantType.html
-  commentId: T:Authgear.Xamarin.GrantType
-  fullName: Authgear.Xamarin.GrantType
-  nameWithType: GrantType
-- uid: Authgear.Xamarin.GrantType.Anonymous
-  name: Anonymous
-  href: api/Authgear.Xamarin.GrantType.html#Authgear_Xamarin_GrantType_Anonymous
-  commentId: F:Authgear.Xamarin.GrantType.Anonymous
-  fullName: Authgear.Xamarin.GrantType.Anonymous
-  nameWithType: GrantType.Anonymous
-- uid: Authgear.Xamarin.GrantType.AuthorizationCode
-  name: AuthorizationCode
-  href: api/Authgear.Xamarin.GrantType.html#Authgear_Xamarin_GrantType_AuthorizationCode
-  commentId: F:Authgear.Xamarin.GrantType.AuthorizationCode
-  fullName: Authgear.Xamarin.GrantType.AuthorizationCode
-  nameWithType: GrantType.AuthorizationCode
-- uid: Authgear.Xamarin.GrantType.Biometric
-  name: Biometric
-  href: api/Authgear.Xamarin.GrantType.html#Authgear_Xamarin_GrantType_Biometric
-  commentId: F:Authgear.Xamarin.GrantType.Biometric
-  fullName: Authgear.Xamarin.GrantType.Biometric
-  nameWithType: GrantType.Biometric
-- uid: Authgear.Xamarin.GrantType.IdToken
-  name: IdToken
-  href: api/Authgear.Xamarin.GrantType.html#Authgear_Xamarin_GrantType_IdToken
-  commentId: F:Authgear.Xamarin.GrantType.IdToken
-  fullName: Authgear.Xamarin.GrantType.IdToken
-  nameWithType: GrantType.IdToken
-- uid: Authgear.Xamarin.GrantType.RefreshToken
-  name: RefreshToken
-  href: api/Authgear.Xamarin.GrantType.html#Authgear_Xamarin_GrantType_RefreshToken
-  commentId: F:Authgear.Xamarin.GrantType.RefreshToken
-  fullName: Authgear.Xamarin.GrantType.RefreshToken
-  nameWithType: GrantType.RefreshToken
 - uid: Authgear.Xamarin.PromoteOptions
   name: PromoteOptions
   href: api/Authgear.Xamarin.PromoteOptions.html
