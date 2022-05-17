@@ -289,6 +289,20 @@ namespace XamarinFormSample
             }
         }
 
+        public async Task RefreshIdTokenAsync()
+        {
+            EnsureAuthgear();
+            try
+            {
+                SetIsLoading(true);
+                await authgear.RefreshIdTokenAsync();
+            }
+            finally
+            {
+                SetIsLoading(false);
+            }
+        }
+
         public async Task AuthenticateBiometricAsync()
         {
             EnsureAuthgear();

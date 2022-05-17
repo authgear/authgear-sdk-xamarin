@@ -167,6 +167,7 @@ namespace XamarinFormSample
 
         private async void ShowAuthTime_Clicked(object sender, EventArgs e)
         {
+            await MainViewModel.RefreshIdTokenAsync();
             await DisplayAlert("auth_time", MainViewModel.AuthTime?.ToString(), "OK");
         }
     }
