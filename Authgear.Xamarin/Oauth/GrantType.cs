@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    public enum GrantType
+    internal enum GrantType
     {
         [Description("authorization_code")]
         AuthorizationCode,
