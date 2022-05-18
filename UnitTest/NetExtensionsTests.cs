@@ -4,7 +4,7 @@ using Xunit;
 using Authgear.Xamarin;
 using Authgear.Xamarin.Oauth;
 
-namespace Test
+namespace UnitTest
 {
     public class NetExtensionsTests
     {
@@ -44,11 +44,7 @@ namespace Test
                 Page = AuthenticatePage.Login,
                 SuppressIdpSessionCookie = true,
             };
-            VerifierHolder holder = new VerifierHolder
-            {
-                Challenge = "codeChallenge"
-            };
-            var dict = request.ToQuery("clientId", holder).ToQueryParameter();
+            var dict = request.ToQuery("clientId", "codeChallenge").ToQueryParameter();
             var u = new Uri("https://localhost:80/");
             var builder = new UriBuilder(u)
             {
