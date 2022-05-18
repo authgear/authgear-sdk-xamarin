@@ -1,4 +1,4 @@
-# Authgear SDK for Flutter
+# Authgear SDK for Xamarin
 
 ## Build
 
