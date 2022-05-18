@@ -27,7 +27,7 @@ Current CI already uses windows image and packs the resultant nuget package as a
 
 ## Demo Apps
 
-Two demo apps are included in the Github repo under `XamarinFormSample/`. They demonstrate the key features of the SDK on Anroid and iOS.
+Two demo apps are included in the Github repo under `XamarinFormSample/`. They demonstrate the key features of the SDK on Android and iOS.
 
 ### XamarinFormSample.Android
 
