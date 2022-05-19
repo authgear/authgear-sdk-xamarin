@@ -35,6 +35,14 @@ namespace XamarinFormSample
         public AuthenticatePage? AuthenticatePageToShow { get; set; }
         public UserInfo UserInfo { get; private set; }
 
+        private ColorScheme ColorScheme
+        {
+            get
+            {
+                return AppInfo.RequestedTheme == AppTheme.Dark ? ColorScheme.Dark : ColorScheme.Light;
+            }
+        }
+
         public DateTimeOffset? AuthTime
         {
             get
@@ -209,6 +217,7 @@ namespace XamarinFormSample
                 var result = await authgear.PromoteAnonymousUserAsync(new PromoteOptions
                 {
                     RedirectUri = RedirectUri,
+                    ColorScheme = ColorScheme,
                 });
                 Debug.WriteLine(result.State ?? "No state");
                 UserInfo = result.UserInfo;
@@ -226,7 +235,10 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                await authgear.OpenAsync(page);
+                await authgear.OpenAsync(page, new SettingsOptions
+                {
+                    ColorScheme = ColorScheme,
+                });
             }
             finally
             {
@@ -243,7 +255,8 @@ namespace XamarinFormSample
                 var result = await authgear.AuthenticateAsync(new AuthenticateOptions
                 {
                     RedirectUri = RedirectUri,
-                    Page = AuthenticatePageToShow
+                    Page = AuthenticatePageToShow,
+                    ColorScheme = ColorScheme,
                 });
                 Debug.WriteLine(result.State ?? "No state");
                 UserInfo = result.UserInfo;
@@ -280,6 +293,7 @@ namespace XamarinFormSample
                 var result = await authgear.ReauthenticateAsync(new ReauthenticateOptions
                 {
                     RedirectUri = RedirectUri,
+                    ColorScheme = ColorScheme,
                 }, useBiometric ? CreateBiometricOptions() : null);
                 UserInfo = result.UserInfo;
             }
