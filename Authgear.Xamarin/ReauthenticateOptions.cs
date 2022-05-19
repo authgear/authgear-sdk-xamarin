@@ -10,6 +10,7 @@ namespace Authgear.Xamarin
         public string RedirectUri { get; set; }
         public string State { get; set; }
         public List<string> UiLocales { get; set; }
+        public ColorScheme? ColorScheme { get; set; }
         public int? MaxAge { get; set; }
         internal OidcAuthenticationRequest ToRequest(string idTokenHint, bool suppressIdpSessionCookie)
         {
@@ -19,13 +20,14 @@ namespace Authgear.Xamarin
             }
             return new OidcAuthenticationRequest
             {
-                RedirectUri = this.RedirectUri,
+                RedirectUri = RedirectUri,
                 ResponseType = "code",
                 Scope = new List<string> { "openid", "https://authgear.com/scopes/full-access" },
-                State = this.State,
+                State = State,
                 IdTokenHint = idTokenHint,
                 MaxAge = MaxAge ?? 0,
                 UiLocales = UiLocales,
+                ColorScheme = ColorScheme,
                 SuppressIdpSessionCookie = suppressIdpSessionCookie
             };
         }

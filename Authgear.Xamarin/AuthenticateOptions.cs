@@ -13,6 +13,7 @@ namespace Authgear.Xamarin
         public List<PromptOption> PromptOptions { get; set; }
         public string LoginHint { get; set; }
         public List<string> UiLocales { get; set; }
+        public ColorScheme? ColorScheme { get; set; }
         public AuthenticatePage? Page { get; set; }
 
         internal OidcAuthenticationRequest ToRequest(bool suppressIdpSessionCookie)
@@ -23,16 +24,17 @@ namespace Authgear.Xamarin
             }
             return new OidcAuthenticationRequest
             {
-                RedirectUri = this.RedirectUri,
+                RedirectUri = RedirectUri,
                 ResponseType = "code",
                 Scope = new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" },
-                State = this.State,
-                Prompt = this.PromptOptions,
-                LoginHint = this.LoginHint,
+                State = State,
+                Prompt = PromptOptions,
+                LoginHint = LoginHint,
                 IdTokenHint = null,
                 MaxAge = null,
-                UiLocales = this.UiLocales,
-                Page = this.Page,
+                UiLocales = UiLocales,
+                ColorScheme = ColorScheme,
+                Page = Page,
                 SuppressIdpSessionCookie = suppressIdpSessionCookie
             };
         }

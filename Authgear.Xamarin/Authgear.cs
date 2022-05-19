@@ -176,17 +176,8 @@ namespace Authgear.Xamarin
             var jwtValue = WebUtility.UrlEncode(jwt);
             var loginHint = $"https://authgear.com/login_hint?type=anonymous&jwt={jwtValue}";
             var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
-            var authorizeUrl = await GetAuthorizeEndpointAsync(new OidcAuthenticationRequest
-            {
-                RedirectUri = options.RedirectUri,
-                ResponseType = "code",
-                Scope = new List<string>() { "openid", "offline_access", "https://authgear.com/scopes/full-access" },
-                Prompt = new List<PromptOption>() { PromptOption.Login },
-                LoginHint = loginHint,
-                State = options.State,
-                UiLocales = options.UiLocales,
-                SuppressIdpSessionCookie = ShouldSuppressIDPSessionCookie,
-            }, codeVerifier);
+            var request = options.ToRequest(loginHint, ShouldSuppressIDPSessionCookie);
+            var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(options.RedirectUri, authorizeUrl);
             var result = await FinishAuthenticationAsync(deepLink, codeVerifier.Verifier);
             containerStorage.DeleteAnonymousKeyId(name);
@@ -258,7 +249,7 @@ namespace Authgear.Xamarin
             ClearSession(SessionStateChangeReason.Logout);
         }
 
-        public async Task OpenUrlAsync(string path)
+        public async Task OpenUrlAsync(string path, SettingsOptions options = null)
         {
             EnsureIsInitialized();
             var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
@@ -266,21 +257,15 @@ namespace Authgear.Xamarin
             var token = appSessionTokenResponse.AppSessionToken;
             var url = new Uri(new Uri(authgearEndpoint), path).ToString();
             var loginHint = string.Format(LoginHintFormat, WebUtility.UrlEncode(token));
-            var authorizeUrl = await GetAuthorizeEndpointAsync(new OidcAuthenticationRequest
-            {
-                RedirectUri = url,
-                ResponseType = "none",
-                Scope = new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" },
-                Prompt = new List<PromptOption>() { PromptOption.None },
-                LoginHint = loginHint,
-                SuppressIdpSessionCookie = ShouldSuppressIDPSessionCookie,
-            }, null);
+            if (options == null) { options = new SettingsOptions(); }
+            var request = options.ToRequest(url, loginHint, ShouldSuppressIDPSessionCookie);
+            var authorizeUrl = await GetAuthorizeEndpointAsync(request, null);
             await webView.ShowAsync(authorizeUrl);
         }
 
-        public async Task OpenAsync(SettingsPage page)
+        public async Task OpenAsync(SettingsPage page, SettingsOptions options = null)
         {
-            await OpenUrlAsync(page.GetDescription());
+            await OpenUrlAsync(page.GetDescription(), options);
         }
 
         private bool ShouldRefreshAccessToken

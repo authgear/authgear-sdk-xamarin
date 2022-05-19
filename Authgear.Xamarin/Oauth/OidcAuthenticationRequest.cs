@@ -18,6 +18,7 @@ namespace Authgear.Xamarin.Oauth
         public int? MaxAge { get; set; }
         public string LoginHint { get; set; }
         public List<string> UiLocales { get; set; }
+        public ColorScheme? ColorScheme { get; set; }
         public string IdTokenHint { get; set; }
         public AuthenticatePage? Page { get; set; }
         public bool? SuppressIdpSessionCookie { get; set; }
@@ -51,6 +52,10 @@ namespace Authgear.Xamarin.Oauth
             if (UiLocales != null)
             {
                 query["ui_locales"] = string.Join(" ", UiLocales);
+            }
+            if (ColorScheme != null)
+            {
+                query["x_color_scheme"] = ColorScheme.GetDescription();
             }
             if (IdTokenHint != null)
             {
