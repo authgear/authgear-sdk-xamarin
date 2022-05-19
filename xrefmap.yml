@@ -13,6 +13,19 @@ references:
   commentId: T:Authgear.Xamarin.AuthenticateOptions
   fullName: Authgear.Xamarin.AuthenticateOptions
   nameWithType: AuthenticateOptions
+- uid: Authgear.Xamarin.AuthenticateOptions.ColorScheme
+  name: ColorScheme
+  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_ColorScheme
+  commentId: P:Authgear.Xamarin.AuthenticateOptions.ColorScheme
+  fullName: Authgear.Xamarin.AuthenticateOptions.ColorScheme
+  nameWithType: AuthenticateOptions.ColorScheme
+- uid: Authgear.Xamarin.AuthenticateOptions.ColorScheme*
+  name: ColorScheme
+  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_ColorScheme_
+  commentId: Overload:Authgear.Xamarin.AuthenticateOptions.ColorScheme
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthenticateOptions.ColorScheme
+  nameWithType: AuthenticateOptions.ColorScheme
 - uid: Authgear.Xamarin.AuthenticateOptions.LoginHint
   name: LoginHint
   href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_LoginHint
@@ -442,12 +455,12 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearSdk.LogoutAsync
   nameWithType: AuthgearSdk.LogoutAsync
-- uid: Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage)
-  name: OpenAsync(SettingsPage)
-  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_OpenAsync_Authgear_Xamarin_SettingsPage_
-  commentId: M:Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage)
-  fullName: Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage)
-  nameWithType: AuthgearSdk.OpenAsync(SettingsPage)
+- uid: Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage,Authgear.Xamarin.SettingsOptions)
+  name: OpenAsync(SettingsPage, SettingsOptions)
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_OpenAsync_Authgear_Xamarin_SettingsPage_Authgear_Xamarin_SettingsOptions_
+  commentId: M:Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage,Authgear.Xamarin.SettingsOptions)
+  fullName: Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage, Authgear.Xamarin.SettingsOptions)
+  nameWithType: AuthgearSdk.OpenAsync(SettingsPage, SettingsOptions)
 - uid: Authgear.Xamarin.AuthgearSdk.OpenAsync*
   name: OpenAsync
   href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_OpenAsync_
@@ -455,12 +468,12 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearSdk.OpenAsync
   nameWithType: AuthgearSdk.OpenAsync
-- uid: Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String)
-  name: OpenUrlAsync(String)
-  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_OpenUrlAsync_System_String_
-  commentId: M:Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String)
-  fullName: Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String)
-  nameWithType: AuthgearSdk.OpenUrlAsync(String)
+- uid: Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String,Authgear.Xamarin.SettingsOptions)
+  name: OpenUrlAsync(String, SettingsOptions)
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_OpenUrlAsync_System_String_Authgear_Xamarin_SettingsOptions_
+  commentId: M:Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String,Authgear.Xamarin.SettingsOptions)
+  fullName: Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String, Authgear.Xamarin.SettingsOptions)
+  nameWithType: AuthgearSdk.OpenUrlAsync(String, SettingsOptions)
 - uid: Authgear.Xamarin.AuthgearSdk.OpenUrlAsync*
   name: OpenUrlAsync
   href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_OpenUrlAsync_
@@ -761,6 +774,24 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.BiometricOptionsIos.LocalizedReason
   nameWithType: BiometricOptionsIos.LocalizedReason
+- uid: Authgear.Xamarin.ColorScheme
+  name: ColorScheme
+  href: api/Authgear.Xamarin.ColorScheme.html
+  commentId: T:Authgear.Xamarin.ColorScheme
+  fullName: Authgear.Xamarin.ColorScheme
+  nameWithType: ColorScheme
+- uid: Authgear.Xamarin.ColorScheme.Dark
+  name: Dark
+  href: api/Authgear.Xamarin.ColorScheme.html#Authgear_Xamarin_ColorScheme_Dark
+  commentId: F:Authgear.Xamarin.ColorScheme.Dark
+  fullName: Authgear.Xamarin.ColorScheme.Dark
+  nameWithType: ColorScheme.Dark
+- uid: Authgear.Xamarin.ColorScheme.Light
+  name: Light
+  href: api/Authgear.Xamarin.ColorScheme.html#Authgear_Xamarin_ColorScheme_Light
+  commentId: F:Authgear.Xamarin.ColorScheme.Light
+  fullName: Authgear.Xamarin.ColorScheme.Light
+  nameWithType: ColorScheme.Light
 - uid: Authgear.Xamarin.Data
   name: Authgear.Xamarin.Data
   href: api/Authgear.Xamarin.Data.html
@@ -908,6 +939,19 @@ references:
   commentId: T:Authgear.Xamarin.PromoteOptions
   fullName: Authgear.Xamarin.PromoteOptions
   nameWithType: PromoteOptions
+- uid: Authgear.Xamarin.PromoteOptions.ColorScheme
+  name: ColorScheme
+  href: api/Authgear.Xamarin.PromoteOptions.html#Authgear_Xamarin_PromoteOptions_ColorScheme
+  commentId: P:Authgear.Xamarin.PromoteOptions.ColorScheme
+  fullName: Authgear.Xamarin.PromoteOptions.ColorScheme
+  nameWithType: PromoteOptions.ColorScheme
+- uid: Authgear.Xamarin.PromoteOptions.ColorScheme*
+  name: ColorScheme
+  href: api/Authgear.Xamarin.PromoteOptions.html#Authgear_Xamarin_PromoteOptions_ColorScheme_
+  commentId: Overload:Authgear.Xamarin.PromoteOptions.ColorScheme
+  isSpec: "True"
+  fullName: Authgear.Xamarin.PromoteOptions.ColorScheme
+  nameWithType: PromoteOptions.ColorScheme
 - uid: Authgear.Xamarin.PromoteOptions.RedirectUri
   name: RedirectUri
   href: api/Authgear.Xamarin.PromoteOptions.html#Authgear_Xamarin_PromoteOptions_RedirectUri
@@ -983,6 +1027,19 @@ references:
   commentId: T:Authgear.Xamarin.ReauthenticateOptions
   fullName: Authgear.Xamarin.ReauthenticateOptions
   nameWithType: ReauthenticateOptions
+- uid: Authgear.Xamarin.ReauthenticateOptions.ColorScheme
+  name: ColorScheme
+  href: api/Authgear.Xamarin.ReauthenticateOptions.html#Authgear_Xamarin_ReauthenticateOptions_ColorScheme
+  commentId: P:Authgear.Xamarin.ReauthenticateOptions.ColorScheme
+  fullName: Authgear.Xamarin.ReauthenticateOptions.ColorScheme
+  nameWithType: ReauthenticateOptions.ColorScheme
+- uid: Authgear.Xamarin.ReauthenticateOptions.ColorScheme*
+  name: ColorScheme
+  href: api/Authgear.Xamarin.ReauthenticateOptions.html#Authgear_Xamarin_ReauthenticateOptions_ColorScheme_
+  commentId: Overload:Authgear.Xamarin.ReauthenticateOptions.ColorScheme
+  isSpec: "True"
+  fullName: Authgear.Xamarin.ReauthenticateOptions.ColorScheme
+  nameWithType: ReauthenticateOptions.ColorScheme
 - uid: Authgear.Xamarin.ReauthenticateOptions.MaxAge
   name: MaxAge
   href: api/Authgear.Xamarin.ReauthenticateOptions.html#Authgear_Xamarin_ReauthenticateOptions_MaxAge
@@ -1133,6 +1190,25 @@ references:
   commentId: F:Authgear.Xamarin.SessionStateChangeReason.NoToken
   fullName: Authgear.Xamarin.SessionStateChangeReason.NoToken
   nameWithType: SessionStateChangeReason.NoToken
+- uid: Authgear.Xamarin.SettingsOptions
+  name: SettingsOptions
+  href: api/Authgear.Xamarin.SettingsOptions.html
+  commentId: T:Authgear.Xamarin.SettingsOptions
+  fullName: Authgear.Xamarin.SettingsOptions
+  nameWithType: SettingsOptions
+- uid: Authgear.Xamarin.SettingsOptions.ColorScheme
+  name: ColorScheme
+  href: api/Authgear.Xamarin.SettingsOptions.html#Authgear_Xamarin_SettingsOptions_ColorScheme
+  commentId: P:Authgear.Xamarin.SettingsOptions.ColorScheme
+  fullName: Authgear.Xamarin.SettingsOptions.ColorScheme
+  nameWithType: SettingsOptions.ColorScheme
+- uid: Authgear.Xamarin.SettingsOptions.ColorScheme*
+  name: ColorScheme
+  href: api/Authgear.Xamarin.SettingsOptions.html#Authgear_Xamarin_SettingsOptions_ColorScheme_
+  commentId: Overload:Authgear.Xamarin.SettingsOptions.ColorScheme
+  isSpec: "True"
+  fullName: Authgear.Xamarin.SettingsOptions.ColorScheme
+  nameWithType: SettingsOptions.ColorScheme
 - uid: Authgear.Xamarin.SettingsPage
   name: SettingsPage
   href: api/Authgear.Xamarin.SettingsPage.html
