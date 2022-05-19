@@ -175,7 +175,7 @@ namespace Authgear.Xamarin
             var jwt = await keyRepo.PromoteAnonymousUserAsync(keyId, challenge, PlatformGetDeviceInfo());
             var jwtValue = WebUtility.UrlEncode(jwt);
             var loginHint = $"https://authgear.com/login_hint?type=anonymous&jwt={jwtValue}";
-            var codeVerifier = SetupVerifier();
+            var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
             var authorizeUrl = await GetAuthorizeEndpointAsync(new OidcAuthenticationRequest
             {
                 RedirectUri = options.RedirectUri,
@@ -201,7 +201,7 @@ namespace Authgear.Xamarin
         public async Task<AuthenticateResult> AuthenticateAsync(AuthenticateOptions options)
         {
             EnsureIsInitialized();
-            var codeVerifier = SetupVerifier();
+            var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
             var request = options.ToRequest(ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
@@ -233,7 +233,7 @@ namespace Authgear.Xamarin
             {
                 throw new AuthgearException("Call refreshIdToken first");
             }
-            var codeVerifier = SetupVerifier();
+            var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
             var request = options.ToRequest(idTokenHint, ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl);
@@ -281,35 +281,6 @@ namespace Authgear.Xamarin
         public async Task OpenAsync(SettingsPage page)
         {
             await OpenUrlAsync(page.GetDescription());
-        }
-
-        private VerifierHolder SetupVerifier()
-        {
-            var verifier = GenerateCodeVerifier();
-            return new VerifierHolder { Verifier = verifier, Challenge = ComputeCodeChallenge(verifier) };
-        }
-
-        private string GenerateCodeVerifier()
-        {
-            const int byteCount = 32;
-            var bytes = new Byte[byteCount];
-            using (var provider = new RNGCryptoServiceProvider())
-            {
-                provider.GetBytes(bytes);
-                return string.Join("", bytes.Select(x => x.ToString("x2")));
-            }
-        }
-
-        private string ComputeCodeChallenge(string verifier)
-        {
-            var hash = Sha256(verifier);
-            return ConvertExtensions.ToBase64UrlSafeString(hash);
-        }
-
-        private byte[] Sha256(string input)
-        {
-            var sha256 = SHA256.Create();
-            return sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
         }
 
         private bool ShouldRefreshAccessToken
@@ -393,7 +364,7 @@ namespace Authgear.Xamarin
             }
         }
 
-        private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, VerifierHolder codeVerifier)
+        private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, CodeVerifier codeVerifier)
         {
             var config = await oauthRepo.GetOidcConfigurationAsync();
             var query = request.ToQuery(ClientId, codeVerifier);

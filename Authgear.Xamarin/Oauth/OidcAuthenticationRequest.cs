@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Authgear.Xamarin.CsExtensions;
 
+[assembly: InternalsVisibleTo("UnitTest")]
 namespace Authgear.Xamarin.Oauth
 {
     internal class OidcAuthenticationRequest
@@ -19,7 +21,7 @@ namespace Authgear.Xamarin.Oauth
         public string IdTokenHint { get; set; }
         public AuthenticatePage? Page { get; set; }
         public bool? SuppressIdpSessionCookie { get; set; }
-        internal Dictionary<string, string> ToQuery(string clientId, VerifierHolder codeVerifier)
+        internal Dictionary<string, string> ToQuery(string clientId, string challenge)
         {
             var query = new Dictionary<string, string>()
             {
@@ -29,10 +31,14 @@ namespace Authgear.Xamarin.Oauth
                 ["scope"] = string.Join(" ", Scope),
                 ["x_platform"] = "xamarin"
             };
-            if (codeVerifier != null)
+            if (challenge != null)
             {
                 query["code_challenge_method"] = "S256";
-                query["code_challenge"] = codeVerifier.Challenge;
+                query["code_challenge"] = challenge;
+            }
+            if (State != null)
+            {
+                query["state"] = State;
             }
             if (Prompt != null)
             {
@@ -63,6 +69,10 @@ namespace Authgear.Xamarin.Oauth
                 query["x_suppress_idp_session_cookie"] = "true";
             }
             return query;
+        }
+        internal Dictionary<string, string> ToQuery(string clientId, CodeVerifier codeVerifier)
+        {
+            return ToQuery(clientId, codeVerifier?.Challenge);
         }
     }
 }

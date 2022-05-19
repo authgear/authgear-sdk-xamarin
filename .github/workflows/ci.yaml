@@ -27,6 +27,8 @@ jobs:
       with:
         vs-version: '17.0'
     - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj
+    - working-directory: UnitTest
+      run: dotnet test
     - uses: crazy-max/ghaction-chocolatey@v1
       with:
         args: install docfx
