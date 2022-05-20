@@ -129,7 +129,10 @@ namespace Authgear.Xamarin.Data.Oauth
             }
             var content = new FormUrlEncodedContent(body);
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, config.TokenEndpoint);
-            httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", request.AccessToken);
+            if (request.AccessToken != null)
+            {
+                httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", request.AccessToken);
+            }
             httpRequest.Content = content;
             var responseMessage = await httpClient.SendAsync(httpRequest);
             return await responseMessage.GetJsonAsync<OidcTokenResponse>();
