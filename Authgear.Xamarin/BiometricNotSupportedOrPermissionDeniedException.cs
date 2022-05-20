@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal class BiometricNotSupportedOrPermissionDeniedException : AuthgearException
+    public class BiometricNotSupportedOrPermissionDeniedException : AuthgearException
     {
         public BiometricNotSupportedOrPermissionDeniedException() : base("") { }
         public BiometricNotSupportedOrPermissionDeniedException(string message) : base(message)

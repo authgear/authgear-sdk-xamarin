@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal class BiometricNoPasscodeException : AuthgearException
+    public class BiometricNoPasscodeException : AuthgearException
     {
         public BiometricNoPasscodeException() : base("") { }
         public BiometricNoPasscodeException(string message) : base(message)

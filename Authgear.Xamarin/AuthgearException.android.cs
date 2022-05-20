@@ -6,9 +6,9 @@ using AndroidX.Biometric;
 
 namespace Authgear.Xamarin
 {
-    internal partial class AuthgearException
+    public partial class AuthgearException
     {
-        public static Exception PlatformWrap(Exception ex)
+        internal static Exception PlatformWrap(Exception ex)
         {
             if (ex is KeyPermanentlyInvalidatedException)
             {

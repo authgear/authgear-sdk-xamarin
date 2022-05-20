@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal partial class AuthgearException : Exception
+    public partial class AuthgearException : Exception
     {
         public AuthgearException() : base("") { }
         public AuthgearException(string message) : base(message)
@@ -14,7 +14,7 @@ namespace Authgear.Xamarin
         {
         }
         public AuthgearException(string message, Exception ex) : base(message, ex) { }
-        public static Exception Wrap(Exception ex)
+        internal static Exception Wrap(Exception ex)
         {
             var platformEx = PlatformWrap(ex);
             if (platformEx != null) return platformEx;

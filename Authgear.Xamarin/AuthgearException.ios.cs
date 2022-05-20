@@ -5,7 +5,7 @@ using LocalAuthentication;
 
 namespace Authgear.Xamarin
 {
-    internal partial class AuthgearException
+    public partial class AuthgearException
     {
         private const int LAErrorUserCancel = -2;
         private const int LAErrorPasscodeNotSet = -5;
@@ -14,7 +14,7 @@ namespace Authgear.Xamarin
         private const int LAErrorBiometryLockout = -8;
         private const int ErrSecUserCanceled = -128;
         private const int ErrSecItemNotFound = -25300;
-        public static Exception PlatformWrap(Exception ex)
+        internal static Exception PlatformWrap(Exception ex)
         {
             if (ex is BiometricIosException bie)
             {

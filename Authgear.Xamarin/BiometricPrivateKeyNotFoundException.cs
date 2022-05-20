@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal class BiometricPrivateKeyNotFoundException : Exception
+    public class BiometricPrivateKeyNotFoundException : Exception
     {
         public BiometricPrivateKeyNotFoundException() : base() { }
         public BiometricPrivateKeyNotFoundException(string msg) : base(msg) { }

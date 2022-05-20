@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal class BiometricLockoutException : AuthgearException
+    public class BiometricLockoutException : AuthgearException
     {
         public BiometricLockoutException() : base("") { }
         public BiometricLockoutException(string message) : base(message)

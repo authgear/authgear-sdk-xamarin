@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal class BiometricNoEnrollmentException : AuthgearException
+    public class BiometricNoEnrollmentException : AuthgearException
     {
         public BiometricNoEnrollmentException() : base("") { }
         public BiometricNoEnrollmentException(string message) : base(message)
