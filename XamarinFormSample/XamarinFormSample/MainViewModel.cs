@@ -357,7 +357,7 @@ namespace XamarinFormSample
                     Subtitle = "subtitle",
                     Description = "description",
                     NegativeButtonText = "Cancel",
-                    AccessContraint = BiometricAccessConstraintAndroid.BiometricOnly,
+                    AccessConstraint = BiometricAccessConstraintAndroid.BiometricOnly,
                 },
                 Ios = new BiometricOptionsIos
                 {

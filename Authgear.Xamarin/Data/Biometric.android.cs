@@ -123,7 +123,7 @@ namespace Authgear.Xamarin.Data
 
         private void EnsureCanAuthenticate(BiometricOptions options)
         {
-            var authenticators = ToAuthenticators(options.Android.AccessContraint);
+            var authenticators = ToAuthenticators(options.Android.AccessConstraint);
             var result = BiometricManager.From(context).CanAuthenticate(authenticators);
             if (result != BiometricManager.BiometricSuccess)
             {
@@ -147,7 +147,7 @@ namespace Authgear.Xamarin.Data
             var promptInfo = BuildPromptInfo(optionsAn);
             var kid = Guid.NewGuid().ToString();
             var alias = string.Format(AliasFormat, kid);
-            var spec = MakeGenerateKeyPairSpec(alias, ToKeyPropertiesAuthType(optionsAn.AccessContraint), optionsAn.InvalidatedByBiometricEnrollment);
+            var spec = MakeGenerateKeyPairSpec(alias, ToKeyPropertiesAuthType(optionsAn.AccessConstraint), optionsAn.InvalidatedByBiometricEnrollment);
             var keyPair = CreateKeyPair(spec);
             var jwk = Jwk.FromPublicKey(kid, keyPair.Public);
             var header = new JwtHeader
@@ -194,7 +194,7 @@ namespace Authgear.Xamarin.Data
 
         private PromptInfo BuildPromptInfo(BiometricOptionsAndroid options)
         {
-            var authenticators = ToAuthenticators(options.AccessContraint);
+            var authenticators = ToAuthenticators(options.AccessConstraint);
             return BuildPromptInfo(options.Title, options.Subtitle, options.Description, options.NegativeButtonText, authenticators);
         }
 

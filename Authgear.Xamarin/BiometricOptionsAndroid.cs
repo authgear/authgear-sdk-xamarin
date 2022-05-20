@@ -10,7 +10,7 @@ namespace Authgear.Xamarin
         public string Subtitle { get; set; }
         public string Description { get; set; }
         public string NegativeButtonText { get; set; }
-        public BiometricAccessConstraintAndroid AccessContraint { get; set; }
+        public BiometricAccessConstraintAndroid AccessConstraint { get; set; }
         public bool InvalidatedByBiometricEnrollment { get; set; }
     }
 }
