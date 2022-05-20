@@ -600,7 +600,7 @@ namespace Authgear.Xamarin
             return AccessToken;
         }
 
-        public void ClearSession(SessionStateChangeReason reason)
+        internal void ClearSession(SessionStateChangeReason reason)
         {
             tokenStorage.DeleteRefreshToken(name);
             lock (tokenStateLock)
@@ -611,6 +611,12 @@ namespace Authgear.Xamarin
                 expiredAt = null;
             }
             UpdateSessionState(SessionState.NoSession, reason);
+        }
+
+        public void ClearSessionState()
+        {
+            EnsureIsInitialized();
+            ClearSession(SessionStateChangeReason.Clear);
         }
     }
 }
