@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.AuthenticateOptions.html",
-          "hash": "d5ir+KHp/O2ZMTIUBwti7/6g/2pBEBfI4H5LI3TXwqs="
+          "hash": "7xFwWiM40nvp1fEbGvzj3jlPJNWjNFOm5ivGUVWEaBQ="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.AuthenticatePage.html",
-          "hash": "LjB3+8xqC5MtFb0dx0UK9IJmZQeJ9F8T3yAbk+0kDBw="
+          "hash": "NJvqWa2htzLbfCXpLQbdHVmeFk63SxtrKu+VUI5+9sE="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.AuthenticateResult.html",
-          "hash": "N+Is3GvMe+JYb2IWoUX9XiusxXRvxzAraCLmdlO9pEE="
+          "hash": "DNv+E9+by+mLo+zxQvUpeNiRFBg9pAv7M5y7nvjI8F4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Authgear.Xamarin.AuthgearException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Authgear.Xamarin.AuthgearException.html",
+          "hash": "/lYp/awS1OOW2zW4H7Y4yHb6nig6Gq9irEV3FIq7ou8="
         }
       },
       "is_incremental": false,
@@ -54,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.AuthgearOptions.html",
-          "hash": "8fuDqRvx86DfQf/xPqo7IWh2ooRvX5COjaRXBWqRdCM="
+          "hash": "7ddmbfYq2lU+F83vR0RStANhBZm76B85Tgc+qJy0M3o="
         }
       },
       "is_incremental": false,
@@ -66,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.AuthgearSdk.html",
-          "hash": "43sDN/XmA0F1YJNYie54NkCd7VK/yO+jvna+FSHOAu0="
+          "hash": "ooGaK8cMIHi0xbq/rztirrGC5Y8Nvofn2Bkn1kBmd58="
         }
       },
       "is_incremental": false,
@@ -78,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.AuthorizeResult.html",
-          "hash": "gs9Hx5wJC9ZgCCIH6fweummbqIEqHlTIer6j7kZn0Oo="
+          "hash": "x1+yvF5fmVuvPRkpR0PC2UeLXCjBh3Tx8A3ee+3VJks="
         }
       },
       "is_incremental": false,
@@ -90,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.BiometricAccessConstraintAndroid.html",
-          "hash": "GIz6HMv5LecYg82pNEnaGChgd5aYRq2MkcGVqVpus2A="
+          "hash": "GXbnQw1V/xAxXcPj61MH3WQaI6Wc40oplwUf8fntP6M="
         }
       },
       "is_incremental": false,
@@ -102,7 +114,55 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.BiometricAccessConstraintIos.html",
-          "hash": "q+aQO2/mEAiW0LFowxBk2e9yFKBagQL8lxKoCvRXnBA="
+          "hash": "D+vqol37vibKzBJh7M3VHL7BZ/B5ACB8bSKLXq6IqWY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Authgear.Xamarin.BiometricLockoutException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Authgear.Xamarin.BiometricLockoutException.html",
+          "hash": "wHbU6XRpcAFtb8iSh6uH9Z1zhepGtmHUiQwxqjQrFr4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Authgear.Xamarin.BiometricNoEnrollmentException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Authgear.Xamarin.BiometricNoEnrollmentException.html",
+          "hash": "CI1ZoyCB3350fOo9V1ln9i5kxTraqRKUisOF0UNPnrU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Authgear.Xamarin.BiometricNoPasscodeException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Authgear.Xamarin.BiometricNoPasscodeException.html",
+          "hash": "sJC1qN58fSemNGAl4+jUtqTBAEqpx3afREvRaVrn1Lk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.html",
+          "hash": "k/UYNtiBQ1myFau1FYxRq8YyMKLsWVJPqKiGJzOOzPY="
         }
       },
       "is_incremental": false,
@@ -114,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.BiometricOptions.html",
-          "hash": "V5QNRTUwgrdMj4DjVqrkCNjRfTbHPDycoutoHON/Q+U="
+          "hash": "HbmFj/KbyTW7vEYT9SU/tCXSsZcMjHgX1oRBhzV3Rzg="
         }
       },
       "is_incremental": false,
@@ -126,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.BiometricOptionsAndroid.html",
-          "hash": "C/+c2vp7pPPN2DLIkmdy/CGMzN0+Mq7xESFE8+75vHM="
+          "hash": "AepSjkZxW+T5OZ5KaHIAQUlfcN09z+o7LH73dqTuv2c="
         }
       },
       "is_incremental": false,
@@ -138,7 +198,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.BiometricOptionsIos.html",
-          "hash": "6XUoVxlftA6mvrC2nx8FP1dp1UfxiQc0Mi9Obpmoi54="
+          "hash": "MVYOUXxEkGuEWO5FXJ3ufM34nkn8ITFjxSQY/OPvbfc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Authgear.Xamarin.BiometricPrivateKeyNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Authgear.Xamarin.BiometricPrivateKeyNotFoundException.html",
+          "hash": "HFH1m6Mf6rH8vQ8xqsJueeYgCFUkPwHVAPsGqXYS+1o="
         }
       },
       "is_incremental": false,
@@ -150,7 +222,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.ColorScheme.html",
-          "hash": "9o0EGzIcgU+xR94Gy6FsIspigBX6UiMeNa2C3YnspsE="
+          "hash": "KyPcT83OOxfbiBefqzAqzfoiedmQafzM3Uy/NpUvOtU="
         }
       },
       "is_incremental": false,
@@ -162,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.Data.ITokenStorage.html",
-          "hash": "FUTflpFHGeRY9MUkA0fxyYt5lO70r1cwiL46IUkBwlc="
+          "hash": "5yanqVxZl0S7sGMIub5HbVnTzIG/YvBkLJY0l5z+/lI="
         }
       },
       "is_incremental": false,
@@ -174,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.Data.PersistentTokenStorage.html",
-          "hash": "SJV4qTb94y7bom5I4Y6cQBZoIp0xsThL9TlXYbNbvFs="
+          "hash": "+1Jsv17v3eQSxPV+UMGWW21X8fCnV8HK37pRM0Vn/h4="
         }
       },
       "is_incremental": false,
@@ -186,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.Data.TransientTokenStorage.html",
-          "hash": "SvxNq0OvN+i3h9MQmOCAHkDdOyRSM+1AfBrQxYf+dTA="
+          "hash": "rNyhdQY1s3W4UbR3Om9rKm8eWx1EVtYj8e1fnsDxIbQ="
         }
       },
       "is_incremental": false,
@@ -198,7 +270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.Data.html",
-          "hash": "GWrPO+kSO/54Fmuqrm094FyWXxr1YXp4NFsZlIvRgdE="
+          "hash": "EJday4Ma4DuQDDQJubnjnX0yS8YmLomydL5G/LlzlcY="
         }
       },
       "is_incremental": false,
@@ -210,7 +282,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.PromoteOptions.html",
-          "hash": "pkg+hEAinwgir4Vp2RirnLE64hVqOFDRjy6ghyNRHAE="
+          "hash": "5TK4qwVHRYxqb0HJvUep4NKf/mz/aE2D1bXmjhoL340="
         }
       },
       "is_incremental": false,
@@ -222,7 +294,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.PromptOption.html",
-          "hash": "rUmhwpCvqTre9qwF6CggodmRMgGr9KuVPRm3vJaIm4s="
+          "hash": "UOYuoBLdl+nwkO5MZoG7Y6JxsnCkfI48Uw2wVgPX6kU="
         }
       },
       "is_incremental": false,
@@ -234,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.ReauthenticateOptions.html",
-          "hash": "Qknrfyfi4V6WNTbQWYLZvNIRQdf3mOSnFWM2icqobss="
+          "hash": "wODVi8BbL9q4QUQVrvuSfDWg371f31lSz7rhv4QnrxM="
         }
       },
       "is_incremental": false,
@@ -246,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.ReauthenticateResult.html",
-          "hash": "dI7eidzGtiJFZZztQYOAou8IU0QaQ+VEbBDhhvuxCOk="
+          "hash": "SQQOSlewlgFTRNnQ5eu0TxczyNlsXY/kMGqiMl6jn2E="
         }
       },
       "is_incremental": false,
@@ -258,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.SessionState.html",
-          "hash": "OblHrbBfPzm+71HX3odjNvjqjqKfzhXJRv6/+icv+zg="
+          "hash": "H0bY7JQJ4PBTREQcRfwqM02Wbd5NRBDHQHPqt/wPOe4="
         }
       },
       "is_incremental": false,
@@ -270,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.SessionStateChangeReason.html",
-          "hash": "U2F+ltc2d4QRLLWeAeI/Iwz5SQvivbDGh9j626a3jJI="
+          "hash": "tMLIeBGhmv7+eqsWwoun3/HGOKwfeIX67KCoHn4Iiv8="
         }
       },
       "is_incremental": false,
@@ -282,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.SettingsOptions.html",
-          "hash": "3pXUwfixsE8PUMHKGen+dKB3kam8N742h9BxNKzmgCs="
+          "hash": "TOV1fipXK3+xzzClT2SZ9rr2/ezmDzZ1Iq/uG8pVXe8="
         }
       },
       "is_incremental": false,
@@ -294,7 +366,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.SettingsPage.html",
-          "hash": "RBt0I9nwKHtGTG8XEhtFSo2C6IdR2wTOg8PxOJj4mWc="
+          "hash": "fyloZ1TalxQCC6rgoV4fWi/goFP8NOXqFy+bG3tXCL8="
         }
       },
       "is_incremental": false,
@@ -306,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.UnauthenticatedUserException.html",
-          "hash": "9Dvs72udDROox1uC2/uzNlOwshat7Y1oShuzL2C57PI="
+          "hash": "JFfJMOeDWYLnM2z6hubYOXx3wpaRxorbp0RfOjTVjWM="
         }
       },
       "is_incremental": false,
@@ -318,7 +390,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.UserInfo.html",
-          "hash": "YAXAj4UcbUh+pKLrnE4+H6q0afVXU1J1wzC39fT9BHs="
+          "hash": "PFqYYc/pLPiRvejhBiIjU/KcMhYWMKOVSl3JPHkJtr8="
         }
       },
       "is_incremental": false,
@@ -330,7 +402,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Authgear.Xamarin.html",
-          "hash": "7HKZ7m9nzZXnHA/mgByx9jfpWYnUoYxWkX1X1sn3O5A="
+          "hash": "FyKDub5I1l1VmdY65sxOB4MDZE6NRBV31hAJK3rB/Ic="
         }
       },
       "is_incremental": false,
@@ -372,7 +444,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 27,
+          "total_file_count": 33,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
