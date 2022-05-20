@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -55,6 +56,7 @@ namespace Authgear.Xamarin
         private DateTimeOffset? expiredAt;
         private readonly string authgearEndpoint;
         private readonly bool shareSessionWithSystemBrowser;
+        private readonly HttpClient httpClient;
         private readonly ITokenStorage tokenStorage;
         private readonly IContainerStorage containerStorage;
         private readonly IOauthRepo oauthRepo;
@@ -99,10 +101,11 @@ namespace Authgear.Xamarin
             ClientId = options.ClientId;
             authgearEndpoint = options.AuthgearEndpoint;
             shareSessionWithSystemBrowser = options.ShareSessionWithSystemBrowser;
+            httpClient = new HttpClient();
             tokenStorage = options.TokenStorage ?? new PersistentTokenStorage();
             name = options.Name ?? "default";
             containerStorage = new PersistentContainerStorage();
-            oauthRepo = new OauthRepoHttp
+            oauthRepo = new OauthRepoHttp(httpClient)
             {
                 Endpoint = authgearEndpoint
             };
