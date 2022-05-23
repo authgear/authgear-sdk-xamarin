@@ -9,6 +9,8 @@
 
 ## Documentation
 
+Get started at [https://docs.authgear.com/get-started/xamarin](https://docs.authgear.com/get-started/xamarin)
+
 View the API reference at [https://authgear.github.io/authgear-sdk-xamarin/](https://authgear.github.io/authgear-sdk-xamarin/).
 
 View Authgear Documentation at [https://docs.authgear.com/](https://docs.authgear.com/)
