@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -37,13 +38,13 @@ namespace Authgear.Xamarin
         { get; private set; }
         public string AccessToken
         { get; private set; }
-        public string IdToken
+        public string IdTokenHint
         { get; private set; }
         public DateTimeOffset? AuthTime
         {
             get
             {
-                var idToken = IdToken;
+                var idToken = IdTokenHint;
                 if (idToken == null) { return null; }
                 var jsonDocument = Jwt.Decode(idToken);
                 if (!jsonDocument.RootElement.TryGetProperty("auth_time", out var authTimeJsonValue)) { return null; };
@@ -74,7 +75,7 @@ namespace Authgear.Xamarin
         {
             get
             {
-                var idToken = IdToken;
+                var idToken = IdTokenHint;
                 if (idToken == null) { return false; }
                 var jsonDocument = Jwt.Decode(idToken);
                 if (!jsonDocument.RootElement.TryGetProperty("https://authgear.com/claims/user/can_reauthenticate", out var can)) { return false; }
@@ -99,10 +100,11 @@ namespace Authgear.Xamarin
             ClientId = options.ClientId;
             authgearEndpoint = options.AuthgearEndpoint;
             shareSessionWithSystemBrowser = options.ShareSessionWithSystemBrowser;
+            var httpClient = new HttpClient();
             tokenStorage = options.TokenStorage ?? new PersistentTokenStorage();
             name = options.Name ?? "default";
             containerStorage = new PersistentContainerStorage();
-            oauthRepo = new OauthRepoHttp
+            oauthRepo = new OauthRepoHttp(httpClient)
             {
                 Endpoint = authgearEndpoint
             };
@@ -219,7 +221,7 @@ namespace Authgear.Xamarin
             {
                 throw new AuthgearException("CanReauthenticate is false");
             }
-            var idTokenHint = IdToken;
+            var idTokenHint = IdTokenHint;
             if (idTokenHint == null)
             {
                 throw new AuthgearException("Call refreshIdToken first");
@@ -424,7 +426,7 @@ namespace Authgear.Xamarin
             (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
             if (tokenResponse.IdToken != null)
             {
-                IdToken = tokenResponse.IdToken;
+                IdTokenHint = tokenResponse.IdToken;
             }
             return new ReauthenticateResult { UserInfo = userInfo, State = state };
         }
@@ -550,7 +552,7 @@ namespace Authgear.Xamarin
                 }
                 if (tokenResponse.IdToken != null)
                 {
-                    IdToken = tokenResponse.IdToken;
+                    IdTokenHint = tokenResponse.IdToken;
                 }
                 if (tokenResponse.ExpiresIn != null)
                 {
@@ -586,7 +588,7 @@ namespace Authgear.Xamarin
             });
             if (tokenResponse.IdToken != null)
             {
-                IdToken = tokenResponse.IdToken;
+                IdTokenHint = tokenResponse.IdToken;
             }
         }
 
@@ -600,17 +602,23 @@ namespace Authgear.Xamarin
             return AccessToken;
         }
 
-        public void ClearSession(SessionStateChangeReason reason)
+        internal void ClearSession(SessionStateChangeReason reason)
         {
             tokenStorage.DeleteRefreshToken(name);
             lock (tokenStateLock)
             {
                 AccessToken = null;
                 refreshToken = null;
-                IdToken = null;
+                IdTokenHint = null;
                 expiredAt = null;
             }
             UpdateSessionState(SessionState.NoSession, reason);
+        }
+
+        public void ClearSessionState()
+        {
+            EnsureIsInitialized();
+            ClearSession(SessionStateChangeReason.Clear);
         }
     }
 }
