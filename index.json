@@ -147,7 +147,7 @@
   "api/Authgear.Xamarin.SettingsOptions.html": {
     "href": "api/Authgear.Xamarin.SettingsOptions.html",
     "title": "Class SettingsOptions",
-    "keywords": "Class SettingsOptions Inheritance System.Object SettingsOptions Inherited Members System.Object.Equals(System.Object) System.Object.Equals(System.Object, System.Object) System.Object.GetHashCode() System.Object.GetType() System.Object.MemberwiseClone() System.Object.ReferenceEquals(System.Object, System.Object) System.Object.ToString() Namespace : Authgear.Xamarin Assembly : Authgear.Xamarin.dll Syntax public class SettingsOptions Properties | Improve this Doc View Source ColorScheme Declaration public ColorScheme? ColorScheme { get; set; } Property Value Type Description System.Nullable < ColorScheme >"
+    "keywords": "Class SettingsOptions Inheritance System.Object SettingsOptions Inherited Members System.Object.Equals(System.Object) System.Object.Equals(System.Object, System.Object) System.Object.GetHashCode() System.Object.GetType() System.Object.MemberwiseClone() System.Object.ReferenceEquals(System.Object, System.Object) System.Object.ToString() Namespace : Authgear.Xamarin Assembly : Authgear.Xamarin.dll Syntax public class SettingsOptions Properties | Improve this Doc View Source ColorScheme Declaration public ColorScheme? ColorScheme { get; set; } Property Value Type Description System.Nullable < ColorScheme > | Improve this Doc View Source UiLocales Declaration public List<string> UiLocales { get; set; } Property Value Type Description System.Collections.Generic.List < System.String >"
   },
   "api/Authgear.Xamarin.SettingsPage.html": {
     "href": "api/Authgear.Xamarin.SettingsPage.html",

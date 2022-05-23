@@ -1431,6 +1431,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.SettingsOptions.ColorScheme
   nameWithType: SettingsOptions.ColorScheme
+- uid: Authgear.Xamarin.SettingsOptions.UiLocales
+  name: UiLocales
+  href: api/Authgear.Xamarin.SettingsOptions.html#Authgear_Xamarin_SettingsOptions_UiLocales
+  commentId: P:Authgear.Xamarin.SettingsOptions.UiLocales
+  fullName: Authgear.Xamarin.SettingsOptions.UiLocales
+  nameWithType: SettingsOptions.UiLocales
+- uid: Authgear.Xamarin.SettingsOptions.UiLocales*
+  name: UiLocales
+  href: api/Authgear.Xamarin.SettingsOptions.html#Authgear_Xamarin_SettingsOptions_UiLocales_
+  commentId: Overload:Authgear.Xamarin.SettingsOptions.UiLocales
+  isSpec: "True"
+  fullName: Authgear.Xamarin.SettingsOptions.UiLocales
+  nameWithType: SettingsOptions.UiLocales
 - uid: Authgear.Xamarin.SettingsPage
   name: SettingsPage
   href: api/Authgear.Xamarin.SettingsPage.html
