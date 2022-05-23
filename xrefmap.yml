@@ -359,19 +359,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearSdk.CanReauthenticate
   nameWithType: AuthgearSdk.CanReauthenticate
-- uid: Authgear.Xamarin.AuthgearSdk.ClearSession(Authgear.Xamarin.SessionStateChangeReason)
-  name: ClearSession(SessionStateChangeReason)
-  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_ClearSession_Authgear_Xamarin_SessionStateChangeReason_
-  commentId: M:Authgear.Xamarin.AuthgearSdk.ClearSession(Authgear.Xamarin.SessionStateChangeReason)
-  fullName: Authgear.Xamarin.AuthgearSdk.ClearSession(Authgear.Xamarin.SessionStateChangeReason)
-  nameWithType: AuthgearSdk.ClearSession(SessionStateChangeReason)
-- uid: Authgear.Xamarin.AuthgearSdk.ClearSession*
-  name: ClearSession
-  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_ClearSession_
-  commentId: Overload:Authgear.Xamarin.AuthgearSdk.ClearSession
+- uid: Authgear.Xamarin.AuthgearSdk.ClearSessionState
+  name: ClearSessionState()
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_ClearSessionState
+  commentId: M:Authgear.Xamarin.AuthgearSdk.ClearSessionState
+  fullName: Authgear.Xamarin.AuthgearSdk.ClearSessionState()
+  nameWithType: AuthgearSdk.ClearSessionState()
+- uid: Authgear.Xamarin.AuthgearSdk.ClearSessionState*
+  name: ClearSessionState
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_ClearSessionState_
+  commentId: Overload:Authgear.Xamarin.AuthgearSdk.ClearSessionState
   isSpec: "True"
-  fullName: Authgear.Xamarin.AuthgearSdk.ClearSession
-  nameWithType: AuthgearSdk.ClearSession
+  fullName: Authgear.Xamarin.AuthgearSdk.ClearSessionState
+  nameWithType: AuthgearSdk.ClearSessionState
 - uid: Authgear.Xamarin.AuthgearSdk.ClientId
   name: ClientId
   href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_ClientId
@@ -463,19 +463,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearSdk.GetIsBiometricEnabledAsync
   nameWithType: AuthgearSdk.GetIsBiometricEnabledAsync
-- uid: Authgear.Xamarin.AuthgearSdk.IdToken
-  name: IdToken
-  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_IdToken
-  commentId: P:Authgear.Xamarin.AuthgearSdk.IdToken
-  fullName: Authgear.Xamarin.AuthgearSdk.IdToken
-  nameWithType: AuthgearSdk.IdToken
-- uid: Authgear.Xamarin.AuthgearSdk.IdToken*
-  name: IdToken
-  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_IdToken_
-  commentId: Overload:Authgear.Xamarin.AuthgearSdk.IdToken
+- uid: Authgear.Xamarin.AuthgearSdk.IdTokenHint
+  name: IdTokenHint
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_IdTokenHint
+  commentId: P:Authgear.Xamarin.AuthgearSdk.IdTokenHint
+  fullName: Authgear.Xamarin.AuthgearSdk.IdTokenHint
+  nameWithType: AuthgearSdk.IdTokenHint
+- uid: Authgear.Xamarin.AuthgearSdk.IdTokenHint*
+  name: IdTokenHint
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_IdTokenHint_
+  commentId: Overload:Authgear.Xamarin.AuthgearSdk.IdTokenHint
   isSpec: "True"
-  fullName: Authgear.Xamarin.AuthgearSdk.IdToken
-  nameWithType: AuthgearSdk.IdToken
+  fullName: Authgear.Xamarin.AuthgearSdk.IdTokenHint
+  nameWithType: AuthgearSdk.IdTokenHint
 - uid: Authgear.Xamarin.AuthgearSdk.LogoutAsync(System.Nullable{System.Boolean})
   name: LogoutAsync(Nullable<Boolean>)
   href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_LogoutAsync_System_Nullable_System_Boolean__
