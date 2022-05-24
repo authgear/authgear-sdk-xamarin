@@ -1,5 +1,7 @@
 # Authgear SDK for Xamarin
 
+NuGet Gallery: https://www.nuget.org/packages/Authgear.Xamarin/
+
 ## Build
 
 ### Prerequisites
