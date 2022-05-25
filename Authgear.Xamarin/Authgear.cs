@@ -391,12 +391,12 @@ namespace Authgear.Xamarin
             query.TryGetValue("error", out var error);
             query.TryGetValue("error_description", out var errorDescription);
             query.TryGetValue("error_uri", out var errorUri);
-            if (error != null)
+            if (error != "")
             {
                 throw new OauthException(error, errorDescription, state, errorUri);
             }
             query.TryGetValue("code", out var code);
-            if (code == null)
+            if (code == "")
             {
                 throw new OauthException("invalid_request", "Missing parameter: code", state, errorUri);
             }

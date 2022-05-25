@@ -38,6 +38,17 @@ namespace UnitTest
             }.ToQueryParameter());
         }
 
+        [Fact]
+        public void Uri_ParseQueryString()
+        {
+            Assert.Equal(new Dictionary<string, string>()
+            {
+                ["a a"] = "a a",
+                ["b b"] = "b b",
+                ["c"] = "",
+                ["d"] = "",
+            }, new Uri("http://localhost?a+a=a+a&b%20b=b%20b&c&d=").ParseQueryString());
+        }
 
         [Fact]
         public void StringStringDict_ToQueryParameters()
