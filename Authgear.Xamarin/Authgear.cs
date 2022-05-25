@@ -257,10 +257,27 @@ namespace Authgear.Xamarin
             var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
             var appSessionTokenResponse = await oauthRepo.OauthAppSessionTokenAsync(refreshToken);
             var token = appSessionTokenResponse.AppSessionToken;
-            var url = new Uri(new Uri(authgearEndpoint), path).ToString();
+
+            var query = new Dictionary<string, string>();
+            var builder = new UriBuilder(new Uri(authgearEndpoint));
+            builder.Path = path;
+            if (options != null)
+            {
+                if (options.ColorScheme != null)
+                {
+                    query["x_color_scheme"] = options.ColorScheme.GetDescription();
+                }
+                if (options.UiLocales != null)
+                {
+                    query["ui_locales"] = string.Join(" ", options.UiLocales);
+                }
+            }
+            builder.Query = query.ToQueryParameter();
+            var url = builder.Uri;
+
             var loginHint = string.Format(LoginHintFormat, WebUtility.UrlEncode(token));
             if (options == null) { options = new SettingsOptions(); }
-            var request = options.ToRequest(url, loginHint, ShouldSuppressIDPSessionCookie);
+            var request = options.ToRequest(url.ToString(), loginHint, ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, null);
             await webView.ShowAsync(authorizeUrl);
         }
