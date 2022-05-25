@@ -9,20 +9,38 @@ namespace Authgear.Xamarin
 {
     internal static class NetExtensions
     {
+        public static string PercentEncode(string s)
+        {
+            return Uri.EscapeDataString(s);
+        }
+
+        public static string URLPercentEncode(string s)
+        {
+            return Uri.EscapeDataString(s).Replace("%20", "+");
+        }
+
         public static string ToFormData(this Dictionary<string, string> dict)
         {
-            return dict.ToQueryParameter();
-        }
-        public static string ToQueryParameter(this Dictionary<string, string> dict)
-        {
-            var builder = new StringBuilder();
+            var arr = new List<string>();
             foreach (var entry in dict)
             {
-                var key = WebUtility.UrlEncode(entry.Key);
-                var value = WebUtility.UrlEncode(entry.Value);
-                builder.Append($"{key}={value}&");
+                var key = PercentEncode(entry.Key);
+                var value = PercentEncode(entry.Value);
+                arr.Add($"{key}={value}");
             }
-            return builder.ToString();
+            return string.Join("&", arr);
+        }
+
+        public static string ToQueryParameter(this Dictionary<string, string> dict)
+        {
+            var arr = new List<string>();
+            foreach (var entry in dict)
+            {
+                var key = URLPercentEncode(entry.Key);
+                var value = URLPercentEncode(entry.Value);
+                arr.Add($"{key}={value}");
+            }
+            return string.Join("&", arr);
         }
     }
 }
