@@ -33,13 +33,25 @@ namespace XamarinFormSample
         public bool UseTransientStorage { get; set; }
         public bool ShareSessioWithDeviceBrowser { get; set; }
         public AuthenticatePage? AuthenticatePageToShow { get; set; }
+        public ColorScheme? ExplicitColorScheme { get; set; }
         public UserInfo UserInfo { get; private set; }
 
-        private ColorScheme ColorScheme
+        private ColorScheme? ColorScheme
         {
             get
             {
-                return AppInfo.RequestedTheme == AppTheme.Dark ? ColorScheme.Dark : ColorScheme.Light;
+                if (ExplicitColorScheme != null)
+                {
+                    return ExplicitColorScheme;
+                }
+                return SystemColorScheme;
+            }
+        }
+        private ColorScheme? SystemColorScheme
+        {
+            get
+            {
+                return AppInfo.RequestedTheme == AppTheme.Dark ? Authgear.Xamarin.ColorScheme.Dark : Authgear.Xamarin.ColorScheme.Light;
             }
         }
 
