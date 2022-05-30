@@ -69,6 +69,8 @@
     <CodesignEntitlements></CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
     <CodesignProvision>Authgear Demo App Xamarin</CodesignProvision>
+    <BuildIpa>true</BuildIpa>
+    <IpaIncludeArtwork>true</IpaIncludeArtwork>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
