@@ -19,13 +19,16 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '6.0.105'
-    - run: dotnet restore
-    - working-directory: Authgear.Xamarin
-      run: dotnet format --verify-no-changes
+        dotnet-version: '5.0.x'
     - uses: microsoft/setup-msbuild@v1.1
       with:
         vs-version: '17.0'
+    - run: dotnet tool install --global dotnet-format --version 5.1.250801
+    - run: dotnet restore
+    - working-directory: Authgear.Xamarin
+      # This is for .NET 6
+      # run: dotnet format --verify-no-changes
+      run: dotnet format --check
     - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj
     - working-directory: UnitTest
       run: dotnet test
@@ -50,15 +53,54 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '6.0.105'
-    - run: dotnet restore
+        dotnet-version: '5.0.x'
     - uses: microsoft/setup-msbuild@v1.1
       with:
         vs-version: '17.0'
+    - run: dotnet restore
     - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj /t:pack /p:Configuration=Release
     - uses: actions/upload-artifact@v3
       with:
         name: nupkg
         path: Authgear.Xamarin/bin/Release/Authgear.Xamarin.*.nupkg
         retention-days: 5
-
+  deploy-ios:
+    runs-on: macos-12
+    needs: ["deploy"]
+    steps:
+    - uses: actions/checkout@v3
+    # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-xamarin-applications
+    # According to the doc, we have to set Xamarin versions and Xcode version
+    - name: Set Xamarin SDK versions
+      run: $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=15.8 --android=12.2
+    - name: Set Xcode version
+      run: |
+        XCODE_ROOT=/Applications/Xcode_13.4.app
+        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+        sudo xcode-select -s $XCODE_ROOT
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '5.0.x'
+    - run: dotnet restore
+    - name: Prepare certificate and provisioning profile
+      env:
+        IOS_CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE_BASE64 }}
+        IOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}
+      run: |
+        CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+        PP_PATH=$RUNNER_TEMP/build_pp.mobileprovision
+        KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+        echo -n "$IOS_CERTIFICATE_BASE64" | base64 --decode --output $CERTIFICATE_PATH
+        echo -n "$IOS_PROVISIONING_PROFILE_BASE64" | base64 --decode --output $PP_PATH
+        security create-keychain -p "" $KEYCHAIN_PATH
+        security set-keychain-settings $KEYCHAIN_PATH
+        security unlock-keychain -p "" $KEYCHAIN_PATH
+        security import $CERTIFICATE_PATH -P "" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+        security list-keychain -d user -s $KEYCHAIN_PATH
+        mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+        cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+    - name: Build .ipa
+      run: |
+        BUILD_NUMBER=$(date +%s)
+        /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" XamarinFormSample/XamarinFormSample.iOS/Info.plist
+        msbuild XamarinFormSample/XamarinFormSample.iOS -p:Configuration=Release -p:Platform=iPhone -p:BuildIpa=true
