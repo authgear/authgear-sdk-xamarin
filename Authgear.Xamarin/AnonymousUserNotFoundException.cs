@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal class AnonymousUserNotFoundException : Exception
+    public class AnonymousUserNotFoundException : Exception
     {
         public AnonymousUserNotFoundException() : base() { }
     }

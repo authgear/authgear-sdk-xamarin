@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using Authgear.Xamarin.DeviceInfo;
@@ -10,6 +11,7 @@ using UIKit;
 
 namespace Authgear.Xamarin.Data
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Xamarin objects are managed")]
     internal class Biometric : IBiometric
     {
         private const string TagFormat = "com.authgear.keys.biometric.{0}";
@@ -41,7 +43,7 @@ namespace Authgear.Xamarin.Data
         public Task<string> AuthenticateBiometricAsync(BiometricOptions options, string kid, string challenge, DeviceInfoRoot deviceInfo)
         {
             EnsureIsSupported(options);
-            var tag = string.Format(TagFormat, kid);
+            var tag = string.Format(CultureInfo.InvariantCulture, TagFormat, kid);
             var record = new SecRecord(SecKind.Key)
             {
                 KeyType = SecKeyType.RSA,
@@ -75,10 +77,10 @@ namespace Authgear.Xamarin.Data
             }
             EnsureIsSupported(options);
             var kid = Guid.NewGuid().ToString();
-            var tag = string.Format(TagFormat, kid);
+            var tag = string.Format(CultureInfo.InvariantCulture, TagFormat, kid);
             var flags = ToFlags(options.Ios.AccessConstraint);
             var context = new LAContext();
-            var (_, error) = await context.EvaluatePolicyAsync(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, options.Ios.LocalizedReason ?? "");
+            var (_, error) = await context.EvaluatePolicyAsync(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, options.Ios.LocalizedReason ?? "").ConfigureAwait(false);
             if (error != null)
             {
                 throw AuthgearException.Wrap(new BiometricIosException(error));
@@ -112,7 +114,7 @@ namespace Authgear.Xamarin.Data
                 Jwt = jwt,
             };
         }
-        private string SignJwt(string kid, SecKey privateKey, string challenge, string action, DeviceInfoRoot deviceInfo)
+        private static string SignJwt(string kid, SecKey privateKey, string challenge, string action, DeviceInfoRoot deviceInfo)
         {
             var jwk = Jwk.FromPrivateKey(kid, privateKey);
             var header = new JwtHeader
@@ -127,7 +129,7 @@ namespace Authgear.Xamarin.Data
             return jwt;
         }
 
-        private void EnsureApiLevel()
+        private static void EnsureApiLevel()
         {
             if (!UIDevice.CurrentDevice.CheckSystemVersion(11, 3))
             {
@@ -148,7 +150,7 @@ namespace Authgear.Xamarin.Data
 
         public void RemoveBiometric(string kid)
         {
-            var tag = string.Format(TagFormat, kid);
+            var tag = string.Format(CultureInfo.InvariantCulture, TagFormat, kid);
             var record = new SecRecord(SecKind.Key)
             {
                 KeyType = SecKeyType.RSA,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Authgear.Xamarin.Oauth;
 
@@ -9,9 +10,9 @@ namespace Authgear.Xamarin
     {
         public string RedirectUri { get; set; }
         public string? State { get; set; }
-        public List<PromptOption>? PromptOptions { get; set; }
+        public ReadOnlyCollection<PromptOption>? PromptOptions { get; set; }
         public string? LoginHint { get; set; }
-        public List<string>? UiLocales { get; set; }
+        public ReadOnlyCollection<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
         public AuthenticatePage? Page { get; set; }
 

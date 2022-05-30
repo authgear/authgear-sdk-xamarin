@@ -17,7 +17,7 @@ namespace Authgear.Xamarin
                     Url = new Uri(url),
                     CallbackUrl = new Uri("nocallback:///"),
                     PrefersEphemeralWebBrowserSession = true
-                });
+                }).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {

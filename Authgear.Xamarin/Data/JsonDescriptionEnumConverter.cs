@@ -21,7 +21,8 @@ namespace Authgear.Xamarin.Data
                     return value;
                 }
             }
-            return default;
+            // TODO: Investigate how to do it properly without !
+            return default!;
         }
 
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)

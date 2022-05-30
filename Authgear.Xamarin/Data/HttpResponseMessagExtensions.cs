@@ -17,7 +17,7 @@ namespace Authgear.Xamarin
             {
                 try
                 {
-                    var errorStr = await responseMessage.Content.ReadAsStringAsync();
+                    var errorStr = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                     try
                     {
                         // Try parsing it as server exception
@@ -46,8 +46,8 @@ namespace Authgear.Xamarin
         }
         public static async Task<T> GetJsonAsync<T>(this HttpResponseMessage responseMessage)
         {
-            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
-            var responseStream = await responseMessage.Content.ReadAsStreamAsync();
+            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync().ConfigureAwait(false);
+            var responseStream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
             return JsonSerializer.Deserialize<T>(responseStream)!;
         }
     }

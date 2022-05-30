@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Foundation;
 using Security;
 
@@ -13,7 +14,7 @@ namespace Authgear.Xamarin
             Error = error;
         }
 
-        public AnonymousUserIosException(SecStatusCode code) : this(new NSError(NSError.OsStatusErrorDomain, Convert.ToInt32(code)))
+        public AnonymousUserIosException(SecStatusCode code) : this(new NSError(NSError.OsStatusErrorDomain, Convert.ToInt32(code, CultureInfo.InvariantCulture)))
         {
 
         }

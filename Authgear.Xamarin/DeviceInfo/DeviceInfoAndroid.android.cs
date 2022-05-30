@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Android.Content;
 using Android.Content.PM;
@@ -22,12 +23,12 @@ namespace Authgear.Xamarin.DeviceInfo
             {
                 baseOs = AndroidBuild.VERSION.BaseOs ?? "";
                 securityPatch = AndroidBuild.VERSION.SecurityPatch ?? "";
-                previewSdkInt = AndroidBuild.VERSION.PreviewSdkInt.ToString();
+                previewSdkInt = AndroidBuild.VERSION.PreviewSdkInt.ToString(CultureInfo.InvariantCulture);
             }
             var longVersionCode = "";
             if (AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P)
             {
-                longVersionCode = packageInfo.LongVersionCode.ToString();
+                longVersionCode = packageInfo.LongVersionCode.ToString(CultureInfo.InvariantCulture);
             }
             var releaseOrCodeName = "";
             if (AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R)
@@ -66,7 +67,7 @@ namespace Authgear.Xamarin.DeviceInfo
                     PackageName = context.PackageName ?? "",
                     VersionName = packageInfo.VersionName ?? "",
 #pragma warning disable CS0618 // Type or member is obsolete
-                    VersionCode = packageInfo.VersionCode.ToString(),
+                    VersionCode = packageInfo.VersionCode.ToString(CultureInfo.InvariantCulture),
 #pragma warning restore CS0618 // Type or member is obsolete
                     LongVersionCode = longVersionCode
                 },

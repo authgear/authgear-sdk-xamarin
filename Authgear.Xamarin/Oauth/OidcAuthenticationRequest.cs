@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,10 +15,10 @@ namespace Authgear.Xamarin.Oauth
         public string ResponseType { get; set; }
         public List<string> Scope { get; set; }
         public string? State { get; set; }
-        public List<PromptOption>? Prompt { get; set; }
+        public IReadOnlyCollection<PromptOption>? Prompt { get; set; }
         public int? MaxAge { get; set; }
         public string? LoginHint { get; set; }
-        public List<string>? UiLocales { get; set; }
+        public IReadOnlyCollection<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
         public string? IdTokenHint { get; set; }
         public AuthenticatePage? Page { get; set; }

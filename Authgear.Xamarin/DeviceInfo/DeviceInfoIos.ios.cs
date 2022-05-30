@@ -10,12 +10,14 @@ namespace Authgear.Xamarin.DeviceInfo
     internal partial class DeviceInfoIos
     {
         [DllImport(Constants.SystemLibrary, EntryPoint = "sysctlbyname")]
+#pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments
         internal static extern int SysctlByName([MarshalAs(UnmanagedType.LPStr)] string property, IntPtr output, IntPtr oldLen, IntPtr newp, uint newlen);
+#pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
 
         internal static string GetSystemLibraryProperty(string property)
         {
             var lengthPtr = Marshal.AllocHGlobal(sizeof(int));
-            SysctlByName(property, IntPtr.Zero, lengthPtr, IntPtr.Zero, 0);
+            _ = SysctlByName(property, IntPtr.Zero, lengthPtr, IntPtr.Zero, 0);
 
             var propertyLength = Marshal.ReadInt32(lengthPtr);
 
@@ -26,7 +28,7 @@ namespace Authgear.Xamarin.DeviceInfo
             }
 
             var valuePtr = Marshal.AllocHGlobal(propertyLength);
-            SysctlByName(property, valuePtr, lengthPtr, IntPtr.Zero, 0);
+            _ = SysctlByName(property, valuePtr, lengthPtr, IntPtr.Zero, 0);
 
             var returnValue = Marshal.PtrToStringAnsi(valuePtr);
 

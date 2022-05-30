@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using Authgear.Xamarin.DeviceInfo;
@@ -8,6 +9,7 @@ using UIKit;
 
 namespace Authgear.Xamarin.Data
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Xamarin Interop objects are managed")]
     internal class KeyRepo : IKeyRepo
     {
         private const string TagFormat = "com.authgear.keys.biometric.{0}";
@@ -20,12 +22,12 @@ namespace Authgear.Xamarin.Data
             if (keyId == null)
             {
                 keyId = Guid.NewGuid().ToString();
-                var tag = string.Format(TagFormat, keyId);
+                var tag = string.Format(CultureInfo.InvariantCulture, TagFormat, keyId);
                 privateKey = GeneratePrivateKey(tag);
             }
             else
             {
-                var tag = string.Format(TagFormat, keyId);
+                var tag = string.Format(CultureInfo.InvariantCulture, TagFormat, keyId);
                 privateKey = GetPrivateKey(tag);
                 if (privateKey == null)
                 {
@@ -54,7 +56,7 @@ namespace Authgear.Xamarin.Data
             throw new NotImplementedException();
         }
 
-        private void EnsureApiLevel()
+        private static void EnsureApiLevel()
         {
             if (!UIDevice.CurrentDevice.CheckSystemVersion(11, 3))
             {
@@ -62,7 +64,7 @@ namespace Authgear.Xamarin.Data
             }
         }
 
-        private SecKey GeneratePrivateKey(string tag)
+        private static SecKey GeneratePrivateKey(string tag)
         {
             var keyGenParam = new SecKeyGenerationParameters()
             {
@@ -86,7 +88,7 @@ namespace Authgear.Xamarin.Data
             return privateKey;
         }
 
-        private SecKey? GetPrivateKey(string tag)
+        private static SecKey? GetPrivateKey(string tag)
         {
             var secRecord = new SecRecord(SecKind.Key)
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using Android.Content;
@@ -12,6 +13,7 @@ using Xamarin.Essentials;
 
 namespace Authgear.Xamarin
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Xamarin Interop objects are managed")]
     internal class WebView : IWebView
     {
         private const string HookFragmentTagFormat = "hookFragment.{0}";
@@ -74,15 +76,16 @@ namespace Authgear.Xamarin
                 Debug.WriteLine("Calling ShowAsync or initiating authgear without a valid activity in use, fragment setup ignored.");
                 return null;
             }
-            var fragment = activity.SupportFragmentManager.FindFragmentByTag(string.Format(HookFragmentTagFormat, TagGuid)) as HookFragment;
+            var fragment = activity.SupportFragmentManager.FindFragmentByTag(string.Format(CultureInfo.InvariantCulture, HookFragmentTagFormat, TagGuid)) as HookFragment;
             if (fragment != null) { return fragment; }
             fragment = new HookFragment
             {
                 Owner = new WeakReference<WebView>(this)
             };
-            activity.SupportFragmentManager.BeginTransaction().Add(fragment, string.Format(HookFragmentTagFormat, TagGuid)).CommitNow();
+            activity.SupportFragmentManager.BeginTransaction().Add(fragment, string.Format(CultureInfo.InvariantCulture, HookFragmentTagFormat, TagGuid)).CommitNow();
             return fragment;
         }
+
         public async Task ShowAsync(string url)
         {
             var taskSource = new TaskCompletionSource<object?>();
@@ -98,7 +101,7 @@ namespace Authgear.Xamarin
             var intent = new CustomTabsIntent.Builder()
                 .Build();
             intent.LaunchUrl(Platform.CurrentActivity, Android.Net.Uri.Parse(url));
-            await taskSource.Task;
+            await taskSource.Task.ConfigureAwait(false);
         }
     }
 }

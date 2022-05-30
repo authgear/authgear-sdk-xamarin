@@ -19,7 +19,10 @@ namespace Authgear.Xamarin
             keyRepo = new KeyRepo();
             webView = new WebView();
         }
+        // Other platform's implementation is not static
+#pragma warning disable CA1822 // Mark members as static
         private DeviceInfoRoot PlatformGetDeviceInfo()
+#pragma warning restore CA1822 // Mark members as static
         {
             return new DeviceInfoRoot
             {
