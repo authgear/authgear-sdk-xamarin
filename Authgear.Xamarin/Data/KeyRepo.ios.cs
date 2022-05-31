@@ -16,7 +16,7 @@ namespace Authgear.Xamarin.Data
         public Task<KeyJwtResult> GetOrCreateAnonymousJwtAsync(string keyId, string challenge, DeviceInfoRoot deviceInfo)
         {
             EnsureApiLevel();
-            SecKey privateKey;
+            SecKey? privateKey;
             if (keyId == null)
             {
                 keyId = Guid.NewGuid().ToString();
@@ -86,7 +86,7 @@ namespace Authgear.Xamarin.Data
             return privateKey;
         }
 
-        private SecKey GetPrivateKey(string tag)
+        private SecKey? GetPrivateKey(string tag)
         {
             var secRecord = new SecRecord(SecKind.Key)
             {

@@ -8,8 +8,8 @@ namespace Authgear.Xamarin.DeviceInfo
     internal class DeviceInfoAndroidSecure
     {
         [JsonPropertyName("bluetooth_name")]
-        public string BluetoothName { get; set; }
+        public string BluetoothName { get; set; } = "";
         [JsonPropertyName("ANDROID_ID")]
-        public string AndroidId { get; set; }
+        public string AndroidId { get; set; } = "";
     }
 }

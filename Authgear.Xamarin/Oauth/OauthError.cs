@@ -8,12 +8,12 @@ namespace Authgear.Xamarin.Oauth
     internal class OauthError
     {
         [JsonPropertyName("error")]
-        public string Error { get; set; }
+        public string? Error { get; set; }
         [JsonPropertyName("state")]
-        public string State { get; set; }
+        public string? State { get; set; }
         [JsonPropertyName("error_description")]
-        public string ErrorDescription { get; set; }
+        public string? ErrorDescription { get; set; }
         [JsonPropertyName("error_uri")]
-        public string ErrorUri { get; set; }
+        public string? ErrorUri { get; set; }
     }
 }

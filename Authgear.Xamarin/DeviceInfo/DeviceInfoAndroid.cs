@@ -8,16 +8,13 @@ namespace Authgear.Xamarin.DeviceInfo
     internal partial class DeviceInfoAndroid
     {
         [JsonPropertyName("Build")]
-        public DeviceInfoAndroidBuild Build { get; set; }
+        public DeviceInfoAndroidBuild? Build { get; set; }
         [JsonPropertyName("PackageInfo")]
-        public DeviceInfoAndroidPackageInfo PackageInfo { get; set; }
+        public DeviceInfoAndroidPackageInfo? PackageInfo { get; set; }
         [JsonPropertyName("Settings")]
-        public DeviceInfoAndroidSettings Settings { get; set; }
+        public DeviceInfoAndroidSettings? Settings { get; set; }
 
         [JsonPropertyName("ApplicationInfoLabel")]
-        public string AplicationInfoLabel { get; set; }
-        private DeviceInfoAndroid()
-        {
-        }
+        public string AplicationInfoLabel { get; set; } = "";
     }
 }

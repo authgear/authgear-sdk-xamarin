@@ -8,7 +8,10 @@ namespace Authgear.Xamarin
 {
     public partial class AuthgearSdk
     {
+        // Netstandard is dummy implementation anyways so ignore errors
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         AuthgearSdk()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             biometric = new Biometric();
             keyRepo = new KeyRepo();

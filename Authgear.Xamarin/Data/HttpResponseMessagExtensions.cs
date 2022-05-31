@@ -21,15 +21,21 @@ namespace Authgear.Xamarin
                     try
                     {
                         // Try parsing it as server exception
-                        var serverErrorResult = AuthgearJson.Deserialize<ServerErrorResult>(errorStr);
+                        var serverErrorResult = JsonSerializer.Deserialize<ServerErrorResult>(errorStr)!;
                         var error = serverErrorResult.Error;
-                        throw new ServerException(error.Name, error.Reason, error.Message, error.Info);
+                        if (error != null && error.Name != null && error.Reason != null && error.Message != null)
+                        {
+                            throw new ServerException(error.Name, error.Reason, error.Message, error.Info);
+                        }
                     }
                     catch (JsonException)
                     {
                         // It's an oauth exception
-                        var error = AuthgearJson.Deserialize<OauthError>(errorStr);
-                        throw new OauthException(error.Error, error.ErrorDescription, error.State, error.ErrorUri);
+                        var error = JsonSerializer.Deserialize<OauthError>(errorStr)!;
+                        if (error != null && error.Error != null)
+                        {
+                            throw new OauthException(error.Error, error.ErrorDescription, error.State, error.ErrorUri);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -42,7 +48,7 @@ namespace Authgear.Xamarin
         {
             await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
             var responseStream = await responseMessage.Content.ReadAsStreamAsync();
-            return AuthgearJson.Deserialize<T>(responseStream);
+            return JsonSerializer.Deserialize<T>(responseStream)!;
         }
     }
 }

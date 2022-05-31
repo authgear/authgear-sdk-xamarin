@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Authgear.Xamarin.CsExtensions;
@@ -13,15 +14,16 @@ namespace Authgear.Xamarin.Data.Oauth
     internal class OauthRepoHttp : IOauthRepo
     {
         private readonly HttpClient httpClient;
-        public string Endpoint { get; set; }
+        public string Endpoint { get; }
 
-        private OidcConfiguration config;
+        private OidcConfiguration? config;
 
         private readonly ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
 
-        public OauthRepoHttp(HttpClient client)
+        public OauthRepoHttp(HttpClient client, string endpoint)
         {
             httpClient = client;
+            Endpoint = endpoint;
         }
 
         public async Task<OidcConfiguration> GetOidcConfigurationAsync()
@@ -68,10 +70,10 @@ namespace Authgear.Xamarin.Data.Oauth
             {
                 ["refresh_token"] = refreshToken,
             };
-            var content = new StringContent(AuthgearJson.Serialize(body), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
             var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/app_session_token"), content);
             var result = await responseMessage.GetJsonAsync<AppSessionTokenResponseResult>();
-            return result.Result;
+            return result.Result!;
         }
 
         public async Task<ChallengeResponse> OauthChallengeAsync(string purpose)
@@ -80,10 +82,10 @@ namespace Authgear.Xamarin.Data.Oauth
             {
                 ["purpose"] = purpose
             };
-            var content = new StringContent(AuthgearJson.Serialize(body), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
             var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/challenge"), content);
             var result = await responseMessage.GetJsonAsync<ChallengeResponseResult>();
-            return result.Result;
+            return result.Result!;
         }
 
         public async Task OidcRevocationRequestAsync(string refreshToken)

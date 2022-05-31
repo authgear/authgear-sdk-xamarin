@@ -8,6 +8,6 @@ namespace Authgear.Xamarin.DeviceInfo
     internal class DeviceInfoAndroidSettingsGlobal
     {
         [JsonPropertyName("DEVICE_NAME")]
-        public string DeviceName { get; set; }
+        public string DeviceName { get; set; } = "";
     }
 }

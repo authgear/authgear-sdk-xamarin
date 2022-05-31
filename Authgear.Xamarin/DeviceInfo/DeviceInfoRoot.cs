@@ -10,10 +10,10 @@ namespace Authgear.Xamarin.DeviceInfo
     {
         [JsonPropertyName("android")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public DeviceInfoAndroid Android { get; set; }
+        public DeviceInfoAndroid? Android { get; set; }
 
         [JsonPropertyName("ios")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public DeviceInfoIos Ios { get; set; }
+        public DeviceInfoIos? Ios { get; set; }
     }
 }

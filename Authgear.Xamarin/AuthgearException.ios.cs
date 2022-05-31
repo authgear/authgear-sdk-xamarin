@@ -14,7 +14,7 @@ namespace Authgear.Xamarin
         private const int LAErrorBiometryLockout = -8;
         private const int ErrSecUserCanceled = -128;
         private const int ErrSecItemNotFound = -25300;
-        internal static Exception PlatformWrap(Exception ex)
+        internal static Exception? PlatformWrap(Exception ex)
         {
             if (ex is BiometricIosException bie)
             {

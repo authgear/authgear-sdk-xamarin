@@ -8,8 +8,8 @@ namespace Authgear.Xamarin.Oauth
     internal class ChallengeResponse
     {
         [JsonPropertyName("token")]
-        public string Token { get; set; }
+        public string? Token { get; set; }
         [JsonPropertyName("expire_at")]
-        public string ExpireAt { get; set; }
+        public string? ExpireAt { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace Authgear.Xamarin.Data
 {
     public interface ITokenStorage
     {
-        void SetRefreshToken(String aNamespace, String refreshToken);
-        Task<string> GetRefreshTokenAsync(String aNamespace);
-        void DeleteRefreshToken(String aNamespace);
+        void SetRefreshToken(string aNamespace, string refreshToken);
+        Task<string?> GetRefreshTokenAsync(string aNamespace);
+        void DeleteRefreshToken(string aNamespace);
     }
 }

@@ -16,8 +16,8 @@ namespace Authgear.Xamarin
             return new Jwk
             {
                 Kid = kid,
-                N = ConvertExtensions.ToBase64UrlSafeString(rsaPublicKey.Modulus.ToByteArray()),
-                E = ConvertExtensions.ToBase64UrlSafeString(rsaPublicKey.PublicExponent.ToByteArray())
+                N = ConvertExtensions.ToBase64UrlSafeString(rsaPublicKey.Modulus!.ToByteArray()!),
+                E = ConvertExtensions.ToBase64UrlSafeString(rsaPublicKey.PublicExponent!.ToByteArray()!)
             };
         }
     }

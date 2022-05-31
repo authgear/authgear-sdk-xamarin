@@ -8,23 +8,29 @@ namespace Authgear.Xamarin.Oauth
     internal class OidcTokenRequest
     {
         [JsonPropertyName("grant_type")]
-        // TODO: Add serializer for Enum with Description
         public GrantType GrantType { get; set; }
         [JsonPropertyName("client_id")]
         public string ClientId { get; set; }
         [JsonPropertyName("x_device_info")]
         public string XDeviceInfo { get; set; }
         [JsonPropertyName("redirect_uri")]
-        public string RedirectUri { get; set; }
+        public string? RedirectUri { get; set; }
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
         [JsonPropertyName("code_verifier")]
-        public string CodeVerifier { get; set; }
+        public string? CodeVerifier { get; set; }
         [JsonPropertyName("refresh_token")]
-        public string RefreshToken { get; set; }
+        public string? RefreshToken { get; set; }
         [JsonPropertyName("access_token")]
-        public string AccessToken { get; set; }
+        public string? AccessToken { get; set; }
         [JsonPropertyName("jwt")]
-        public string Jwt { get; set; }
+        public string? Jwt { get; set; }
+
+        public OidcTokenRequest(GrantType type, string clientId, string xDeviceInfo)
+        {
+            GrantType = type;
+            ClientId = clientId;
+            XDeviceInfo = xDeviceInfo;
+        }
     }
 }

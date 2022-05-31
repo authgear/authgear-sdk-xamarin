@@ -15,8 +15,12 @@ namespace Authgear.Xamarin.Data
         private const string TagFormat = "com.authgear.keys.biometric.{0}";
         private const int KeySize = 2048;
 
-        private static SecAccessControlCreateFlags ToFlags(BiometricAccessConstraintIos biometricAccessConstraint)
+        private static SecAccessControlCreateFlags ToFlags(BiometricAccessConstraintIos? biometricAccessConstraint)
         {
+            if (biometricAccessConstraint == null)
+            {
+                throw new ArgumentNullException(nameof(BiometricOptionsIos.AccessConstraint));
+            }
             switch (biometricAccessConstraint)
             {
                 case BiometricAccessConstraintIos.BiometricAny:
@@ -74,7 +78,7 @@ namespace Authgear.Xamarin.Data
             var tag = string.Format(TagFormat, kid);
             var flags = ToFlags(options.Ios.AccessConstraint);
             var context = new LAContext();
-            var (_, error) = await context.EvaluatePolicyAsync(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, options.Ios.LocalizedReason);
+            var (_, error) = await context.EvaluatePolicyAsync(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, options.Ios.LocalizedReason ?? "");
             if (error != null)
             {
                 throw AuthgearException.Wrap(new BiometricIosException(error));

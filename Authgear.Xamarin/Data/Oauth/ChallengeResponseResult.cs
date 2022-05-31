@@ -9,6 +9,6 @@ namespace Authgear.Xamarin.Data.Oauth
     internal class ChallengeResponseResult
     {
         [JsonPropertyName("result")]
-        public ChallengeResponse Result { get; set; }
+        public ChallengeResponse? Result { get; set; }
     }
 }

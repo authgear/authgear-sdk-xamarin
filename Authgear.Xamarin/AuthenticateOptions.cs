@@ -7,12 +7,12 @@ namespace Authgear.Xamarin
 {
     public class AuthenticateOptions
     {
-        public string RedirectUri { get; set; }
-        public string State { get; set; }
-        public string ResponseType { get; set; }
-        public List<PromptOption> PromptOptions { get; set; }
-        public string LoginHint { get; set; }
-        public List<string> UiLocales { get; set; }
+        public string? RedirectUri { get; set; }
+        public string? State { get; set; }
+        public string? ResponseType { get; set; }
+        public List<PromptOption>? PromptOptions { get; set; }
+        public string? LoginHint { get; set; }
+        public List<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
         public AuthenticatePage? Page { get; set; }
 
@@ -22,11 +22,8 @@ namespace Authgear.Xamarin
             {
                 throw new ArgumentNullException(nameof(RedirectUri));
             }
-            return new OidcAuthenticationRequest
+            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" })
             {
-                RedirectUri = RedirectUri,
-                ResponseType = "code",
-                Scope = new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" },
                 State = State,
                 Prompt = PromptOptions,
                 LoginHint = LoginHint,

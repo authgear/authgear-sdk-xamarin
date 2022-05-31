@@ -36,9 +36,9 @@ namespace Authgear.Xamarin
         { get; private set; }
         public SessionState SessionState
         { get; private set; }
-        public string AccessToken
+        public string? AccessToken
         { get; private set; }
-        public string IdTokenHint
+        public string? IdTokenHint
         { get; private set; }
         public DateTimeOffset? AuthTime
         {
@@ -64,8 +64,8 @@ namespace Authgear.Xamarin
         private readonly IWebView webView;
         private readonly string name;
         private bool isInitialized = false;
-        private string refreshToken = null;
-        private Task refreshAccessTokenTask = null;
+        private string? refreshToken = null;
+        private Task? refreshAccessTokenTask = null;
         public event EventHandler<SessionStateChangeReason> SessionStateChange;
         private bool ShouldSuppressIDPSessionCookie
         {
@@ -83,7 +83,13 @@ namespace Authgear.Xamarin
             }
         }
         private readonly object tokenStateLock = new object();
+        // These fields are configured in the platform's respective constructors
+        // For brevity, they are not passed into this contructor. If it's proven that bugs are caused by some platform missing initializing
+        // constructors, change the constructor to accept all those dependencies (think of it as each platform's constructor injecting
+        // dependencies into this constructor)
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private AuthgearSdk(AuthgearOptions options)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             if (options == null)
             {
@@ -104,10 +110,7 @@ namespace Authgear.Xamarin
             tokenStorage = options.TokenStorage ?? new PersistentTokenStorage();
             name = options.Name ?? "default";
             containerStorage = new PersistentContainerStorage();
-            oauthRepo = new OauthRepoHttp(httpClient)
-            {
-                Endpoint = authgearEndpoint
-            };
+            oauthRepo = new OauthRepoHttp(httpClient, authgearEndpoint);
         }
 
         private void EnsureIsInitialized()
@@ -142,20 +145,17 @@ namespace Authgear.Xamarin
         {
             EnsureIsInitialized();
             var challengeResponse = await oauthRepo.OauthChallengeAsync("anonymous_request");
-            var challenge = challengeResponse.Token;
+            var challenge = challengeResponse.Token!;
             var keyId = await containerStorage.GetAnonymousKeyIdAsync(name);
             var deviceInfo = PlatformGetDeviceInfo();
             var jwtResult = await keyRepo.GetOrCreateAnonymousJwtAsync(keyId, challenge, deviceInfo);
             keyId = jwtResult.KeyId;
             var jwt = jwtResult.Jwt;
-            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest(GrantType.Anonymous, ClientId, GetDeviceInfoString(deviceInfo))
             {
-                GrantType = GrantType.Anonymous,
-                ClientId = ClientId,
-                XDeviceInfo = GetDeviceInfoString(deviceInfo),
                 Jwt = jwt
             });
-            var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken);
+            var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken!);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
             containerStorage.SetAnonymousKeyId(name, keyId);
@@ -170,10 +170,14 @@ namespace Authgear.Xamarin
         /// <exception cref="TaskCanceledException"></exception>
         public async Task<AuthenticateResult> PromoteAnonymousUserAsync(PromoteOptions options)
         {
+            if (options.RedirectUri == null)
+            {
+                throw new ArgumentNullException(nameof(options.RedirectUri));
+            }
             EnsureIsInitialized();
             var keyId = (await containerStorage.GetAnonymousKeyIdAsync(name)) ?? throw new AnonymousUserNotFoundException();
             var challengeResponse = await oauthRepo.OauthChallengeAsync("anonymous_request");
-            var challenge = challengeResponse.Token;
+            var challenge = challengeResponse.Token!;
             var jwt = await keyRepo.PromoteAnonymousUserAsync(keyId, challenge, PlatformGetDeviceInfo());
             var jwtValue = WebUtility.UrlEncode(jwt);
             var loginHint = $"https://authgear.com/login_hint?type=anonymous&jwt={jwtValue}";
@@ -250,16 +254,18 @@ namespace Authgear.Xamarin
             ClearSession(SessionStateChangeReason.Logout);
         }
 
-        public async Task OpenUrlAsync(string path, SettingsOptions options = null)
+        public async Task OpenUrlAsync(string path, SettingsOptions? options = null)
         {
             EnsureIsInitialized();
-            var refreshToken = await tokenStorage.GetRefreshTokenAsync(name);
+            var refreshToken = await tokenStorage.GetRefreshTokenAsync(name) ?? "";
             var appSessionTokenResponse = await oauthRepo.OauthAppSessionTokenAsync(refreshToken);
             var token = appSessionTokenResponse.AppSessionToken;
 
             var query = new Dictionary<string, string>();
-            var builder = new UriBuilder(new Uri(authgearEndpoint));
-            builder.Path = path;
+            var builder = new UriBuilder(new Uri(authgearEndpoint))
+            {
+                Path = path
+            };
             if (options != null)
             {
                 if (options.ColorScheme != null)
@@ -281,7 +287,7 @@ namespace Authgear.Xamarin
             await webView.ShowAsync(authorizeUrl);
         }
 
-        public async Task OpenAsync(SettingsPage page, SettingsOptions options = null)
+        public async Task OpenAsync(SettingsPage page, SettingsOptions? options = null)
         {
             await OpenUrlAsync(page.GetDescription(), options);
         }
@@ -302,10 +308,9 @@ namespace Authgear.Xamarin
 
         private async Task RefreshAccessTokenAsync()
         {
-            var taskSource = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var taskSource = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
             var existingTask = Interlocked.CompareExchange(ref refreshAccessTokenTask, taskSource.Task, null);
-            var isExchanged = existingTask == null;
-            if (isExchanged)
+            if (existingTask == null)
             {
                 try
                 {
@@ -343,11 +348,8 @@ namespace Authgear.Xamarin
             try
             {
                 var tokenResponse = await oauthRepo.OidcTokenRequestAsync(
-                    new OidcTokenRequest
+                    new OidcTokenRequest(GrantType.RefreshToken, ClientId, GetDeviceInfoString())
                     {
-                        GrantType = GrantType.RefreshToken,
-                        ClientId = ClientId,
-                        XDeviceInfo = GetDeviceInfoString(),
                         RefreshToken = refreshToken
                     });
                 SaveToken(tokenResponse, SessionStateChangeReason.FoundToken);
@@ -357,7 +359,7 @@ namespace Authgear.Xamarin
                 if (ex is OauthException)
                 {
                     var oauthEx = ex as OauthException;
-                    if (oauthEx.Error == "invalid_grant")
+                    if (oauthEx?.Error == "invalid_grant")
                     {
                         ClearSession(SessionStateChangeReason.Invalid);
                         return;
@@ -367,7 +369,7 @@ namespace Authgear.Xamarin
             }
         }
 
-        private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, CodeVerifier codeVerifier)
+        private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, CodeVerifier? codeVerifier)
         {
             var config = await oauthRepo.GetOidcConfigurationAsync();
             var query = request.ToQuery(ClientId, codeVerifier);
@@ -416,16 +418,13 @@ namespace Authgear.Xamarin
             {
                 throw new OauthException("invalid_request", "Missing parameter: code", state, errorUri);
             }
-            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest(GrantType.AuthorizationCode, ClientId, GetDeviceInfoString())
             {
-                GrantType = GrantType.AuthorizationCode,
-                ClientId = ClientId,
-                XDeviceInfo = GetDeviceInfoString(),
                 Code = code,
                 RedirectUri = redirectUri,
                 CodeVerifier = codeVerifier ?? "",
             });
-            var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken);
+            var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken!);
             return (userInfo, tokenResponse, state);
         }
 
@@ -434,7 +433,7 @@ namespace Authgear.Xamarin
             var (userInfo, tokenResponse, state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
-            return new AuthenticateResult { UserInfo = userInfo, State = state };
+            return new AuthenticateResult(userInfo, state);
         }
 
         private async Task<UserInfo> FinishReauthenticationAsync(string deepLink, string codeVerifier)
@@ -484,7 +483,7 @@ namespace Authgear.Xamarin
             await RefreshAccessTokenIfNeededAsync();
             var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
             var challengeResponse = await oauthRepo.OauthChallengeAsync("biometric_request");
-            var challenge = challengeResponse.Token;
+            var challenge = challengeResponse.Token!;
             var result = await biometric.EnableBiometricAsync(options, challenge, PlatformGetDeviceInfo());
             await oauthRepo.BiometricSetupRequestAsync(accessToken, ClientId, result.Jwt);
             containerStorage.SetBiometricKeyId(name, result.Kid);
@@ -501,21 +500,18 @@ namespace Authgear.Xamarin
             EnsureIsInitialized();
             var kid = await containerStorage.GetBiometricKeyIdAsync(name) ?? throw new BiometricPrivateKeyNotFoundException();
             var challengeResponse = await oauthRepo.OauthChallengeAsync("biometric_request");
-            var challenge = challengeResponse.Token;
+            var challenge = challengeResponse.Token!;
             try
             {
                 var deviceInfo = PlatformGetDeviceInfo();
                 var jwt = await biometric.AuthenticateBiometricAsync(options, kid, challenge, deviceInfo);
                 try
                 {
-                    var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
+                    var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest(GrantType.Biometric, ClientId, GetDeviceInfoString())
                     {
-                        GrantType = GrantType.Biometric,
-                        ClientId = ClientId,
-                        XDeviceInfo = GetDeviceInfoString(deviceInfo),
                         Jwt = jwt
                     });
-                    var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken);
+                    var userInfo = await oauthRepo.OidcUserInfoRequestAsync(tokenResponse.AccessToken!);
                     SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
                     return userInfo;
                 }
@@ -595,11 +591,8 @@ namespace Authgear.Xamarin
             EnsureIsInitialized();
             await RefreshAccessTokenIfNeededAsync();
             var accessToken = AccessToken ?? throw new UnauthenticatedUserException();
-            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(new OidcTokenRequest(GrantType.IdToken, ClientId, GetDeviceInfoString())
             {
-                GrantType = GrantType.IdToken,
-                ClientId = ClientId,
-                XDeviceInfo = GetDeviceInfoString(),
                 AccessToken = accessToken,
             });
             if (tokenResponse.IdToken != null)
@@ -615,7 +608,7 @@ namespace Authgear.Xamarin
             {
                 await RefreshAccessTokenAsync();
             }
-            return AccessToken;
+            return AccessToken!;
         }
 
         internal void ClearSession(SessionStateChangeReason reason)

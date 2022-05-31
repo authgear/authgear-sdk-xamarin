@@ -13,16 +13,16 @@ namespace Authgear.Xamarin.Data
             refreshTokens.Remove(aNamespace);
         }
 
-        public Task<string> GetRefreshTokenAsync(string aNamespace)
+        public Task<string?> GetRefreshTokenAsync(string aNamespace)
         {
             try
             {
                 var refreshToken = refreshTokens[aNamespace];
-                return Task.FromResult(refreshToken);
+                return Task.FromResult<string?>(refreshToken);
             }
             catch (KeyNotFoundException)
             {
-                return Task.FromResult<string>(null);
+                return Task.FromResult<string?>(null);
             }
         }
 

@@ -6,7 +6,12 @@ namespace Authgear.Xamarin
 {
     public class AuthorizeResult
     {
-        public UserInfo UserInfo { get; set; }
-        public string State { get; set; }
+        public UserInfo UserInfo { get; }
+        public string State { get; }
+        public AuthorizeResult(UserInfo userInfo, string state)
+        {
+            UserInfo = userInfo;
+            State = state;
+        }
     }
 }

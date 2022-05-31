@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    public class AuthenticateResult
+    public class ReauthenticateResult
     {
         public UserInfo UserInfo { get; }
         public string State { get; }
-        internal AuthenticateResult(UserInfo userInfo, string state)
+        internal ReauthenticateResult(UserInfo userInfo, string state)
         {
             UserInfo = userInfo;
             State = state;

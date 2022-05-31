@@ -6,7 +6,7 @@ namespace Authgear.Xamarin
 {
     internal class KeyJwtResult
     {
-        public string KeyId { get; set; }
-        public string Jwt { get; set; }
+        public string KeyId { get; set; } = "";
+        public string Jwt { get; set; } = "";
     }
 }

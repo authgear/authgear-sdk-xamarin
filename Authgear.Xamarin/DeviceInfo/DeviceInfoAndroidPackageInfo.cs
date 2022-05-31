@@ -8,12 +8,12 @@ namespace Authgear.Xamarin.DeviceInfo
     internal class DeviceInfoAndroidPackageInfo
     {
         [JsonPropertyName("packageName")]
-        public string PackageName { get; set; }
+        public string PackageName { get; set; } = "";
         [JsonPropertyName("versionName")]
-        public string VersionName { get; set; }
+        public string VersionName { get; set; } = "";
         [JsonPropertyName("versionCode")]
-        public string VersionCode { get; set; }
+        public string VersionCode { get; set; } = "";
         [JsonPropertyName("longVersionCode")]
-        public string LongVersionCode { get; set; }
+        public string LongVersionCode { get; set; } = "";
     }
 }
