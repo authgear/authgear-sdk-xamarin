@@ -19,13 +19,16 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '6.0.105'
-    - run: dotnet restore
-    - working-directory: Authgear.Xamarin
-      run: dotnet format --verify-no-changes
+        dotnet-version: '5.0.x'
     - uses: microsoft/setup-msbuild@v1.1
       with:
         vs-version: '17.0'
+    - run: dotnet tool install --global dotnet-format --version 5.1.250801
+    - run: dotnet restore
+    - working-directory: Authgear.Xamarin
+      # This is for .NET 6
+      # run: dotnet format --verify-no-changes
+      run: dotnet format --check
     - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj
     - working-directory: UnitTest
       run: dotnet test
@@ -50,15 +53,14 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: '6.0.105'
-    - run: dotnet restore
+        dotnet-version: '5.0.x'
     - uses: microsoft/setup-msbuild@v1.1
       with:
         vs-version: '17.0'
+    - run: dotnet restore
     - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj /t:pack /p:Configuration=Release
     - uses: actions/upload-artifact@v3
       with:
         name: nupkg
         path: Authgear.Xamarin/bin/Release/Authgear.Xamarin.*.nupkg
         retention-days: 5
-
