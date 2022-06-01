@@ -9,7 +9,6 @@ namespace Authgear.Xamarin
     {
         public string RedirectUri { get; set; }
         public string? State { get; set; }
-        public string? ResponseType { get; set; }
         public List<PromptOption>? PromptOptions { get; set; }
         public string? LoginHint { get; set; }
         public List<string>? UiLocales { get; set; }
