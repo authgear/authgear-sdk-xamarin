@@ -8,7 +8,7 @@ using Authgear.Xamarin.CsExtensions;
 
 namespace Authgear.Xamarin.Data
 {
-    internal class JsonDescriptionEnumConverter<T> : JsonConverter<T> where T : Enum
+    internal class JsonDescriptionEnumConverter<T> : JsonConverter<T> where T : struct, Enum
     {
         public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -21,8 +21,7 @@ namespace Authgear.Xamarin.Data
                     return value;
                 }
             }
-            // TODO: Investigate how to do it properly without !
-            return default!;
+            return default;
         }
 
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
