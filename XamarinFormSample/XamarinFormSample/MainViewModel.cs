@@ -184,6 +184,10 @@ namespace XamarinFormSample
                 Preferences.Set("authgear.clientID", ClientId);
                 authgear.SessionStateChange += (sender, e) =>
                 {
+                    if (!MainThread.IsMainThread)
+                    {
+                        throw new InvalidOperationException("Session state change isn't dispatched on the main thread");
+                    }
                     _ = SyncAuthgearState();
                 };
                 await authgear.ConfigureAsync();

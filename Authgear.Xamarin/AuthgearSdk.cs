@@ -141,7 +141,10 @@ namespace Authgear.Xamarin
         private void UpdateSessionState(SessionState state, SessionStateChangeReason reason)
         {
             SessionState = state;
-            SessionStateChange?.Invoke(this, reason);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                SessionStateChange?.Invoke(this, reason);
+            });
         }
 
         public async Task<UserInfo> AuthenticateAnonymouslyAsync()
