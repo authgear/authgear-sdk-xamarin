@@ -168,7 +168,7 @@ namespace Authgear.Xamarin
         /// <returns></returns>
         /// <exception cref="AnonymousUserNotFoundException"></exception>
         /// <exception cref="TaskCanceledException"></exception>
-        public async Task<AuthenticateResult> PromoteAnonymousUserAsync(PromoteOptions options)
+        public async Task<UserInfo> PromoteAnonymousUserAsync(PromoteOptions options)
         {
             if (options.RedirectUri == null)
             {
@@ -195,7 +195,7 @@ namespace Authgear.Xamarin
         /// <param name="options"></param>
         /// <exception cref="TaskCanceledException"></exception>
         /// <returns></returns>
-        public async Task<AuthenticateResult> AuthenticateAsync(AuthenticateOptions options)
+        public async Task<UserInfo> AuthenticateAsync(AuthenticateOptions options)
         {
             EnsureIsInitialized();
             var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
@@ -428,12 +428,12 @@ namespace Authgear.Xamarin
             return (userInfo, tokenResponse, state);
         }
 
-        private async Task<AuthenticateResult> FinishAuthenticationAsync(string deepLink, string codeVerifier)
+        private async Task<UserInfo> FinishAuthenticationAsync(string deepLink, string codeVerifier)
         {
             var (userInfo, tokenResponse, state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
-            return new AuthenticateResult(userInfo, state);
+            return userInfo;
         }
 
         private async Task<UserInfo> FinishReauthenticationAsync(string deepLink, string codeVerifier)

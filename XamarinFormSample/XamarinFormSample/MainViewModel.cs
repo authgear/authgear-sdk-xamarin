@@ -224,12 +224,10 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                var result = await authgear.PromoteAnonymousUserAsync(new PromoteOptions(RedirectUri)
+                UserInfo = await authgear.PromoteAnonymousUserAsync(new PromoteOptions(RedirectUri)
                 {
                     ColorScheme = ColorScheme,
                 });
-                Debug.WriteLine(result.State ?? "No state");
-                UserInfo = result.UserInfo;
             }
             finally
             {
@@ -261,13 +259,11 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                var result = await authgear.AuthenticateAsync(new AuthenticateOptions(RedirectUri)
+                UserInfo = await authgear.AuthenticateAsync(new AuthenticateOptions(RedirectUri)
                 {
                     Page = AuthenticatePageToShow,
                     ColorScheme = ColorScheme,
                 });
-                Debug.WriteLine(result.State ?? "No state");
-                UserInfo = result.UserInfo;
             }
             finally
             {
