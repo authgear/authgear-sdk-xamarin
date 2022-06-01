@@ -7,11 +7,15 @@ namespace Authgear.Xamarin
 {
     public class PromoteOptions
     {
-        // TODO: Require in constructor
-        public string? RedirectUri { get; set; }
+        public string RedirectUri { get; set; }
         public string? State { get; set; }
         public List<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
+
+        public PromoteOptions(string redirectUri)
+        {
+            RedirectUri = redirectUri;
+        }
 
         internal OidcAuthenticationRequest ToRequest(string loginHint, bool suppressIdpSessionCookie)
         {

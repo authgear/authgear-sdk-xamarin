@@ -7,7 +7,7 @@ namespace Authgear.Xamarin
 {
     public class AuthenticateOptions
     {
-        public string? RedirectUri { get; set; }
+        public string RedirectUri { get; set; }
         public string? State { get; set; }
         public string? ResponseType { get; set; }
         public List<PromptOption>? PromptOptions { get; set; }
@@ -16,6 +16,10 @@ namespace Authgear.Xamarin
         public ColorScheme? ColorScheme { get; set; }
         public AuthenticatePage? Page { get; set; }
 
+        public AuthenticateOptions(string redirectUri)
+        {
+            RedirectUri = redirectUri;
+        }
         internal OidcAuthenticationRequest ToRequest(bool suppressIdpSessionCookie)
         {
             if (RedirectUri == null)

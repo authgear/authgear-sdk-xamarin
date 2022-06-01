@@ -7,11 +7,15 @@ namespace Authgear.Xamarin
 {
     public class ReauthenticateOptions
     {
-        public string? RedirectUri { get; set; }
+        public string RedirectUri { get; set; }
         public string? State { get; set; }
         public List<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
         public int? MaxAge { get; set; }
+        public ReauthenticateOptions(string redirectUri)
+        {
+            RedirectUri = redirectUri;
+        }
         internal OidcAuthenticationRequest ToRequest(string idTokenHint, bool suppressIdpSessionCookie)
         {
             if (RedirectUri == null)
