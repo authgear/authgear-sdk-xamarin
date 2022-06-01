@@ -209,13 +209,12 @@ namespace Authgear.Xamarin
         /// <exception cref="AuthgearException"></exception>
         /// <exception cref="TaskCanceledException"></exception>
         /// <exception cref="OperationCanceledException"></exception>
-        public async Task<ReauthenticateResult> ReauthenticateAsync(ReauthenticateOptions options, BiometricOptions biometricOptions)
+        public async Task<UserInfo> ReauthenticateAsync(ReauthenticateOptions options, BiometricOptions biometricOptions)
         {
             EnsureIsInitialized();
             if (await GetIsBiometricEnabledAsync() && biometricOptions != null)
             {
-                var userInfo = await AuthenticateBiometricAsync(biometricOptions);
-                return new ReauthenticateResult { State = options.State, UserInfo = userInfo };
+                return await AuthenticateBiometricAsync(biometricOptions);
             }
             if (!CanReauthenticate)
             {
@@ -432,20 +431,20 @@ namespace Authgear.Xamarin
 
         private async Task<AuthenticateResult> FinishAuthenticationAsync(string deepLink, string codeVerifier)
         {
-            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
+            var (userInfo, tokenResponse, state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
             SaveToken(tokenResponse, SessionStateChangeReason.Authenciated);
             await DisableBiometricAsync();
             return new AuthenticateResult { UserInfo = userInfo, State = state };
         }
 
-        private async Task<ReauthenticateResult> FinishReauthenticationAsync(string deepLink, string codeVerifier)
+        private async Task<UserInfo> FinishReauthenticationAsync(string deepLink, string codeVerifier)
         {
-            (var userInfo, var tokenResponse, var state) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
+            var (userInfo, tokenResponse, _) = await ParseDeepLinkAndGetUserAsync(deepLink, codeVerifier);
             if (tokenResponse.IdToken != null)
             {
                 IdTokenHint = tokenResponse.IdToken;
             }
-            return new ReauthenticateResult { UserInfo = userInfo, State = state };
+            return userInfo;
         }
 
         public void EnsureBiometricIsSupported(BiometricOptions options)
