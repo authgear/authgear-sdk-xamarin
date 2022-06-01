@@ -72,11 +72,8 @@ namespace UnitTest
         [Fact]
         public void OidcAuthenticationRequest_ToQueryParameters()
         {
-            var request = new OidcAuthenticationRequest
+            var request = new OidcAuthenticationRequest("http://host/path", "code", new List<string> { "openid", "email" })
             {
-                RedirectUri = "http://host/path",
-                ResponseType = "code",
-                Scope = new List<string> { "openid", "email" },
                 State = "state",
                 Prompt = new List<PromptOption> { PromptOption.Login },
                 LoginHint = "loginHint",
