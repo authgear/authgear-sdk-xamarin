@@ -302,12 +302,11 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 await authgear.RefreshIdTokenAsync();
-                var result = await authgear.ReauthenticateAsync(new ReauthenticateOptions
+                UserInfo = await authgear.ReauthenticateAsync(new ReauthenticateOptions
                 {
                     RedirectUri = RedirectUri,
                     ColorScheme = ColorScheme,
                 }, useBiometric ? CreateBiometricOptions() : null);
-                UserInfo = result.UserInfo;
             }
             finally
             {

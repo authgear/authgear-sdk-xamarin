@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("UnitTest")]
@@ -12,19 +13,9 @@ namespace Authgear.Xamarin
             return Uri.EscapeDataString(s);
         }
 
-        public static string URLPercentEncode(string s)
-        {
-            return Uri.EscapeDataString(s).Replace("%20", "+");
-        }
-
         public static string PercentDecode(string s)
         {
             return Uri.UnescapeDataString(s);
-        }
-
-        public static string URLPercentDecode(string s)
-        {
-            return Uri.UnescapeDataString(s.Replace("+", "%20"));
         }
 
         public static string ToFormData(this Dictionary<string, string> dict)
@@ -44,8 +35,8 @@ namespace Authgear.Xamarin
             var arr = new List<string>();
             foreach (var entry in dict)
             {
-                var key = URLPercentEncode(entry.Key);
-                var value = URLPercentEncode(entry.Value);
+                var key = WebUtility.UrlEncode(entry.Key);
+                var value = WebUtility.UrlEncode(entry.Value);
                 arr.Add($"{key}={value}");
             }
             return string.Join("&", arr);
@@ -72,13 +63,13 @@ namespace Authgear.Xamarin
                 var keyValue = entry.Split('=');
                 if (keyValue.Length == 2)
                 {
-                    var key = URLPercentDecode(keyValue[0]);
-                    var value = URLPercentDecode(keyValue[1]);
+                    var key = WebUtility.UrlDecode(keyValue[0]);
+                    var value = WebUtility.UrlDecode(keyValue[1]);
                     dict.Add(key, value);
                 }
                 else if (keyValue[0] != null && keyValue[0].Length > 0)
                 {
-                    var key = URLPercentDecode(keyValue[0]);
+                    var key = WebUtility.UrlDecode(keyValue[0]);
                     dict.Add(key, "");
                 }
             }
