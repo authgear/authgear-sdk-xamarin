@@ -10,9 +10,9 @@ namespace Authgear.Xamarin
     {
         public string RedirectUri { get; set; }
         public string? State { get; set; }
-        public ReadOnlyCollection<PromptOption>? PromptOptions { get; set; }
+        public IReadOnlyCollection<PromptOption>? PromptOptions { get; set; }
         public string? LoginHint { get; set; }
-        public ReadOnlyCollection<string>? UiLocales { get; set; }
+        public IReadOnlyCollection<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
         public AuthenticatePage? Page { get; set; }
 

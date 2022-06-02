@@ -260,6 +260,7 @@ namespace XamarinFormSample
                 await authgear.OpenAsync(page, new SettingsOptions
                 {
                     ColorScheme = ColorScheme,
+                    UiLocales = new List<string> { },
                 });
                 EnsureIsMainThread(nameof(OpenAsync));
             }
@@ -279,6 +280,8 @@ namespace XamarinFormSample
                 {
                     Page = AuthenticatePageToShow,
                     ColorScheme = ColorScheme,
+                    UiLocales = new List<string> { },
+                    PromptOptions = new List<PromptOption> { PromptOption.Login },
                 });
                 EnsureIsMainThread(nameof(AuthenticateAsync));
             }
@@ -315,6 +318,7 @@ namespace XamarinFormSample
                 UserInfo = await authgear.ReauthenticateAsync(new ReauthenticateOptions(RedirectUri)
                 {
                     ColorScheme = ColorScheme,
+                    UiLocales = new List<string> { },
                 }, useBiometric ? CreateBiometricOptions() : null);
                 EnsureIsMainThread(nameof(ReAuthenticateAsync));
             }
