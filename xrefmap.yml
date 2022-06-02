@@ -7,6 +7,25 @@ references:
   commentId: N:Authgear.Xamarin
   fullName: Authgear.Xamarin
   nameWithType: Authgear.Xamarin
+- uid: Authgear.Xamarin.AnonymousUserNotFoundException
+  name: AnonymousUserNotFoundException
+  href: api/Authgear.Xamarin.AnonymousUserNotFoundException.html
+  commentId: T:Authgear.Xamarin.AnonymousUserNotFoundException
+  fullName: Authgear.Xamarin.AnonymousUserNotFoundException
+  nameWithType: AnonymousUserNotFoundException
+- uid: Authgear.Xamarin.AnonymousUserNotFoundException.#ctor
+  name: AnonymousUserNotFoundException()
+  href: api/Authgear.Xamarin.AnonymousUserNotFoundException.html#Authgear_Xamarin_AnonymousUserNotFoundException__ctor
+  commentId: M:Authgear.Xamarin.AnonymousUserNotFoundException.#ctor
+  fullName: Authgear.Xamarin.AnonymousUserNotFoundException.AnonymousUserNotFoundException()
+  nameWithType: AnonymousUserNotFoundException.AnonymousUserNotFoundException()
+- uid: Authgear.Xamarin.AnonymousUserNotFoundException.#ctor*
+  name: AnonymousUserNotFoundException
+  href: api/Authgear.Xamarin.AnonymousUserNotFoundException.html#Authgear_Xamarin_AnonymousUserNotFoundException__ctor_
+  commentId: Overload:Authgear.Xamarin.AnonymousUserNotFoundException.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AnonymousUserNotFoundException.AnonymousUserNotFoundException
+  nameWithType: AnonymousUserNotFoundException.AnonymousUserNotFoundException
 - uid: Authgear.Xamarin.AuthenticateOptions
   name: AuthenticateOptions
   href: api/Authgear.Xamarin.AuthenticateOptions.html
@@ -1149,6 +1168,77 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.Data.TransientTokenStorage.SetRefreshToken
   nameWithType: TransientTokenStorage.SetRefreshToken
+- uid: Authgear.Xamarin.OauthException
+  name: OauthException
+  href: api/Authgear.Xamarin.OauthException.html
+  commentId: T:Authgear.Xamarin.OauthException
+  fullName: Authgear.Xamarin.OauthException
+  nameWithType: OauthException
+- uid: Authgear.Xamarin.OauthException.#ctor(System.String,System.String,System.String,System.String)
+  name: OauthException(String, String, String, String)
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException__ctor_System_String_System_String_System_String_System_String_
+  commentId: M:Authgear.Xamarin.OauthException.#ctor(System.String,System.String,System.String,System.String)
+  fullName: Authgear.Xamarin.OauthException.OauthException(System.String, System.String, System.String, System.String)
+  nameWithType: OauthException.OauthException(String, String, String, String)
+- uid: Authgear.Xamarin.OauthException.#ctor*
+  name: OauthException
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException__ctor_
+  commentId: Overload:Authgear.Xamarin.OauthException.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.OauthException.OauthException
+  nameWithType: OauthException.OauthException
+- uid: Authgear.Xamarin.OauthException.Error
+  name: Error
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_Error
+  commentId: P:Authgear.Xamarin.OauthException.Error
+  fullName: Authgear.Xamarin.OauthException.Error
+  nameWithType: OauthException.Error
+- uid: Authgear.Xamarin.OauthException.Error*
+  name: Error
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_Error_
+  commentId: Overload:Authgear.Xamarin.OauthException.Error
+  isSpec: "True"
+  fullName: Authgear.Xamarin.OauthException.Error
+  nameWithType: OauthException.Error
+- uid: Authgear.Xamarin.OauthException.ErrorDescription
+  name: ErrorDescription
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_ErrorDescription
+  commentId: P:Authgear.Xamarin.OauthException.ErrorDescription
+  fullName: Authgear.Xamarin.OauthException.ErrorDescription
+  nameWithType: OauthException.ErrorDescription
+- uid: Authgear.Xamarin.OauthException.ErrorDescription*
+  name: ErrorDescription
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_ErrorDescription_
+  commentId: Overload:Authgear.Xamarin.OauthException.ErrorDescription
+  isSpec: "True"
+  fullName: Authgear.Xamarin.OauthException.ErrorDescription
+  nameWithType: OauthException.ErrorDescription
+- uid: Authgear.Xamarin.OauthException.ErrorUri
+  name: ErrorUri
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_ErrorUri
+  commentId: P:Authgear.Xamarin.OauthException.ErrorUri
+  fullName: Authgear.Xamarin.OauthException.ErrorUri
+  nameWithType: OauthException.ErrorUri
+- uid: Authgear.Xamarin.OauthException.ErrorUri*
+  name: ErrorUri
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_ErrorUri_
+  commentId: Overload:Authgear.Xamarin.OauthException.ErrorUri
+  isSpec: "True"
+  fullName: Authgear.Xamarin.OauthException.ErrorUri
+  nameWithType: OauthException.ErrorUri
+- uid: Authgear.Xamarin.OauthException.State
+  name: State
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_State
+  commentId: P:Authgear.Xamarin.OauthException.State
+  fullName: Authgear.Xamarin.OauthException.State
+  nameWithType: OauthException.State
+- uid: Authgear.Xamarin.OauthException.State*
+  name: State
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException_State_
+  commentId: Overload:Authgear.Xamarin.OauthException.State
+  isSpec: "True"
+  fullName: Authgear.Xamarin.OauthException.State
+  nameWithType: OauthException.State
 - uid: Authgear.Xamarin.PromoteOptions
   name: PromoteOptions
   href: api/Authgear.Xamarin.PromoteOptions.html
@@ -1334,38 +1424,64 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.ReauthenticateOptions.UiLocales
   nameWithType: ReauthenticateOptions.UiLocales
-- uid: Authgear.Xamarin.ReauthenticateResult
-  name: ReauthenticateResult
-  href: api/Authgear.Xamarin.ReauthenticateResult.html
-  commentId: T:Authgear.Xamarin.ReauthenticateResult
-  fullName: Authgear.Xamarin.ReauthenticateResult
-  nameWithType: ReauthenticateResult
-- uid: Authgear.Xamarin.ReauthenticateResult.State
-  name: State
-  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_State
-  commentId: P:Authgear.Xamarin.ReauthenticateResult.State
-  fullName: Authgear.Xamarin.ReauthenticateResult.State
-  nameWithType: ReauthenticateResult.State
-- uid: Authgear.Xamarin.ReauthenticateResult.State*
-  name: State
-  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_State_
-  commentId: Overload:Authgear.Xamarin.ReauthenticateResult.State
+- uid: Authgear.Xamarin.ServerException
+  name: ServerException
+  href: api/Authgear.Xamarin.ServerException.html
+  commentId: T:Authgear.Xamarin.ServerException
+  fullName: Authgear.Xamarin.ServerException
+  nameWithType: ServerException
+- uid: Authgear.Xamarin.ServerException.#ctor(System.String,System.String,System.String,System.Text.Json.JsonDocument)
+  name: ServerException(String, String, String, JsonDocument)
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException__ctor_System_String_System_String_System_String_System_Text_Json_JsonDocument_
+  commentId: M:Authgear.Xamarin.ServerException.#ctor(System.String,System.String,System.String,System.Text.Json.JsonDocument)
+  fullName: Authgear.Xamarin.ServerException.ServerException(System.String, System.String, System.String, System.Text.Json.JsonDocument)
+  nameWithType: ServerException.ServerException(String, String, String, JsonDocument)
+- uid: Authgear.Xamarin.ServerException.#ctor*
+  name: ServerException
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException__ctor_
+  commentId: Overload:Authgear.Xamarin.ServerException.#ctor
   isSpec: "True"
-  fullName: Authgear.Xamarin.ReauthenticateResult.State
-  nameWithType: ReauthenticateResult.State
-- uid: Authgear.Xamarin.ReauthenticateResult.UserInfo
-  name: UserInfo
-  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_UserInfo
-  commentId: P:Authgear.Xamarin.ReauthenticateResult.UserInfo
-  fullName: Authgear.Xamarin.ReauthenticateResult.UserInfo
-  nameWithType: ReauthenticateResult.UserInfo
-- uid: Authgear.Xamarin.ReauthenticateResult.UserInfo*
-  name: UserInfo
-  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_UserInfo_
-  commentId: Overload:Authgear.Xamarin.ReauthenticateResult.UserInfo
+  fullName: Authgear.Xamarin.ServerException.ServerException
+  nameWithType: ServerException.ServerException
+- uid: Authgear.Xamarin.ServerException.Info
+  name: Info
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException_Info
+  commentId: P:Authgear.Xamarin.ServerException.Info
+  fullName: Authgear.Xamarin.ServerException.Info
+  nameWithType: ServerException.Info
+- uid: Authgear.Xamarin.ServerException.Info*
+  name: Info
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException_Info_
+  commentId: Overload:Authgear.Xamarin.ServerException.Info
   isSpec: "True"
-  fullName: Authgear.Xamarin.ReauthenticateResult.UserInfo
-  nameWithType: ReauthenticateResult.UserInfo
+  fullName: Authgear.Xamarin.ServerException.Info
+  nameWithType: ServerException.Info
+- uid: Authgear.Xamarin.ServerException.Name
+  name: Name
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException_Name
+  commentId: P:Authgear.Xamarin.ServerException.Name
+  fullName: Authgear.Xamarin.ServerException.Name
+  nameWithType: ServerException.Name
+- uid: Authgear.Xamarin.ServerException.Name*
+  name: Name
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException_Name_
+  commentId: Overload:Authgear.Xamarin.ServerException.Name
+  isSpec: "True"
+  fullName: Authgear.Xamarin.ServerException.Name
+  nameWithType: ServerException.Name
+- uid: Authgear.Xamarin.ServerException.Reason
+  name: Reason
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException_Reason
+  commentId: P:Authgear.Xamarin.ServerException.Reason
+  fullName: Authgear.Xamarin.ServerException.Reason
+  nameWithType: ServerException.Reason
+- uid: Authgear.Xamarin.ServerException.Reason*
+  name: Reason
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException_Reason_
+  commentId: Overload:Authgear.Xamarin.ServerException.Reason
+  isSpec: "True"
+  fullName: Authgear.Xamarin.ServerException.Reason
+  nameWithType: ServerException.Reason
 - uid: Authgear.Xamarin.SessionState
   name: SessionState
   href: api/Authgear.Xamarin.SessionState.html
