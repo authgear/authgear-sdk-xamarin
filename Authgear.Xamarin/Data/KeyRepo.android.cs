@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using Android.Security.Keystore;
@@ -9,6 +10,7 @@ using Java.Security;
 
 namespace Authgear.Xamarin
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Xamarin objects are managed")]
     internal class KeyRepo : IKeyRepo
     {
         private const string AliasFormat = "com.authgear.keys.anonymous.{0}";
@@ -67,9 +69,9 @@ namespace Authgear.Xamarin
             return signature;
         }
 
-        private KeyPair GenerateAnonymousKey(string keyId)
+        private static KeyPair GenerateAnonymousKey(string keyId)
         {
-            string alias = string.Format(AliasFormat, keyId);
+            string alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, keyId);
             var kpg = KeyPairGenerator.GetInstance(KeyProperties.KeyAlgorithmRsa, AndroidKeyStore)!;
             var spec = new KeyGenParameterSpec.Builder(alias, KeyStorePurpose.Sign | KeyStorePurpose.Verify)
                 .SetDigests(KeyProperties.DigestSha256)
@@ -79,9 +81,9 @@ namespace Authgear.Xamarin
             return kpg.GenerateKeyPair()!;
         }
 
-        private KeyPair GetAnonymousKey(string keyId)
+        private static KeyPair GetAnonymousKey(string keyId)
         {
-            var alias = string.Format(AliasFormat, keyId);
+            var alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, keyId);
             var ks = KeyStore.GetInstance(AndroidKeyStore)!;
             ks.Load(null);
             var entry = ks.GetEntry(alias, null);

@@ -8,7 +8,6 @@ namespace Authgear.Xamarin.Data
 {
     internal class PersistentContainerStorage : IContainerStorage
     {
-        private const string KeyVerifier = "verifier";
         private const string KeyAnonymousId = "anonymousId";
         private const string KeyBiometricKeyId = "biometricKeyId";
         public void DeleteAnonymousKeyId(string aNamespace)

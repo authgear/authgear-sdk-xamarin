@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Authgear.Xamarin
 {
-    internal class OauthException : Exception
+    public class OauthException : Exception
     {
         static internal string FormatOauthExceptionMessage(string error, string? errorDescription)
         {

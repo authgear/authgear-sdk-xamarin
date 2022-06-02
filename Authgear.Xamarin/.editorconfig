@@ -5,3 +5,41 @@ csharp_new_line_before_open_brace = all
 csharp_new_line_before_catch = true
 csharp_new_line_before_else = true
 csharp_new_line_before_finally = true
+
+# CA1032: Implement standard exception constructors
+dotnet_diagnostic.CA1032.severity = none
+
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = none
+
+# CA1307: Specify StringComparison for clarity
+# Some methods are not available in netstandard
+dotnet_diagnostic.CA1307.severity = none
+
+# CA1056: URI-like properties should not be strings
+dotnet_diagnostic.CA1056.severity = none
+
+# CA2227: Collection properties should be read only
+dotnet_diagnostic.CA2227.severity = none
+
+# CA1003: Use generic event handler instances
+dotnet_diagnostic.CA1003.severity = none
+
+# CA1062: Validate arguments of public methods
+# Not needed with NRT
+dotnet_diagnostic.CA1062.severity = none
+
+# CA2208: Instantiate argument exceptions correctly
+dotnet_diagnostic.CA2208.severity = none
+
+# CA2208: Type names should not match namespaces
+dotnet_diagnostic.CA1724.severity = none
+
+# CA1054: URI-like parameters should not be strings
+dotnet_diagnostic.CA1054.severity = none
+
+# CA2237: Mark ISerializable types with SerializableAttribute
+dotnet_diagnostic.CA2237.severity = none
+
+# CA1014: Mark assemblies with CLSCompliantAttribute
+dotnet_diagnostic.CA1014.severity = none

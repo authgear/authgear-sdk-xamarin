@@ -14,9 +14,9 @@ namespace Authgear.Xamarin.Data
             SecureStorage.Remove($"{aNamespace}_{KeyRefreshToken}");
         }
 
-        public Task<string?> GetRefreshTokenAsync(string aNamespace)
+        public async Task<string?> GetRefreshTokenAsync(string aNamespace)
         {
-            return SecureStorage.GetAsync($"{aNamespace}_{KeyRefreshToken}");
+            return await SecureStorage.GetAsync($"{aNamespace}_{KeyRefreshToken}").ConfigureAwait(false);
         }
 
         public void SetRefreshToken(string aNamespace, string refreshToken)

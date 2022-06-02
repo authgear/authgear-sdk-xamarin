@@ -13,22 +13,20 @@ namespace Authgear.Xamarin
         {
             return Sign(header, payload, (input) =>
             {
-                using (var sha256 = SHA256.Create())
+                using var sha256 = SHA256.Create();
+                sha256.Initialize();
+                var hash = sha256.ComputeHash(input);
+                var hashNsData = NSData.FromArray(hash);
+                var signedNsData = privateKey.CreateSignature(SecKeyAlgorithm.RsaSignatureDigestPkcs1v15Sha256, hashNsData, out var error);
+                if (error != null)
                 {
-                    sha256.Initialize();
-                    var hash = sha256.ComputeHash(input);
-                    var hashNsData = NSData.FromArray(hash);
-                    var signedNsData = privateKey.CreateSignature(SecKeyAlgorithm.RsaSignatureDigestPkcs1v15Sha256, hashNsData, out var error);
-                    if (error != null)
-                    {
-                        throw new BiometricIosException(error);
-                    }
-                    // According to the following ref, this is faster than .ToArray()
-                    // https://stackoverflow.com/questions/6239636/how-to-go-from-nsdata-to-byte?msclkid=6c02bbb8d11b11ecab5688675cf7d0a3
-                    var signedData = new byte[signedNsData.Length];
-                    System.Runtime.InteropServices.Marshal.Copy(signedNsData.Bytes, signedData, 0, Convert.ToInt32(signedNsData.Length));
-                    return signedData;
+                    throw new BiometricIosException(error);
                 }
+                // According to the following ref, this is faster than .ToArray()
+                // https://stackoverflow.com/questions/6239636/how-to-go-from-nsdata-to-byte?msclkid=6c02bbb8d11b11ecab5688675cf7d0a3
+                var signedData = new byte[signedNsData!.Length];
+                System.Runtime.InteropServices.Marshal.Copy(signedNsData.Bytes, signedData, 0, Convert.ToInt32(signedData.Length));
+                return signedData;
             });
         }
     }

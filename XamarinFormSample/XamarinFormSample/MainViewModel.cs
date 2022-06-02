@@ -149,7 +149,7 @@ namespace XamarinFormSample
         {
             get
             {
-                return IsConfigured && IsNotLoading;
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
             }
         }
         public bool IsEnabledLogout
@@ -159,8 +159,6 @@ namespace XamarinFormSample
                 return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
             }
         }
-
-        public event ErrorRaisedHandler ErrorRaised;
 
         public MainViewModel()
         {
@@ -184,10 +182,16 @@ namespace XamarinFormSample
                 Preferences.Set("authgear.clientID", ClientId);
                 authgear.SessionStateChange += (sender, e) =>
                 {
+                    if (!MainThread.IsMainThread)
+                    {
+                        throw new InvalidOperationException("Session state change isn't dispatched on the main thread");
+                    }
                     _ = SyncAuthgearState();
                 };
                 await authgear.ConfigureAsync();
+                EnsureIsMainThread(nameof(ConfigureAsync));
                 await SyncAuthgearState();
+                EnsureIsMainThread(nameof(ConfigureAsync));
             }
             finally
             {
@@ -195,6 +199,13 @@ namespace XamarinFormSample
             }
         }
 
+        private void EnsureIsMainThread(string methodName)
+        {
+            if (!MainThread.IsMainThread)
+            {
+                throw new InvalidOperationException($"await in {methodName} didn't resume on the main thread");
+            }
+        }
         private void EnsureAuthgear()
         {
             if (authgear == null)
@@ -210,6 +221,7 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 var userInfo = await authgear.AuthenticateAnonymouslyAsync();
+                EnsureIsMainThread(nameof(AuthenticateAnonymouslyAsync));
                 UserInfo = userInfo;
             }
             finally
@@ -228,6 +240,7 @@ namespace XamarinFormSample
                 {
                     ColorScheme = ColorScheme,
                 });
+                EnsureIsMainThread(nameof(PromoteAnonymousUserAsync));
             }
             finally
             {
@@ -245,7 +258,9 @@ namespace XamarinFormSample
                 await authgear.OpenAsync(page, new SettingsOptions
                 {
                     ColorScheme = ColorScheme,
+                    UiLocales = new List<string> { },
                 });
+                EnsureIsMainThread(nameof(OpenAsync));
             }
             finally
             {
@@ -263,7 +278,10 @@ namespace XamarinFormSample
                 {
                     Page = AuthenticatePageToShow,
                     ColorScheme = ColorScheme,
+                    UiLocales = new List<string> { },
+                    PromptOptions = new List<PromptOption> { PromptOption.Login },
                 });
+                EnsureIsMainThread(nameof(AuthenticateAsync));
             }
             finally
             {
@@ -278,6 +296,7 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 var userInfo = await authgear.FetchUserInfoAsync();
+                EnsureIsMainThread(nameof(FetchUserInfoAsync));
                 UserInfo = userInfo;
                 return userInfo;
             }
@@ -297,7 +316,9 @@ namespace XamarinFormSample
                 UserInfo = await authgear.ReauthenticateAsync(new ReauthenticateOptions(RedirectUri)
                 {
                     ColorScheme = ColorScheme,
+                    UiLocales = new List<string> { },
                 }, useBiometric ? CreateBiometricOptions() : null);
+                EnsureIsMainThread(nameof(ReAuthenticateAsync));
             }
             finally
             {
@@ -312,6 +333,7 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 await authgear.RefreshIdTokenAsync();
+                EnsureIsMainThread(nameof(RefreshIdTokenAsync));
             }
             finally
             {
@@ -326,6 +348,7 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 var result = await authgear.AuthenticateBiometricAsync(CreateBiometricOptions());
+                EnsureIsMainThread(nameof(AuthenticateBiometricAsync));
                 UserInfo = result;
             }
             finally
@@ -341,7 +364,9 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 await authgear.EnableBiometricAsync(CreateBiometricOptions());
+                EnsureIsMainThread(nameof(EnableBiometricAsync));
                 await SyncAuthgearState();
+                EnsureIsMainThread(nameof(EnableBiometricAsync));
             }
             finally
             {
@@ -376,7 +401,9 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 await authgear.DisableBiometricAsync();
+                EnsureIsMainThread(nameof(DisableBiometricAsync));
                 await SyncAuthgearState();
+                EnsureIsMainThread(nameof(DisableBiometricAsync));
             }
             finally
             {
@@ -391,6 +418,7 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 await authgear.LogoutAsync();
+                EnsureIsMainThread(nameof(LogoutAsync));
             }
             finally
             {
@@ -410,6 +438,7 @@ namespace XamarinFormSample
             SessionState = authgear.SessionState;
             State = SessionState.ToString();
             IsBiometricEnabled = await authgear.GetIsBiometricEnabledAsync();
+            EnsureIsMainThread(nameof(SyncAuthgearState));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SessionState)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(State)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AuthTime)));

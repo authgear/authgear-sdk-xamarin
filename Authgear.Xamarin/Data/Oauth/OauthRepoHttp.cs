@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -11,14 +12,14 @@ using Authgear.Xamarin.Oauth;
 
 namespace Authgear.Xamarin.Data.Oauth
 {
-    internal class OauthRepoHttp : IOauthRepo
+    internal class OauthRepoHttp : IOauthRepo, IDisposable
     {
         private readonly HttpClient httpClient;
         public string Endpoint { get; }
 
         private OidcConfiguration? config;
 
-        private readonly ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
+        private readonly SemaphoreSlim locker = new SemaphoreSlim(1, 1);
 
         public OauthRepoHttp(HttpClient client, string endpoint)
         {
@@ -28,28 +29,24 @@ namespace Authgear.Xamarin.Data.Oauth
 
         public async Task<OidcConfiguration> GetOidcConfigurationAsync()
         {
-            try
-            {
-                locker.EnterReadLock();
-                if (config != null) return config;
-            }
-            finally { locker.ExitReadLock(); }
+            var configBeforeLock = config;
+            if (configBeforeLock != null) { return configBeforeLock; }
             // Double-checked locking
+            await locker.WaitAsync().ConfigureAwait(false);
             try
             {
-                locker.EnterWriteLock();
                 var configAfterLock = config;
-                if (configAfterLock != null) return configAfterLock;
-                var responseMessage = await httpClient.GetAsync(new Uri(new Uri(Endpoint), "/.well-known/openid-configuration"));
-                config = await responseMessage.GetJsonAsync<OidcConfiguration>();
+                if (configAfterLock != null) { return configAfterLock; }
+                var responseMessage = await httpClient.GetAsync(new Uri(new Uri(Endpoint), "/.well-known/openid-configuration")).ConfigureAwait(false);
+                config = await responseMessage.GetJsonAsync<OidcConfiguration>().ConfigureAwait(false);
                 return config;
             }
-            finally { locker.ExitWriteLock(); }
+            finally { locker.Release(); }
         }
 
         public async Task BiometricSetupRequestAsync(string accessToken, string clientId, string jwt)
         {
-            var config = await GetOidcConfigurationAsync();
+            var config = await GetOidcConfigurationAsync().ConfigureAwait(false);
             var body = new Dictionary<string, string>()
             {
                 ["client_id"] = clientId,
@@ -57,11 +54,11 @@ namespace Authgear.Xamarin.Data.Oauth
                 ["jwt"] = jwt
             };
             var content = new FormUrlEncodedContent(body);
-            var request = new HttpRequestMessage(HttpMethod.Post, config.TokenEndpoint);
+            using var request = new HttpRequestMessage(HttpMethod.Post, config.TokenEndpoint);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             request.Content = content;
-            var responseMessage = await httpClient.SendAsync(request);
-            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
+            var responseMessage = await httpClient.SendAsync(request).ConfigureAwait(false);
+            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync().ConfigureAwait(false);
         }
 
         public async Task<AppSessionTokenResponse> OauthAppSessionTokenAsync(string refreshToken)
@@ -70,9 +67,9 @@ namespace Authgear.Xamarin.Data.Oauth
             {
                 ["refresh_token"] = refreshToken,
             };
-            var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-            var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/app_session_token"), content);
-            var result = await responseMessage.GetJsonAsync<AppSessionTokenResponseResult>();
+            using var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
+            var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/app_session_token"), content).ConfigureAwait(false);
+            var result = await responseMessage.GetJsonAsync<AppSessionTokenResponseResult>().ConfigureAwait(false);
             return result.Result!;
         }
 
@@ -82,27 +79,27 @@ namespace Authgear.Xamarin.Data.Oauth
             {
                 ["purpose"] = purpose
             };
-            var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-            var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/challenge"), content);
-            var result = await responseMessage.GetJsonAsync<ChallengeResponseResult>();
+            using var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
+            var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/challenge"), content).ConfigureAwait(false);
+            var result = await responseMessage.GetJsonAsync<ChallengeResponseResult>().ConfigureAwait(false);
             return result.Result!;
         }
 
         public async Task OidcRevocationRequestAsync(string refreshToken)
         {
-            var config = await GetOidcConfigurationAsync();
+            var config = await GetOidcConfigurationAsync().ConfigureAwait(false);
             var body = new Dictionary<string, string>()
             {
                 ["token"] = refreshToken
             };
-            var content = new FormUrlEncodedContent(body);
-            var responseMessage = await httpClient.PostAsync(config.RevocationEndpoint, content);
-            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync();
+            using var content = new FormUrlEncodedContent(body);
+            var responseMessage = await httpClient.PostAsync(new Uri(config.RevocationEndpoint), content).ConfigureAwait(false);
+            await responseMessage.EnsureSuccessOrAuthgearExceptionAsync().ConfigureAwait(false);
         }
 
         public async Task<OidcTokenResponse> OidcTokenRequestAsync(OidcTokenRequest request)
         {
-            var config = await GetOidcConfigurationAsync();
+            var config = await GetOidcConfigurationAsync().ConfigureAwait(false);
             var body = new Dictionary<string, string>()
             {
                 ["grant_type"] = request.GrantType.GetDescription(),
@@ -129,24 +126,29 @@ namespace Authgear.Xamarin.Data.Oauth
             {
                 body["jwt"] = request.Jwt;
             }
-            var content = new FormUrlEncodedContent(body);
-            var httpRequest = new HttpRequestMessage(HttpMethod.Post, config.TokenEndpoint);
+            using var content = new FormUrlEncodedContent(body);
+            using var httpRequest = new HttpRequestMessage(HttpMethod.Post, config.TokenEndpoint);
             if (request.AccessToken != null)
             {
                 httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", request.AccessToken);
             }
             httpRequest.Content = content;
-            var responseMessage = await httpClient.SendAsync(httpRequest);
-            return await responseMessage.GetJsonAsync<OidcTokenResponse>();
+            var responseMessage = await httpClient.SendAsync(httpRequest).ConfigureAwait(false);
+            return await responseMessage.GetJsonAsync<OidcTokenResponse>().ConfigureAwait(false);
         }
 
         public async Task<UserInfo> OidcUserInfoRequestAsync(string accessToken)
         {
-            var config = await GetOidcConfigurationAsync();
-            var request = new HttpRequestMessage(HttpMethod.Get, config.UserInfoEndpoint);
+            var config = await GetOidcConfigurationAsync().ConfigureAwait(false);
+            using var request = new HttpRequestMessage(HttpMethod.Get, config.UserInfoEndpoint);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var responseMessage = await httpClient.SendAsync(request);
-            return await responseMessage.GetJsonAsync<UserInfo>();
+            var responseMessage = await httpClient.SendAsync(request).ConfigureAwait(false);
+            return await responseMessage.GetJsonAsync<UserInfo>().ConfigureAwait(false);
+        }
+
+        public void Dispose()
+        {
+            locker.Dispose();
         }
     }
 }

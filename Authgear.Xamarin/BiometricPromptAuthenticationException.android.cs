@@ -5,7 +5,7 @@ using AndroidX.Biometric;
 
 namespace Authgear.Xamarin
 {
-    internal class BiometricPromptAuthenticationException : Exception
+    public class BiometricPromptAuthenticationException : Exception
     {
         public int ErrorCode { get; private set; }
         public BiometricPromptAuthenticationException(string message) : base(message) { }

@@ -13,13 +13,16 @@ namespace Authgear.Xamarin
         /// </summary>
         /// <param name="app">Dummy tag argument to denote this constructor is for ios</param>
         /// <param name="options"></param>
-        public AuthgearSdk(UIApplication app, AuthgearOptions options) : this(options)
+        public AuthgearSdk(UIApplication _, AuthgearOptions options) : this(options)
         {
             biometric = new Biometric();
             keyRepo = new KeyRepo();
             webView = new WebView();
         }
+        // Other platform's implementation is not static
+#pragma warning disable CA1822 // Mark members as static
         private DeviceInfoRoot PlatformGetDeviceInfo()
+#pragma warning restore CA1822 // Mark members as static
         {
             return new DeviceInfoRoot
             {

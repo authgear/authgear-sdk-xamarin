@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace Authgear.Xamarin
 {
-    internal class ServerException : Exception
+    public class ServerException : Exception
     {
         public string Name { get; private set; }
         public string Reason { get; private set; }
