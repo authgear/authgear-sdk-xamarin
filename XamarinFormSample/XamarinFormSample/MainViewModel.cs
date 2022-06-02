@@ -149,7 +149,7 @@ namespace XamarinFormSample
         {
             get
             {
-                return IsConfigured && IsNotLoading;
+                return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
             }
         }
         public bool IsEnabledLogout
@@ -159,8 +159,6 @@ namespace XamarinFormSample
                 return IsConfigured && IsNotLoading && SessionState == SessionState.Authenticated;
             }
         }
-
-        public event ErrorRaisedHandler ErrorRaised;
 
         public MainViewModel()
         {

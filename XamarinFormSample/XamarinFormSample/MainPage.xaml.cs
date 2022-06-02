@@ -18,10 +18,6 @@ namespace XamarinFormSample
             InitializeComponent();
             MainViewModel = new MainViewModel();
             BindingContext = MainViewModel;
-            MainViewModel.ErrorRaised += async (s, e) =>
-            {
-                await ShowException(e);
-            };
         }
 
         private async void Configure_Clicked(object sender, EventArgs e)
@@ -156,19 +152,33 @@ namespace XamarinFormSample
 
         private async Task ShowUserInfo(UserInfo userInfo)
         {
-            var message = String.Format(
-                "Sub: {0}\nIsVerified: {1}\nIsAnonymous: {2}",
-                userInfo.Sub,
-                userInfo.IsVerified,
-                userInfo.IsAnonymous
-            );
-            await DisplayAlert("UserInfo", message, "OK");
+            try
+            {
+                var message = String.Format(
+                    "Sub: {0}\nIsVerified: {1}\nIsAnonymous: {2}",
+                    userInfo.Sub,
+                    userInfo.IsVerified,
+                    userInfo.IsAnonymous
+                );
+                await DisplayAlert("UserInfo", message, "OK");
+            }
+            catch (Exception ex)
+            {
+                await ShowException(ex);
+            }
         }
 
         private async void ShowAuthTime_Clicked(object sender, EventArgs e)
         {
-            await MainViewModel.RefreshIdTokenAsync();
-            await DisplayAlert("auth_time", MainViewModel.AuthTime?.ToString(), "OK");
+            try
+            {
+                await MainViewModel.RefreshIdTokenAsync();
+                await DisplayAlert("auth_time", MainViewModel.AuthTime?.ToString(), "OK");
+            }
+            catch (Exception ex)
+            {
+                await ShowException(ex);
+            }
         }
     }
 }
