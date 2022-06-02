@@ -8,6 +8,6 @@ namespace Authgear.Xamarin.Data
     internal class ServerErrorResult
     {
         [JsonPropertyName("error")]
-        public ServerError Error { get; set; }
+        public ServerError? Error { get; set; }
     }
 }

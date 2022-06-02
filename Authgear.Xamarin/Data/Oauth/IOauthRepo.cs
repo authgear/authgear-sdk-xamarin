@@ -8,7 +8,7 @@ namespace Authgear.Xamarin.Data.Oauth
 {
     internal interface IOauthRepo
     {
-        string Endpoint { get; set; }
+        string Endpoint { get; }
         Task<OidcConfiguration> GetOidcConfigurationAsync();
         Task<OidcTokenResponse> OidcTokenRequestAsync(OidcTokenRequest request);
         Task BiometricSetupRequestAsync(string accessToken, string clientId, string jwt);

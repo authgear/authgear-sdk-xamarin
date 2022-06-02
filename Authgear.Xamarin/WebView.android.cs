@@ -17,8 +17,8 @@ namespace Authgear.Xamarin
         private const string HookFragmentTagFormat = "hookFragment.{0}";
         private class HookFragment : Fragment
         {
-            public WeakReference<WebView> Owner { get; set; }
-            public TaskCompletionSource<object> TaskSource { get; set; }
+            public WeakReference<WebView>? Owner { get; set; }
+            public TaskCompletionSource<object?>? TaskSource { get; set; }
 
             public bool IsWaiting { get; set; }
 
@@ -67,7 +67,7 @@ namespace Authgear.Xamarin
             TagGuid = Guid.NewGuid();
             _ = FindOrCreateFragment();
         }
-        private HookFragment FindOrCreateFragment()
+        private HookFragment? FindOrCreateFragment()
         {
             if (!(Platform.CurrentActivity is AppCompatActivity activity))
             {
@@ -85,7 +85,7 @@ namespace Authgear.Xamarin
         }
         public async Task ShowAsync(string url)
         {
-            var taskSource = new TaskCompletionSource<object>();
+            var taskSource = new TaskCompletionSource<object?>();
             var fragment = FindOrCreateFragment();
             if (fragment == null) { return; }
             if (fragment.IsWaiting)

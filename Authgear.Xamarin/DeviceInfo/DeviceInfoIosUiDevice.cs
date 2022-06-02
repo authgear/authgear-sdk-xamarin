@@ -6,18 +6,18 @@ namespace Authgear.Xamarin.DeviceInfo
     internal class DeviceInfoIosUiDevice
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         [JsonPropertyName("systemName")]
-        public string SystemName { get; set; }
+        public string SystemName { get; set; } = "";
 
         [JsonPropertyName("systemVersion")]
-        public string SystemVersion { get; set; }
+        public string SystemVersion { get; set; } = "";
 
         [JsonPropertyName("model")]
-        public string Model { get; set; }
+        public string Model { get; set; } = "";
 
         [JsonPropertyName("userInterfaceIdiom")]
-        public string UserInterfaceIdiom { get; set; }
+        public string UserInterfaceIdiom { get; set; } = "";
     }
 }

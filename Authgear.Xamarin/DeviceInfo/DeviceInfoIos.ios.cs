@@ -77,12 +77,12 @@ namespace Authgear.Xamarin.DeviceInfo
                 },
                 Bundle = new DeviceInfoIosBundle
                 {
-                    CFBundleIdentifier = infoDict["CFBundleIdentifier"]?.ToString(),
-                    CFBundleName = infoDict["CFBundleName"]?.ToString(),
-                    CFBundleDisplayName = infoDict["CFBundleDisplayName"]?.ToString(),
-                    CFBundleExecutable = infoDict["CFBundleExecutable"]?.ToString(),
-                    CFBundleShortVersionString = infoDict["CFBundleShortVersionString"]?.ToString(),
-                    CFBundleVersion = infoDict["CFBundleVersion"]?.ToString()
+                    CFBundleIdentifier = infoDict["CFBundleIdentifier"]?.ToString() ?? "",
+                    CFBundleName = infoDict["CFBundleName"]?.ToString() ?? "",
+                    CFBundleDisplayName = infoDict["CFBundleDisplayName"]?.ToString() ?? "",
+                    CFBundleExecutable = infoDict["CFBundleExecutable"]?.ToString() ?? "",
+                    CFBundleShortVersionString = infoDict["CFBundleShortVersionString"]?.ToString() ?? "",
+                    CFBundleVersion = infoDict["CFBundleVersion"]?.ToString() ?? ""
                 }
             };
         }

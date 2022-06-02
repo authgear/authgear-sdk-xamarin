@@ -6,7 +6,7 @@ namespace Authgear.Xamarin
 {
     internal class OauthException : Exception
     {
-        static internal string FormatOauthExceptionMessage(string error, string errorDescription)
+        static internal string FormatOauthExceptionMessage(string error, string? errorDescription)
         {
             var messageBuilder = new StringBuilder();
             messageBuilder.Append(error);
@@ -18,10 +18,10 @@ namespace Authgear.Xamarin
             return messageBuilder.ToString();
         }
         public string Error { get; private set; }
-        public string ErrorDescription { get; private set; }
-        public string State { get; private set; }
-        public string ErrorUri { get; private set; }
-        public OauthException(string error, string errorDescription, string state, string errorUri) : base(FormatOauthExceptionMessage(error, errorDescription))
+        public string? ErrorDescription { get; private set; }
+        public string? State { get; private set; }
+        public string? ErrorUri { get; private set; }
+        public OauthException(string error, string? errorDescription, string? state, string? errorUri) : base(FormatOauthExceptionMessage(error, errorDescription))
         {
             Error = error;
             ErrorDescription = errorDescription;

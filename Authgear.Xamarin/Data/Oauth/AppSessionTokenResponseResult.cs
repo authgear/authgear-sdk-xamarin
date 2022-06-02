@@ -9,6 +9,6 @@ namespace Authgear.Xamarin.Data.Oauth
     internal class AppSessionTokenResponseResult
     {
         [JsonPropertyName("result")]
-        public AppSessionTokenResponse Result { get; set; }
+        public AppSessionTokenResponse? Result { get; set; }
     }
 }

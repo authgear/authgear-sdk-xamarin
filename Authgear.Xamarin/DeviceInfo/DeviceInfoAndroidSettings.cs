@@ -8,8 +8,8 @@ namespace Authgear.Xamarin.DeviceInfo
     internal class DeviceInfoAndroidSettings
     {
         [JsonPropertyName("Secure")]
-        public DeviceInfoAndroidSecure Secure { get; set; }
+        public DeviceInfoAndroidSecure? Secure { get; set; }
         [JsonPropertyName("Global")]
-        public DeviceInfoAndroidSettingsGlobal Global { get; set; }
+        public DeviceInfoAndroidSettingsGlobal? Global { get; set; }
     }
 }

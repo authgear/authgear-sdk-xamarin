@@ -8,8 +8,8 @@ namespace Authgear.Xamarin.Oauth
     internal class AppSessionTokenResponse
     {
         [JsonPropertyName("app_session_token")]
-        public string AppSessionToken { get; set; }
+        public string? AppSessionToken { get; set; }
         [JsonPropertyName("expire_at")]
-        public string ExpireAt { get; set; }
+        public string? ExpireAt { get; set; }
     }
 }

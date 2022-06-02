@@ -19,6 +19,9 @@
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	  <PackageProjectUrl>https://github.com/authgear/authgear-sdk-xamarin</PackageProjectUrl>
+	  <!-- TODO: Can we use 9.0 for init only setters? -->
+	  <LangVersion>8.0</LangVersion>
+	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

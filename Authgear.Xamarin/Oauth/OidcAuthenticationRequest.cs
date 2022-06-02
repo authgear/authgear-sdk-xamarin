@@ -13,16 +13,22 @@ namespace Authgear.Xamarin.Oauth
         public string RedirectUri { get; set; }
         public string ResponseType { get; set; }
         public List<string> Scope { get; set; }
-        public string State { get; set; }
-        public List<PromptOption> Prompt { get; set; }
+        public string? State { get; set; }
+        public List<PromptOption>? Prompt { get; set; }
         public int? MaxAge { get; set; }
-        public string LoginHint { get; set; }
-        public List<string> UiLocales { get; set; }
+        public string? LoginHint { get; set; }
+        public List<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
-        public string IdTokenHint { get; set; }
+        public string? IdTokenHint { get; set; }
         public AuthenticatePage? Page { get; set; }
         public bool? SuppressIdpSessionCookie { get; set; }
-        internal Dictionary<string, string> ToQuery(string clientId, string challenge)
+        public OidcAuthenticationRequest(string redirectUri, string responseType, List<string> scope)
+        {
+            RedirectUri = redirectUri;
+            ResponseType = responseType;
+            Scope = scope;
+        }
+        internal Dictionary<string, string> ToQuery(string clientId, string? challenge)
         {
             var query = new Dictionary<string, string>()
             {
@@ -75,7 +81,7 @@ namespace Authgear.Xamarin.Oauth
             }
             return query;
         }
-        internal Dictionary<string, string> ToQuery(string clientId, CodeVerifier codeVerifier)
+        internal Dictionary<string, string> ToQuery(string clientId, CodeVerifier? codeVerifier)
         {
             return ToQuery(clientId, codeVerifier?.Challenge);
         }

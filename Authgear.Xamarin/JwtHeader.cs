@@ -11,10 +11,10 @@ namespace Authgear.Xamarin
         [JsonPropertyName("typ")]
         public JwtHeaderType Typ { get; set; }
         [JsonPropertyName("kid")]
-        public string Kid { get; set; }
+        public string? Kid { get; set; }
         [JsonPropertyName("alg")]
-        public string Alg { get; set; }
+        public string? Alg { get; set; }
         [JsonPropertyName("jwk")]
-        public Jwk Jwk { get; set; }
+        public Jwk? Jwk { get; set; }
     }
 }

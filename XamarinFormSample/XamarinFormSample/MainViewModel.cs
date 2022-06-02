@@ -175,10 +175,8 @@ namespace XamarinFormSample
                 ITokenStorage tokenStorage;
                 if (UseTransientStorage) { tokenStorage = new TransientTokenStorage(); }
                 else { tokenStorage = new PersistentTokenStorage(); }
-                authgear = authgearFactory.CreateAuthgear(new AuthgearOptions
+                authgear = authgearFactory.CreateAuthgear(new AuthgearOptions(ClientId, AuthgearEndpoint)
                 {
-                    ClientId = ClientId,
-                    AuthgearEndpoint = AuthgearEndpoint,
                     TokenStorage = tokenStorage,
                     ShareSessionWithSystemBrowser = ShareSessioWithDeviceBrowser
                 });
@@ -226,13 +224,10 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                var result = await authgear.PromoteAnonymousUserAsync(new PromoteOptions
+                UserInfo = await authgear.PromoteAnonymousUserAsync(new PromoteOptions(RedirectUri)
                 {
-                    RedirectUri = RedirectUri,
                     ColorScheme = ColorScheme,
                 });
-                Debug.WriteLine(result.State ?? "No state");
-                UserInfo = result.UserInfo;
             }
             finally
             {
@@ -264,14 +259,11 @@ namespace XamarinFormSample
             try
             {
                 SetIsLoading(true);
-                var result = await authgear.AuthenticateAsync(new AuthenticateOptions
+                UserInfo = await authgear.AuthenticateAsync(new AuthenticateOptions(RedirectUri)
                 {
-                    RedirectUri = RedirectUri,
                     Page = AuthenticatePageToShow,
                     ColorScheme = ColorScheme,
                 });
-                Debug.WriteLine(result.State ?? "No state");
-                UserInfo = result.UserInfo;
             }
             finally
             {
@@ -302,9 +294,8 @@ namespace XamarinFormSample
             {
                 SetIsLoading(true);
                 await authgear.RefreshIdTokenAsync();
-                UserInfo = await authgear.ReauthenticateAsync(new ReauthenticateOptions
+                UserInfo = await authgear.ReauthenticateAsync(new ReauthenticateOptions(RedirectUri)
                 {
-                    RedirectUri = RedirectUri,
                     ColorScheme = ColorScheme,
                 }, useBiometric ? CreateBiometricOptions() : null);
             }

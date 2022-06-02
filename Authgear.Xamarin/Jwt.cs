@@ -22,8 +22,8 @@ namespace Authgear.Xamarin
         }
         private static string Sign(JwtHeader header, JwtPayload payload, Func<byte[], byte[]> signer)
         {
-            var headerStr = ConvertExtensions.ToBase64UrlSafeString(AuthgearJson.Serialize(header), Encoding.UTF8);
-            var payloadStr = ConvertExtensions.ToBase64UrlSafeString(AuthgearJson.Serialize(payload), Encoding.UTF8);
+            var headerStr = ConvertExtensions.ToBase64UrlSafeString(JsonSerializer.Serialize(header), Encoding.UTF8);
+            var payloadStr = ConvertExtensions.ToBase64UrlSafeString(JsonSerializer.Serialize(payload), Encoding.UTF8);
             var data = $"{headerStr}.{payloadStr}";
             var sig = signer(Encoding.UTF8.GetBytes(data));
             return $"{data}.{ConvertExtensions.ToBase64UrlSafeString(sig)}";

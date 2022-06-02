@@ -9,12 +9,12 @@ namespace Authgear.Xamarin
     {
         public string Name { get; private set; }
         public string Reason { get; private set; }
-        public string Info { get; private set; }
-        public ServerException(string name, string reason, string message, JsonDocument info) : base(message)
+        public JsonDocument? Info { get; private set; }
+        public ServerException(string name, string reason, string message, JsonDocument? info) : base(message)
         {
             Name = name;
             Reason = reason;
-            Info = Info;
+            Info = info;
         }
     }
 }

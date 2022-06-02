@@ -9,12 +9,12 @@ namespace Authgear.Xamarin.Data
     internal class ServerError
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [JsonPropertyName("reason")]
-        public string Reason { get; set; }
+        public string? Reason { get; set; }
         [JsonPropertyName("message")]
-        public string Message { get; set; }
+        public string? Message { get; set; }
         [JsonPropertyName("info")]
-        public JsonDocument Info { get; set; }
+        public JsonDocument? Info { get; set; }
     }
 }
