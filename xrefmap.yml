@@ -13,6 +13,19 @@ references:
   commentId: T:Authgear.Xamarin.AuthenticateOptions
   fullName: Authgear.Xamarin.AuthenticateOptions
   nameWithType: AuthenticateOptions
+- uid: Authgear.Xamarin.AuthenticateOptions.#ctor(System.String)
+  name: AuthenticateOptions(String)
+  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions__ctor_System_String_
+  commentId: M:Authgear.Xamarin.AuthenticateOptions.#ctor(System.String)
+  fullName: Authgear.Xamarin.AuthenticateOptions.AuthenticateOptions(System.String)
+  nameWithType: AuthenticateOptions.AuthenticateOptions(String)
+- uid: Authgear.Xamarin.AuthenticateOptions.#ctor*
+  name: AuthenticateOptions
+  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions__ctor_
+  commentId: Overload:Authgear.Xamarin.AuthenticateOptions.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthenticateOptions.AuthenticateOptions
+  nameWithType: AuthenticateOptions.AuthenticateOptions
 - uid: Authgear.Xamarin.AuthenticateOptions.ColorScheme
   name: ColorScheme
   href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_ColorScheme
@@ -78,19 +91,6 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthenticateOptions.RedirectUri
   nameWithType: AuthenticateOptions.RedirectUri
-- uid: Authgear.Xamarin.AuthenticateOptions.ResponseType
-  name: ResponseType
-  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_ResponseType
-  commentId: P:Authgear.Xamarin.AuthenticateOptions.ResponseType
-  fullName: Authgear.Xamarin.AuthenticateOptions.ResponseType
-  nameWithType: AuthenticateOptions.ResponseType
-- uid: Authgear.Xamarin.AuthenticateOptions.ResponseType*
-  name: ResponseType
-  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_ResponseType_
-  commentId: Overload:Authgear.Xamarin.AuthenticateOptions.ResponseType
-  isSpec: "True"
-  fullName: Authgear.Xamarin.AuthenticateOptions.ResponseType
-  nameWithType: AuthenticateOptions.ResponseType
 - uid: Authgear.Xamarin.AuthenticateOptions.State
   name: State
   href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_State
@@ -135,38 +135,6 @@ references:
   commentId: F:Authgear.Xamarin.AuthenticatePage.Signup
   fullName: Authgear.Xamarin.AuthenticatePage.Signup
   nameWithType: AuthenticatePage.Signup
-- uid: Authgear.Xamarin.AuthenticateResult
-  name: AuthenticateResult
-  href: api/Authgear.Xamarin.AuthenticateResult.html
-  commentId: T:Authgear.Xamarin.AuthenticateResult
-  fullName: Authgear.Xamarin.AuthenticateResult
-  nameWithType: AuthenticateResult
-- uid: Authgear.Xamarin.AuthenticateResult.State
-  name: State
-  href: api/Authgear.Xamarin.AuthenticateResult.html#Authgear_Xamarin_AuthenticateResult_State
-  commentId: P:Authgear.Xamarin.AuthenticateResult.State
-  fullName: Authgear.Xamarin.AuthenticateResult.State
-  nameWithType: AuthenticateResult.State
-- uid: Authgear.Xamarin.AuthenticateResult.State*
-  name: State
-  href: api/Authgear.Xamarin.AuthenticateResult.html#Authgear_Xamarin_AuthenticateResult_State_
-  commentId: Overload:Authgear.Xamarin.AuthenticateResult.State
-  isSpec: "True"
-  fullName: Authgear.Xamarin.AuthenticateResult.State
-  nameWithType: AuthenticateResult.State
-- uid: Authgear.Xamarin.AuthenticateResult.UserInfo
-  name: UserInfo
-  href: api/Authgear.Xamarin.AuthenticateResult.html#Authgear_Xamarin_AuthenticateResult_UserInfo
-  commentId: P:Authgear.Xamarin.AuthenticateResult.UserInfo
-  fullName: Authgear.Xamarin.AuthenticateResult.UserInfo
-  nameWithType: AuthenticateResult.UserInfo
-- uid: Authgear.Xamarin.AuthenticateResult.UserInfo*
-  name: UserInfo
-  href: api/Authgear.Xamarin.AuthenticateResult.html#Authgear_Xamarin_AuthenticateResult_UserInfo_
-  commentId: Overload:Authgear.Xamarin.AuthenticateResult.UserInfo
-  isSpec: "True"
-  fullName: Authgear.Xamarin.AuthenticateResult.UserInfo
-  nameWithType: AuthenticateResult.UserInfo
 - uid: Authgear.Xamarin.AuthgearException
   name: AuthgearException
   href: api/Authgear.Xamarin.AuthgearException.html
@@ -210,6 +178,19 @@ references:
   commentId: T:Authgear.Xamarin.AuthgearOptions
   fullName: Authgear.Xamarin.AuthgearOptions
   nameWithType: AuthgearOptions
+- uid: Authgear.Xamarin.AuthgearOptions.#ctor(System.String,System.String)
+  name: AuthgearOptions(String, String)
+  href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions__ctor_System_String_System_String_
+  commentId: M:Authgear.Xamarin.AuthgearOptions.#ctor(System.String,System.String)
+  fullName: Authgear.Xamarin.AuthgearOptions.AuthgearOptions(System.String, System.String)
+  nameWithType: AuthgearOptions.AuthgearOptions(String, String)
+- uid: Authgear.Xamarin.AuthgearOptions.#ctor*
+  name: AuthgearOptions
+  href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions__ctor_
+  commentId: Overload:Authgear.Xamarin.AuthgearOptions.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthgearOptions.AuthgearOptions
+  nameWithType: AuthgearOptions.AuthgearOptions
 - uid: Authgear.Xamarin.AuthgearOptions.AuthgearEndpoint
   name: AuthgearEndpoint
   href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions_AuthgearEndpoint
@@ -595,6 +576,19 @@ references:
   commentId: T:Authgear.Xamarin.AuthorizeResult
   fullName: Authgear.Xamarin.AuthorizeResult
   nameWithType: AuthorizeResult
+- uid: Authgear.Xamarin.AuthorizeResult.#ctor(Authgear.Xamarin.UserInfo,System.String)
+  name: AuthorizeResult(UserInfo, String)
+  href: api/Authgear.Xamarin.AuthorizeResult.html#Authgear_Xamarin_AuthorizeResult__ctor_Authgear_Xamarin_UserInfo_System_String_
+  commentId: M:Authgear.Xamarin.AuthorizeResult.#ctor(Authgear.Xamarin.UserInfo,System.String)
+  fullName: Authgear.Xamarin.AuthorizeResult.AuthorizeResult(Authgear.Xamarin.UserInfo, System.String)
+  nameWithType: AuthorizeResult.AuthorizeResult(UserInfo, String)
+- uid: Authgear.Xamarin.AuthorizeResult.#ctor*
+  name: AuthorizeResult
+  href: api/Authgear.Xamarin.AuthorizeResult.html#Authgear_Xamarin_AuthorizeResult__ctor_
+  commentId: Overload:Authgear.Xamarin.AuthorizeResult.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthorizeResult.AuthorizeResult
+  nameWithType: AuthorizeResult.AuthorizeResult
 - uid: Authgear.Xamarin.AuthorizeResult.State
   name: State
   href: api/Authgear.Xamarin.AuthorizeResult.html#Authgear_Xamarin_AuthorizeResult_State
@@ -1161,6 +1155,19 @@ references:
   commentId: T:Authgear.Xamarin.PromoteOptions
   fullName: Authgear.Xamarin.PromoteOptions
   nameWithType: PromoteOptions
+- uid: Authgear.Xamarin.PromoteOptions.#ctor(System.String)
+  name: PromoteOptions(String)
+  href: api/Authgear.Xamarin.PromoteOptions.html#Authgear_Xamarin_PromoteOptions__ctor_System_String_
+  commentId: M:Authgear.Xamarin.PromoteOptions.#ctor(System.String)
+  fullName: Authgear.Xamarin.PromoteOptions.PromoteOptions(System.String)
+  nameWithType: PromoteOptions.PromoteOptions(String)
+- uid: Authgear.Xamarin.PromoteOptions.#ctor*
+  name: PromoteOptions
+  href: api/Authgear.Xamarin.PromoteOptions.html#Authgear_Xamarin_PromoteOptions__ctor_
+  commentId: Overload:Authgear.Xamarin.PromoteOptions.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.PromoteOptions.PromoteOptions
+  nameWithType: PromoteOptions.PromoteOptions
 - uid: Authgear.Xamarin.PromoteOptions.ColorScheme
   name: ColorScheme
   href: api/Authgear.Xamarin.PromoteOptions.html#Authgear_Xamarin_PromoteOptions_ColorScheme
@@ -1249,6 +1256,19 @@ references:
   commentId: T:Authgear.Xamarin.ReauthenticateOptions
   fullName: Authgear.Xamarin.ReauthenticateOptions
   nameWithType: ReauthenticateOptions
+- uid: Authgear.Xamarin.ReauthenticateOptions.#ctor(System.String)
+  name: ReauthenticateOptions(String)
+  href: api/Authgear.Xamarin.ReauthenticateOptions.html#Authgear_Xamarin_ReauthenticateOptions__ctor_System_String_
+  commentId: M:Authgear.Xamarin.ReauthenticateOptions.#ctor(System.String)
+  fullName: Authgear.Xamarin.ReauthenticateOptions.ReauthenticateOptions(System.String)
+  nameWithType: ReauthenticateOptions.ReauthenticateOptions(String)
+- uid: Authgear.Xamarin.ReauthenticateOptions.#ctor*
+  name: ReauthenticateOptions
+  href: api/Authgear.Xamarin.ReauthenticateOptions.html#Authgear_Xamarin_ReauthenticateOptions__ctor_
+  commentId: Overload:Authgear.Xamarin.ReauthenticateOptions.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.ReauthenticateOptions.ReauthenticateOptions
+  nameWithType: ReauthenticateOptions.ReauthenticateOptions
 - uid: Authgear.Xamarin.ReauthenticateOptions.ColorScheme
   name: ColorScheme
   href: api/Authgear.Xamarin.ReauthenticateOptions.html#Authgear_Xamarin_ReauthenticateOptions_ColorScheme
@@ -1314,6 +1334,38 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.ReauthenticateOptions.UiLocales
   nameWithType: ReauthenticateOptions.UiLocales
+- uid: Authgear.Xamarin.ReauthenticateResult
+  name: ReauthenticateResult
+  href: api/Authgear.Xamarin.ReauthenticateResult.html
+  commentId: T:Authgear.Xamarin.ReauthenticateResult
+  fullName: Authgear.Xamarin.ReauthenticateResult
+  nameWithType: ReauthenticateResult
+- uid: Authgear.Xamarin.ReauthenticateResult.State
+  name: State
+  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_State
+  commentId: P:Authgear.Xamarin.ReauthenticateResult.State
+  fullName: Authgear.Xamarin.ReauthenticateResult.State
+  nameWithType: ReauthenticateResult.State
+- uid: Authgear.Xamarin.ReauthenticateResult.State*
+  name: State
+  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_State_
+  commentId: Overload:Authgear.Xamarin.ReauthenticateResult.State
+  isSpec: "True"
+  fullName: Authgear.Xamarin.ReauthenticateResult.State
+  nameWithType: ReauthenticateResult.State
+- uid: Authgear.Xamarin.ReauthenticateResult.UserInfo
+  name: UserInfo
+  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_UserInfo
+  commentId: P:Authgear.Xamarin.ReauthenticateResult.UserInfo
+  fullName: Authgear.Xamarin.ReauthenticateResult.UserInfo
+  nameWithType: ReauthenticateResult.UserInfo
+- uid: Authgear.Xamarin.ReauthenticateResult.UserInfo*
+  name: UserInfo
+  href: api/Authgear.Xamarin.ReauthenticateResult.html#Authgear_Xamarin_ReauthenticateResult_UserInfo_
+  commentId: Overload:Authgear.Xamarin.ReauthenticateResult.UserInfo
+  isSpec: "True"
+  fullName: Authgear.Xamarin.ReauthenticateResult.UserInfo
+  nameWithType: ReauthenticateResult.UserInfo
 - uid: Authgear.Xamarin.SessionState
   name: SessionState
   href: api/Authgear.Xamarin.SessionState.html
