@@ -12,11 +12,14 @@ namespace Authgear.Xamarin
         {
             try
             {
-                _ = await WebAuthenticator.AuthenticateAsync(new WebAuthenticatorOptions
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    Url = new Uri(url),
-                    CallbackUrl = new Uri("nocallback:///"),
-                    PrefersEphemeralWebBrowserSession = true
+                    _ = await WebAuthenticator.AuthenticateAsync(new WebAuthenticatorOptions
+                    {
+                        Url = new Uri(url),
+                        CallbackUrl = new Uri("nocallback:///"),
+                        PrefersEphemeralWebBrowserSession = true
+                    }).ConfigureAwait(false);
                 }).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
