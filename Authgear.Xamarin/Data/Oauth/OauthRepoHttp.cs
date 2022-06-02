@@ -19,7 +19,7 @@ namespace Authgear.Xamarin.Data.Oauth
 
         private OidcConfiguration? config;
 
-        private readonly ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
+        private readonly SemaphoreSlim locker = new SemaphoreSlim(1, 1);
 
         public OauthRepoHttp(HttpClient client, string endpoint)
         {
@@ -29,26 +29,19 @@ namespace Authgear.Xamarin.Data.Oauth
 
         public async Task<OidcConfiguration> GetOidcConfigurationAsync()
         {
-            locker.EnterReadLock();
-            try
-            {
-                if (config != null) return config;
-            }
-            finally { locker.ExitReadLock(); }
+            var configBeforeLock = config;
+            if (configBeforeLock != null) { return configBeforeLock; }
             // Double-checked locking
-            locker.EnterWriteLock();
+            await locker.WaitAsync().ConfigureAwait(false);
             try
             {
                 var configAfterLock = config;
                 if (configAfterLock != null) { return configAfterLock; }
-                // ConfigAwait(*true*) since for some reason the locker insists that it's not being held after continuing on another thread.
-                // Possibly related issue: https://bugzilla.xamarin.com/66/6635/bug.html
-                // TODO: Add pure net5.0+ test to see if this diagnostic is correct
-                var responseMessage = await httpClient.GetAsync(new Uri(new Uri(Endpoint), "/.well-known/openid-configuration")).ConfigureAwait(true);
-                config = await responseMessage.GetJsonAsync<OidcConfiguration>().ConfigureAwait(true);
+                var responseMessage = await httpClient.GetAsync(new Uri(new Uri(Endpoint), "/.well-known/openid-configuration")).ConfigureAwait(false);
+                config = await responseMessage.GetJsonAsync<OidcConfiguration>().ConfigureAwait(false);
                 return config;
             }
-            finally { locker.ExitWriteLock(); }
+            finally { locker.Release(); }
         }
 
         public async Task BiometricSetupRequestAsync(string accessToken, string clientId, string jwt)
