@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -28,20 +29,23 @@ namespace Authgear.Xamarin.Data.Oauth
 
         public async Task<OidcConfiguration> GetOidcConfigurationAsync()
         {
+            locker.EnterReadLock();
             try
             {
-                locker.EnterReadLock();
                 if (config != null) return config;
             }
             finally { locker.ExitReadLock(); }
             // Double-checked locking
+            locker.EnterWriteLock();
             try
             {
-                locker.EnterWriteLock();
                 var configAfterLock = config;
-                if (configAfterLock != null) return configAfterLock;
-                var responseMessage = await httpClient.GetAsync(new Uri(new Uri(Endpoint), "/.well-known/openid-configuration")).ConfigureAwait(false);
-                config = await responseMessage.GetJsonAsync<OidcConfiguration>().ConfigureAwait(false);
+                if (configAfterLock != null) { return configAfterLock; }
+                // ConfigAwait(*true*) since for some reason the locker insists that it's not being held after continuing on another thread.
+                // Possibly related issue: https://bugzilla.xamarin.com/66/6635/bug.html
+                // TODO: Add pure net5.0+ test to see if this diagnostic is correct
+                var responseMessage = await httpClient.GetAsync(new Uri(new Uri(Endpoint), "/.well-known/openid-configuration")).ConfigureAwait(true);
+                config = await responseMessage.GetJsonAsync<OidcConfiguration>().ConfigureAwait(true);
                 return config;
             }
             finally { locker.ExitWriteLock(); }
