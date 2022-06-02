@@ -49,11 +49,12 @@ namespace Authgear.Xamarin.Data
                 KeyType = SecKeyType.RSA,
                 ApplicationTag = tag,
             };
-            var secKeyObject = SecKeyChain.QueryAsConcreteType(record, out var result);
+            var secKeyObjectOpt = SecKeyChain.QueryAsConcreteType(record, out var result);
             if (result != SecStatusCode.Success)
             {
                 throw AuthgearException.Wrap(new BiometricIosException(result));
             }
+            var secKeyObject = secKeyObjectOpt!;
             try
             {
                 var secKey = (SecKey)secKeyObject;
@@ -90,11 +91,12 @@ namespace Authgear.Xamarin.Data
                 KeyType = SecKeyType.RSA,
                 KeySizeInBits = KeySize
             };
-            var secKey = SecKey.CreateRandomKey(keyGenParameters.Dictionary, out error);
+            var secKeyOpt = SecKey.CreateRandomKey(keyGenParameters.Dictionary, out error);
             if (error != null)
             {
                 throw AuthgearException.Wrap(new BiometricIosException(error));
             }
+            var secKey = secKeyOpt!;
             var accessControl = new SecAccessControl(SecAccessible.WhenPasscodeSetThisDeviceOnly, flags);
             var record = new SecRecord(secKey)
             {

@@ -71,11 +71,12 @@ namespace Authgear.Xamarin.Data
                 KeyType = SecKeyType.RSA,
                 KeySizeInBits = KeySize
             };
-            var privateKey = SecKey.CreateRandomKey(keyGenParam.Dictionary, out var error);
+            var privateKeyOpt = SecKey.CreateRandomKey(keyGenParam.Dictionary, out var error);
             if (error != null)
             {
                 throw AuthgearException.Wrap(new AnonymousUserIosException(error));
             }
+            var privateKey = privateKeyOpt!;
             var secRecord = new SecRecord(privateKey)
             {
                 ApplicationTag = tag
@@ -95,13 +96,14 @@ namespace Authgear.Xamarin.Data
                 KeyType = SecKeyType.RSA,
                 ApplicationTag = tag
             };
-            var privateKey = SecKeyChain.QueryAsConcreteType(secRecord, out var result);
+            var privateKeyOpt = SecKeyChain.QueryAsConcreteType(secRecord, out var result);
             if (result != SecStatusCode.Success)
             {
                 return null;
             }
             try
             {
+                var privateKey = privateKeyOpt!;
                 return (SecKey)privateKey;
             }
             catch

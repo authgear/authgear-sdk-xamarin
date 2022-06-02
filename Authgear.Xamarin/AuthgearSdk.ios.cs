@@ -13,7 +13,7 @@ namespace Authgear.Xamarin
         /// </summary>
         /// <param name="app">Dummy tag argument to denote this constructor is for ios</param>
         /// <param name="options"></param>
-        public AuthgearSdk(UIApplication app, AuthgearOptions options) : this(options)
+        public AuthgearSdk(UIApplication _, AuthgearOptions options) : this(options)
         {
             biometric = new Biometric();
             keyRepo = new KeyRepo();

@@ -11,8 +11,8 @@ namespace Authgear.Xamarin
     {
         public static Jwk FromPrivateKey(string kid, SecKey secKey)
         {
-            var publicKey = secKey.GetPublicKey();
-            var data = publicKey.GetExternalRepresentation();
+            var publicKey = secKey.GetPublicKey()!;
+            var data = publicKey.GetExternalRepresentation()!;
             var size = data.Length;
             // Copy and pasted from flutter. TODO: Document what these magic numbers are.
             var modulus = data.Subdata(new NSRange(size > 269 ? 9 : 8, 256));
