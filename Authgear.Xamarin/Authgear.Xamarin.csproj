@@ -55,4 +55,9 @@
 		<Compile Include="**\*.ios.cs" />
 	</ItemGroup>
 	
+	<ItemGroup>
+	  <Compile Update="UserInfoAddress.cs">
+	    <SubType></SubType>
+	  </Compile>
+	</ItemGroup>
 </Project>
