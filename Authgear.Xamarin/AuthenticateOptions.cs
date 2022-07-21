@@ -15,6 +15,7 @@ namespace Authgear.Xamarin
         public IReadOnlyCollection<string>? UiLocales { get; set; }
         public ColorScheme? ColorScheme { get; set; }
         public AuthenticatePage? Page { get; set; }
+        public string? OauthProviderAlias { get; set; }
 
         public AuthenticateOptions(string redirectUri)
         {
@@ -36,7 +37,8 @@ namespace Authgear.Xamarin
                 UiLocales = UiLocales,
                 ColorScheme = ColorScheme,
                 Page = Page,
-                SuppressIdpSessionCookie = suppressIdpSessionCookie
+                SuppressIdpSessionCookie = suppressIdpSessionCookie,
+                OauthProviderAlias = OauthProviderAlias
             };
         }
     }

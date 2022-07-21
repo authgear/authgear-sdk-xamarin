@@ -23,6 +23,7 @@ namespace Authgear.Xamarin.Oauth
         public string? IdTokenHint { get; set; }
         public AuthenticatePage? Page { get; set; }
         public bool? SuppressIdpSessionCookie { get; set; }
+        public string? OauthProviderAlias { get; set; }
         public OidcAuthenticationRequest(string redirectUri, string responseType, List<string> scope)
         {
             RedirectUri = redirectUri;
@@ -79,6 +80,10 @@ namespace Authgear.Xamarin.Oauth
             if (SuppressIdpSessionCookie == true)
             {
                 query["x_suppress_idp_session_cookie"] = "true";
+            }
+            if (OauthProviderAlias != null)
+            {
+                query["x_oauth_provider_alias"] = OauthProviderAlias;
             }
             return query;
         }
