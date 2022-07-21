@@ -71,6 +71,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthenticateOptions.LoginHint
   nameWithType: AuthenticateOptions.LoginHint
+- uid: Authgear.Xamarin.AuthenticateOptions.OauthProviderAlias
+  name: OauthProviderAlias
+  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_OauthProviderAlias
+  commentId: P:Authgear.Xamarin.AuthenticateOptions.OauthProviderAlias
+  fullName: Authgear.Xamarin.AuthenticateOptions.OauthProviderAlias
+  nameWithType: AuthenticateOptions.OauthProviderAlias
+- uid: Authgear.Xamarin.AuthenticateOptions.OauthProviderAlias*
+  name: OauthProviderAlias
+  href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_OauthProviderAlias_
+  commentId: Overload:Authgear.Xamarin.AuthenticateOptions.OauthProviderAlias
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthenticateOptions.OauthProviderAlias
+  nameWithType: AuthenticateOptions.OauthProviderAlias
 - uid: Authgear.Xamarin.AuthenticateOptions.Page
   name: Page
   href: api/Authgear.Xamarin.AuthenticateOptions.html#Authgear_Xamarin_AuthenticateOptions_Page
