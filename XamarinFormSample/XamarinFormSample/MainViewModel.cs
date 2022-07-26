@@ -19,6 +19,7 @@ namespace XamarinFormSample
         public readonly string RedirectUri = "com.authgear.exampleapp.xamarin://host/path";
         public string ClientId { get; set; } = Preferences.Get("authgear.clientID", "");
         public string AuthgearEndpoint { get; set; } = Preferences.Get("authgear.endpoint", "");
+        public string OauthProviderAlias { get; set; } = Preferences.Get("authgear.oauthProviderAlias", "");
         public SessionState SessionState { get; set; } = SessionState.Unknown;
         public string State { get; private set; } = "<no-authgear-instance>";
         public bool IsNotLoading
@@ -280,6 +281,7 @@ namespace XamarinFormSample
                     ColorScheme = ColorScheme,
                     UiLocales = new List<string> { },
                     PromptOptions = new List<PromptOption> { PromptOption.Login },
+                    OauthProviderAlias = OauthProviderAlias,
                 });
                 EnsureIsMainThread(nameof(AuthenticateAsync));
             }
