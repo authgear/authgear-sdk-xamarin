@@ -12,6 +12,7 @@
             <StackLayout>
                 <Entry Placeholder="Authgear endpoint" Text="{Binding AuthgearEndpoint, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
                 <Entry Placeholder="Client Id" Text="{Binding ClientId, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
+                <Entry Placeholder="Oauth provider alias" Text="{Binding OauthProviderAlias, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
                 <local:LabeledSwitch Text="Use TransientTokenStorage" IsToggled="{Binding UseTransientStorage, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
                 <local:LabeledSwitch Text="Share session with device browser" IsToggled="{Binding ShareSessioWithDeviceBrowser, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
                 <StackLayout RadioButtonGroup.GroupName="AuthenticatePage" RadioButtonGroup.SelectedValue="{Binding AuthenticatePageToShow, Mode=TwoWay}" Margin="16, 16, 16, 0">
