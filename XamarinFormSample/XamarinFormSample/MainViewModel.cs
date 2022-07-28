@@ -381,11 +381,7 @@ namespace XamarinFormSample
             return new BiometricOptions
             {
                 Android = new BiometricOptionsAndroid("Enable biometric title", "subtitle", "description", "Cancel", BiometricAccessConstraintAndroid.BiometricOnly, true),
-                Ios = new BiometricOptionsIos
-                {
-                    LocalizedReason = "Reason",
-                    AccessConstraint = BiometricAccessConstraintIos.BiometricAny
-                }
+                Ios = new BiometricOptionsIos("Reason", BiometricAccessConstraintIos.BiometricAny)
             };
         }
 
