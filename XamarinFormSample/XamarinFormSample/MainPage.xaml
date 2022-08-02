@@ -16,14 +16,14 @@
                 <local:LabeledSwitch Text="Use TransientTokenStorage" IsToggled="{Binding UseTransientStorage, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
                 <local:LabeledSwitch Text="Share session with device browser" IsToggled="{Binding ShareSessioWithDeviceBrowser, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
                 <StackLayout RadioButtonGroup.GroupName="AuthenticatePage" RadioButtonGroup.SelectedValue="{Binding AuthenticatePageToShow, Mode=TwoWay}" Margin="16, 16, 16, 0">
-                    <Label Text="Authenticate Page"/>
-                    <RadioButton Content="Unset" Value="{x:Null}"/>
-                    <RadioButton Content="Login" Value="{Binding Source={x:Static authgear:AuthenticatePage.Login}}"/>
-                    <RadioButton Content="Signup" Value="{Binding Source={x:Static authgear:AuthenticatePage.Signup}}"/>
+                    <Label Text="Authenticate Page" />
+                    <RadioButton Content="Unset" Value="{x:Null}" IsChecked="True" />
+                    <RadioButton Content="Login" Value="{Binding Source={x:Static authgear:AuthenticatePage.Login}}" />
+                    <RadioButton Content="Signup" Value="{Binding Source={x:Static authgear:AuthenticatePage.Signup}}" />
                 </StackLayout>
                 <StackLayout RadioButtonGroup.GroupName="ColorScheme" RadioButtonGroup.SelectedValue="{Binding ExplicitColorScheme, Mode=TwoWay}" Margin="16, 16, 16, 0">
                     <Label Text="Color Scheme" />
-                    <RadioButton Content="Use System" Value="{x:Null}" />
+                    <RadioButton Content="Use System" Value="{x:Null}" IsChecked="True" />
                     <RadioButton Content="Light" Value="{Binding Source={x:Static authgear:ColorScheme.Light}}" />
                     <RadioButton Content="Dark" Value="{Binding Source={x:Static authgear:ColorScheme.Dark}}" />
                 </StackLayout>
