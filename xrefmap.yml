@@ -875,6 +875,19 @@ references:
   commentId: T:Authgear.Xamarin.BiometricOptionsAndroid
   fullName: Authgear.Xamarin.BiometricOptionsAndroid
   nameWithType: BiometricOptionsAndroid
+- uid: Authgear.Xamarin.BiometricOptionsAndroid.#ctor(System.String,System.String,System.String,System.String,Authgear.Xamarin.BiometricAccessConstraintAndroid,System.Boolean)
+  name: BiometricOptionsAndroid(String, String, String, String, BiometricAccessConstraintAndroid, Boolean)
+  href: api/Authgear.Xamarin.BiometricOptionsAndroid.html#Authgear_Xamarin_BiometricOptionsAndroid__ctor_System_String_System_String_System_String_System_String_Authgear_Xamarin_BiometricAccessConstraintAndroid_System_Boolean_
+  commentId: M:Authgear.Xamarin.BiometricOptionsAndroid.#ctor(System.String,System.String,System.String,System.String,Authgear.Xamarin.BiometricAccessConstraintAndroid,System.Boolean)
+  fullName: Authgear.Xamarin.BiometricOptionsAndroid.BiometricOptionsAndroid(System.String, System.String, System.String, System.String, Authgear.Xamarin.BiometricAccessConstraintAndroid, System.Boolean)
+  nameWithType: BiometricOptionsAndroid.BiometricOptionsAndroid(String, String, String, String, BiometricAccessConstraintAndroid, Boolean)
+- uid: Authgear.Xamarin.BiometricOptionsAndroid.#ctor*
+  name: BiometricOptionsAndroid
+  href: api/Authgear.Xamarin.BiometricOptionsAndroid.html#Authgear_Xamarin_BiometricOptionsAndroid__ctor_
+  commentId: Overload:Authgear.Xamarin.BiometricOptionsAndroid.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.BiometricOptionsAndroid.BiometricOptionsAndroid
+  nameWithType: BiometricOptionsAndroid.BiometricOptionsAndroid
 - uid: Authgear.Xamarin.BiometricOptionsAndroid.AccessConstraint
   name: AccessConstraint
   href: api/Authgear.Xamarin.BiometricOptionsAndroid.html#Authgear_Xamarin_BiometricOptionsAndroid_AccessConstraint
@@ -959,6 +972,19 @@ references:
   commentId: T:Authgear.Xamarin.BiometricOptionsIos
   fullName: Authgear.Xamarin.BiometricOptionsIos
   nameWithType: BiometricOptionsIos
+- uid: Authgear.Xamarin.BiometricOptionsIos.#ctor(System.String,Authgear.Xamarin.BiometricAccessConstraintIos)
+  name: BiometricOptionsIos(String, BiometricAccessConstraintIos)
+  href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos__ctor_System_String_Authgear_Xamarin_BiometricAccessConstraintIos_
+  commentId: M:Authgear.Xamarin.BiometricOptionsIos.#ctor(System.String,Authgear.Xamarin.BiometricAccessConstraintIos)
+  fullName: Authgear.Xamarin.BiometricOptionsIos.BiometricOptionsIos(System.String, Authgear.Xamarin.BiometricAccessConstraintIos)
+  nameWithType: BiometricOptionsIos.BiometricOptionsIos(String, BiometricAccessConstraintIos)
+- uid: Authgear.Xamarin.BiometricOptionsIos.#ctor*
+  name: BiometricOptionsIos
+  href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos__ctor_
+  commentId: Overload:Authgear.Xamarin.BiometricOptionsIos.#ctor
+  isSpec: "True"
+  fullName: Authgear.Xamarin.BiometricOptionsIos.BiometricOptionsIos
+  nameWithType: BiometricOptionsIos.BiometricOptionsIos
 - uid: Authgear.Xamarin.BiometricOptionsIos.AccessConstraint
   name: AccessConstraint
   href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos_AccessConstraint
