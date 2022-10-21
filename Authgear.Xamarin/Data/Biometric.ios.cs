@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using Authgear.Xamarin.DeviceInfo;
@@ -36,18 +37,64 @@ namespace Authgear.Xamarin.Data
             }
         }
 
+        private static LAContext LAContextFromLAPolicy(LAPolicy laPolicy)
+        {
+            var context = new LAContext();
+            if (laPolicy == LAPolicy.DeviceOwnerAuthenticationWithBiometrics)
+            {
+                context.LocalizedFallbackTitle = "";
+            }
+            return context;
+        }
+
+        private static LAPolicy LAPolicyFromPolicy(BiometricLAPolicy? policy)
+        {
+            if (policy == null)
+            {
+                throw new ArgumentNullException(nameof(BiometricOptionsIos.Policy));
+            }
+
+            switch (policy)
+            {
+                case BiometricLAPolicy.DeviceOwnerAuthentication:
+                    return LAPolicy.DeviceOwnerAuthentication;
+                case BiometricLAPolicy.DeviceOwnerAuthenticationWithBiometrics:
+                    return LAPolicy.DeviceOwnerAuthenticationWithBiometrics;
+                default:
+                    throw new ArgumentException($"Unknown policy: {policy}");
+            }
+        }
+
         internal Biometric()
         {
         }
 
-        public Task<string> AuthenticateBiometricAsync(BiometricOptions options, string kid, string challenge, DeviceInfoRoot deviceInfo)
+        public async Task<string> AuthenticateBiometricAsync(BiometricOptions options, string kid, string challenge, DeviceInfoRoot deviceInfo)
         {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+            if (options.Ios == null)
+            {
+                throw new ArgumentNullException(nameof(options.Ios));
+            }
+
             EnsureIsSupported(options);
             var tag = string.Format(CultureInfo.InvariantCulture, TagFormat, kid);
+            var laPolicy = LAPolicyFromPolicy(options.Ios.Policy);
+            var context = LAContextFromLAPolicy(laPolicy);
+            var (_, error) = await context.EvaluatePolicyAsync(laPolicy, options.Ios.LocalizedReason ?? "").ConfigureAwait(false);
+            if (error != null)
+            {
+                throw AuthgearException.Wrap(new BiometricIosException(error));
+            }
+
             var record = new SecRecord(SecKind.Key)
             {
                 KeyType = SecKeyType.RSA,
                 ApplicationTag = tag,
+                AuthenticationContext = context,
             };
             var secKeyObjectOpt = SecKeyChain.QueryAsConcreteType(record, out var result);
             if (result != SecStatusCode.Success)
@@ -58,7 +105,7 @@ namespace Authgear.Xamarin.Data
             try
             {
                 var secKey = (SecKey)secKeyObject;
-                return Task.FromResult(SignJwt(kid, secKey, challenge, "authenticate", deviceInfo));
+                return SignJwt(kid, secKey, challenge, "authenticate", deviceInfo);
             }
             catch (Exception ex)
             {
@@ -80,8 +127,9 @@ namespace Authgear.Xamarin.Data
             var kid = Guid.NewGuid().ToString();
             var tag = string.Format(CultureInfo.InvariantCulture, TagFormat, kid);
             var flags = ToFlags(options.Ios.AccessConstraint);
-            var context = new LAContext();
-            var (_, error) = await context.EvaluatePolicyAsync(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, options.Ios.LocalizedReason ?? "").ConfigureAwait(false);
+            var laPolicy = LAPolicy.DeviceOwnerAuthenticationWithBiometrics;
+            var context = LAContextFromLAPolicy(laPolicy);
+            var (_, error) = await context.EvaluatePolicyAsync(laPolicy, options.Ios.LocalizedReason ?? "").ConfigureAwait(false);
             if (error != null)
             {
                 throw AuthgearException.Wrap(new BiometricIosException(error));
@@ -142,8 +190,9 @@ namespace Authgear.Xamarin.Data
         public void EnsureIsSupported(BiometricOptions options)
         {
             EnsureApiLevel();
-            var context = new LAContext();
-            _ = context.CanEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, out var error);
+            var laPolicy = LAPolicy.DeviceOwnerAuthenticationWithBiometrics;
+            var context = LAContextFromLAPolicy(laPolicy);
+            _ = context.CanEvaluatePolicy(laPolicy, out var error);
             if (error != null)
             {
                 throw AuthgearException.Wrap(new BiometricIosException(error));
