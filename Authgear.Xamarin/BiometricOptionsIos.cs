@@ -8,11 +8,17 @@ namespace Authgear.Xamarin
     {
         public string LocalizedReason { get; set; }
         public BiometricAccessConstraintIos AccessConstraint { get; set; }
+        public BiometricLAPolicy Policy { get; set; }
 
-        public BiometricOptionsIos(string localizedReason, BiometricAccessConstraintIos accessConstraint)
+        public BiometricOptionsIos(
+            string localizedReason,
+            BiometricAccessConstraintIos accessConstraint,
+            BiometricLAPolicy policy
+        )
         {
             LocalizedReason = localizedReason;
             AccessConstraint = accessConstraint;
+            Policy = policy;
         }
     }
 }
