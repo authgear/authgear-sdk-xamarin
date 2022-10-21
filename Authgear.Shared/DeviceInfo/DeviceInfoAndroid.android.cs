@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Versioning;
 using System.Text;
 using Android.Content;
 using Android.Content.PM;
@@ -11,6 +12,26 @@ namespace Authgear.Xamarin.DeviceInfo
 {
     internal partial class DeviceInfoAndroid
     {
+        [SupportedOSPlatformGuard("android28.0")]
+        private static bool IsAtLeastP()
+        {
+#if Xamarin
+            return AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P;
+#else
+            return OperatingSystem.IsAndroidVersionAtLeast(28, 0);
+#endif
+        }
+
+        [SupportedOSPlatformGuard("android30.0")]
+        private static bool IsAtLeastR()
+        {
+#if Xamarin
+            return AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R;
+#else
+            return OperatingSystem.IsAndroidVersionAtLeast(30, 0);
+#endif
+        }
+
         public static DeviceInfoAndroid Get(Context context)
         {
             PackageInfo packageInfo;
@@ -19,19 +40,19 @@ namespace Authgear.Xamarin.DeviceInfo
             var baseOs = "";
             var previewSdkInt = "";
             var securityPatch = "";
-            if (AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.M)
+            if (ApiLevelException.IsAtLeastM())
             {
                 baseOs = AndroidBuild.VERSION.BaseOs ?? "";
                 securityPatch = AndroidBuild.VERSION.SecurityPatch ?? "";
                 previewSdkInt = AndroidBuild.VERSION.PreviewSdkInt.ToString(CultureInfo.InvariantCulture);
             }
             var longVersionCode = "";
-            if (AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.P)
+            if (IsAtLeastP())
             {
                 longVersionCode = packageInfo.LongVersionCode.ToString(CultureInfo.InvariantCulture);
             }
             var releaseOrCodeName = "";
-            if (AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R)
+            if (IsAtLeastR())
             {
                 releaseOrCodeName = AndroidBuild.VERSION.ReleaseOrCodename;
             }

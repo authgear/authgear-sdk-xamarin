@@ -3,7 +3,9 @@ using System.Runtime.InteropServices;
 using Foundation;
 using ObjCRuntime;
 using UIKit;
+#if Xamarin
 using Xamarin.Essentials;
+#endif
 
 namespace Authgear.Xamarin.DeviceInfo
 {
@@ -35,7 +37,7 @@ namespace Authgear.Xamarin.DeviceInfo
             Marshal.FreeHGlobal(lengthPtr);
             Marshal.FreeHGlobal(valuePtr);
 
-            return returnValue;
+            return returnValue ?? "";
         }
 
         private static string GetBySysCtlName(string name)
@@ -59,7 +61,11 @@ namespace Authgear.Xamarin.DeviceInfo
                 {
                     // These are best-effort approximation
                     Machine = GetBySysCtlName("hw.machine"),
+#if Xamarin
                     NodeName = global::Xamarin.Essentials.DeviceInfo.Name,
+#else
+                    NodeName = global::Microsoft.Maui.Devices.DeviceInfo.Name,
+#endif
                     Release = GetBySysCtlName("kern.osrelease"),
                     SysName = GetBySysCtlName("kern.ostype"),
                     Version = GetBySysCtlName("kern.version"),

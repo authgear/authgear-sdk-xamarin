@@ -14,7 +14,9 @@ using Authgear.Xamarin.Data;
 using Authgear.Xamarin.Data.Oauth;
 using Authgear.Xamarin.DeviceInfo;
 using Authgear.Xamarin.Oauth;
+#if Xamarin
 using Xamarin.Essentials;
+#endif
 
 namespace Authgear.Xamarin
 {
@@ -187,7 +189,7 @@ namespace Authgear.Xamarin
             var jwt = await keyRepo.PromoteAnonymousUserAsync(keyId, challenge, PlatformGetDeviceInfo()).ConfigureAwait(false);
             var jwtValue = WebUtility.UrlEncode(jwt);
             var loginHint = $"https://authgear.com/login_hint?type=anonymous&jwt={jwtValue}";
-            var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
+            var codeVerifier = new CodeVerifier();
             var request = options.ToRequest(loginHint, ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier).ConfigureAwait(false);
             var deepLink = await OpenAuthorizeUrlAsync(options.RedirectUri, authorizeUrl).ConfigureAwait(false);
@@ -204,7 +206,7 @@ namespace Authgear.Xamarin
         public async Task<UserInfo> AuthenticateAsync(AuthenticateOptions options)
         {
             EnsureIsInitialized();
-            var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
+            var codeVerifier = new CodeVerifier();
             var request = options.ToRequest(ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier).ConfigureAwait(false);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl).ConfigureAwait(false);
@@ -235,7 +237,7 @@ namespace Authgear.Xamarin
             {
                 throw new AuthgearException("Call refreshIdToken first");
             }
-            var codeVerifier = new CodeVerifier(new RNGCryptoServiceProvider());
+            var codeVerifier = new CodeVerifier();
             var request = options.ToRequest(idTokenHint, ShouldSuppressIDPSessionCookie);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier).ConfigureAwait(false);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl).ConfigureAwait(false);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using Android.Content;
@@ -10,7 +11,9 @@ using AndroidX.Biometric;
 using AndroidX.Fragment.App;
 using Authgear.Xamarin.DeviceInfo;
 using Java.Security;
+#if Xamarin
 using Xamarin.Essentials;
+#endif
 using static AndroidX.Biometric.BiometricPrompt;
 
 namespace Authgear.Xamarin.Data
@@ -84,12 +87,9 @@ namespace Authgear.Xamarin.Data
             this.context = context;
         }
 
-        private static void EnsureApiLevel()
+        private static Exception ApiException()
         {
-            if (Build.VERSION.SdkInt < BuildVersionCodes.M)
-            {
-                throw new InvalidOperationException("Biometric authentication requires at least API Level 23");
-            }
+            return new ApiLevelException("Biometric authentication requires at least API Level 23");
         }
 
         public void EnsureIsSupported(BiometricOptions options)
@@ -98,7 +98,10 @@ namespace Authgear.Xamarin.Data
             {
                 throw new ArgumentNullException(nameof(options.Android));
             }
-            EnsureApiLevel();
+            if (!ApiLevelException.IsAtLeastM())
+            {
+                throw ApiException();
+            }
             EnsureCanAuthenticate(options);
         }
 
@@ -114,6 +117,7 @@ namespace Authgear.Xamarin.Data
             keystore.DeleteEntry(alias);
         }
 
+        [SupportedOSPlatform("android23.0")]
         private static KeyPair GetPrivateKey(string alias)
         {
             var keyStore = KeyStore.GetInstance(AndroidKeyStore)!;
@@ -143,42 +147,15 @@ namespace Authgear.Xamarin.Data
             {
                 throw new ArgumentNullException(nameof(options.Android));
             }
-            EnsureApiLevel();
-            EnsureCanAuthenticate(options);
-            var optionsAn = options.Android;
-            var promptInfo = BuildPromptInfo(optionsAn);
-            var kid = Guid.NewGuid().ToString();
-            var alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, kid);
-            var spec = MakeGenerateKeyPairSpec(alias, ToKeyPropertiesAuthType(optionsAn.AccessConstraint), optionsAn.InvalidatedByBiometricEnrollment);
-            var keyPair = CreateKeyPair(spec);
-            var jwk = Jwk.FromPublicKey(kid, keyPair.Public!);
-            var header = new JwtHeader
+            if (ApiLevelException.IsAtLeastM())
             {
-                Typ = JwtHeaderType.Biometric,
-                Kid = kid,
-                Alg = jwk.Alg,
-                Jwk = jwk,
-            };
-            var payload = new JwtPayload(DateTimeOffset.Now, challenge, "setup", deviceInfo);
-            var lockedSignature = KeyRepo.MakeSignature(keyPair.Private!);
-            var cryptoObject = new CryptoObject(lockedSignature);
-            var jwt = await Authenticate(promptInfo, cryptoObject, header, payload).ConfigureAwait(false);
-            return new BiometricEnableResult { Kid = kid, Jwt = jwt };
-        }
-
-        public async Task<string> AuthenticateBiometricAsync(BiometricOptions options, string kid, string challenge, DeviceInfoRoot deviceInfo)
-        {
-            if (options.Android == null)
-            {
-                throw new ArgumentNullException(nameof(options.Android));
-            }
-            EnsureApiLevel();
-            EnsureCanAuthenticate(options);
-            var promptInfo = BuildPromptInfo(options.Android);
-            var alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, kid);
-            try
-            {
-                var keyPair = GetPrivateKey(alias);
+                EnsureCanAuthenticate(options);
+                var optionsAn = options.Android;
+                var promptInfo = BuildPromptInfo(optionsAn);
+                var kid = Guid.NewGuid().ToString();
+                var alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, kid);
+                var spec = MakeGenerateKeyPairSpec(alias, ToKeyPropertiesAuthType(optionsAn.AccessConstraint), optionsAn.InvalidatedByBiometricEnrollment);
+                var keyPair = CreateKeyPair(spec);
                 var jwk = Jwk.FromPublicKey(kid, keyPair.Public!);
                 var header = new JwtHeader
                 {
@@ -187,15 +164,48 @@ namespace Authgear.Xamarin.Data
                     Alg = jwk.Alg,
                     Jwk = jwk,
                 };
-                var payload = new JwtPayload(DateTimeOffset.Now, challenge, "authenticate", deviceInfo);
+                var payload = new JwtPayload(DateTimeOffset.Now, challenge, "setup", deviceInfo);
                 var lockedSignature = KeyRepo.MakeSignature(keyPair.Private!);
                 var cryptoObject = new CryptoObject(lockedSignature);
-                return await Authenticate(promptInfo, cryptoObject, header, payload).ConfigureAwait(false);
+                var jwt = await Authenticate(promptInfo, cryptoObject, header, payload).ConfigureAwait(false);
+                return new BiometricEnableResult { Kid = kid, Jwt = jwt };
             }
-            catch (Exception ex)
+            throw ApiException();
+        }
+
+        public async Task<string> AuthenticateBiometricAsync(BiometricOptions options, string kid, string challenge, DeviceInfoRoot deviceInfo)
+        {
+            if (options.Android == null)
             {
-                throw AuthgearException.Wrap(ex);
+                throw new ArgumentNullException(nameof(options.Android));
             }
+            if (ApiLevelException.IsAtLeastM())
+            {
+                EnsureCanAuthenticate(options);
+                var promptInfo = BuildPromptInfo(options.Android);
+                var alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, kid);
+                try
+                {
+                    var keyPair = GetPrivateKey(alias);
+                    var jwk = Jwk.FromPublicKey(kid, keyPair.Public!);
+                    var header = new JwtHeader
+                    {
+                        Typ = JwtHeaderType.Biometric,
+                        Kid = kid,
+                        Alg = jwk.Alg,
+                        Jwk = jwk,
+                    };
+                    var payload = new JwtPayload(DateTimeOffset.Now, challenge, "authenticate", deviceInfo);
+                    var lockedSignature = KeyRepo.MakeSignature(keyPair.Private!);
+                    var cryptoObject = new CryptoObject(lockedSignature);
+                    return await Authenticate(promptInfo, cryptoObject, header, payload).ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    throw AuthgearException.Wrap(ex);
+                }
+            }
+            throw ApiException();
         }
 
         private static PromptInfo BuildPromptInfo(BiometricOptionsAndroid options)
@@ -221,6 +231,28 @@ namespace Authgear.Xamarin.Data
             return builder.Build();
         }
 
+        [SupportedOSPlatformGuard("android30.0")]
+        private static bool IsAtLeastR()
+        {
+#if Xamarin
+            return Build.VERSION.SdkInt >= BuildVersionCodes.R;
+#else
+            return OperatingSystem.IsAndroidVersionAtLeast(30, 0);
+#endif
+        }
+
+        [SupportedOSPlatformGuard("android24.0")]
+        private static bool IsAtLeastN()
+        {
+
+#if Xamarin
+            return Build.VERSION.SdkInt >= BuildVersionCodes.N;
+#else
+            return OperatingSystem.IsAndroidVersionAtLeast(24, 0);
+#endif
+        }
+
+        [SupportedOSPlatform("android23.0")]
         private static KeyGenParameterSpec MakeGenerateKeyPairSpec(string alias, KeyPropertiesAuthType type, bool invalidatedByBiometricEnrollment)
         {
             var builder = new KeyGenParameterSpec.Builder(alias, KeyStorePurpose.Sign | KeyStorePurpose.Verify)
@@ -228,11 +260,11 @@ namespace Authgear.Xamarin.Data
                 .SetDigests(KeyProperties.DigestSha256)
                 .SetSignaturePaddings(KeyProperties.SignaturePaddingRsaPkcs1)
                 .SetUserAuthenticationRequired(true);
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.R)
+            if (IsAtLeastR())
             {
                 builder.SetUserAuthenticationParameters(0 /* 0 means require authentication every time */, Convert.ToInt32(type, CultureInfo.InvariantCulture));
             }
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
+            if (IsAtLeastN())
             {
                 builder.SetInvalidatedByBiometricEnrollment(invalidatedByBiometricEnrollment);
             }
@@ -267,6 +299,7 @@ namespace Authgear.Xamarin.Data
             return builder.Build();
         }
 
+        [SupportedOSPlatform("android23.0")]
         private static KeyPair CreateKeyPair(KeyGenParameterSpec spec)
         {
             var generator = KeyPairGenerator.GetInstance(KeyProperties.KeyAlgorithmRsa, AndroidKeyStore)!;

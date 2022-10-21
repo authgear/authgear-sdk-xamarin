@@ -19,7 +19,7 @@ namespace Authgear.Xamarin.Data.Oauth
 
         private OidcConfiguration? config;
 
-        private readonly SemaphoreSlim locker = new SemaphoreSlim(1, 1);
+        private readonly SemaphoreSlim locker = new(1, 1);
 
         public OauthRepoHttp(HttpClient client, string endpoint)
         {
@@ -93,7 +93,7 @@ namespace Authgear.Xamarin.Data.Oauth
                 ["token"] = refreshToken
             };
             using var content = new FormUrlEncodedContent(body);
-            var responseMessage = await httpClient.PostAsync(new Uri(config.RevocationEndpoint), content).ConfigureAwait(false);
+            var responseMessage = await httpClient.PostAsync(new Uri(config.RevocationEndpoint ?? ""), content).ConfigureAwait(false);
             await responseMessage.EnsureSuccessOrAuthgearExceptionAsync().ConfigureAwait(false);
         }
 

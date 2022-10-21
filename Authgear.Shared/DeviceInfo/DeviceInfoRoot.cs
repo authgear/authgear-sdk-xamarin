@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+#if Xamarin
 using Xamarin.Essentials;
+#endif
 
 namespace Authgear.Xamarin.DeviceInfo
 {

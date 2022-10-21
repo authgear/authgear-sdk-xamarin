@@ -9,7 +9,9 @@ using AndroidX.Activity.Result;
 using AndroidX.AppCompat.App;
 using AndroidX.Browser.CustomTabs;
 using AndroidX.Fragment.App;
+#if Xamarin
 using Xamarin.Essentials;
+#endif
 
 namespace Authgear.Xamarin
 {
@@ -71,7 +73,7 @@ namespace Authgear.Xamarin
         }
         private HookFragment? FindOrCreateFragment()
         {
-            if (!(Platform.CurrentActivity is AppCompatActivity activity))
+            if (Platform.CurrentActivity is not AppCompatActivity activity)
             {
                 Debug.WriteLine("Calling ShowAsync or initiating authgear without a valid activity in use, fragment setup ignored.");
                 return null;

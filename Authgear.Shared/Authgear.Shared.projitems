@@ -13,14 +13,14 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)**\*.cs" Exclude="$(MSBuildThisFileDirectory)obj\**\*.cs;$(MSBuildThisFileDirectory)**\*.android.cs;$(MSBuildThisFileDirectory)**\*.netstandard.cs;$(MSBuildThisFileDirectory)**\*.ios.cs" />
   </ItemGroup>
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) Or $(Targetframework.Contains('android')) ">
     <Compile Include="$(MSBuildThisFileDirectory)**\*.android.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)**\*.android.*.cs" />
   </ItemGroup>
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) Or $(Targetframework) == 'net6.0' ">
     <Compile Include="$(MSBuildThisFileDirectory)**\*.netstandard.cs" />
   </ItemGroup>
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) Or $(Targetframework.Contains('ios')) ">
     <Compile Include="$(MSBuildThisFileDirectory)**\*.ios.cs" />
   </ItemGroup>
 </Project>

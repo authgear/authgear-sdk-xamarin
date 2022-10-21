@@ -25,6 +25,30 @@
 	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|Xamarin.iOS10|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|Xamarin.iOS10|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|MonoAndroid12.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|MonoAndroid12.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="6.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.2" />

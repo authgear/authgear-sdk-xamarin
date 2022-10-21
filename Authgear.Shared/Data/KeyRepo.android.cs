@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using Android.Security.Keystore;
@@ -15,51 +16,70 @@ namespace Authgear.Xamarin
     {
         private const string AliasFormat = "com.authgear.keys.anonymous.{0}";
         private const string AndroidKeyStore = "AndroidKeyStore";
+
+        [SupportedOSPlatformGuard("android23.0")]
+        private static bool IsAtLeastM()
+        {
+#if Xamarin
+            return if (Build.VERSION.SdkInt >= BuildVersionCodes.M);
+#else
+            return OperatingSystem.IsAndroidVersionAtLeast(23, 0);
+#endif
+        }
+
         public Task<KeyJwtResult> GetOrCreateAnonymousJwtAsync(string keyId, string challenge, DeviceInfoRoot deviceInfo)
         {
-            KeyPair keyPair;
-            if (keyId == null)
+            if (IsAtLeastM())
             {
-                keyId = Guid.NewGuid().ToString();
-                keyPair = GenerateAnonymousKey(keyId);
-            }
-            else
-            {
-                keyPair = GetAnonymousKey(keyId);
-                if (keyPair == null)
+                KeyPair keyPair;
+                if (keyId == null)
                 {
-                    throw new AnonymousUserNotFoundException();
+                    keyId = Guid.NewGuid().ToString();
+                    keyPair = GenerateAnonymousKey(keyId);
                 }
+                else
+                {
+                    keyPair = GetAnonymousKey(keyId);
+                    if (keyPair == null)
+                    {
+                        throw new AnonymousUserNotFoundException();
+                    }
+                }
+                var jwk = Jwk.FromPublicKey(keyId, keyPair.Public!);
+                var header = new JwtHeader
+                {
+                    Typ = JwtHeaderType.Anonymous,
+                    Jwk = jwk,
+                    Alg = jwk.Alg,
+                    Kid = jwk.Kid,
+                };
+                var payload = new JwtPayload(DateTimeOffset.Now, challenge, "auth", deviceInfo);
+                var signature = MakeSignature(keyPair.Private!);
+                var jwt = Jwt.Sign(signature, header, payload);
+                return Task.FromResult(new KeyJwtResult { Jwt = jwt, KeyId = keyId });
             }
-            var jwk = Jwk.FromPublicKey(keyId, keyPair.Public!);
-            var header = new JwtHeader
-            {
-                Typ = JwtHeaderType.Anonymous,
-                Jwk = jwk,
-                Alg = jwk.Alg,
-                Kid = jwk.Kid,
-            };
-            var payload = new JwtPayload(DateTimeOffset.Now, challenge, "auth", deviceInfo);
-            var signature = MakeSignature(keyPair.Private!);
-            var jwt = Jwt.Sign(signature, header, payload);
-            return Task.FromResult(new KeyJwtResult { Jwt = jwt, KeyId = keyId });
+            throw new ApiLevelException("API < 23");
         }
 
         public Task<string> PromoteAnonymousUserAsync(string keyId, string challenge, DeviceInfoRoot deviceInfo)
         {
-            var keyPair = GetAnonymousKey(keyId) ?? throw new AnonymousUserNotFoundException();
-            var jwk = Jwk.FromPublicKey(keyId, keyPair.Public!);
-            var header = new JwtHeader
+            if (IsAtLeastM())
             {
-                Typ = JwtHeaderType.Anonymous,
-                Jwk = jwk,
-                Alg = jwk.Alg,
-                Kid = jwk.Kid,
-            };
-            var payload = new JwtPayload(DateTimeOffset.Now, challenge, "promote", deviceInfo);
-            var signature = MakeSignature(keyPair.Private!);
-            var jwt = Jwt.Sign(signature, header, payload);
-            return Task.FromResult(jwt);
+                var keyPair = GetAnonymousKey(keyId) ?? throw new AnonymousUserNotFoundException();
+                var jwk = Jwk.FromPublicKey(keyId, keyPair.Public!);
+                var header = new JwtHeader
+                {
+                    Typ = JwtHeaderType.Anonymous,
+                    Jwk = jwk,
+                    Alg = jwk.Alg,
+                    Kid = jwk.Kid,
+                };
+                var payload = new JwtPayload(DateTimeOffset.Now, challenge, "promote", deviceInfo);
+                var signature = MakeSignature(keyPair.Private!);
+                var jwt = Jwt.Sign(signature, header, payload);
+                return Task.FromResult(jwt);
+            }
+            throw new ApiLevelException("API < 23");
         }
 
         public static Signature MakeSignature(IPrivateKey privateKey)
@@ -69,6 +89,7 @@ namespace Authgear.Xamarin
             return signature;
         }
 
+        [SupportedOSPlatform("android23.0")]
         private static KeyPair GenerateAnonymousKey(string keyId)
         {
             string alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, keyId);
@@ -81,6 +102,7 @@ namespace Authgear.Xamarin
             return kpg.GenerateKeyPair()!;
         }
 
+        [SupportedOSPlatform("android23.0")]
         private static KeyPair GetAnonymousKey(string keyId)
         {
             var alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, keyId);
