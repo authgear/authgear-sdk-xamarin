@@ -33,12 +33,9 @@
 
 	<ItemGroup>
 		<None Include="..\LICENSE" PackagePath="" Pack="true" />
-		<Compile Include="**\*.cs" Exclude="obj\**\*.cs;**\*.android.cs;**\*.netstandard.cs;**\*.ios.cs" />
 	</ItemGroup>
-	
+
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-		<Compile Include="**\*.android.cs" />
-		<Compile Include="**\*.android.*.cs" />
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
 		<Reference Include="System.Numerics" />
 		<AndroidResource Include="Resources\xml\*.xml" />
@@ -48,10 +45,10 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
-		<Compile Include="**\*.netstandard.cs" />
 	</ItemGroup>
-	
+
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-		<Compile Include="**\*.ios.cs" />
 	</ItemGroup>
+
+	<Import Project="..\Authgear.Shared\Authgear.Shared.projitems" Label="Shared" />
 </Project>

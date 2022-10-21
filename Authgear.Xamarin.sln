@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XamarinFormSample", "Xamari
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{AA91AD88-14E2-40D9-9945-8C95152625CD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Authgear.Shared", "Authgear.Shared\Authgear.Shared.shproj", "{09E91D5A-675E-40F5-A4EE-A65AB8D7007C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,5 +97,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45E4118D-5062-4E2C-9E03-C961E4D7D604}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Authgear.Shared\Authgear.Shared.projitems*{09e91d5a-675e-40f5-a4ee-a65ab8d7007c}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
