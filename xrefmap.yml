@@ -689,6 +689,24 @@ references:
   commentId: F:Authgear.Xamarin.BiometricAccessConstraintIos.UserPresence
   fullName: Authgear.Xamarin.BiometricAccessConstraintIos.UserPresence
   nameWithType: BiometricAccessConstraintIos.UserPresence
+- uid: Authgear.Xamarin.BiometricLAPolicy
+  name: BiometricLAPolicy
+  href: api/Authgear.Xamarin.BiometricLAPolicy.html
+  commentId: T:Authgear.Xamarin.BiometricLAPolicy
+  fullName: Authgear.Xamarin.BiometricLAPolicy
+  nameWithType: BiometricLAPolicy
+- uid: Authgear.Xamarin.BiometricLAPolicy.DeviceOwnerAuthentication
+  name: DeviceOwnerAuthentication
+  href: api/Authgear.Xamarin.BiometricLAPolicy.html#Authgear_Xamarin_BiometricLAPolicy_DeviceOwnerAuthentication
+  commentId: F:Authgear.Xamarin.BiometricLAPolicy.DeviceOwnerAuthentication
+  fullName: Authgear.Xamarin.BiometricLAPolicy.DeviceOwnerAuthentication
+  nameWithType: BiometricLAPolicy.DeviceOwnerAuthentication
+- uid: Authgear.Xamarin.BiometricLAPolicy.DeviceOwnerAuthenticationWithBiometrics
+  name: DeviceOwnerAuthenticationWithBiometrics
+  href: api/Authgear.Xamarin.BiometricLAPolicy.html#Authgear_Xamarin_BiometricLAPolicy_DeviceOwnerAuthenticationWithBiometrics
+  commentId: F:Authgear.Xamarin.BiometricLAPolicy.DeviceOwnerAuthenticationWithBiometrics
+  fullName: Authgear.Xamarin.BiometricLAPolicy.DeviceOwnerAuthenticationWithBiometrics
+  nameWithType: BiometricLAPolicy.DeviceOwnerAuthenticationWithBiometrics
 - uid: Authgear.Xamarin.BiometricLockoutException
   name: BiometricLockoutException
   href: api/Authgear.Xamarin.BiometricLockoutException.html
@@ -972,12 +990,12 @@ references:
   commentId: T:Authgear.Xamarin.BiometricOptionsIos
   fullName: Authgear.Xamarin.BiometricOptionsIos
   nameWithType: BiometricOptionsIos
-- uid: Authgear.Xamarin.BiometricOptionsIos.#ctor(System.String,Authgear.Xamarin.BiometricAccessConstraintIos)
-  name: BiometricOptionsIos(String, BiometricAccessConstraintIos)
-  href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos__ctor_System_String_Authgear_Xamarin_BiometricAccessConstraintIos_
-  commentId: M:Authgear.Xamarin.BiometricOptionsIos.#ctor(System.String,Authgear.Xamarin.BiometricAccessConstraintIos)
-  fullName: Authgear.Xamarin.BiometricOptionsIos.BiometricOptionsIos(System.String, Authgear.Xamarin.BiometricAccessConstraintIos)
-  nameWithType: BiometricOptionsIos.BiometricOptionsIos(String, BiometricAccessConstraintIos)
+- uid: Authgear.Xamarin.BiometricOptionsIos.#ctor(System.String,Authgear.Xamarin.BiometricAccessConstraintIos,Authgear.Xamarin.BiometricLAPolicy)
+  name: BiometricOptionsIos(String, BiometricAccessConstraintIos, BiometricLAPolicy)
+  href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos__ctor_System_String_Authgear_Xamarin_BiometricAccessConstraintIos_Authgear_Xamarin_BiometricLAPolicy_
+  commentId: M:Authgear.Xamarin.BiometricOptionsIos.#ctor(System.String,Authgear.Xamarin.BiometricAccessConstraintIos,Authgear.Xamarin.BiometricLAPolicy)
+  fullName: Authgear.Xamarin.BiometricOptionsIos.BiometricOptionsIos(System.String, Authgear.Xamarin.BiometricAccessConstraintIos, Authgear.Xamarin.BiometricLAPolicy)
+  nameWithType: BiometricOptionsIos.BiometricOptionsIos(String, BiometricAccessConstraintIos, BiometricLAPolicy)
 - uid: Authgear.Xamarin.BiometricOptionsIos.#ctor*
   name: BiometricOptionsIos
   href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos__ctor_
@@ -1011,6 +1029,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.BiometricOptionsIos.LocalizedReason
   nameWithType: BiometricOptionsIos.LocalizedReason
+- uid: Authgear.Xamarin.BiometricOptionsIos.Policy
+  name: Policy
+  href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos_Policy
+  commentId: P:Authgear.Xamarin.BiometricOptionsIos.Policy
+  fullName: Authgear.Xamarin.BiometricOptionsIos.Policy
+  nameWithType: BiometricOptionsIos.Policy
+- uid: Authgear.Xamarin.BiometricOptionsIos.Policy*
+  name: Policy
+  href: api/Authgear.Xamarin.BiometricOptionsIos.html#Authgear_Xamarin_BiometricOptionsIos_Policy_
+  commentId: Overload:Authgear.Xamarin.BiometricOptionsIos.Policy
+  isSpec: "True"
+  fullName: Authgear.Xamarin.BiometricOptionsIos.Policy
+  nameWithType: BiometricOptionsIos.Policy
 - uid: Authgear.Xamarin.BiometricPrivateKeyNotFoundException
   name: BiometricPrivateKeyNotFoundException
   href: api/Authgear.Xamarin.BiometricPrivateKeyNotFoundException.html
