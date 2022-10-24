@@ -8,10 +8,10 @@
 	  <Title>Authgear Xamarin SDK</Title>
 	  <Description>Authgear SDK for Xamarin</Description>
 	  <Product>$(AssemblyName) ($(TargetFramework))</Product>
-	  <AssemblyVersion>0.6.1.0</AssemblyVersion>
-	  <AssemblyFileVersion>0.6.1.0</AssemblyFileVersion>
-	  <Version>0.6.1</Version>
-	  <PackageVersion>0.6.1</PackageVersion>
+	  <AssemblyVersion>0.7.0.0</AssemblyVersion>
+	  <AssemblyFileVersion>0.7.0.0</AssemblyFileVersion>
+	  <Version>0.7.0</Version>
+	  <PackageVersion>0.7.0</PackageVersion>
 	  <Authors>Oursky</Authors>
 	  <Owners>authgear,oursky</Owners>
 	  <NeutralLanguage>en</NeutralLanguage>
