@@ -12,7 +12,9 @@ namespace Authgear.Xamarin.DeviceInfo
 {
     internal partial class DeviceInfoAndroid
     {
+#if !Xamarin
         [SupportedOSPlatformGuard("android28.0")]
+#endif
         private static bool IsAtLeastP()
         {
 #if Xamarin
@@ -22,7 +24,9 @@ namespace Authgear.Xamarin.DeviceInfo
 #endif
         }
 
+#if !Xamarin
         [SupportedOSPlatformGuard("android30.0")]
+#endif
         private static bool IsAtLeastR()
         {
 #if Xamarin

@@ -19,7 +19,7 @@
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	  <PackageProjectUrl>https://github.com/authgear/authgear-sdk-xamarin</PackageProjectUrl>
-	  <LangVersion>8.0</LangVersion>
+	  <LangVersion>9.0</LangVersion>
 	  <Nullable>enable</Nullable>
 	  <AnalysisMode>AllEnabledByDefault</AnalysisMode>
 	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

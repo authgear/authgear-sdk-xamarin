@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
+using Android.OS;
 using Android.Security.Keystore;
 using Authgear.Xamarin.Data;
 using Authgear.Xamarin.DeviceInfo;
@@ -17,19 +18,9 @@ namespace Authgear.Xamarin
         private const string AliasFormat = "com.authgear.keys.anonymous.{0}";
         private const string AndroidKeyStore = "AndroidKeyStore";
 
-        [SupportedOSPlatformGuard("android23.0")]
-        private static bool IsAtLeastM()
-        {
-#if Xamarin
-            return if (Build.VERSION.SdkInt >= BuildVersionCodes.M);
-#else
-            return OperatingSystem.IsAndroidVersionAtLeast(23, 0);
-#endif
-        }
-
         public Task<KeyJwtResult> GetOrCreateAnonymousJwtAsync(string keyId, string challenge, DeviceInfoRoot deviceInfo)
         {
-            if (IsAtLeastM())
+            if (ApiLevelException.IsAtLeastM())
             {
                 KeyPair keyPair;
                 if (keyId == null)
@@ -63,7 +54,7 @@ namespace Authgear.Xamarin
 
         public Task<string> PromoteAnonymousUserAsync(string keyId, string challenge, DeviceInfoRoot deviceInfo)
         {
-            if (IsAtLeastM())
+            if (ApiLevelException.IsAtLeastM())
             {
                 var keyPair = GetAnonymousKey(keyId) ?? throw new AnonymousUserNotFoundException();
                 var jwk = Jwk.FromPublicKey(keyId, keyPair.Public!);
@@ -89,7 +80,9 @@ namespace Authgear.Xamarin
             return signature;
         }
 
+#if !Xamarin
         [SupportedOSPlatform("android23.0")]
+#endif
         private static KeyPair GenerateAnonymousKey(string keyId)
         {
             string alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, keyId);
@@ -102,7 +95,9 @@ namespace Authgear.Xamarin
             return kpg.GenerateKeyPair()!;
         }
 
+#if !Xamarin
         [SupportedOSPlatform("android23.0")]
+#endif
         private static KeyPair GetAnonymousKey(string keyId)
         {
             var alias = string.Format(CultureInfo.InvariantCulture, AliasFormat, keyId);

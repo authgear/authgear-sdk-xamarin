@@ -12,14 +12,18 @@ namespace Authgear.Xamarin
     {
         public string Verifier { get; private set; }
         public string Challenge { get; private set; }
-        public CodeVerifier()
+        public CodeVerifier(RandomNumberGenerator generator)
         {
             const int byteCount = 32;
             var bytes = new byte[byteCount];
-            RandomNumberGenerator.Fill(bytes);
+            using (var provider = generator)
+            {
+                provider.GetBytes(bytes);
+            }
             Verifier = string.Join("", bytes.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
             Challenge = ComputeCodeChallenge(Verifier);
         }
+        public CodeVerifier() : this(RandomNumberGenerator.Create()) { }
 
         private static string ComputeCodeChallenge(string verifier)
         {

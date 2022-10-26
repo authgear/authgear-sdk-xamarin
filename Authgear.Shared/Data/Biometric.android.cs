@@ -117,7 +117,9 @@ namespace Authgear.Xamarin.Data
             keystore.DeleteEntry(alias);
         }
 
+#if !Xamarin
         [SupportedOSPlatform("android23.0")]
+#endif
         private static KeyPair GetPrivateKey(string alias)
         {
             var keyStore = KeyStore.GetInstance(AndroidKeyStore)!;
@@ -231,7 +233,9 @@ namespace Authgear.Xamarin.Data
             return builder.Build();
         }
 
+#if !Xamarin
         [SupportedOSPlatformGuard("android30.0")]
+#endif
         private static bool IsAtLeastR()
         {
 #if Xamarin
@@ -241,7 +245,9 @@ namespace Authgear.Xamarin.Data
 #endif
         }
 
+#if !Xamarin
         [SupportedOSPlatformGuard("android24.0")]
+#endif
         private static bool IsAtLeastN()
         {
 
@@ -252,7 +258,9 @@ namespace Authgear.Xamarin.Data
 #endif
         }
 
+#if !Xamarin
         [SupportedOSPlatform("android23.0")]
+#endif
         private static KeyGenParameterSpec MakeGenerateKeyPairSpec(string alias, KeyPropertiesAuthType type, bool invalidatedByBiometricEnrollment)
         {
             var builder = new KeyGenParameterSpec.Builder(alias, KeyStorePurpose.Sign | KeyStorePurpose.Verify)
@@ -299,7 +307,9 @@ namespace Authgear.Xamarin.Data
             return builder.Build();
         }
 
+#if !Xamarin
         [SupportedOSPlatform("android23.0")]
+#endif
         private static KeyPair CreateKeyPair(KeyGenParameterSpec spec)
         {
             var generator = KeyPairGenerator.GetInstance(KeyProperties.KeyAlgorithmRsa, AndroidKeyStore)!;
