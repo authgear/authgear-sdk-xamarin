@@ -7,6 +7,11 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 
+#if Xamarin
+using Xamarin.Essentials;
+using Xamarin.Forms;
+#endif
+
 namespace AuthgearSample
 {
     public class MainViewModel : INotifyPropertyChanged

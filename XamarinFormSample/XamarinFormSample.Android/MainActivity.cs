@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.OS;
 using Authgear.Xamarin;
 using Xamarin.Forms;
+using AuthgearSample;
 
 namespace XamarinFormSample.Droid
 {

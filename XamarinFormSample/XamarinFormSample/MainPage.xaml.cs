@@ -1,4 +1,5 @@
 ﻿using Authgear.Xamarin;
+using AuthgearSample;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

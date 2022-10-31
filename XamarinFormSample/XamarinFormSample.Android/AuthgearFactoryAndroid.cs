@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Authgear.Xamarin;
+using AuthgearSample;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,94 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:XamarinFormSample"
-             xmlns:authgear="clr-namespace:Authgear.Xamarin;assembly=Authgear.Xamarin"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             x:Class="XamarinFormSample.MainPage"
-             x:DataType="local:MainViewModel"
-             ios:Page.UseSafeArea="true">
+<ContentPage
+    x:Class="XamarinFormSample.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:authgear="clr-namespace:Authgear.Xamarin;assembly=Authgear.Xamarin"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:XamarinFormSample"
+    xmlns:sample="clr-namespace:AuthgearSample"
+    ios:Page.UseSafeArea="true"
+    x:DataType="sample:MainViewModel">
     <Grid>
         <ScrollView>
             <StackLayout>
-                <Entry Placeholder="Authgear endpoint" Text="{Binding AuthgearEndpoint, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
-                <Entry Placeholder="Client Id" Text="{Binding ClientId, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
-                <Entry Placeholder="Oauth provider alias" Text="{Binding OauthProviderAlias, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
-                <local:LabeledSwitch Text="Use TransientTokenStorage" IsToggled="{Binding UseTransientStorage, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
-                <local:LabeledSwitch Text="Share session with device browser" IsToggled="{Binding ShareSessioWithDeviceBrowser, Mode=TwoWay}" Margin="16, 16, 16, 0"/>
-                <StackLayout RadioButtonGroup.GroupName="AuthenticatePage" RadioButtonGroup.SelectedValue="{Binding AuthenticatePageToShow, Mode=TwoWay}" Margin="16, 16, 16, 0">
+                <Entry
+                    Margin="16,16,16,0"
+                    Placeholder="Authgear endpoint"
+                    Text="{Binding AuthgearEndpoint, Mode=TwoWay}" />
+                <Entry
+                    Margin="16,16,16,0"
+                    Placeholder="Client Id"
+                    Text="{Binding ClientId, Mode=TwoWay}" />
+                <Entry
+                    Margin="16,16,16,0"
+                    Placeholder="Oauth provider alias"
+                    Text="{Binding OauthProviderAlias, Mode=TwoWay}" />
+                <local:LabeledSwitch
+                    Margin="16,16,16,0"
+                    IsToggled="{Binding UseTransientStorage, Mode=TwoWay}"
+                    Text="Use TransientTokenStorage" />
+                <local:LabeledSwitch
+                    Margin="16,16,16,0"
+                    IsToggled="{Binding ShareSessioWithDeviceBrowser, Mode=TwoWay}"
+                    Text="Share session with device browser" />
+                <StackLayout
+                    Margin="16,16,16,0"
+                    RadioButtonGroup.GroupName="AuthenticatePage"
+                    RadioButtonGroup.SelectedValue="{Binding AuthenticatePageToShow, Mode=TwoWay}">
                     <Label Text="Authenticate Page" />
-                    <RadioButton Content="Unset" Value="{x:Null}" IsChecked="True" />
+                    <RadioButton
+                        Content="Unset"
+                        IsChecked="True"
+                        Value="{x:Null}" />
                     <RadioButton Content="Login" Value="{Binding Source={x:Static authgear:AuthenticatePage.Login}}" />
                     <RadioButton Content="Signup" Value="{Binding Source={x:Static authgear:AuthenticatePage.Signup}}" />
                 </StackLayout>
-                <StackLayout RadioButtonGroup.GroupName="ColorScheme" RadioButtonGroup.SelectedValue="{Binding ExplicitColorScheme, Mode=TwoWay}" Margin="16, 16, 16, 0">
+                <StackLayout
+                    Margin="16,16,16,0"
+                    RadioButtonGroup.GroupName="ColorScheme"
+                    RadioButtonGroup.SelectedValue="{Binding ExplicitColorScheme, Mode=TwoWay}">
                     <Label Text="Color Scheme" />
-                    <RadioButton Content="Use System" Value="{x:Null}" IsChecked="True" />
+                    <RadioButton
+                        Content="Use System"
+                        IsChecked="True"
+                        Value="{x:Null}" />
                     <RadioButton Content="Light" Value="{Binding Source={x:Static authgear:ColorScheme.Light}}" />
                     <RadioButton Content="Dark" Value="{Binding Source={x:Static authgear:ColorScheme.Dark}}" />
                 </StackLayout>
-                <Label Text="SessionState" Margin="16, 16, 16, 0"/>
-                <Label Text="{Binding State, Mode=OneWay}" Margin="16, 16, 16, 0"/>
-                <Button Text="Configure" Clicked="Configure_Clicked" Margin="16, 16, 16, 0" />
+                <Label Margin="16,16,16,0" Text="SessionState" />
+                <Label Margin="16,16,16,0" Text="{Binding State, Mode=OneWay}" />
                 <Button
-                    Text="Authenticate"
+                    Margin="16,16,16,0"
+                    Clicked="Configure_Clicked"
+                    Text="Configure" />
+                <Button
+                    Margin="16,16,16,0"
                     Clicked="Authenticate_Clicked"
                     IsEnabled="{Binding IsEnabledAuthenticate, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Authenticate" />
                 <Button
-                    Text="Authenticate Biometric"
+                    Margin="16,16,16,0"
                     Clicked="AuthenticateBiometric_Clicked"
                     IsEnabled="{Binding IsEnabledAuthenticateBiometric, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Authenticate Biometric" />
                 <Button
-                    Text="Reauthenticate (web-only)"
+                    Margin="16,16,16,0"
                     Clicked="ReauthenticateWeb_Clicked"
                     IsEnabled="{Binding IsEnabledReauthenticateWeb, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Reauthenticate (web-only)" />
                 <Button
-                    Text="Reauthenticate (biometric or web)"
+                    Margin="16,16,16,0"
                     Clicked="Reauthenticate_Clicked"
                     IsEnabled="{Binding IsEnabledReauthenticate, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Reauthenticate (biometric or web)" />
                 <Button
-                    Text="Enable Biometric"
+                    Margin="16,16,16,0"
                     Clicked="EnableBiometric_Clicked"
                     IsEnabled="{Binding IsEnabledEnableBiometric, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Enable Biometric" />
                 <Button
-                    Text="Disable Biometric"
+                    Margin="16,16,16,0"
                     Clicked="DisableBiometric_Clicked"
                     IsEnabled="{Binding IsEnabledDisableBiometric, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Disable Biometric" />
                 <Button
-                    Text="Fetch User Info"
+                    Margin="16,16,16,0"
                     Clicked="FetchUserInfo_Clicked"
                     IsEnabled="{Binding IsEnabledFetchUserInfo, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Fetch User Info" />
                 <Button
-                    Text="Open settings"
+                    Margin="16,16,16,0"
                     Clicked="OpenSettings_Clicked"
                     IsEnabled="{Binding IsEnabledOpenSettings, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Open settings" />
                 <Button
-                    Text="Show auth time"
+                    Margin="16,16,16,0"
                     Clicked="ShowAuthTime_Clicked"
                     IsEnabled="{Binding IsEnabledShowAuthTime, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"/>
+                    Text="Show auth time" />
                 <Button
-                    Text="Logout"
+                    Margin="16,16,16,0"
                     Clicked="Logout_Clicked"
                     IsEnabled="{Binding IsEnabledLogout, Mode=OneWay}"
-                    Margin="16, 16, 16, 0"
-                 />
+                    Text="Logout" />
             </StackLayout>
         </ScrollView>
     </Grid>

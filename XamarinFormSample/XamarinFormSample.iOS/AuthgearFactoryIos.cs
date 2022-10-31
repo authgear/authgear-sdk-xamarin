@@ -1,5 +1,6 @@
 ﻿using System;
 using Authgear.Xamarin;
+using AuthgearSample;
 
 namespace XamarinFormSample.iOS
 {
