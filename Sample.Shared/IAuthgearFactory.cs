@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XamarinFormSample
+namespace AuthgearSample
 {
     public interface IAuthgearFactory
     {
