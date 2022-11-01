@@ -54,7 +54,7 @@ jobs:
           publish_dir: Documentation/_site
   pack-xamarin:
     runs-on: windows-2022
-    needs: ["deploy"]
+    needs: ["test"]
     if: startsWith(github.ref, 'refs/tags') && !startsWith(github.ref, 'refs/tags/staging-')
     steps:
       - uses: actions/checkout@v3
@@ -73,7 +73,7 @@ jobs:
           retention-days: 5
   pack-maui:
     runs-on: windows-2022
-    needs: ["deploy"]
+    needs: ["test"]
     if: startsWith(github.ref, 'refs/tags') && !startsWith(github.ref, 'refs/tags/staging-')
     steps:
       - uses: actions/checkout@v3
