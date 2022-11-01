@@ -221,35 +221,11 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">AuthgearSdk</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Authgear.Xamarin.html">Authgear.Xamarin</a></h6>
   <h6><strong>Assembly</strong>: Authgear.Xamarin.dll</h6>
   <h5 id="Authgear_Xamarin_AuthgearSdk_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AuthgearSdk</code></pre>
+    <pre><code class="lang-csharp hljs">public class AuthgearSdk : object</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -258,7 +234,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_AccessToken.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.AccessToken%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L40">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L42">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_AccessToken_" data-uid="Authgear.Xamarin.AuthgearSdk.AccessToken*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_AccessToken" data-uid="Authgear.Xamarin.AuthgearSdk.AccessToken">AccessToken</h4>
@@ -266,7 +242,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string AccessToken { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? AccessToken { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -278,7 +254,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -288,7 +264,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_AuthTime.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.AuthTime%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L44">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L46">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_AuthTime_" data-uid="Authgear.Xamarin.AuthgearSdk.AuthTime*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_AuthTime" data-uid="Authgear.Xamarin.AuthgearSdk.AuthTime">AuthTime</h4>
@@ -308,7 +284,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.DateTimeOffset</span>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">DateTimeOffset</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -318,7 +294,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_CanReauthenticate.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.CanReauthenticate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L75">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L77">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_CanReauthenticate_" data-uid="Authgear.Xamarin.AuthgearSdk.CanReauthenticate*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_CanReauthenticate" data-uid="Authgear.Xamarin.AuthgearSdk.CanReauthenticate">CanReauthenticate</h4>
@@ -348,7 +324,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_ClientId.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.ClientId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L36">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L38">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_ClientId_" data-uid="Authgear.Xamarin.AuthgearSdk.ClientId*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_ClientId" data-uid="Authgear.Xamarin.AuthgearSdk.ClientId">ClientId</h4>
@@ -378,7 +354,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_IdTokenHint.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.IdTokenHint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L42">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L44">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_IdTokenHint_" data-uid="Authgear.Xamarin.AuthgearSdk.IdTokenHint*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_IdTokenHint" data-uid="Authgear.Xamarin.AuthgearSdk.IdTokenHint">IdTokenHint</h4>
@@ -386,7 +362,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string IdTokenHint { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? IdTokenHint { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -398,7 +374,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -408,7 +384,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_SessionState.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.SessionState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L38">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L40">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_SessionState_" data-uid="Authgear.Xamarin.AuthgearSdk.SessionState*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_SessionState" data-uid="Authgear.Xamarin.AuthgearSdk.SessionState">SessionState</h4>
@@ -440,7 +416,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_AuthenticateAnonymouslyAsync.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.AuthenticateAnonymouslyAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L150">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L152">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_AuthenticateAnonymouslyAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.AuthenticateAnonymouslyAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_AuthenticateAnonymouslyAsync" data-uid="Authgear.Xamarin.AuthgearSdk.AuthenticateAnonymouslyAsync">AuthenticateAnonymouslyAsync()</h4>
@@ -460,7 +436,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -470,7 +446,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_AuthenticateAsync_Authgear_Xamarin_AuthenticateOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.AuthenticateAsync(Authgear.Xamarin.AuthenticateOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L204">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L206">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_AuthenticateAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.AuthenticateAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_AuthenticateAsync_Authgear_Xamarin_AuthenticateOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.AuthenticateAsync(Authgear.Xamarin.AuthenticateOptions)">AuthenticateAsync(AuthenticateOptions)</h4>
@@ -507,22 +483,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.TaskCanceledException</span></td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -532,7 +493,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_AuthenticateBiometricAsync_Authgear_Xamarin_BiometricOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.AuthenticateBiometricAsync(Authgear.Xamarin.BiometricOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L507">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L509">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_AuthenticateBiometricAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.AuthenticateBiometricAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_AuthenticateBiometricAsync_Authgear_Xamarin_BiometricOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.AuthenticateBiometricAsync(Authgear.Xamarin.BiometricOptions)">AuthenticateBiometricAsync(BiometricOptions)</h4>
@@ -569,7 +530,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -587,10 +548,6 @@
         <td><a class="xref" href="Authgear.Xamarin.BiometricPrivateKeyNotFoundException.html">BiometricPrivateKeyNotFoundException</a></td>
         <td></td>
       </tr>
-      <tr>
-        <td><span class="xref">System.OperationCanceledException</span></td>
-        <td></td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
@@ -598,7 +555,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_ClearSessionState.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.ClearSessionState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L636">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L638">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_ClearSessionState_" data-uid="Authgear.Xamarin.AuthgearSdk.ClearSessionState*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_ClearSessionState" data-uid="Authgear.Xamarin.AuthgearSdk.ClearSessionState">ClearSessionState()</h4>
@@ -613,7 +570,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_ConfigureAsync.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.ConfigureAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L126">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L128">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_ConfigureAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.ConfigureAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_ConfigureAsync" data-uid="Authgear.Xamarin.AuthgearSdk.ConfigureAsync">ConfigureAsync()</h4>
@@ -633,7 +590,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -643,7 +600,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_DisableBiometricAsync.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.DisableBiometricAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L472">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L474">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_DisableBiometricAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.DisableBiometricAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_DisableBiometricAsync" data-uid="Authgear.Xamarin.AuthgearSdk.DisableBiometricAsync">DisableBiometricAsync()</h4>
@@ -663,7 +620,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -673,7 +630,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_EnableBiometricAsync_Authgear_Xamarin_BiometricOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.EnableBiometricAsync(Authgear.Xamarin.BiometricOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L489">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L491">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_EnableBiometricAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.EnableBiometricAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_EnableBiometricAsync_Authgear_Xamarin_BiometricOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.EnableBiometricAsync(Authgear.Xamarin.BiometricOptions)">EnableBiometricAsync(BiometricOptions)</h4>
@@ -710,7 +667,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -728,10 +685,6 @@
         <td><a class="xref" href="Authgear.Xamarin.UnauthenticatedUserException.html">UnauthenticatedUserException</a></td>
         <td></td>
       </tr>
-      <tr>
-        <td><span class="xref">System.OperationCanceledException</span></td>
-        <td></td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
@@ -739,7 +692,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_EnsureBiometricIsSupported_Authgear_Xamarin_BiometricOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.EnsureBiometricIsSupported(Authgear.Xamarin.BiometricOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L458">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L460">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_EnsureBiometricIsSupported_" data-uid="Authgear.Xamarin.AuthgearSdk.EnsureBiometricIsSupported*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_EnsureBiometricIsSupported_Authgear_Xamarin_BiometricOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.EnsureBiometricIsSupported(Authgear.Xamarin.BiometricOptions)">EnsureBiometricIsSupported(BiometricOptions)</h4>
@@ -771,7 +724,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_FetchUserInfoAsync.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.FetchUserInfoAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L590">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L592">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_FetchUserInfoAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.FetchUserInfoAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_FetchUserInfoAsync" data-uid="Authgear.Xamarin.AuthgearSdk.FetchUserInfoAsync">FetchUserInfoAsync()</h4>
@@ -791,7 +744,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -801,7 +754,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_GetIsBiometricEnabledAsync.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.GetIsBiometricEnabledAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L464">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L466">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_GetIsBiometricEnabledAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.GetIsBiometricEnabledAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_GetIsBiometricEnabledAsync" data-uid="Authgear.Xamarin.AuthgearSdk.GetIsBiometricEnabledAsync">GetIsBiometricEnabledAsync()</h4>
@@ -821,7 +774,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -831,7 +784,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_LogoutAsync_System_Nullable_System_Boolean__.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.LogoutAsync(System.Nullable%7BSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L245">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L247">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_LogoutAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.LogoutAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_LogoutAsync_System_Nullable_System_Boolean__" data-uid="Authgear.Xamarin.AuthgearSdk.LogoutAsync(System.Nullable{System.Boolean})">LogoutAsync(Nullable&lt;Boolean&gt;)</h4>
@@ -868,7 +821,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -878,7 +831,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_OpenAsync_Authgear_Xamarin_SettingsPage_Authgear_Xamarin_SettingsOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage%2CAuthgear.Xamarin.SettingsOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L296">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L298">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_OpenAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.OpenAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_OpenAsync_Authgear_Xamarin_SettingsPage_Authgear_Xamarin_SettingsOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.OpenAsync(Authgear.Xamarin.SettingsPage,Authgear.Xamarin.SettingsOptions)">OpenAsync(SettingsPage, SettingsOptions)</h4>
@@ -920,7 +873,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -930,7 +883,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_OpenUrlAsync_System_String_Authgear_Xamarin_SettingsOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String%2CAuthgear.Xamarin.SettingsOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L263">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L265">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_OpenUrlAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.OpenUrlAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_OpenUrlAsync_System_String_Authgear_Xamarin_SettingsOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.OpenUrlAsync(System.String,Authgear.Xamarin.SettingsOptions)">OpenUrlAsync(String, SettingsOptions)</h4>
@@ -972,7 +925,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -982,7 +935,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_PromoteAnonymousUserAsync_Authgear_Xamarin_PromoteOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.PromoteAnonymousUserAsync(Authgear.Xamarin.PromoteOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L177">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L179">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_PromoteAnonymousUserAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.PromoteAnonymousUserAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_PromoteAnonymousUserAsync_Authgear_Xamarin_PromoteOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.PromoteAnonymousUserAsync(Authgear.Xamarin.PromoteOptions)">PromoteAnonymousUserAsync(PromoteOptions)</h4>
@@ -1019,7 +972,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1037,10 +990,6 @@
         <td><a class="xref" href="Authgear.Xamarin.AnonymousUserNotFoundException.html">AnonymousUserNotFoundException</a></td>
         <td></td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.TaskCanceledException</span></td>
-        <td></td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
@@ -1048,7 +997,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_ReauthenticateAsync_Authgear_Xamarin_ReauthenticateOptions_Authgear_Xamarin_BiometricOptions_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.ReauthenticateAsync(Authgear.Xamarin.ReauthenticateOptions%2CAuthgear.Xamarin.BiometricOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L222">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L224">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_ReauthenticateAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.ReauthenticateAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_ReauthenticateAsync_Authgear_Xamarin_ReauthenticateOptions_Authgear_Xamarin_BiometricOptions_" data-uid="Authgear.Xamarin.AuthgearSdk.ReauthenticateAsync(Authgear.Xamarin.ReauthenticateOptions,Authgear.Xamarin.BiometricOptions)">ReauthenticateAsync(ReauthenticateOptions, BiometricOptions)</h4>
@@ -1090,7 +1039,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Authgear.Xamarin.UserInfo.html">UserInfo</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1108,14 +1057,6 @@
         <td><a class="xref" href="Authgear.Xamarin.AuthgearException.html">AuthgearException</a></td>
         <td></td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Threading.Tasks.TaskCanceledException</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.OperationCanceledException</span></td>
-        <td></td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
@@ -1123,7 +1064,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_RefreshAccessTokenIfNeededAsync.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.RefreshAccessTokenIfNeededAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L613">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L615">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_RefreshAccessTokenIfNeededAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.RefreshAccessTokenIfNeededAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_RefreshAccessTokenIfNeededAsync" data-uid="Authgear.Xamarin.AuthgearSdk.RefreshAccessTokenIfNeededAsync">RefreshAccessTokenIfNeededAsync()</h4>
@@ -1143,7 +1084,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1153,7 +1094,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_RefreshIdTokenAsync.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.RefreshIdTokenAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L598">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L600">View Source</a>
   </span>
   <a id="Authgear_Xamarin_AuthgearSdk_RefreshIdTokenAsync_" data-uid="Authgear.Xamarin.AuthgearSdk.RefreshIdTokenAsync*"></a>
   <h4 id="Authgear_Xamarin_AuthgearSdk_RefreshIdTokenAsync" data-uid="Authgear.Xamarin.AuthgearSdk.RefreshIdTokenAsync">RefreshIdTokenAsync()</h4>
@@ -1173,7 +1114,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td><span class="xref">Task</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1185,7 +1126,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk_SessionStateChange.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk.SessionStateChange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.cs/#L70">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.cs/#L72">View Source</a>
   </span>
   <h4 id="Authgear_Xamarin_AuthgearSdk_SessionStateChange" data-uid="Authgear.Xamarin.AuthgearSdk.SessionStateChange">SessionStateChange</h4>
   <div class="markdown level1 summary"></div>
@@ -1204,7 +1145,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Authgear.Xamarin.SessionStateChangeReason.html">SessionStateChangeReason</a>&gt;</td>
+        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Authgear.Xamarin.SessionStateChangeReason.html">SessionStateChangeReason</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1220,7 +1161,7 @@
                     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_AuthgearSdk.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.AuthgearSdk%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/AuthgearSdk.netstandard.cs/#L9" class="contribution-link">View Source</a>
+                    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/AuthgearSdk.netstandard.cs/#L9" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

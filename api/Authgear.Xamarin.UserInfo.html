@@ -221,35 +221,11 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">UserInfo</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Authgear.Xamarin.html">Authgear.Xamarin</a></h6>
   <h6><strong>Assembly</strong>: Authgear.Xamarin.dll</h6>
   <h5 id="Authgear_Xamarin_UserInfo_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UserInfo</code></pre>
+    <pre><code class="lang-csharp hljs">public class UserInfo : object</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -258,7 +234,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_address.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.address%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L54">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L54">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_address_" data-uid="Authgear.Xamarin.UserInfo.address*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_address" data-uid="Authgear.Xamarin.UserInfo.address">address</h4>
@@ -266,8 +242,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;address&quot;)]
-public UserInfoAddress address { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public UserInfoAddress address { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -289,7 +264,7 @@ public UserInfoAddress address { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Birthdate.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Birthdate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L48">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L48">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Birthdate_" data-uid="Authgear.Xamarin.UserInfo.Birthdate*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Birthdate" data-uid="Authgear.Xamarin.UserInfo.Birthdate">Birthdate</h4>
@@ -297,8 +272,7 @@ public UserInfoAddress address { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;birthdate&quot;)]
-public string Birthdate { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Birthdate { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -310,7 +284,7 @@ public string Birthdate { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -320,7 +294,7 @@ public string Birthdate { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_CanReauthenticate.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.CanReauthenticate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L16">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L16">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_CanReauthenticate_" data-uid="Authgear.Xamarin.UserInfo.CanReauthenticate*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_CanReauthenticate" data-uid="Authgear.Xamarin.UserInfo.CanReauthenticate">CanReauthenticate</h4>
@@ -328,8 +302,7 @@ public string Birthdate { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;https://authgear.com/claims/user/can_reauthenticate&quot;)]
-public bool CanReauthenticate { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool CanReauthenticate { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -351,7 +324,7 @@ public bool CanReauthenticate { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_CustomAttributes.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.CustomAttributes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L18">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L18">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_CustomAttributes_" data-uid="Authgear.Xamarin.UserInfo.CustomAttributes*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_CustomAttributes" data-uid="Authgear.Xamarin.UserInfo.CustomAttributes">CustomAttributes</h4>
@@ -359,8 +332,7 @@ public bool CanReauthenticate { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;custom_attributes&quot;)]
-public Dictionary&lt;string, object&gt; CustomAttributes { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, object&gt;? CustomAttributes { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -372,7 +344,7 @@ public Dictionary&lt;string, object&gt; CustomAttributes { get; set; }</code></p
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -382,7 +354,7 @@ public Dictionary&lt;string, object&gt; CustomAttributes { get; set; }</code></p
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Email.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Email%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L20">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L20">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Email_" data-uid="Authgear.Xamarin.UserInfo.Email*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Email" data-uid="Authgear.Xamarin.UserInfo.Email">Email</h4>
@@ -390,8 +362,7 @@ public Dictionary&lt;string, object&gt; CustomAttributes { get; set; }</code></p
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;email&quot;)]
-public string Email { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Email { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -403,7 +374,7 @@ public string Email { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -413,7 +384,7 @@ public string Email { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_EmailVerified.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.EmailVerified%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L22">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L22">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_EmailVerified_" data-uid="Authgear.Xamarin.UserInfo.EmailVerified*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_EmailVerified" data-uid="Authgear.Xamarin.UserInfo.EmailVerified">EmailVerified</h4>
@@ -421,8 +392,7 @@ public string Email { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;email_verified&quot;)]
-public bool? EmailVerified { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? EmailVerified { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -444,7 +414,7 @@ public bool? EmailVerified { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_FamilyName.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.FamilyName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L30">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L30">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_FamilyName_" data-uid="Authgear.Xamarin.UserInfo.FamilyName*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_FamilyName" data-uid="Authgear.Xamarin.UserInfo.FamilyName">FamilyName</h4>
@@ -452,8 +422,7 @@ public bool? EmailVerified { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;family_name&quot;)]
-public string FamilyName { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? FamilyName { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -465,7 +434,7 @@ public string FamilyName { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -475,7 +444,7 @@ public string FamilyName { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Gender.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Gender%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L46">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L46">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Gender_" data-uid="Authgear.Xamarin.UserInfo.Gender*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Gender" data-uid="Authgear.Xamarin.UserInfo.Gender">Gender</h4>
@@ -483,8 +452,7 @@ public string FamilyName { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;gender&quot;)]
-public string Gender { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Gender { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -496,7 +464,7 @@ public string Gender { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -506,7 +474,7 @@ public string Gender { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_GivenName.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.GivenName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L32">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L32">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_GivenName_" data-uid="Authgear.Xamarin.UserInfo.GivenName*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_GivenName" data-uid="Authgear.Xamarin.UserInfo.GivenName">GivenName</h4>
@@ -514,8 +482,7 @@ public string Gender { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;given_name&quot;)]
-public string GivenName { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? GivenName { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -527,7 +494,7 @@ public string GivenName { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -537,7 +504,7 @@ public string GivenName { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_IsAnonymous.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.IsAnonymous%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L12">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L12">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_IsAnonymous_" data-uid="Authgear.Xamarin.UserInfo.IsAnonymous*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_IsAnonymous" data-uid="Authgear.Xamarin.UserInfo.IsAnonymous">IsAnonymous</h4>
@@ -545,8 +512,7 @@ public string GivenName { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;https://authgear.com/claims/user/is_anonymous&quot;)]
-public bool IsAnonymous { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsAnonymous { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -568,7 +534,7 @@ public bool IsAnonymous { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_IsVerified.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.IsVerified%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L14">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L14">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_IsVerified_" data-uid="Authgear.Xamarin.UserInfo.IsVerified*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_IsVerified" data-uid="Authgear.Xamarin.UserInfo.IsVerified">IsVerified</h4>
@@ -576,8 +542,7 @@ public bool IsAnonymous { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;https://authgear.com/claims/user/is_verified&quot;)]
-public bool IsVerified { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsVerified { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -599,7 +564,7 @@ public bool IsVerified { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Locale.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Locale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L52">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L52">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Locale_" data-uid="Authgear.Xamarin.UserInfo.Locale*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Locale" data-uid="Authgear.Xamarin.UserInfo.Locale">Locale</h4>
@@ -607,8 +572,7 @@ public bool IsVerified { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;locale&quot;)]
-public string Locale { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Locale { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -620,7 +584,7 @@ public string Locale { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -630,7 +594,7 @@ public string Locale { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_MiddleName.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.MiddleName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L34">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L34">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_MiddleName_" data-uid="Authgear.Xamarin.UserInfo.MiddleName*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_MiddleName" data-uid="Authgear.Xamarin.UserInfo.MiddleName">MiddleName</h4>
@@ -638,8 +602,7 @@ public string Locale { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;middle_name&quot;)]
-public string MiddleName { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? MiddleName { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -651,7 +614,7 @@ public string MiddleName { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -661,7 +624,7 @@ public string MiddleName { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Name.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L36">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L36">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Name_" data-uid="Authgear.Xamarin.UserInfo.Name*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Name" data-uid="Authgear.Xamarin.UserInfo.Name">Name</h4>
@@ -669,8 +632,7 @@ public string MiddleName { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;name&quot;)]
-public string Name { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Name { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -682,7 +644,7 @@ public string Name { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -692,7 +654,7 @@ public string Name { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Nickname.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Nickname%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L38">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L38">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Nickname_" data-uid="Authgear.Xamarin.UserInfo.Nickname*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Nickname" data-uid="Authgear.Xamarin.UserInfo.Nickname">Nickname</h4>
@@ -700,8 +662,7 @@ public string Name { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;nickname&quot;)]
-public string Nickname { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Nickname { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -713,7 +674,7 @@ public string Nickname { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -723,7 +684,7 @@ public string Nickname { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_PhoneNumber.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.PhoneNumber%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L24">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L24">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_PhoneNumber_" data-uid="Authgear.Xamarin.UserInfo.PhoneNumber*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_PhoneNumber" data-uid="Authgear.Xamarin.UserInfo.PhoneNumber">PhoneNumber</h4>
@@ -731,8 +692,7 @@ public string Nickname { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;phone_number&quot;)]
-public string PhoneNumber { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? PhoneNumber { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -744,7 +704,7 @@ public string PhoneNumber { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -754,7 +714,7 @@ public string PhoneNumber { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_PhoneNumberVerified.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.PhoneNumberVerified%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L26">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L26">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_PhoneNumberVerified_" data-uid="Authgear.Xamarin.UserInfo.PhoneNumberVerified*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_PhoneNumberVerified" data-uid="Authgear.Xamarin.UserInfo.PhoneNumberVerified">PhoneNumberVerified</h4>
@@ -762,8 +722,7 @@ public string PhoneNumber { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;phone_number_verified&quot;)]
-public bool? PhoneNumberVerified { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool? PhoneNumberVerified { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -785,7 +744,7 @@ public bool? PhoneNumberVerified { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Picture.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Picture%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L40">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L40">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Picture_" data-uid="Authgear.Xamarin.UserInfo.Picture*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Picture" data-uid="Authgear.Xamarin.UserInfo.Picture">Picture</h4>
@@ -793,8 +752,7 @@ public bool? PhoneNumberVerified { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;picture&quot;)]
-public string Picture { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Picture { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -806,7 +764,7 @@ public string Picture { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -816,7 +774,7 @@ public string Picture { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_PreferredUsername.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.PreferredUsername%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L28">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L28">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_PreferredUsername_" data-uid="Authgear.Xamarin.UserInfo.PreferredUsername*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_PreferredUsername" data-uid="Authgear.Xamarin.UserInfo.PreferredUsername">PreferredUsername</h4>
@@ -824,8 +782,7 @@ public string Picture { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;preferred_username&quot;)]
-public string PreferredUsername { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? PreferredUsername { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -837,7 +794,7 @@ public string PreferredUsername { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -847,7 +804,7 @@ public string PreferredUsername { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Profile.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Profile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L42">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L42">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Profile_" data-uid="Authgear.Xamarin.UserInfo.Profile*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Profile" data-uid="Authgear.Xamarin.UserInfo.Profile">Profile</h4>
@@ -855,8 +812,7 @@ public string PreferredUsername { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;profile&quot;)]
-public string Profile { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Profile { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -868,7 +824,7 @@ public string Profile { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -878,7 +834,7 @@ public string Profile { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Sub.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Sub%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L10">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L10">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Sub_" data-uid="Authgear.Xamarin.UserInfo.Sub*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Sub" data-uid="Authgear.Xamarin.UserInfo.Sub">Sub</h4>
@@ -886,8 +842,7 @@ public string Profile { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;sub&quot;)]
-public string Sub { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string Sub { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -909,7 +864,7 @@ public string Sub { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Website.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Website%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L44">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L44">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Website_" data-uid="Authgear.Xamarin.UserInfo.Website*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Website" data-uid="Authgear.Xamarin.UserInfo.Website">Website</h4>
@@ -917,8 +872,7 @@ public string Sub { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;website&quot;)]
-public string Website { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Website { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -930,7 +884,7 @@ public string Website { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -940,7 +894,7 @@ public string Website { get; set; }</code></pre>
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo_Zoneinfo.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo.Zoneinfo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L50">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L50">View Source</a>
   </span>
   <a id="Authgear_Xamarin_UserInfo_Zoneinfo_" data-uid="Authgear.Xamarin.UserInfo.Zoneinfo*"></a>
   <h4 id="Authgear_Xamarin_UserInfo_Zoneinfo" data-uid="Authgear.Xamarin.UserInfo.Zoneinfo">Zoneinfo</h4>
@@ -948,8 +902,7 @@ public string Website { get; set; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonPropertyName(&quot;zoneinfo&quot;)]
-public string Zoneinfo { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Zoneinfo { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -961,7 +914,7 @@ public string Zoneinfo { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -977,7 +930,7 @@ public string Zoneinfo { get; set; }</code></pre>
                     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_UserInfo.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.UserInfo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/UserInfo.cs/#L8" class="contribution-link">View Source</a>
+                    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/UserInfo.cs/#L8" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

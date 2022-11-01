@@ -179,11 +179,11 @@ references:
   commentId: M:Authgear.Xamarin.AuthgearException.#ctor
   fullName: Authgear.Xamarin.AuthgearException.AuthgearException()
   nameWithType: AuthgearException.AuthgearException()
-- uid: Authgear.Xamarin.AuthgearException.#ctor(System.Exception)
+- uid: Authgear.Xamarin.AuthgearException.#ctor(Exception)
   name: AuthgearException(Exception)
-  href: api/Authgear.Xamarin.AuthgearException.html#Authgear_Xamarin_AuthgearException__ctor_System_Exception_
-  commentId: M:Authgear.Xamarin.AuthgearException.#ctor(System.Exception)
-  fullName: Authgear.Xamarin.AuthgearException.AuthgearException(System.Exception)
+  href: api/Authgear.Xamarin.AuthgearException.html#Authgear_Xamarin_AuthgearException__ctor_Exception_
+  commentId: M:Authgear.Xamarin.AuthgearException.#ctor(Exception)
+  fullName: Authgear.Xamarin.AuthgearException.AuthgearException(Exception)
   nameWithType: AuthgearException.AuthgearException(Exception)
 - uid: Authgear.Xamarin.AuthgearException.#ctor(System.String)
   name: AuthgearException(String)
@@ -191,11 +191,11 @@ references:
   commentId: M:Authgear.Xamarin.AuthgearException.#ctor(System.String)
   fullName: Authgear.Xamarin.AuthgearException.AuthgearException(System.String)
   nameWithType: AuthgearException.AuthgearException(String)
-- uid: Authgear.Xamarin.AuthgearException.#ctor(System.String,System.Exception)
+- uid: Authgear.Xamarin.AuthgearException.#ctor(System.String,Exception)
   name: AuthgearException(String, Exception)
-  href: api/Authgear.Xamarin.AuthgearException.html#Authgear_Xamarin_AuthgearException__ctor_System_String_System_Exception_
-  commentId: M:Authgear.Xamarin.AuthgearException.#ctor(System.String,System.Exception)
-  fullName: Authgear.Xamarin.AuthgearException.AuthgearException(System.String, System.Exception)
+  href: api/Authgear.Xamarin.AuthgearException.html#Authgear_Xamarin_AuthgearException__ctor_System_String_Exception_
+  commentId: M:Authgear.Xamarin.AuthgearException.#ctor(System.String,Exception)
+  fullName: Authgear.Xamarin.AuthgearException.AuthgearException(System.String, Exception)
   nameWithType: AuthgearException.AuthgearException(String, Exception)
 - uid: Authgear.Xamarin.AuthgearException.#ctor*
   name: AuthgearException
@@ -719,11 +719,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricLockoutException.#ctor
   fullName: Authgear.Xamarin.BiometricLockoutException.BiometricLockoutException()
   nameWithType: BiometricLockoutException.BiometricLockoutException()
-- uid: Authgear.Xamarin.BiometricLockoutException.#ctor(System.Exception)
+- uid: Authgear.Xamarin.BiometricLockoutException.#ctor(Exception)
   name: BiometricLockoutException(Exception)
-  href: api/Authgear.Xamarin.BiometricLockoutException.html#Authgear_Xamarin_BiometricLockoutException__ctor_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricLockoutException.#ctor(System.Exception)
-  fullName: Authgear.Xamarin.BiometricLockoutException.BiometricLockoutException(System.Exception)
+  href: api/Authgear.Xamarin.BiometricLockoutException.html#Authgear_Xamarin_BiometricLockoutException__ctor_Exception_
+  commentId: M:Authgear.Xamarin.BiometricLockoutException.#ctor(Exception)
+  fullName: Authgear.Xamarin.BiometricLockoutException.BiometricLockoutException(Exception)
   nameWithType: BiometricLockoutException.BiometricLockoutException(Exception)
 - uid: Authgear.Xamarin.BiometricLockoutException.#ctor(System.String)
   name: BiometricLockoutException(String)
@@ -731,11 +731,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricLockoutException.#ctor(System.String)
   fullName: Authgear.Xamarin.BiometricLockoutException.BiometricLockoutException(System.String)
   nameWithType: BiometricLockoutException.BiometricLockoutException(String)
-- uid: Authgear.Xamarin.BiometricLockoutException.#ctor(System.String,System.Exception)
+- uid: Authgear.Xamarin.BiometricLockoutException.#ctor(System.String,Exception)
   name: BiometricLockoutException(String, Exception)
-  href: api/Authgear.Xamarin.BiometricLockoutException.html#Authgear_Xamarin_BiometricLockoutException__ctor_System_String_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricLockoutException.#ctor(System.String,System.Exception)
-  fullName: Authgear.Xamarin.BiometricLockoutException.BiometricLockoutException(System.String, System.Exception)
+  href: api/Authgear.Xamarin.BiometricLockoutException.html#Authgear_Xamarin_BiometricLockoutException__ctor_System_String_Exception_
+  commentId: M:Authgear.Xamarin.BiometricLockoutException.#ctor(System.String,Exception)
+  fullName: Authgear.Xamarin.BiometricLockoutException.BiometricLockoutException(System.String, Exception)
   nameWithType: BiometricLockoutException.BiometricLockoutException(String, Exception)
 - uid: Authgear.Xamarin.BiometricLockoutException.#ctor*
   name: BiometricLockoutException
@@ -756,11 +756,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricNoEnrollmentException.#ctor
   fullName: Authgear.Xamarin.BiometricNoEnrollmentException.BiometricNoEnrollmentException()
   nameWithType: BiometricNoEnrollmentException.BiometricNoEnrollmentException()
-- uid: Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.Exception)
+- uid: Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(Exception)
   name: BiometricNoEnrollmentException(Exception)
-  href: api/Authgear.Xamarin.BiometricNoEnrollmentException.html#Authgear_Xamarin_BiometricNoEnrollmentException__ctor_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.Exception)
-  fullName: Authgear.Xamarin.BiometricNoEnrollmentException.BiometricNoEnrollmentException(System.Exception)
+  href: api/Authgear.Xamarin.BiometricNoEnrollmentException.html#Authgear_Xamarin_BiometricNoEnrollmentException__ctor_Exception_
+  commentId: M:Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(Exception)
+  fullName: Authgear.Xamarin.BiometricNoEnrollmentException.BiometricNoEnrollmentException(Exception)
   nameWithType: BiometricNoEnrollmentException.BiometricNoEnrollmentException(Exception)
 - uid: Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.String)
   name: BiometricNoEnrollmentException(String)
@@ -768,11 +768,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.String)
   fullName: Authgear.Xamarin.BiometricNoEnrollmentException.BiometricNoEnrollmentException(System.String)
   nameWithType: BiometricNoEnrollmentException.BiometricNoEnrollmentException(String)
-- uid: Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.String,System.Exception)
+- uid: Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.String,Exception)
   name: BiometricNoEnrollmentException(String, Exception)
-  href: api/Authgear.Xamarin.BiometricNoEnrollmentException.html#Authgear_Xamarin_BiometricNoEnrollmentException__ctor_System_String_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.String,System.Exception)
-  fullName: Authgear.Xamarin.BiometricNoEnrollmentException.BiometricNoEnrollmentException(System.String, System.Exception)
+  href: api/Authgear.Xamarin.BiometricNoEnrollmentException.html#Authgear_Xamarin_BiometricNoEnrollmentException__ctor_System_String_Exception_
+  commentId: M:Authgear.Xamarin.BiometricNoEnrollmentException.#ctor(System.String,Exception)
+  fullName: Authgear.Xamarin.BiometricNoEnrollmentException.BiometricNoEnrollmentException(System.String, Exception)
   nameWithType: BiometricNoEnrollmentException.BiometricNoEnrollmentException(String, Exception)
 - uid: Authgear.Xamarin.BiometricNoEnrollmentException.#ctor*
   name: BiometricNoEnrollmentException
@@ -793,11 +793,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricNoPasscodeException.#ctor
   fullName: Authgear.Xamarin.BiometricNoPasscodeException.BiometricNoPasscodeException()
   nameWithType: BiometricNoPasscodeException.BiometricNoPasscodeException()
-- uid: Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.Exception)
+- uid: Authgear.Xamarin.BiometricNoPasscodeException.#ctor(Exception)
   name: BiometricNoPasscodeException(Exception)
-  href: api/Authgear.Xamarin.BiometricNoPasscodeException.html#Authgear_Xamarin_BiometricNoPasscodeException__ctor_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.Exception)
-  fullName: Authgear.Xamarin.BiometricNoPasscodeException.BiometricNoPasscodeException(System.Exception)
+  href: api/Authgear.Xamarin.BiometricNoPasscodeException.html#Authgear_Xamarin_BiometricNoPasscodeException__ctor_Exception_
+  commentId: M:Authgear.Xamarin.BiometricNoPasscodeException.#ctor(Exception)
+  fullName: Authgear.Xamarin.BiometricNoPasscodeException.BiometricNoPasscodeException(Exception)
   nameWithType: BiometricNoPasscodeException.BiometricNoPasscodeException(Exception)
 - uid: Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.String)
   name: BiometricNoPasscodeException(String)
@@ -805,11 +805,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.String)
   fullName: Authgear.Xamarin.BiometricNoPasscodeException.BiometricNoPasscodeException(System.String)
   nameWithType: BiometricNoPasscodeException.BiometricNoPasscodeException(String)
-- uid: Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.String,System.Exception)
+- uid: Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.String,Exception)
   name: BiometricNoPasscodeException(String, Exception)
-  href: api/Authgear.Xamarin.BiometricNoPasscodeException.html#Authgear_Xamarin_BiometricNoPasscodeException__ctor_System_String_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.String,System.Exception)
-  fullName: Authgear.Xamarin.BiometricNoPasscodeException.BiometricNoPasscodeException(System.String, System.Exception)
+  href: api/Authgear.Xamarin.BiometricNoPasscodeException.html#Authgear_Xamarin_BiometricNoPasscodeException__ctor_System_String_Exception_
+  commentId: M:Authgear.Xamarin.BiometricNoPasscodeException.#ctor(System.String,Exception)
+  fullName: Authgear.Xamarin.BiometricNoPasscodeException.BiometricNoPasscodeException(System.String, Exception)
   nameWithType: BiometricNoPasscodeException.BiometricNoPasscodeException(String, Exception)
 - uid: Authgear.Xamarin.BiometricNoPasscodeException.#ctor*
   name: BiometricNoPasscodeException
@@ -830,11 +830,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor
   fullName: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException()
   nameWithType: BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException()
-- uid: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.Exception)
+- uid: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(Exception)
   name: BiometricNotSupportedOrPermissionDeniedException(Exception)
-  href: api/Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.html#Authgear_Xamarin_BiometricNotSupportedOrPermissionDeniedException__ctor_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.Exception)
-  fullName: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(System.Exception)
+  href: api/Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.html#Authgear_Xamarin_BiometricNotSupportedOrPermissionDeniedException__ctor_Exception_
+  commentId: M:Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(Exception)
+  fullName: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(Exception)
   nameWithType: BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(Exception)
 - uid: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.String)
   name: BiometricNotSupportedOrPermissionDeniedException(String)
@@ -842,11 +842,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.String)
   fullName: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(System.String)
   nameWithType: BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(String)
-- uid: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.String,System.Exception)
+- uid: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.String,Exception)
   name: BiometricNotSupportedOrPermissionDeniedException(String, Exception)
-  href: api/Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.html#Authgear_Xamarin_BiometricNotSupportedOrPermissionDeniedException__ctor_System_String_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.String,System.Exception)
-  fullName: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(System.String, System.Exception)
+  href: api/Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.html#Authgear_Xamarin_BiometricNotSupportedOrPermissionDeniedException__ctor_System_String_Exception_
+  commentId: M:Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor(System.String,Exception)
+  fullName: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(System.String, Exception)
   nameWithType: BiometricNotSupportedOrPermissionDeniedException.BiometricNotSupportedOrPermissionDeniedException(String, Exception)
 - uid: Authgear.Xamarin.BiometricNotSupportedOrPermissionDeniedException.#ctor*
   name: BiometricNotSupportedOrPermissionDeniedException
@@ -1054,11 +1054,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor
   fullName: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException()
   nameWithType: BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException()
-- uid: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.Exception)
+- uid: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(Exception)
   name: BiometricPrivateKeyNotFoundException(Exception)
-  href: api/Authgear.Xamarin.BiometricPrivateKeyNotFoundException.html#Authgear_Xamarin_BiometricPrivateKeyNotFoundException__ctor_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.Exception)
-  fullName: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(System.Exception)
+  href: api/Authgear.Xamarin.BiometricPrivateKeyNotFoundException.html#Authgear_Xamarin_BiometricPrivateKeyNotFoundException__ctor_Exception_
+  commentId: M:Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(Exception)
+  fullName: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(Exception)
   nameWithType: BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(Exception)
 - uid: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.String)
   name: BiometricPrivateKeyNotFoundException(String)
@@ -1066,11 +1066,11 @@ references:
   commentId: M:Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.String)
   fullName: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(System.String)
   nameWithType: BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(String)
-- uid: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.String,System.Exception)
+- uid: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.String,Exception)
   name: BiometricPrivateKeyNotFoundException(String, Exception)
-  href: api/Authgear.Xamarin.BiometricPrivateKeyNotFoundException.html#Authgear_Xamarin_BiometricPrivateKeyNotFoundException__ctor_System_String_System_Exception_
-  commentId: M:Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.String,System.Exception)
-  fullName: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(System.String, System.Exception)
+  href: api/Authgear.Xamarin.BiometricPrivateKeyNotFoundException.html#Authgear_Xamarin_BiometricPrivateKeyNotFoundException__ctor_System_String_Exception_
+  commentId: M:Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor(System.String,Exception)
+  fullName: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(System.String, Exception)
   nameWithType: BiometricPrivateKeyNotFoundException.BiometricPrivateKeyNotFoundException(String, Exception)
 - uid: Authgear.Xamarin.BiometricPrivateKeyNotFoundException.#ctor*
   name: BiometricPrivateKeyNotFoundException
@@ -1244,12 +1244,15 @@ references:
   commentId: T:Authgear.Xamarin.OauthException
   fullName: Authgear.Xamarin.OauthException
   nameWithType: OauthException
-- uid: Authgear.Xamarin.OauthException.#ctor(System.String,System.String,System.String,System.String)
-  name: OauthException(String, String, String, String)
-  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException__ctor_System_String_System_String_System_String_System_String_
-  commentId: M:Authgear.Xamarin.OauthException.#ctor(System.String,System.String,System.String,System.String)
-  fullName: Authgear.Xamarin.OauthException.OauthException(System.String, System.String, System.String, System.String)
-  nameWithType: OauthException.OauthException(String, String, String, String)
+- uid: Authgear.Xamarin.OauthException.#ctor(System.String,System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String})
+  name: OauthException(String, Nullable<String>, Nullable<String>, Nullable<String>)
+  href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException__ctor_System_String_System_Nullable_System_String__System_Nullable_System_String__System_Nullable_System_String__
+  commentId: M:Authgear.Xamarin.OauthException.#ctor(System.String,System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String})
+  name.vb: OauthException(String, Nullable(Of String), Nullable(Of String), Nullable(Of String))
+  fullName: Authgear.Xamarin.OauthException.OauthException(System.String, System.Nullable<System.String>, System.Nullable<System.String>, System.Nullable<System.String>)
+  fullName.vb: Authgear.Xamarin.OauthException.OauthException(System.String, System.Nullable(Of System.String), System.Nullable(Of System.String), System.Nullable(Of System.String))
+  nameWithType: OauthException.OauthException(String, Nullable<String>, Nullable<String>, Nullable<String>)
+  nameWithType.vb: OauthException.OauthException(String, Nullable(Of String), Nullable(Of String), Nullable(Of String))
 - uid: Authgear.Xamarin.OauthException.#ctor*
   name: OauthException
   href: api/Authgear.Xamarin.OauthException.html#Authgear_Xamarin_OauthException__ctor_
@@ -1500,12 +1503,15 @@ references:
   commentId: T:Authgear.Xamarin.ServerException
   fullName: Authgear.Xamarin.ServerException
   nameWithType: ServerException
-- uid: Authgear.Xamarin.ServerException.#ctor(System.String,System.String,System.String,System.Text.Json.JsonDocument)
-  name: ServerException(String, String, String, JsonDocument)
-  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException__ctor_System_String_System_String_System_String_System_Text_Json_JsonDocument_
-  commentId: M:Authgear.Xamarin.ServerException.#ctor(System.String,System.String,System.String,System.Text.Json.JsonDocument)
-  fullName: Authgear.Xamarin.ServerException.ServerException(System.String, System.String, System.String, System.Text.Json.JsonDocument)
-  nameWithType: ServerException.ServerException(String, String, String, JsonDocument)
+- uid: Authgear.Xamarin.ServerException.#ctor(System.String,System.String,System.String,System.Nullable{JsonDocument})
+  name: ServerException(String, String, String, Nullable<JsonDocument>)
+  href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException__ctor_System_String_System_String_System_String_System_Nullable_JsonDocument__
+  commentId: M:Authgear.Xamarin.ServerException.#ctor(System.String,System.String,System.String,System.Nullable{JsonDocument})
+  name.vb: ServerException(String, String, String, Nullable(Of JsonDocument))
+  fullName: Authgear.Xamarin.ServerException.ServerException(System.String, System.String, System.String, System.Nullable<JsonDocument>)
+  fullName.vb: Authgear.Xamarin.ServerException.ServerException(System.String, System.String, System.String, System.Nullable(Of JsonDocument))
+  nameWithType: ServerException.ServerException(String, String, String, Nullable<JsonDocument>)
+  nameWithType.vb: ServerException.ServerException(String, String, String, Nullable(Of JsonDocument))
 - uid: Authgear.Xamarin.ServerException.#ctor*
   name: ServerException
   href: api/Authgear.Xamarin.ServerException.html#Authgear_Xamarin_ServerException__ctor_

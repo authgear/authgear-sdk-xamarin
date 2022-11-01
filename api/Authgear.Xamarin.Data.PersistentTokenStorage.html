@@ -225,35 +225,11 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Authgear.Xamarin.Data.ITokenStorage.html">ITokenStorage</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Authgear.Xamarin.Data.html">Authgear.Xamarin.Data</a></h6>
   <h6><strong>Assembly</strong>: Authgear.Xamarin.dll</h6>
   <h5 id="Authgear_Xamarin_Data_PersistentTokenStorage_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PersistentTokenStorage : ITokenStorage</code></pre>
+    <pre><code class="lang-csharp hljs">public class PersistentTokenStorage : object, ITokenStorage</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
@@ -262,7 +238,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_Data_PersistentTokenStorage_DeleteRefreshToken_System_String_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.Data.PersistentTokenStorage.DeleteRefreshToken(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/Data/PersistentTokenStorage.cs/#L12">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/Data/PersistentTokenStorage.cs/#L14">View Source</a>
   </span>
   <a id="Authgear_Xamarin_Data_PersistentTokenStorage_DeleteRefreshToken_" data-uid="Authgear.Xamarin.Data.PersistentTokenStorage.DeleteRefreshToken*"></a>
   <h4 id="Authgear_Xamarin_Data_PersistentTokenStorage_DeleteRefreshToken_System_String_" data-uid="Authgear.Xamarin.Data.PersistentTokenStorage.DeleteRefreshToken(System.String)">DeleteRefreshToken(String)</h4>
@@ -294,7 +270,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_Data_PersistentTokenStorage_GetRefreshTokenAsync_System_String_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.Data.PersistentTokenStorage.GetRefreshTokenAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/Data/PersistentTokenStorage.cs/#L17">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/Data/PersistentTokenStorage.cs/#L19">View Source</a>
   </span>
   <a id="Authgear_Xamarin_Data_PersistentTokenStorage_GetRefreshTokenAsync_" data-uid="Authgear.Xamarin.Data.PersistentTokenStorage.GetRefreshTokenAsync*"></a>
   <h4 id="Authgear_Xamarin_Data_PersistentTokenStorage_GetRefreshTokenAsync_System_String_" data-uid="Authgear.Xamarin.Data.PersistentTokenStorage.GetRefreshTokenAsync(System.String)">GetRefreshTokenAsync(String)</h4>
@@ -302,7 +278,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task&lt;string&gt; GetRefreshTokenAsync(string aNamespace)</code></pre>
+    <pre><code class="lang-csharp hljs">public async Task&lt;string?&gt; GetRefreshTokenAsync(string aNamespace)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -331,7 +307,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -341,7 +317,7 @@
     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_Data_PersistentTokenStorage_SetRefreshToken_System_String_System_String_.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.Data.PersistentTokenStorage.SetRefreshToken(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/Data/PersistentTokenStorage.cs/#L22">View Source</a>
+    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/Data/PersistentTokenStorage.cs/#L24">View Source</a>
   </span>
   <a id="Authgear_Xamarin_Data_PersistentTokenStorage_SetRefreshToken_" data-uid="Authgear.Xamarin.Data.PersistentTokenStorage.SetRefreshToken*"></a>
   <h4 id="Authgear_Xamarin_Data_PersistentTokenStorage_SetRefreshToken_System_String_System_String_" data-uid="Authgear.Xamarin.Data.PersistentTokenStorage.SetRefreshToken(System.String,System.String)">SetRefreshToken(String, String)</h4>
@@ -388,7 +364,7 @@
                     <a href="https://github.com/authgear/authgear-sdk-xamarin/new/main/apiSpec/new?filename=Authgear_Xamarin_Data_PersistentTokenStorage.md&amp;value=---%0Auid%3A%20Authgear.Xamarin.Data.PersistentTokenStorage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Xamarin/Data/PersistentTokenStorage.cs/#L9" class="contribution-link">View Source</a>
+                    <a href="https://github.com/authgear/authgear-sdk-xamarin/blob/main/Authgear.Shared/Data/PersistentTokenStorage.cs/#L11" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
