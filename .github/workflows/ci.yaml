@@ -83,6 +83,7 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.1
         with:
           vs-version: "17.0"
+      - run: dotnet workload restore Authgear.Maui/Authgear.Maui.csproj
       - run: dotnet restore Authgear.Maui/Authgear.Maui.csproj
       - run: msbuild Authgear.Maui/Authgear.Maui.csproj /t:pack /p:Configuration=Release
       - uses: actions/upload-artifact@v3
