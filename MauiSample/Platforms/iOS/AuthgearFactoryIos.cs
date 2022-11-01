@@ -2,7 +2,7 @@
 using Authgear.Xamarin;
 using AuthgearSample;
 
-namespace XamarinFormSample.iOS
+namespace MauiSample
 {
     public class AuthgearFactoryIos : IAuthgearFactory
     {
@@ -16,3 +16,4 @@ namespace XamarinFormSample.iOS
         }
     }
 }
+

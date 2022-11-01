@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using Authgear.Xamarin;
 using Xamarin.Forms;
+using AuthgearSample;
 
 namespace XamarinFormSample.iOS
 {

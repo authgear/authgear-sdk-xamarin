@@ -1,28 +1,25 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.Content;
 using Authgear.Xamarin;
 using AuthgearSample;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace XamarinFormSample.Droid
+namespace MauiSample
 {
     internal class AuthgearFactoryAndroid : IAuthgearFactory
     {
-        private readonly Context context;
+        private readonly Context _context;
         public AuthgearFactoryAndroid(Context context)
         {
-            this.context = context;
+            _context = context;
         }
+
         public AuthgearSdk CreateAuthgear(AuthgearOptions options)
         {
-            return new AuthgearSdk(context, options);
+            return new AuthgearSdk(_context, options);
         }
     }
 }

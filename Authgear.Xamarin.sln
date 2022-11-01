@@ -13,6 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XamarinFormSample", "Xamari
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{AA91AD88-14E2-40D9-9945-8C95152625CD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Authgear.Shared", "Authgear.Shared\Authgear.Shared.shproj", "{09E91D5A-675E-40F5-A4EE-A65AB8D7007C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authgear.Maui", "Authgear.Maui\Authgear.Maui.csproj", "{6F68F06C-ADD6-4574-9F46-870ACB808106}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiSample", "MauiSample\MauiSample.csproj", "{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Sample.Shared", "Sample.Shared\Sample.Shared.shproj", "{2FE99810-C321-4363-85C5-89B2EC5A6766}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,11 +97,47 @@ Global
 		{AA91AD88-14E2-40D9-9945-8C95152625CD}.Release|iPhone.Build.0 = Release|Any CPU
 		{AA91AD88-14E2-40D9-9945-8C95152625CD}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{AA91AD88-14E2-40D9-9945-8C95152625CD}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Release|iPhone.Build.0 = Release|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{6F68F06C-ADD6-4574-9F46-870ACB808106}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|iPhone.Deploy.0 = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|iPhone.Build.0 = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|iPhone.Deploy.0 = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{3A5E7DA9-4076-4AAA-A9E9-4B7ACFD636C3}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {45E4118D-5062-4E2C-9E03-C961E4D7D604}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Authgear.Shared\Authgear.Shared.projitems*{09e91d5a-675e-40f5-a4ee-a65ab8d7007c}*SharedItemsImports = 13
+		Sample.Shared\Sample.Shared.projitems*{2fe99810-c321-4363-85c5-89b2ec5a6766}*SharedItemsImports = 13
+		Sample.Shared\Sample.Shared.projitems*{3a5e7da9-4076-4aaa-a9e9-4b7acfd636c3}*SharedItemsImports = 5
+		Authgear.Shared\Authgear.Shared.projitems*{6f68f06c-add6-4574-9f46-870acb808106}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

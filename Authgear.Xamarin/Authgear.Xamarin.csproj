@@ -19,10 +19,34 @@
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	  <PackageProjectUrl>https://github.com/authgear/authgear-sdk-xamarin</PackageProjectUrl>
-	  <LangVersion>8.0</LangVersion>
+	  <LangVersion>9.0</LangVersion>
 	  <Nullable>enable</Nullable>
 	  <AnalysisMode>AllEnabledByDefault</AnalysisMode>
 	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|Xamarin.iOS10|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|Xamarin.iOS10|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|MonoAndroid12.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|MonoAndroid12.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,12 +57,9 @@
 
 	<ItemGroup>
 		<None Include="..\LICENSE" PackagePath="" Pack="true" />
-		<Compile Include="**\*.cs" Exclude="obj\**\*.cs;**\*.android.cs;**\*.netstandard.cs;**\*.ios.cs" />
 	</ItemGroup>
-	
+
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-		<Compile Include="**\*.android.cs" />
-		<Compile Include="**\*.android.*.cs" />
 		<PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
 		<Reference Include="System.Numerics" />
 		<AndroidResource Include="Resources\xml\*.xml" />
@@ -48,10 +69,10 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
-		<Compile Include="**\*.netstandard.cs" />
 	</ItemGroup>
-	
+
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-		<Compile Include="**\*.ios.cs" />
 	</ItemGroup>
+
+	<Import Project="..\Authgear.Shared\Authgear.Shared.projitems" Label="Shared" />
 </Project>
