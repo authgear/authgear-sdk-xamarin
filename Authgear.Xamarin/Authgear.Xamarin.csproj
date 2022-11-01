@@ -3,26 +3,26 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid12.0;</TargetFrameworks>
 	<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-	  <Summary>Authgear SDK for Xamarin</Summary>
-	  <PackageTags>xamarin, ios, android, xamarin.forms, Authgear Xamarin, kit, authgear</PackageTags>
-	  <Title>Authgear Xamarin SDK</Title>
-	  <Description>Authgear SDK for Xamarin</Description>
-	  <Product>$(AssemblyName) ($(TargetFramework))</Product>
-	  <AssemblyVersion>0.7.0.0</AssemblyVersion>
-	  <AssemblyFileVersion>0.7.0.0</AssemblyFileVersion>
-	  <Version>0.7.0</Version>
-	  <PackageVersion>0.7.0</PackageVersion>
-	  <Authors>Oursky</Authors>
-	  <Owners>authgear,oursky</Owners>
-	  <NeutralLanguage>en</NeutralLanguage>
-	  <RepositoryUrl>https://github.com/authgear/authgear-sdk-xamarin</RepositoryUrl>
-	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-	  <PackageProjectUrl>https://github.com/authgear/authgear-sdk-xamarin</PackageProjectUrl>
-	  <LangVersion>9.0</LangVersion>
-	  <Nullable>enable</Nullable>
-	  <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<Summary>Authgear SDK for Xamarin</Summary>
+	<PackageTags>xamarin, ios, android, xamarin.forms, authgear</PackageTags>
+	<Title>Authgear Xamarin SDK</Title>
+	<Description>Authgear SDK for Xamarin</Description>
+	<Product>$(AssemblyName) ($(TargetFramework))</Product>
+	<AssemblyVersion>0.8.0.0</AssemblyVersion>
+	<AssemblyFileVersion>0.8.0.0</AssemblyFileVersion>
+	<Version>0.8.0</Version>
+	<PackageVersion>0.8.0</PackageVersion>
+	<Authors>Oursky</Authors>
+	<Owners>authgear,oursky</Owners>
+	<NeutralLanguage>en</NeutralLanguage>
+	<RepositoryUrl>https://github.com/authgear/authgear-sdk-xamarin</RepositoryUrl>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	<PackageProjectUrl>https://github.com/authgear/authgear-sdk-xamarin</PackageProjectUrl>
+	<LangVersion>9.0</LangVersion>
+	<Nullable>enable</Nullable>
+	<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
