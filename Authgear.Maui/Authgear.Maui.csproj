@@ -47,6 +47,10 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" PrivateAssets="all" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="..\LICENSE" PackagePath="" Pack="true" />
+	</ItemGroup>
+
 	<ItemGroup Condition=" $(TargetFramework.Contains('android')) ">
 		<AndroidResource Include="Resources\xml\*.xml" />
 		<!-- Xamarin.AndroidX.Browser does not need to be depended on because it is a dependency of Xamarin.Essentials -->
