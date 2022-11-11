@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Authgear Xamarin</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.authgear.exampleapp.xamarin</string>
+	<string>com.authgear.sdk.exampleapp.xamarin</string>
 	<key>CFBundleName</key>
 	<string>Authgear Xamarin</string>
 	<key>CFBundleURLTypes</key>
