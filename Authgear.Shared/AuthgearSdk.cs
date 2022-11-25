@@ -20,7 +20,7 @@ using Xamarin.Essentials;
 
 namespace Authgear.Xamarin
 {
-    public partial class AuthgearSdk
+    public sealed partial class AuthgearSdk : IDisposable
     {
         /// <summary>
         /// To prevent user from using expired access token, we have to check in advance
@@ -62,6 +62,7 @@ namespace Authgear.Xamarin
         private readonly ITokenStorage tokenStorage;
         private readonly IContainerStorage containerStorage;
         private readonly IOauthRepo oauthRepo;
+        private readonly List<IDisposable> disposables;
         private readonly IKeyRepo keyRepo;
         private readonly IBiometric biometric;
         private readonly IWebView webView;
@@ -115,7 +116,23 @@ namespace Authgear.Xamarin
             tokenStorage = options.TokenStorage ?? new PersistentTokenStorage();
             name = options.Name ?? "default";
             containerStorage = new PersistentContainerStorage();
-            oauthRepo = new OauthRepoHttp(httpClient, authgearEndpoint);
+            var oauthRepoHttp = new OauthRepoHttp(httpClient, authgearEndpoint);
+            var oauthRepo = new OauthRepo(oauthRepoHttp);
+            oauthRepo.ClearSessionCallback += (s, e) =>
+            {
+                this.ClearSession(e);
+            };
+            this.oauthRepo = oauthRepo;
+
+            this.disposables = new List<IDisposable> { httpClient, oauthRepoHttp };
+        }
+
+        public void Dispose()
+        {
+            foreach (IDisposable d in this.disposables)
+            {
+                d.Dispose();
+            }
         }
 
         private void EnsureIsInitialized()
@@ -353,28 +370,12 @@ namespace Authgear.Xamarin
                 ClearSession(SessionStateChangeReason.NoToken);
                 return;
             }
-            try
-            {
-                var tokenResponse = await oauthRepo.OidcTokenRequestAsync(
-                    new OidcTokenRequest(GrantType.RefreshToken, ClientId, GetDeviceInfoString())
-                    {
-                        RefreshToken = refreshToken
-                    }).ConfigureAwait(false);
-                SaveToken(tokenResponse, SessionStateChangeReason.FoundToken);
-            }
-            catch (Exception ex)
-            {
-                if (ex is OauthException)
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(
+                new OidcTokenRequest(GrantType.RefreshToken, ClientId, GetDeviceInfoString())
                 {
-                    var oauthEx = ex as OauthException;
-                    if (oauthEx?.Error == "invalid_grant")
-                    {
-                        ClearSession(SessionStateChangeReason.Invalid);
-                        return;
-                    }
-                }
-                throw;
-            }
+                    RefreshToken = refreshToken
+                }).ConfigureAwait(false);
+            SaveToken(tokenResponse, SessionStateChangeReason.FoundToken);
         }
 
         private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, CodeVerifier? codeVerifier)
