@@ -7,7 +7,7 @@ using UIKit;
 
 namespace Authgear.Xamarin
 {
-    public partial class AuthgearSdk
+    public sealed partial class AuthgearSdk
     {
         /// <summary>
         /// </summary>

@@ -7,7 +7,7 @@ using Authgear.Xamarin.DeviceInfo;
 
 namespace Authgear.Xamarin
 {
-    public partial class AuthgearSdk
+    public sealed partial class AuthgearSdk
     {
         private readonly Context context;
         public AuthgearSdk(Context context, AuthgearOptions options) : this(options)
