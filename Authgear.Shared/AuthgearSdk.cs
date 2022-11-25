@@ -20,7 +20,7 @@ using Xamarin.Essentials;
 
 namespace Authgear.Xamarin
 {
-    public partial class AuthgearSdk
+    public partial class AuthgearSdk : OauthRepoDelegate
     {
         /// <summary>
         /// To prevent user from using expired access token, we have to check in advance
@@ -115,7 +115,9 @@ namespace Authgear.Xamarin
             tokenStorage = options.TokenStorage ?? new PersistentTokenStorage();
             name = options.Name ?? "default";
             containerStorage = new PersistentContainerStorage();
-            oauthRepo = new OauthRepoHttp(httpClient, authgearEndpoint);
+            var oauthRepo = new OauthRepo(new OauthRepoHttp(httpClient, authgearEndpoint));
+            oauthRepo.sdk = this;
+            this.oauthRepo = oauthRepo;
         }
 
         private void EnsureIsInitialized()
@@ -353,28 +355,12 @@ namespace Authgear.Xamarin
                 ClearSession(SessionStateChangeReason.NoToken);
                 return;
             }
-            try
-            {
-                var tokenResponse = await oauthRepo.OidcTokenRequestAsync(
-                    new OidcTokenRequest(GrantType.RefreshToken, ClientId, GetDeviceInfoString())
-                    {
-                        RefreshToken = refreshToken
-                    }).ConfigureAwait(false);
-                SaveToken(tokenResponse, SessionStateChangeReason.FoundToken);
-            }
-            catch (Exception ex)
-            {
-                if (ex is OauthException)
+            var tokenResponse = await oauthRepo.OidcTokenRequestAsync(
+                new OidcTokenRequest(GrantType.RefreshToken, ClientId, GetDeviceInfoString())
                 {
-                    var oauthEx = ex as OauthException;
-                    if (oauthEx?.Error == "invalid_grant")
-                    {
-                        ClearSession(SessionStateChangeReason.Invalid);
-                        return;
-                    }
-                }
-                throw;
-            }
+                    RefreshToken = refreshToken
+                }).ConfigureAwait(false);
+            SaveToken(tokenResponse, SessionStateChangeReason.FoundToken);
         }
 
         private async Task<string> GetAuthorizeEndpointAsync(OidcAuthenticationRequest request, CodeVerifier? codeVerifier)
@@ -622,7 +608,7 @@ namespace Authgear.Xamarin
             return AccessToken!;
         }
 
-        internal void ClearSession(SessionStateChangeReason reason)
+        public void ClearSession(SessionStateChangeReason reason)
         {
             tokenStorage.DeleteRefreshToken(name);
             lock (tokenStateLock)
