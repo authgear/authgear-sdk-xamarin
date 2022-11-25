@@ -424,6 +424,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearSdk.DisableBiometricAsync
   nameWithType: AuthgearSdk.DisableBiometricAsync
+- uid: Authgear.Xamarin.AuthgearSdk.Dispose
+  name: Dispose()
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_Dispose
+  commentId: M:Authgear.Xamarin.AuthgearSdk.Dispose
+  fullName: Authgear.Xamarin.AuthgearSdk.Dispose()
+  nameWithType: AuthgearSdk.Dispose()
+- uid: Authgear.Xamarin.AuthgearSdk.Dispose*
+  name: Dispose
+  href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_Dispose_
+  commentId: Overload:Authgear.Xamarin.AuthgearSdk.Dispose
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthgearSdk.Dispose
+  nameWithType: AuthgearSdk.Dispose
 - uid: Authgear.Xamarin.AuthgearSdk.EnableBiometricAsync(Authgear.Xamarin.BiometricOptions)
   name: EnableBiometricAsync(BiometricOptions)
   href: api/Authgear.Xamarin.AuthgearSdk.html#Authgear_Xamarin_AuthgearSdk_EnableBiometricAsync_Authgear_Xamarin_BiometricOptions_
