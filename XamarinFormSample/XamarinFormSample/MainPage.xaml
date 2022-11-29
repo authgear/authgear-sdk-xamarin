@@ -30,8 +30,8 @@
                     Text="Use TransientTokenStorage" />
                 <local:LabeledSwitch
                     Margin="16,16,16,0"
-                    IsToggled="{Binding ShareSessioWithDeviceBrowser, Mode=TwoWay}"
-                    Text="Share session with device browser" />
+                    IsToggled="{Binding SsoEnabled, Mode=TwoWay}"
+                    Text="SSO Enabled" />
                 <StackLayout
                     Margin="16,16,16,0"
                     RadioButtonGroup.GroupName="AuthenticatePage"

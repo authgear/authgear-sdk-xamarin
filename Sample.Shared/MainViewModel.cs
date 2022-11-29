@@ -35,7 +35,7 @@ namespace AuthgearSample
         public bool IsLoading { get; private set; } = false;
 
         public bool UseTransientStorage { get; set; }
-        public bool ShareSessioWithDeviceBrowser { get; set; }
+        public bool SsoEnabled { get; set; }
         public AuthenticatePage? AuthenticatePageToShow { get; set; }
         public ColorScheme? ExplicitColorScheme { get; set; }
         public UserInfo UserInfo { get; private set; }
@@ -180,7 +180,7 @@ namespace AuthgearSample
                 authgear = authgearFactory.CreateAuthgear(new AuthgearOptions(ClientId, AuthgearEndpoint)
                 {
                     TokenStorage = tokenStorage,
-                    ShareSessionWithSystemBrowser = ShareSessioWithDeviceBrowser
+                    SsoEnabled = SsoEnabled,
                 });
                 Preferences.Set("authgear.endpoint", AuthgearEndpoint);
                 Preferences.Set("authgear.clientID", ClientId);

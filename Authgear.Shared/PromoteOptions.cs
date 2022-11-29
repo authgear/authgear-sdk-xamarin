@@ -17,20 +17,19 @@ namespace Authgear.Xamarin
             RedirectUri = redirectUri;
         }
 
-        internal OidcAuthenticationRequest ToRequest(string loginHint, bool suppressIdpSessionCookie)
+        internal OidcAuthenticationRequest ToRequest(string loginHint, bool ssoEnabled)
         {
             if (RedirectUri == null)
             {
                 throw new ArgumentNullException(nameof(RedirectUri));
             }
-            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string>() { "openid", "offline_access", "https://authgear.com/scopes/full-access" })
+            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string>() { "openid", "offline_access", "https://authgear.com/scopes/full-access" }, ssoEnabled)
             {
                 Prompt = new List<PromptOption>() { PromptOption.Login },
                 LoginHint = loginHint,
                 State = State,
                 UiLocales = UiLocales,
                 ColorScheme = ColorScheme,
-                SuppressIdpSessionCookie = suppressIdpSessionCookie,
             };
         }
     }
