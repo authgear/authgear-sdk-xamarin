@@ -283,7 +283,6 @@ namespace AuthgearSample
                     Page = AuthenticatePageToShow,
                     ColorScheme = ColorScheme,
                     UiLocales = new List<string> { },
-                    PromptOptions = new List<PromptOption> { PromptOption.Login },
                     OauthProviderAlias = OauthProviderAlias,
                 });
                 EnsureIsMainThread(nameof(AuthenticateAsync));
