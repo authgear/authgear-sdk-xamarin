@@ -9,9 +9,9 @@ namespace Authgear.Xamarin
     {
         public ColorScheme? ColorScheme { get; set; }
         public IReadOnlyCollection<string>? UiLocales { get; set; }
-        internal OidcAuthenticationRequest ToRequest(string url, string loginHint, bool ssoEnabled)
+        internal OidcAuthenticationRequest ToRequest(string url, string loginHint, bool isSsoEnabled)
         {
-            return new OidcAuthenticationRequest(url, "none", new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" }, ssoEnabled)
+            return new OidcAuthenticationRequest(url, "none", new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" }, isSsoEnabled)
             {
                 Prompt = new List<PromptOption>() { PromptOption.None },
                 LoginHint = loginHint,

@@ -16,13 +16,13 @@ namespace Authgear.Xamarin
         {
             RedirectUri = redirectUri;
         }
-        internal OidcAuthenticationRequest ToRequest(string idTokenHint, bool ssoEnabled)
+        internal OidcAuthenticationRequest ToRequest(string idTokenHint, bool isSsoEnabled)
         {
             if (RedirectUri == null)
             {
                 throw new ArgumentNullException(nameof(RedirectUri));
             }
-            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string> { "openid", "https://authgear.com/scopes/full-access" }, ssoEnabled)
+            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string> { "openid", "https://authgear.com/scopes/full-access" }, isSsoEnabled)
             {
                 State = State,
                 IdTokenHint = idTokenHint,
