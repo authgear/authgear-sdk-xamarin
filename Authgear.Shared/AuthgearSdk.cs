@@ -58,7 +58,7 @@ namespace Authgear.Xamarin
         }
         private DateTimeOffset? expiredAt;
         private readonly string authgearEndpoint;
-        private readonly bool shareSessionWithSystemBrowser;
+        private readonly bool isSsoEnabled;
         private readonly ITokenStorage tokenStorage;
         private readonly IContainerStorage containerStorage;
         private readonly IOauthRepo oauthRepo;
@@ -71,10 +71,6 @@ namespace Authgear.Xamarin
         private string? refreshToken;
         private Task? refreshAccessTokenTask;
         public event EventHandler<SessionStateChangeReason> SessionStateChange;
-        private bool ShouldSuppressIDPSessionCookie
-        {
-            get { return !shareSessionWithSystemBrowser; }
-        }
         public bool CanReauthenticate
         {
             get
@@ -111,7 +107,7 @@ namespace Authgear.Xamarin
             }
             ClientId = options.ClientId;
             authgearEndpoint = options.AuthgearEndpoint;
-            shareSessionWithSystemBrowser = options.ShareSessionWithSystemBrowser;
+            isSsoEnabled = options.IsSsoEnabled;
             var httpClient = new HttpClient();
             tokenStorage = options.TokenStorage ?? new PersistentTokenStorage();
             name = options.Name ?? "default";
@@ -207,7 +203,7 @@ namespace Authgear.Xamarin
             var jwtValue = WebUtility.UrlEncode(jwt);
             var loginHint = $"https://authgear.com/login_hint?type=anonymous&jwt={jwtValue}";
             var codeVerifier = new CodeVerifier();
-            var request = options.ToRequest(loginHint, ShouldSuppressIDPSessionCookie);
+            var request = options.ToRequest(loginHint, isSsoEnabled);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier).ConfigureAwait(false);
             var deepLink = await OpenAuthorizeUrlAsync(options.RedirectUri, authorizeUrl).ConfigureAwait(false);
             var result = await FinishAuthenticationAsync(deepLink, codeVerifier.Verifier).ConfigureAwait(false);
@@ -224,7 +220,7 @@ namespace Authgear.Xamarin
         {
             EnsureIsInitialized();
             var codeVerifier = new CodeVerifier();
-            var request = options.ToRequest(ShouldSuppressIDPSessionCookie);
+            var request = options.ToRequest(isSsoEnabled);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier).ConfigureAwait(false);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl).ConfigureAwait(false);
             return await FinishAuthenticationAsync(deepLink, codeVerifier.Verifier).ConfigureAwait(false);
@@ -255,7 +251,7 @@ namespace Authgear.Xamarin
                 throw new AuthgearException("Call refreshIdToken first");
             }
             var codeVerifier = new CodeVerifier();
-            var request = options.ToRequest(idTokenHint, ShouldSuppressIDPSessionCookie);
+            var request = options.ToRequest(idTokenHint, isSsoEnabled);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, codeVerifier).ConfigureAwait(false);
             var deepLink = await OpenAuthorizeUrlAsync(request.RedirectUri, authorizeUrl).ConfigureAwait(false);
             return await FinishReauthenticationAsync(deepLink, codeVerifier.Verifier).ConfigureAwait(false);
@@ -307,7 +303,7 @@ namespace Authgear.Xamarin
 
             var loginHint = string.Format(CultureInfo.InvariantCulture, LoginHintFormat, WebUtility.UrlEncode(token));
             if (options == null) { options = new SettingsOptions(); }
-            var request = options.ToRequest(url.ToString(), loginHint, ShouldSuppressIDPSessionCookie);
+            var request = options.ToRequest(url.ToString(), loginHint, isSsoEnabled);
             var authorizeUrl = await GetAuthorizeEndpointAsync(request, null).ConfigureAwait(false);
             await webView.ShowAsync(authorizeUrl).ConfigureAwait(false);
         }
@@ -399,7 +395,7 @@ namespace Authgear.Xamarin
                 {
                     Url = new Uri(authorizeUrl),
                     CallbackUrl = new Uri(redirectUrl),
-                    PrefersEphemeralWebBrowserSession = !shareSessionWithSystemBrowser
+                    PrefersEphemeralWebBrowserSession = !isSsoEnabled
                 }).ConfigureAwait(false);
                 // WebAuthenticator abstracts the redirect uri (WebAuthenticatorResult) for us but we need the uri in FinishAuthorization.
                 // Substitute the uri for now.

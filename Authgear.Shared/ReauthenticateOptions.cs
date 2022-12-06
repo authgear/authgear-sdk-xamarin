@@ -16,20 +16,19 @@ namespace Authgear.Xamarin
         {
             RedirectUri = redirectUri;
         }
-        internal OidcAuthenticationRequest ToRequest(string idTokenHint, bool suppressIdpSessionCookie)
+        internal OidcAuthenticationRequest ToRequest(string idTokenHint, bool isSsoEnabled)
         {
             if (RedirectUri == null)
             {
                 throw new ArgumentNullException(nameof(RedirectUri));
             }
-            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string> { "openid", "https://authgear.com/scopes/full-access" })
+            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string> { "openid", "https://authgear.com/scopes/full-access" }, isSsoEnabled)
             {
                 State = State,
                 IdTokenHint = idTokenHint,
                 MaxAge = MaxAge ?? 0,
                 UiLocales = UiLocales,
                 ColorScheme = ColorScheme,
-                SuppressIdpSessionCookie = suppressIdpSessionCookie
             };
         }
     }

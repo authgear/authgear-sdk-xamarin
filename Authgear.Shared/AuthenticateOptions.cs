@@ -21,13 +21,13 @@ namespace Authgear.Xamarin
         {
             RedirectUri = redirectUri;
         }
-        internal OidcAuthenticationRequest ToRequest(bool suppressIdpSessionCookie)
+        internal OidcAuthenticationRequest ToRequest(bool isSsoEnabled)
         {
             if (RedirectUri == null)
             {
                 throw new ArgumentNullException(nameof(RedirectUri));
             }
-            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" })
+            return new OidcAuthenticationRequest(RedirectUri, "code", new List<string> { "openid", "offline_access", "https://authgear.com/scopes/full-access" }, isSsoEnabled)
             {
                 State = State,
                 Prompt = PromptOptions,
@@ -37,7 +37,6 @@ namespace Authgear.Xamarin
                 UiLocales = UiLocales,
                 ColorScheme = ColorScheme,
                 Page = Page,
-                SuppressIdpSessionCookie = suppressIdpSessionCookie,
                 OauthProviderAlias = OauthProviderAlias
             };
         }

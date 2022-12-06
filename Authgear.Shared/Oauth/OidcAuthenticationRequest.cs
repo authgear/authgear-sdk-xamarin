@@ -15,6 +15,7 @@ namespace Authgear.Xamarin.Oauth
         public string RedirectUri { get; set; }
         public string ResponseType { get; set; }
         public List<string> Scope { get; set; }
+        public bool IsSsoEnabled { get; set; }
         public string? State { get; set; }
         public IReadOnlyCollection<PromptOption>? Prompt { get; set; }
         public int? MaxAge { get; set; }
@@ -23,13 +24,13 @@ namespace Authgear.Xamarin.Oauth
         public ColorScheme? ColorScheme { get; set; }
         public string? IdTokenHint { get; set; }
         public AuthenticatePage? Page { get; set; }
-        public bool? SuppressIdpSessionCookie { get; set; }
         public string? OauthProviderAlias { get; set; }
-        public OidcAuthenticationRequest(string redirectUri, string responseType, List<string> scope)
+        public OidcAuthenticationRequest(string redirectUri, string responseType, List<string> scope, bool isSsoEnabled)
         {
             RedirectUri = redirectUri;
             ResponseType = responseType;
             Scope = scope;
+            IsSsoEnabled = isSsoEnabled;
         }
         internal Dictionary<string, string> ToQuery(string clientId, string? challenge)
         {
@@ -78,10 +79,13 @@ namespace Authgear.Xamarin.Oauth
             {
                 query["x_page"] = Page.GetDescription();
             }
-            if (SuppressIdpSessionCookie == true)
+            if (IsSsoEnabled == false)
             {
+                // For backward compatibility
+                // If the developer updates the SDK but not the server
                 query["x_suppress_idp_session_cookie"] = "true";
             }
+            query["x_sso_enabled"] = IsSsoEnabled ? "true" : "false";
             if (OauthProviderAlias != null)
             {
                 query["x_oauth_provider_alias"] = OauthProviderAlias;

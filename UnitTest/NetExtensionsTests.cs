@@ -72,7 +72,7 @@ namespace UnitTest
         [Fact]
         public void OidcAuthenticationRequest_ToQueryParameters()
         {
-            var request = new OidcAuthenticationRequest("http://host/path", "code", new List<string> { "openid", "email" })
+            var request = new OidcAuthenticationRequest("http://host/path", "code", new List<string> { "openid", "email" }, false)
             {
                 State = "state",
                 Prompt = new List<PromptOption> { PromptOption.Login },
@@ -81,7 +81,6 @@ namespace UnitTest
                 IdTokenHint = "idTokenHint",
                 MaxAge = 1000000000,
                 Page = AuthenticatePage.Login,
-                SuppressIdpSessionCookie = true,
             };
             var dict = request.ToQuery("clientId", "codeChallenge").ToQueryParameter();
             var u = new Uri("https://localhost:80/");
@@ -89,7 +88,7 @@ namespace UnitTest
             {
                 Query = dict
             };
-            Assert.Equal("https://localhost:80/?client_id=clientId&response_type=code&redirect_uri=http%3A%2F%2Fhost%2Fpath&scope=openid+email&x_platform=xamarin&code_challenge_method=S256&code_challenge=codeChallenge&state=state&prompt=login&login_hint=loginHint&ui_locales=en-US+zh-HK&id_token_hint=idTokenHint&max_age=1000000000&x_page=login&x_suppress_idp_session_cookie=true", builder.ToString());
+            Assert.Equal("https://localhost:80/?client_id=clientId&response_type=code&redirect_uri=http%3A%2F%2Fhost%2Fpath&scope=openid+email&x_platform=xamarin&code_challenge_method=S256&code_challenge=codeChallenge&state=state&prompt=login&login_hint=loginHint&ui_locales=en-US+zh-HK&id_token_hint=idTokenHint&max_age=1000000000&x_page=login&x_suppress_idp_session_cookie=true&x_sso_enabled=false", builder.ToString());
         }
     }
 }
