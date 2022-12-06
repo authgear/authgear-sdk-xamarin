@@ -249,6 +249,19 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearOptions.ClientId
   nameWithType: AuthgearOptions.ClientId
+- uid: Authgear.Xamarin.AuthgearOptions.IsSsoEnabled
+  name: IsSsoEnabled
+  href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions_IsSsoEnabled
+  commentId: P:Authgear.Xamarin.AuthgearOptions.IsSsoEnabled
+  fullName: Authgear.Xamarin.AuthgearOptions.IsSsoEnabled
+  nameWithType: AuthgearOptions.IsSsoEnabled
+- uid: Authgear.Xamarin.AuthgearOptions.IsSsoEnabled*
+  name: IsSsoEnabled
+  href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions_IsSsoEnabled_
+  commentId: Overload:Authgear.Xamarin.AuthgearOptions.IsSsoEnabled
+  isSpec: "True"
+  fullName: Authgear.Xamarin.AuthgearOptions.IsSsoEnabled
+  nameWithType: AuthgearOptions.IsSsoEnabled
 - uid: Authgear.Xamarin.AuthgearOptions.Name
   name: Name
   href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions_Name
@@ -262,19 +275,6 @@ references:
   isSpec: "True"
   fullName: Authgear.Xamarin.AuthgearOptions.Name
   nameWithType: AuthgearOptions.Name
-- uid: Authgear.Xamarin.AuthgearOptions.ShareSessionWithSystemBrowser
-  name: ShareSessionWithSystemBrowser
-  href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions_ShareSessionWithSystemBrowser
-  commentId: P:Authgear.Xamarin.AuthgearOptions.ShareSessionWithSystemBrowser
-  fullName: Authgear.Xamarin.AuthgearOptions.ShareSessionWithSystemBrowser
-  nameWithType: AuthgearOptions.ShareSessionWithSystemBrowser
-- uid: Authgear.Xamarin.AuthgearOptions.ShareSessionWithSystemBrowser*
-  name: ShareSessionWithSystemBrowser
-  href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions_ShareSessionWithSystemBrowser_
-  commentId: Overload:Authgear.Xamarin.AuthgearOptions.ShareSessionWithSystemBrowser
-  isSpec: "True"
-  fullName: Authgear.Xamarin.AuthgearOptions.ShareSessionWithSystemBrowser
-  nameWithType: AuthgearOptions.ShareSessionWithSystemBrowser
 - uid: Authgear.Xamarin.AuthgearOptions.TokenStorage
   name: TokenStorage
   href: api/Authgear.Xamarin.AuthgearOptions.html#Authgear_Xamarin_AuthgearOptions_TokenStorage
