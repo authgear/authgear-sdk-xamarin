@@ -576,7 +576,7 @@ namespace Authgear.Xamarin
                 }
                 if (tokenResponse.ExpiresIn != null)
                 {
-                    expiredAt = DateTimeOffset.UtcNow.AddMilliseconds(((float)tokenResponse.ExpiresIn * ExpireInPercentage));
+                    expiredAt = DateTimeOffset.UtcNow.AddSeconds(((float)tokenResponse.ExpiresIn * ExpireInPercentage));
                 }
                 UpdateSessionState(SessionState.Authenticated, reason);
             }
