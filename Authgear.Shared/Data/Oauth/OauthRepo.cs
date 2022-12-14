@@ -32,6 +32,15 @@ namespace Authgear.Xamarin.Data.Oauth
                         return;
                     }
                 }
+                else if (ex is ServerException)
+                {
+                    var serverEx = ex as ServerException;
+                    if (serverEx?.Reason == "InvalidGrant")
+                    {
+                        this.ClearSessionCallback?.Invoke(this, SessionStateChangeReason.Invalid);
+                        return;
+                    }
+                }
                 ex = ex.InnerException;
             }
         }
