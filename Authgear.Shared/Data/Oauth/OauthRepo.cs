@@ -19,7 +19,7 @@ namespace Authgear.Xamarin.Data.Oauth
 
         public string Endpoint => this.impl.Endpoint;
 
-        private void handleException(Exception? ex)
+        private void handleInvalidGrantException(Exception? ex)
         {
             while (ex != null)
             {
@@ -52,21 +52,14 @@ namespace Authgear.Xamarin.Data.Oauth
                 await this.impl.BiometricSetupRequestAsync(accessToken, clientId, jwt).ConfigureAwait(false);
             } catch (Exception ex)
             {
-                this.handleException(ex);
+                this.handleInvalidGrantException(ex);
                 throw;
             }
         }
 
         public async Task OidcRevocationRequestAsync(string refreshToken)
         {
-            try
-            {
-                await this.impl.OidcRevocationRequestAsync(refreshToken).ConfigureAwait(false);
-            } catch (Exception ex)
-            {
-                this.handleException(ex);
-                throw;
-            }
+            await this.impl.OidcRevocationRequestAsync(refreshToken).ConfigureAwait(false);
         }
 
         public async Task<UserInfo> OidcUserInfoRequestAsync(string accessToken)
@@ -76,21 +69,14 @@ namespace Authgear.Xamarin.Data.Oauth
                 return await this.impl.OidcUserInfoRequestAsync(accessToken).ConfigureAwait(false);
             } catch (Exception ex)
             {
-                this.handleException(ex);
+                this.handleInvalidGrantException(ex);
                 throw;
             }
         }
 
         public async Task<OidcConfiguration> GetOidcConfigurationAsync()
         {
-            try
-            {
-                return await this.impl.GetOidcConfigurationAsync().ConfigureAwait(false);
-            } catch (Exception ex)
-            {
-                this.handleException(ex);
-                throw;
-            }
+            return await this.impl.GetOidcConfigurationAsync().ConfigureAwait(false);
         }
 
         public async Task<AppSessionTokenResponse> OauthAppSessionTokenAsync(string refreshToken)
@@ -100,21 +86,14 @@ namespace Authgear.Xamarin.Data.Oauth
                 return await this.impl.OauthAppSessionTokenAsync(refreshToken).ConfigureAwait(false);
             } catch (Exception ex)
             {
-                this.handleException(ex);
+                this.handleInvalidGrantException(ex);
                 throw;
             }
         }
 
         public async Task<ChallengeResponse> OauthChallengeAsync(string purpose)
         {
-            try
-            {
-                return await this.impl.OauthChallengeAsync(purpose).ConfigureAwait(false);
-            } catch (Exception ex)
-            {
-                this.handleException(ex);
-                throw;
-            }
+            return await this.impl.OauthChallengeAsync(purpose).ConfigureAwait(false);
         }
 
         public async Task<OidcTokenResponse> OidcTokenRequestAsync(OidcTokenRequest request)
@@ -124,7 +103,7 @@ namespace Authgear.Xamarin.Data.Oauth
                 return await this.impl.OidcTokenRequestAsync(request).ConfigureAwait(false);
             } catch (Exception ex)
             {
-                this.handleException(ex);
+                this.handleInvalidGrantException(ex);
                 throw;
             }
         }
