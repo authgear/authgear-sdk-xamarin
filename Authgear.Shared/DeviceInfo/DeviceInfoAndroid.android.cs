@@ -36,14 +36,43 @@ namespace Authgear.Xamarin.DeviceInfo
 #endif
         }
 
+#if !Xamarin
+        [SupportedOSPlatformGuard("android25.0")]
+#endif
+        private static bool IsAtLeast25()
+        {
+#if Xamarin
+            return AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.NMr1;
+#else
+            return OperatingSystem.IsAndroidVersionAtLeast(25, 0);
+#endif
+        }
+
+#if !Xamarin
+        [SupportedOSPlatformGuard("android32.0")]
+#endif
+        private static bool IsAtLeast32()
+        {
+#if Xamarin
+            return AndroidBuild.VERSION.SdkInt >= Android.OS.BuildVersionCodes.SV2;
+#else
+            return OperatingSystem.IsAndroidVersionAtLeast(32, 0);
+#endif
+        }
+
         public static DeviceInfoAndroid Get(Context context)
         {
             PackageInfo packageInfo;
+#pragma warning disable CS0618 // Type or member is obsolete
             packageInfo = context.PackageManager!.GetPackageInfo(context.PackageName ?? "", 0)!;
+#pragma warning restore CS0618 // Type or member is obsolete
+
             var contentResolver = context.ContentResolver;
             var baseOs = "";
             var previewSdkInt = "";
             var securityPatch = "";
+            var bluetoothName = "";
+            var deviceName = "";
             if (ApiLevelException.IsAtLeastM())
             {
                 baseOs = AndroidBuild.VERSION.BaseOs ?? "";
@@ -59,6 +88,14 @@ namespace Authgear.Xamarin.DeviceInfo
             if (IsAtLeastR())
             {
                 releaseOrCodeName = AndroidBuild.VERSION.ReleaseOrCodename;
+            }
+            if (!IsAtLeast32())
+            {
+                bluetoothName = AndroidSettings.Secure.GetString(contentResolver, "bluetooth_name") ?? "";
+            }
+            if (IsAtLeast25())
+            {
+                deviceName = AndroidSettings.Global.GetString(contentResolver, AndroidSettings.Global.DeviceName) ?? "";
             }
             return new DeviceInfoAndroid
             {
@@ -100,12 +137,12 @@ namespace Authgear.Xamarin.DeviceInfo
                 {
                     Secure = new DeviceInfoAndroidSecure
                     {
-                        BluetoothName = AndroidSettings.Secure.GetString(contentResolver, "bluetooth_name") ?? "",
+                        BluetoothName = bluetoothName,
                         AndroidId = AndroidSettings.Secure.GetString(contentResolver, AndroidSettings.Secure.AndroidId) ?? ""
                     },
                     Global = new DeviceInfoAndroidSettingsGlobal
                     {
-                        DeviceName = AndroidSettings.Global.GetString(contentResolver, AndroidSettings.Global.DeviceName) ?? "",
+                        DeviceName = deviceName
                     }
                 },
                 AplicationInfoLabel = context.ApplicationInfo!.LoadLabel(context.PackageManager)

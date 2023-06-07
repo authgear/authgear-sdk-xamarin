@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.22">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid12.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid13.0;</TargetFrameworks>
 	<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 	<Summary>Authgear SDK for Xamarin</Summary>
 	<PackageTags>xamarin, ios, android, xamarin.forms, authgear</PackageTags>
@@ -41,11 +41,11 @@
     <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|MonoAndroid12.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|MonoAndroid13.0|AnyCPU'">
     <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|MonoAndroid12.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|MonoAndroid13.0|AnyCPU'">
     <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
   </PropertyGroup>
 
