@@ -3,91 +3,91 @@ name: CI
 on:
   push:
     branches:
-      - "*"
-      - "!gh-pages"
+    - "*"
+    - "!gh-pages"
     tags:
-      - "*"
+    - "*"
   pull_request:
     branches:
-      - "*"
-      - "!gh-pages"
+    - "*"
+    - "!gh-pages"
 
 jobs:
   test:
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: "6.0.408"
-      - uses: microsoft/setup-msbuild@v1.1
-        with:
-          vs-version: "17.0"
-      - run: dotnet tool install --global dotnet-format --version 5.1.250801
-      - working-directory: Authgear.Xamarin
-        run: |
-          dotnet restore Authgear.Xamarin.csproj
-          dotnet format --verify-no-changes
-          msbuild Authgear.Xamarin.csproj
-      - working-directory: Authgear.Maui
-        run: |
-          dotnet workload install maui
-          dotnet restore Authgear.Maui.csproj
-          dotnet format --verify-no-changes
-          msbuild Authgear.Maui.csproj
-      - run: dotnet test UnitTest/UnitTest.csproj
+    - uses: actions/checkout@v3
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: "6.0.408"
+    - uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: "17.0"
+    - run: dotnet tool install --global dotnet-format --version 5.1.250801
+    - working-directory: Authgear.Xamarin
+      run: |
+        dotnet restore Authgear.Xamarin.csproj
+        dotnet format --verify-no-changes
+        msbuild Authgear.Xamarin.csproj
+    - working-directory: Authgear.Maui
+      run: |
+        dotnet workload install maui
+        dotnet restore Authgear.Maui.csproj
+        dotnet format --verify-no-changes
+        msbuild Authgear.Maui.csproj
+    - run: dotnet test UnitTest/UnitTest.csproj
   deploy:
-      runs-on: windows-2022
-      needs: ["test"]
-      if: ${{ github.ref == 'refs/heads/main' }}
-      steps:
-      - uses: actions/checkout@v3
-      - uses: crazy-max/ghaction-chocolatey@v1
-        with:
-          args: install docfx
-      - working-directory: Documentation
-        run: docfx docfx.json
-      - name: Deploy docs to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: Documentation/_site
+    runs-on: windows-2022
+    needs: ["test"]
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install docfx
+    - working-directory: Documentation
+      run: docfx docfx.json
+    - name: Deploy docs to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: Documentation/_site
   pack-xamarin:
     runs-on: windows-2022
     needs: ["test"]
     if: startsWith(github.ref, 'refs/tags') && !startsWith(github.ref, 'refs/tags/staging-')
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: "6.0.408"
-      - uses: microsoft/setup-msbuild@v1.1
-        with:
-          vs-version: "17.0"
-      - run: dotnet restore Authgear.Xamarin/Authgear.Xamarin.csproj
-      - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj /t:pack /p:Configuration=Release
-      - uses: actions/upload-artifact@v3
-        with:
-          name: nupkg
-          path: Authgear.Xamarin/bin/Release/Authgear.Xamarin.*.nupkg
-          retention-days: 5
+    - uses: actions/checkout@v3
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: "6.0.408"
+    - uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: "17.0"
+    - run: dotnet restore Authgear.Xamarin/Authgear.Xamarin.csproj
+    - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj /t:pack /p:Configuration=Release
+    - uses: actions/upload-artifact@v3
+      with:
+        name: nupkg
+        path: Authgear.Xamarin/bin/Release/Authgear.Xamarin.*.nupkg
+        retention-days: 5
   pack-maui:
     runs-on: windows-2022
     needs: ["test"]
     if: startsWith(github.ref, 'refs/tags') && !startsWith(github.ref, 'refs/tags/staging-')
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: "6.0.408"
-      - uses: microsoft/setup-msbuild@v1.1
-        with:
-          vs-version: "17.0"
-      - run: dotnet workload restore Authgear.Maui/Authgear.Maui.csproj
-      - run: dotnet restore Authgear.Maui/Authgear.Maui.csproj
-      - run: msbuild Authgear.Maui/Authgear.Maui.csproj /t:pack /p:Configuration=Release
-      - uses: actions/upload-artifact@v3
-        with:
-          name: nupkg
-          path: Authgear.Maui/bin/Release/Authgear.Maui.*.nupkg
-          retention-days: 5
+    - uses: actions/checkout@v3
+    - uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: "6.0.408"
+    - uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-version: "17.0"
+    - run: dotnet workload restore Authgear.Maui/Authgear.Maui.csproj
+    - run: dotnet restore Authgear.Maui/Authgear.Maui.csproj
+    - run: msbuild Authgear.Maui/Authgear.Maui.csproj /t:pack /p:Configuration=Release
+    - uses: actions/upload-artifact@v3
+      with:
+        name: nupkg
+        path: Authgear.Maui/bin/Release/Authgear.Maui.*.nupkg
+        retention-days: 5
