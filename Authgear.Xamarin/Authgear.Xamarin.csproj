@@ -23,30 +23,11 @@
 	<Nullable>enable</Nullable>
 	<AnalysisMode>AllEnabledByDefault</AnalysisMode>
 	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<BuildWithMSBuildOnMono>true</BuildWithMSBuildOnMono>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|Xamarin.iOS10|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|Xamarin.iOS10|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|MonoAndroid13.0|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|MonoAndroid13.0|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE;Xamarin</DefineConstants>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard')) Or $(TargetFramework.StartsWith('Xamarin.iOS')) Or $(TargetFramework.StartsWith('MonoAndroid'))">
+    <DefineConstants>$(DefineConstants);Xamarin</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
