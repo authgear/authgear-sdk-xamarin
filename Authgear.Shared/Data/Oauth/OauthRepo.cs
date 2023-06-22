@@ -50,7 +50,8 @@ namespace Authgear.Xamarin.Data.Oauth
             try
             {
                 await this.impl.BiometricSetupRequestAsync(accessToken, clientId, jwt).ConfigureAwait(false);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 this.handleInvalidGrantException(ex);
                 throw;
@@ -67,7 +68,8 @@ namespace Authgear.Xamarin.Data.Oauth
             try
             {
                 return await this.impl.OidcUserInfoRequestAsync(accessToken).ConfigureAwait(false);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 this.handleInvalidGrantException(ex);
                 throw;
@@ -84,7 +86,8 @@ namespace Authgear.Xamarin.Data.Oauth
             try
             {
                 return await this.impl.OauthAppSessionTokenAsync(refreshToken).ConfigureAwait(false);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 this.handleInvalidGrantException(ex);
                 throw;
@@ -101,7 +104,8 @@ namespace Authgear.Xamarin.Data.Oauth
             try
             {
                 return await this.impl.OidcTokenRequestAsync(request).ConfigureAwait(false);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 this.handleInvalidGrantException(ex);
                 throw;
