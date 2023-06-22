@@ -14,27 +14,22 @@ on:
 
 jobs:
   test:
-    runs-on: windows-2022
+    runs-on: macos-12
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v3
       with:
         global-json-file: ./global.json
-    - uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-version: "17.0"
-    - run: dotnet tool install --global dotnet-format --version 5.1.250801
-    - working-directory: Authgear.Xamarin
-      run: |
-        dotnet restore Authgear.Xamarin.csproj
-        dotnet format --verify-no-changes
-        msbuild Authgear.Xamarin.csproj
+    - working-directory: ./Authgear.Xamarin
+      run: dotnet restore Authgear.Xamarin.csproj
+    - working-directory: ./Authgear.Xamarin
+      run: dotnet format --verify-no-changes
     - working-directory: Authgear.Maui
-      run: |
-        dotnet workload install maui
-        dotnet restore Authgear.Maui.csproj
-        dotnet format --verify-no-changes
-        msbuild Authgear.Maui.csproj
+      run: dotnet workload restore Authgear.Maui.csproj
+    - working-directory: Authgear.Maui
+      run: dotnet restore Authgear.Maui.csproj
+    - working-directory: Authgear.Maui
+      run: dotnet format --verify-no-changes
     - run: dotnet test UnitTest/UnitTest.csproj
   deploy:
     runs-on: windows-2022
