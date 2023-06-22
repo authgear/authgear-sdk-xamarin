@@ -92,6 +92,7 @@ jobs:
         retention-days: 5
   xamarin_ios:
     runs-on: macos-12
+    needs: ["test"]
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
     - uses: actions/checkout@v3
