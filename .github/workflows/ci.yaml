@@ -48,7 +48,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: Documentation/_site
   pack-xamarin:
-    runs-on: windows-2022
+    runs-on: macos-12
     needs: ["test"]
     if: startsWith(github.ref, 'refs/tags') && !startsWith(github.ref, 'refs/tags/staging-')
     steps:
@@ -56,9 +56,10 @@ jobs:
     - uses: actions/setup-dotnet@v3
       with:
         global-json-file: ./global.json
-    - uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-version: "17.0"
+    - name: Set Xamarin SDK versions
+      run: |
+        # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=16.2 --android=13.2
     - run: dotnet restore Authgear.Xamarin/Authgear.Xamarin.csproj
     - run: msbuild Authgear.Xamarin/Authgear.Xamarin.csproj /t:pack /p:Configuration=Release
     - uses: actions/upload-artifact@v3
@@ -67,7 +68,7 @@ jobs:
         path: Authgear.Xamarin/bin/Release/Authgear.Xamarin.*.nupkg
         retention-days: 5
   pack-maui:
-    runs-on: windows-2022
+    runs-on: macos-12
     needs: ["test"]
     if: startsWith(github.ref, 'refs/tags') && !startsWith(github.ref, 'refs/tags/staging-')
     steps:
@@ -75,12 +76,15 @@ jobs:
     - uses: actions/setup-dotnet@v3
       with:
         global-json-file: ./global.json
-    - uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-version: "17.0"
+    - name: Set Xamarin SDK versions
+      run: |
+        # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=16.2 --android=13.2
     - run: dotnet workload restore Authgear.Maui/Authgear.Maui.csproj
     - run: dotnet restore Authgear.Maui/Authgear.Maui.csproj
-    - run: msbuild Authgear.Maui/Authgear.Maui.csproj /t:pack /p:Configuration=Release
+    # By peeking the build output of Visual Studio for Mac,
+    # it uses `dotnet msbuild` instead of `msbuild` to build MAUI project.
+    - run: dotnet msbuild Authgear.Maui/Authgear.Maui.csproj /t:pack /p:Configuration=Release
     - uses: actions/upload-artifact@v3
       with:
         name: nupkg
@@ -103,7 +107,7 @@ jobs:
     - name: Set Xamarin SDK versions
       run: |
         # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=16.2
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=16.2 --android=13.2
     - run: sudo xcode-select -s /Applications/Xcode_14.2.app/Contents/Developer
     - name: nuget restore
       run: |
