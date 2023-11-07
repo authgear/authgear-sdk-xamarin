@@ -21,6 +21,20 @@ namespace Authgear.Xamarin.Data.Oauth
 
         private readonly SemaphoreSlim locker = new(1, 1);
 
+        private async Task<Uri> BuildApiUri(string path)
+        {
+            var config = await GetOidcConfigurationAsync().ConfigureAwait(false);
+            var endpoint = new Uri(config.AuthorizationEndpoint);
+            var builder = new UriBuilder()
+            {
+                Scheme = endpoint.Scheme,
+                Port = endpoint.Port,
+                Host = endpoint.Host,
+                Path = path
+            };
+            return builder.Uri;
+        }
+
         public OauthRepoHttp(HttpClient client, string endpoint)
         {
             httpClient = client;
@@ -67,8 +81,9 @@ namespace Authgear.Xamarin.Data.Oauth
             {
                 ["refresh_token"] = refreshToken,
             };
+            var uri = await BuildApiUri("/oauth2/app_session_token").ConfigureAwait(false);
             using var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-            var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/app_session_token"), content).ConfigureAwait(false);
+            var responseMessage = await httpClient.PostAsync(uri, content).ConfigureAwait(false);
             var result = await responseMessage.GetJsonAsync<AppSessionTokenResponseResult>().ConfigureAwait(false);
             return result.Result!;
         }
@@ -79,8 +94,9 @@ namespace Authgear.Xamarin.Data.Oauth
             {
                 ["purpose"] = purpose
             };
+            var uri = await BuildApiUri("/oauth2/challenge").ConfigureAwait(false);
             using var content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
-            var responseMessage = await httpClient.PostAsync(new Uri(new Uri(Endpoint), "/oauth2/challenge"), content).ConfigureAwait(false);
+            var responseMessage = await httpClient.PostAsync(uri, content).ConfigureAwait(false);
             var result = await responseMessage.GetJsonAsync<ChallengeResponseResult>().ConfigureAwait(false);
             return result.Result!;
         }

@@ -281,10 +281,15 @@ namespace Authgear.Xamarin
             var refreshToken = await tokenStorage.GetRefreshTokenAsync(name).ConfigureAwait(false) ?? "";
             var appSessionTokenResponse = await oauthRepo.OauthAppSessionTokenAsync(refreshToken).ConfigureAwait(false);
             var token = appSessionTokenResponse.AppSessionToken;
+            var oidcConfig = await oauthRepo.GetOidcConfigurationAsync().ConfigureAwait(false);
+            var endpoint = new Uri(oidcConfig.AuthorizationEndpoint);
 
             var query = new Dictionary<string, string>();
-            var builder = new UriBuilder(new Uri(authgearEndpoint))
+            var builder = new UriBuilder()
             {
+                Scheme = endpoint.Scheme,
+                Port = endpoint.Port,
+                Host = endpoint.Host,
                 Path = path
             };
             if (options != null)
