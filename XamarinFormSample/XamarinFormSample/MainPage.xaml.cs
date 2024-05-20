@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -155,11 +156,8 @@ namespace XamarinFormSample
         {
             try
             {
-                var message = String.Format(
-                    "Sub: {0}\nIsVerified: {1}\nIsAnonymous: {2}",
-                    userInfo.Sub,
-                    userInfo.IsVerified,
-                    userInfo.IsAnonymous
+                var message = JsonSerializer.Serialize(
+                    userInfo, new JsonSerializerOptions { WriteIndented = true }
                 );
                 await DisplayAlert("UserInfo", message, "OK");
             }
